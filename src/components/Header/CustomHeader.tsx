@@ -17,7 +17,6 @@ function CustomHeader({
   children,
   isBackButton,
   headerRightEl,
-  s,
 }: CustomHeaderProps) {
   return (
     <View style={styles.container}>
@@ -25,7 +24,7 @@ function CustomHeader({
         children
       ) : (
         <>
-          {isBackButton ? <BackButtonHeaderLeft /> : <EmptyBox />}
+          {isBackButton ? <BackButtonHeaderLeft /> : 'null'}
           {children}
           {/* {headerRightEl ? headerRightEl : <EmptyBox />} */}
         </>
