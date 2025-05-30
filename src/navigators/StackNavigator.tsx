@@ -16,7 +16,7 @@ const StackNavigator = () => {
         component={TabNavigator}
         options={{headerShown: false}}
       />
-      <Stack.Screen name="테스트" component={TestScreen} />
+      <Stack.Screen name="테스트" component={TestScreen} navigationKey="test" />
       <Stack.Screen
         name="타이머"
         component={TimeScreen}
