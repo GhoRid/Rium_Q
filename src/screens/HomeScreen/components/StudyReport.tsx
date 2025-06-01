@@ -13,9 +13,10 @@ export default StudyReport;
 const styles = StyleSheet.create({
   card: {
     backgroundColor: '#fff',
-    borderRadius: 16,
+    borderRadius: 15,
     padding: 20,
     marginBottom: 20,
+    height: 150,
     elevation: 2,
     shadowColor: '#000',
     shadowOpacity: 0.1,

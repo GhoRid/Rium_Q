@@ -30,6 +30,14 @@ const Grid = () => {
 
 export default Grid;
 
+const shadow = {
+  shadowColor: '#000',
+  shadowOpacity: 0.1,
+  shadowOffset: {width: 0, height: 2},
+  shadowRadius: 4,
+  elevation: 2,
+};
+
 const styles = StyleSheet.create({
   grid: {
     flexDirection: 'row',
@@ -49,10 +57,7 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     justifyContent: 'center',
     alignItems: 'center',
-    elevation: 2,
-    shadowColor: '#000',
-    shadowOpacity: 0.1,
-    shadowOffset: {width: 0, height: 2},
+    ...shadow,
   },
   smallCard: {
     height: 100,
@@ -61,10 +66,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 16,
-    elevation: 2,
-    shadowColor: '#000',
-    shadowOpacity: 0.1,
-    shadowOffset: {width: 0, height: 2},
+    ...shadow,
   },
   smallText: {
     color: '#333',
@@ -79,10 +81,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    elevation: 2,
-    shadowColor: '#000',
-    shadowOpacity: 0.1,
-    shadowOffset: {width: 0, height: 2},
+    ...shadow,
   },
   seatTextContainer: {
     flex: 1,
