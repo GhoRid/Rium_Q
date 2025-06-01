@@ -1,6 +1,6 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {View} from 'react-native';
-import HomeScreen from '../screens/HomeScreen';
+import HomeScreen from '../screens/HomeScreen/HomeScreen';
 import TimerScreen from '../screens/TimerScreen/TimerScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import PlanScreen from '../screens/PlanScreen/PlanScreen';

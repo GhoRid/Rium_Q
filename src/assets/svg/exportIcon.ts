@@ -22,3 +22,5 @@ export {default as 완료체크} from './icon/completeCheck.svg';
 export {default as 엄지척} from './icon/thumbUp.svg';
 export {default as 카메라} from './icon/camera.svg';
 export {default as 편집} from './icon/edit.svg';
+export {default as 앱로고2} from './icon/logo2.svg';
+export {default as 책상} from './icon/desk.svg';
