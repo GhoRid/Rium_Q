@@ -4,18 +4,26 @@ import StudyReport from './components/StudyReport';
 import AchievementRate from './components/AchievementRate';
 import Grid from './components/Grid';
 import SvgIcon from '../../components/SvgIcon';
+import StudyObject from './components/StudyObject';
+import Carousel from './components/Carousel';
 
 const HomeScreen = () => {
   return (
     <View style={styles.container}>
       {/* <SvgIcon name="알림" /> */}
       {/* 상단: 과목 선택 + 시험명 */}
-      <View style={styles.row}>
-        <Pressable style={styles.subjectChip}>
-          <Text style={styles.subjectChipText}>국어</Text>
-        </Pressable>
-        <Text style={styles.testText}>2024학년도 수능 모의고사</Text>
-      </View>
+      {/* <StudyObject /> */}
+      {/* <Carousel /> */}
+      <Carousel
+        data={[
+          {subject: '국어', aim: '모의고사 1회차'},
+          {subject: '영어', aim: '모의고사 2회차'},
+          {subject: '수학', aim: '모의고사 3회차'},
+          {subject: '사회', aim: '모의고사 4회차'},
+          {subject: '과학', aim: '모의고사 5회차'},
+          {subject: '한국사', aim: '모의고사 6회차'},
+        ]}
+      />
 
       {/* 목표 달성률 */}
       <AchievementRate />
@@ -36,25 +44,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     padding: 20,
     paddingBottom: 40,
-  },
-  row: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 20,
-  },
-  subjectChip: {
-    backgroundColor: '#E6EEFF',
-    paddingVertical: 6,
-    paddingHorizontal: 12,
-    borderRadius: 12,
-    marginRight: 8,
-  },
-  subjectChipText: {
-    color: '#001742',
-    fontWeight: 'bold',
-  },
-  testText: {
-    fontSize: 16,
-    color: '#222',
   },
 });
