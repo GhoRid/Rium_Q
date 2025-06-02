@@ -13,6 +13,8 @@ type CarouselProps = {
   data?: any[];
 };
 
+const scrollHeight = 40; // Height of each item in the carousel
+
 const Carousel = ({data}: CarouselProps) => {
   if (!data || data.length === 0) return null;
 
@@ -24,7 +26,7 @@ const Carousel = ({data}: CarouselProps) => {
 
   useEffect(() => {
     setTimeout(() => {
-      scrollViewRef.current?.scrollTo({y: 30, animated: false});
+      scrollViewRef.current?.scrollTo({y: scrollHeight, animated: false});
     }, 0);
 
     startAutoScroll();
@@ -46,21 +48,39 @@ const Carousel = ({data}: CarouselProps) => {
   };
 
   useEffect(() => {
-    scrollViewRef.current?.scrollTo({y: activeIndex * 30, animated: true});
+    scrollViewRef.current?.scrollTo({
+      y: activeIndex * scrollHeight,
+      animated: true,
+    });
   }, [activeIndex]);
+
+  const handleScrollEndDrag = (
+    event: NativeSyntheticEvent<NativeScrollEvent>,
+  ) => {
+    const offsetY = event.nativeEvent.contentOffset.y;
+    const index = Math.round(offsetY / scrollHeight);
+    scrollViewRef.current?.scrollTo({y: index * scrollHeight, animated: true});
+    setActiveIndex(index);
+  };
 
   const handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
     const contentOffsetX = event.nativeEvent.contentOffset.y;
-    let index = Math.floor(contentOffsetX / 30);
+    let index = Math.floor(contentOffsetX / scrollHeight);
 
     if (index <= 0) {
       index = extendedData.length - 2;
       setActiveIndex(index);
-      scrollViewRef.current?.scrollTo({y: index * 30, animated: false});
+      scrollViewRef.current?.scrollTo({
+        y: index * scrollHeight,
+        animated: false,
+      });
     } else if (index >= extendedData.length - 1) {
       index = 1;
       setActiveIndex(index);
-      scrollViewRef.current?.scrollTo({y: index * 30, animated: false});
+      scrollViewRef.current?.scrollTo({
+        y: index * scrollHeight,
+        animated: false,
+      });
     } else {
       setActiveIndex(index);
     }
@@ -88,7 +108,7 @@ const Carousel = ({data}: CarouselProps) => {
 const styles = StyleSheet.create({
   container: {
     // flex: 1,
-    height: 30,
+    height: scrollHeight,
     marginBottom: 20,
     flexDirection: 'row',
   },

@@ -21,14 +21,14 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
     alignItems: 'center',
-    height: 30,
+    height: 40,
+    gap: 12,
   },
   subjectChip: {
     backgroundColor: '#E6EEFF',
-    paddingVertical: 6,
-    paddingHorizontal: 12,
+    paddingVertical: 8,
+    paddingHorizontal: 15,
     borderRadius: 12,
-    marginRight: 8,
   },
   subjectChipText: {
     color: '#001742',
