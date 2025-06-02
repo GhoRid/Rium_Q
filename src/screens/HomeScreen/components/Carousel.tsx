@@ -111,6 +111,7 @@ const styles = StyleSheet.create({
     height: scrollHeight,
     marginBottom: 20,
     flexDirection: 'row',
+    // backgroundColor
   },
 });
 

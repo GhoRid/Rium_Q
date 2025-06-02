@@ -1,4 +1,4 @@
-import {View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 
 type CustomHeaderProps = {
   leftItem?: React.ReactNode;
@@ -8,7 +8,7 @@ type CustomHeaderProps = {
 
 const CustomHeader = ({leftItem, centerItem, rightItem}: CustomHeaderProps) => {
   return (
-    <View style={{flexDirection: 'row', alignItems: 'center', padding: 10}}>
+    <View style={styles.headerContainer}>
       <View style={{flex: 1, alignItems: 'flex-start'}}>
         {leftItem ?? leftItem}
       </View>
@@ -22,3 +22,25 @@ const CustomHeader = ({leftItem, centerItem, rightItem}: CustomHeaderProps) => {
   );
 };
 export default CustomHeader;
+
+const styles = StyleSheet.create({
+  headerContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    backgroundColor: 'white',
+  },
+  leftItem: {
+    flex: 1,
+    alignItems: 'flex-start',
+  },
+  centerItem: {
+    flex: 2,
+    alignItems: 'center',
+  },
+  rightItem: {
+    flex: 1,
+    alignItems: 'flex-end',
+  },
+});

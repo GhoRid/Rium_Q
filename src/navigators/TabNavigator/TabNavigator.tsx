@@ -9,6 +9,7 @@ import CustomTabBar from './CustomTabBar';
 import {SafeAreaView, useSafeAreaInsets} from 'react-native-safe-area-context';
 import CustomHeader from '../../components/Header/CustomHeader';
 import SvgIcon from '../../components/SvgIcon';
+import TestScreen from '../../screens/TestScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -25,23 +26,40 @@ const TabNavigator = () => {
       }}>
       <Tab.Navigator
         tabBar={props => <CustomTabBar {...props} />}
-        screenOptions={{headerShown: false}}>
+        // screenOptions={{headerShown: false}}
+      >
         <Tab.Screen
           name="홈"
           component={HomeScreen}
           options={{
             header: () => (
               <CustomHeader
-                leftItem={<SvgIcon name="앱로고1" size={24} />} // 왼쪽 아이콘
-                rightItem={<SvgIcon name="알림" size={24} />} // 오른쪽 아이콘
+                leftItem={<SvgIcon name="앱로고2" width={65} color="#1C2E4A" />} // 왼쪽 아이콘
+                rightItem={<SvgIcon name="알림" size={35} />} // 오른쪽 아이콘
               />
             ),
           }}
         />
-        <Tab.Screen name="계획" component={PlanScreen} />
-        <Tab.Screen name="공부 시작" component={TimerScreen} />
-        <Tab.Screen name="통계" component={SettingsScreen} />
-        <Tab.Screen name="마이페이지" component={MyPageScreen} />
+        <Tab.Screen
+          name="계획"
+          component={PlanScreen}
+          options={{headerShown: false}}
+        />
+        <Tab.Screen
+          name="공부 시작"
+          component={TestScreen}
+          options={{headerShown: false}}
+        />
+        <Tab.Screen
+          name="통계"
+          component={SettingsScreen}
+          options={{headerShown: false}}
+        />
+        <Tab.Screen
+          name="마이페이지"
+          component={MyPageScreen}
+          options={{headerShown: false}}
+        />
       </Tab.Navigator>
     </SafeAreaView>
   );

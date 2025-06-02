@@ -10,7 +10,7 @@ const StackNavigator = () => {
   const insets = useSafeAreaInsets();
 
   return (
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={{headerShown: false}}>
       <Stack.Screen
         name="Tab"
         component={TabNavigator}
