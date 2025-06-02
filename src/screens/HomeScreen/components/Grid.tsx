@@ -6,7 +6,7 @@ const Grid = () => {
     <View style={styles.grid}>
       {/* 왼쪽 세로 긴 카드 */}
       <View style={styles.leftColumn}>
-        <View style={styles.rankingCard}>
+        <View style={styles.longCard}>
           <Text style={styles.smallText}>내 랭킹</Text>
         </View>
       </View>
@@ -43,6 +43,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     gap: '4%',
+    height: '40%',
   },
   leftColumn: {
     width: '48%',
@@ -51,8 +52,8 @@ const styles = StyleSheet.create({
     width: '48%',
     justifyContent: 'space-between',
   },
-  rankingCard: {
-    height: 216,
+  longCard: {
+    height: '100%',
     backgroundColor: '#fff',
     borderRadius: 16,
     justifyContent: 'center',
@@ -60,12 +61,11 @@ const styles = StyleSheet.create({
     ...shadow,
   },
   smallCard: {
-    height: 100,
+    height: '48%',
     backgroundColor: '#fff',
     borderRadius: 16,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 16,
     ...shadow,
   },
   smallText: {
@@ -74,18 +74,16 @@ const styles = StyleSheet.create({
     fontWeight: '500',
   },
   seatCard: {
-    height: 100,
+    height: '48%',
+    borderRadius: 16,
     backgroundColor: '#001742',
-    borderRadius: 15,
     paddingHorizontal: 20,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
     ...shadow,
   },
-  seatTextContainer: {
-    flex: 1,
-  },
+  seatTextContainer: {},
   seatText: {
     color: '#fff',
     fontWeight: 'bold',

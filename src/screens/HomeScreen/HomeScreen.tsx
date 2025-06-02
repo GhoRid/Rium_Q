@@ -12,8 +12,6 @@ const HomeScreen = () => {
     <View style={styles.container}>
       {/* <SvgIcon name="알림" /> */}
       {/* 상단: 과목 선택 + 시험명 */}
-      {/* <StudyObject /> */}
-      {/* <Carousel /> */}
       <Carousel
         data={[
           {subject: '국어', aim: '모의고사 1회차'},
