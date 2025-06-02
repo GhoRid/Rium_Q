@@ -1,10 +1,8 @@
 import React from 'react';
-import {View, Text, StyleSheet, Pressable} from 'react-native';
+import {View, StyleSheet, Pressable} from 'react-native';
 import StudyReport from './components/StudyReport';
 import AchievementRate from './components/AchievementRate';
 import Grid from './components/Grid';
-import SvgIcon from '../../components/SvgIcon';
-import StudyObject from './components/StudyObject';
 import Carousel from './components/Carousel';
 
 const HomeScreen = () => {

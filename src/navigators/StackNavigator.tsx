@@ -1,8 +1,8 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import TabNavigator from './TabNavigator';
 import TestScreen from '../screens/TestScreen';
 import TimeScreen from '../screens/TimeScreen';
+import TabNavigator from './TabNavigator/TabNavigator';
 
 const Stack = createNativeStackNavigator();
 

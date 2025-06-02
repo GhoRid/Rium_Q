@@ -1,7 +1,15 @@
+//하단 네비게이터
 export {default as 홈} from './icon/home.svg';
-export {default as 찜} from './icon/heart.svg';
+export {default as 계획} from './icon/plan.svg';
+export {default as 통계} from './icon/statistics.svg';
+export {default as 마이페이지} from './icon/person.svg';
+
+export {default as 앱로고1} from './icon/logo1.svg';
+export {default as 앱로고2} from './icon/logo2.svg';
+export {default as 하트} from './icon/heart.svg';
+export {default as 책상} from './icon/desk.svg';
+export {default as 아래방향} from './icon/directionDown.svg';
 export {default as 둘러보기} from './icon/file-search.svg';
-export {default as 마이페이지} from './icon/user-profile.svg';
 export {default as 지도} from './icon/map.svg';
 // export {default as 주문내역} from './icon/check-square.svg';
 export {default as 검색} from './icon/search.svg';
@@ -22,6 +30,3 @@ export {default as 완료체크} from './icon/completeCheck.svg';
 export {default as 엄지척} from './icon/thumbUp.svg';
 export {default as 카메라} from './icon/camera.svg';
 export {default as 편집} from './icon/edit.svg';
-export {default as 앱로고2} from './icon/logo2.svg';
-export {default as 책상} from './icon/desk.svg';
-export {default as 아래방향} from './icon/directionDown.svg';
