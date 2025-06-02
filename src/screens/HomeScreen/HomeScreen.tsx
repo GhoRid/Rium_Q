@@ -24,7 +24,7 @@ const HomeScreen = () => {
       />
 
       {/* 목표 달성률 */}
-      <AchievementRate />
+      <AchievementRate progress={50} />
       {/* 카드: 내 학습 리포트 */}
       <StudyReport />
 
