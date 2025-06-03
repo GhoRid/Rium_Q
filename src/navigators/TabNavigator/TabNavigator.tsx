@@ -1,5 +1,5 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {View} from 'react-native';
+import {Text, View} from 'react-native';
 import HomeScreen from '../../screens/HomeScreen/HomeScreen';
 import PlanScreen from '../../screens/PlanScreen/PlanScreen';
 import TimerScreen from '../../screens/TimerScreen/TimerScreen';
@@ -10,6 +10,7 @@ import {SafeAreaView, useSafeAreaInsets} from 'react-native-safe-area-context';
 import CustomHeader from '../../components/Header/CustomHeader';
 import SvgIcon from '../../components/SvgIcon';
 import TestScreen from '../../screens/TestScreen';
+import StatisticScreen from '../../screens/\bStatisticScreen/\bStatisticScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -52,8 +53,22 @@ const TabNavigator = () => {
         />
         <Tab.Screen
           name="통계"
-          component={SettingsScreen}
-          options={{headerShown: false}}
+          component={StatisticScreen}
+          options={{
+            header: () => (
+              <CustomHeader
+                leftItem={
+                  <Text
+                    style={{
+                      fontSize: 20,
+                      fontWeight: 'bold',
+                    }}>
+                    익끼 님의 학습 리포트
+                  </Text>
+                } // 왼쪽 아이콘
+              />
+            ),
+          }}
         />
         <Tab.Screen
           name="마이페이지"

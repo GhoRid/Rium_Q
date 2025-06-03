@@ -9,15 +9,9 @@ type CustomHeaderProps = {
 const CustomHeader = ({leftItem, centerItem, rightItem}: CustomHeaderProps) => {
   return (
     <View style={styles.headerContainer}>
-      <View style={{flex: 1, alignItems: 'flex-start'}}>
-        {leftItem ?? leftItem}
-      </View>
-      <View style={{flex: 2, alignItems: 'center'}}>
-        {centerItem ?? centerItem}
-      </View>
-      <View style={{flex: 1, alignItems: 'flex-end'}}>
-        {rightItem ?? rightItem}
-      </View>
+      <View style={styles.leftItem}>{leftItem ?? leftItem}</View>
+      <View style={styles.centerItem}>{centerItem ?? centerItem}</View>
+      <View style={styles.rightItem}>{rightItem ?? rightItem}</View>
     </View>
   );
 };
@@ -25,22 +19,24 @@ export default CustomHeader;
 
 const styles = StyleSheet.create({
   headerContainer: {
+    height: 60,
     flexDirection: 'row',
     alignItems: 'center',
-    paddingVertical: 10,
     paddingHorizontal: 20,
     backgroundColor: 'white',
   },
   leftItem: {
-    flex: 1,
+    flexGrow: 1, // 왼쪽은 가능한 만큼 늘어남
+    flexShrink: 0, // 왼쪽은 줄어들지 않음
+    minWidth: 0, // 줄어들 수 있게 허용
     alignItems: 'flex-start',
   },
   centerItem: {
-    flex: 2,
+    flexShrink: 1, // 중앙은 공간 부족할 땐 줄어듦
     alignItems: 'center',
   },
   rightItem: {
-    flex: 1,
+    flexShrink: 1, // 오른쪽도 공간 부족할 땐 줄어듦
     alignItems: 'flex-end',
   },
 });

@@ -57,6 +57,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     paddingHorizontal: 20,
     alignItems: 'center',
+    justifyContent: 'space-between',
     // elevation: 10,
     // shadowColor: '#000',
     // shadowOpacity: 0.05,
@@ -67,6 +68,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     flex: 1,
+    // backgroundColor: 'orange',
   },
   centerButton: {
     width: 70,
