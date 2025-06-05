@@ -1,11 +1,14 @@
 import {View, Text, StyleSheet} from 'react-native';
 import StudyTimeOverviewSection from './components/StudyTimeOverviewSection';
+import RankingComparisonSection from './components/RankingComparisonSection';
 
 const StatisticScreen = () => {
   return (
     <View style={styles.container}>
+      {/* 학습 통계 요약 */}
       <StudyTimeOverviewSection />
-      <StudyTimeOverviewSection />
+      {/* 개별 학습 시간 */}
+      <RankingComparisonSection />
     </View>
   );
 };
@@ -15,7 +18,6 @@ export default StatisticScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: '#fff',
-    gap: 20,
+    gap: 10,
   },
 });

@@ -5,17 +5,20 @@ import {
   StyleSheet,
   NativeSyntheticEvent,
   NativeScrollEvent,
+  Touchable,
+  TouchableOpacity,
 } from 'react-native';
 import StudyObject from './StudyObject';
 import SvgIcon from '../../../components/SvgIcon';
 
 type CarouselProps = {
   data?: any[];
+  setModalVisible: (visible: boolean) => void;
 };
 
 const scrollHeight = 40; // Height of each item in the carousel
 
-const Carousel = ({data}: CarouselProps) => {
+const Carousel = ({data, setModalVisible}: CarouselProps) => {
   if (!data || data.length === 0) return null;
 
   const [activeIndex, setActiveIndex] = useState(1);
@@ -54,15 +57,6 @@ const Carousel = ({data}: CarouselProps) => {
     });
   }, [activeIndex]);
 
-  const handleScrollEndDrag = (
-    event: NativeSyntheticEvent<NativeScrollEvent>,
-  ) => {
-    const offsetY = event.nativeEvent.contentOffset.y;
-    const index = Math.round(offsetY / scrollHeight);
-    scrollViewRef.current?.scrollTo({y: index * scrollHeight, animated: true});
-    setActiveIndex(index);
-  };
-
   const handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
     const contentOffsetX = event.nativeEvent.contentOffset.y;
     let index = Math.floor(contentOffsetX / scrollHeight);
@@ -100,7 +94,12 @@ const Carousel = ({data}: CarouselProps) => {
           <StudyObject key={index} subject={item.subject} aim={item.aim} />
         ))}
       </ScrollView>
-      <SvgIcon name="아래방향" color="#D9D9D9" />
+      <TouchableOpacity
+        onPress={() => {
+          setModalVisible(true);
+        }}>
+        <SvgIcon name="더하기" color="#D9D9D9" />
+      </TouchableOpacity>
     </View>
   );
 };
@@ -111,7 +110,7 @@ const styles = StyleSheet.create({
     height: scrollHeight,
     marginBottom: 20,
     flexDirection: 'row',
-    // backgroundColor
+    alignItems: 'center',
   },
 });
 
