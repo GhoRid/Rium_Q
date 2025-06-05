@@ -1,5 +1,5 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {Text, TouchableOpacity} from 'react-native';
+import {Text, TouchableOpacity, View} from 'react-native';
 import HomeScreen from '../../screens/HomeScreen/HomeScreen';
 import PlanScreen from '../../screens/PlanScreen/PlanScreen';
 import CustomTabBar from './CustomTabBar';
@@ -20,12 +20,10 @@ const TabNavigator = () => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
   return (
-    <SafeAreaView
+    <View
       style={{
         flex: 1,
         backgroundColor: 'white',
-        // paddingBottom: insets.bottom,
-        // paddingTop: insets.top,
       }}>
       <Tab.Navigator
         tabBar={props => <CustomTabBar {...props} />}
@@ -96,7 +94,7 @@ const TabNavigator = () => {
           options={{tabBarLabel: 'MyPage', headerShown: false}}
         />
       </Tab.Navigator>
-    </SafeAreaView>
+    </View>
   );
 };
 
