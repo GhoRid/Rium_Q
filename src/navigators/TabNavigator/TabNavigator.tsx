@@ -7,7 +7,7 @@ import MyPageScreen from '../../screens/MyPageScreen/MyPageScreen';
 import {SafeAreaView, useSafeAreaInsets} from 'react-native-safe-area-context';
 import CustomHeader from '../../components/Header/CustomHeader';
 import SvgIcon from '../../components/SvgIcon';
-import TestScreen from '../../screens/TestScreen';
+import TestScreen from '../../screens/TestScreen/TestScreen';
 import StatisticScreen from '../../screens/\bStatisticScreen/\bStatisticScreen';
 import {useNavigation, NavigationProp} from '@react-navigation/native';
 import {RootStackParamList} from '../../types/screens';
@@ -91,7 +91,7 @@ const TabNavigator = () => {
         <Tab.Screen
           name="MyPage"
           component={MyPageScreen}
-          options={{tabBarLabel: 'MyPage', headerShown: false}}
+          options={{tabBarLabel: '마이', headerShown: false}}
         />
       </Tab.Navigator>
     </View>

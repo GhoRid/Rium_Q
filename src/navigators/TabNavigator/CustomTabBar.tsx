@@ -25,14 +25,11 @@ const CustomTabBar = ({state, descriptors, navigation}: any) => {
               //   style={styles.centerButtonContainer}
               activeOpacity={0.8}>
               <View style={styles.centerButton}>
-                <SvgIcon name="앱로고1" size={40} color="white" />
+                <SvgIcon name="앱로고1" size={32} color="white" />
               </View>
             </TouchableOpacity>
           );
         }
-
-        // 일반 탭 버튼
-        console.log(route);
 
         return (
           <TouchableOpacity
@@ -69,6 +66,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     flex: 1,
+    gap: 5,
     // backgroundColor: 'orange',
   },
   centerButton: {

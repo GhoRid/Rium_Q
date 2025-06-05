@@ -1,6 +1,6 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {SafeAreaView, useSafeAreaInsets} from 'react-native-safe-area-context';
-import TestScreen from '../screens/TestScreen';
+import TestScreen from '../screens/TestScreen/TestScreen';
 import TabNavigator from './TabNavigator/TabNavigator';
 import NotificationScreen from '../screens/NotificationScreen/NotificationScreen';
 import TimerScreen from '../screens/TimerScreen/TimerScreen';
