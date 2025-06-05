@@ -1,5 +1,6 @@
 import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 import SvgIcon from '../../../components/SvgIcon';
+import palette from '../../../utils/palette';
 
 const Grid = () => {
   return (
@@ -76,7 +77,7 @@ const styles = StyleSheet.create({
   seatCard: {
     height: '48%',
     borderRadius: 16,
-    backgroundColor: '#001742',
+    backgroundColor: palette.app_main_color,
     paddingHorizontal: 20,
     flexDirection: 'row',
     alignItems: 'center',

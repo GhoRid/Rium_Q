@@ -1,5 +1,6 @@
 import {View, Text, TouchableOpacity, StyleSheet, Platform} from 'react-native';
 import SvgIcon from '../../components/SvgIcon';
+import palette from '../../utils/palette';
 
 const CustomTabBar = ({state, descriptors, navigation}: any) => {
   return (
@@ -74,7 +75,7 @@ const styles = StyleSheet.create({
     width: 70,
     height: 70,
     borderRadius: '50%',
-    backgroundColor: '#1C2E4A',
+    backgroundColor: palette.app_main_color,
     alignItems: 'center',
     justifyContent: 'center',
   },

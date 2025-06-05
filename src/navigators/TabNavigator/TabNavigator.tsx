@@ -11,6 +11,7 @@ import TestScreen from '../../screens/TestScreen';
 import StatisticScreen from '../../screens/\bStatisticScreen/\bStatisticScreen';
 import {useNavigation, NavigationProp} from '@react-navigation/native';
 import {RootStackParamList} from '../../types/screens';
+import palette from '../../utils/palette';
 
 const Tab = createBottomTabNavigator();
 
@@ -37,7 +38,13 @@ const TabNavigator = () => {
             tabBarLabel: '홈',
             header: () => (
               <CustomHeader
-                leftItem={<SvgIcon name="앱로고2" width={65} color="#1C2E4A" />} // 왼쪽 아이콘
+                leftItem={
+                  <SvgIcon
+                    name="앱로고2"
+                    width={65}
+                    color={palette.app_main_color}
+                  />
+                } // 왼쪽 아이콘
                 rightItem={
                   <TouchableOpacity
                     onPress={() => {

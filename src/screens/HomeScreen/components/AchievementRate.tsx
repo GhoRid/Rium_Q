@@ -1,4 +1,5 @@
 import {Pressable, View, Text, StyleSheet, Image} from 'react-native';
+import palette from '../../../utils/palette';
 
 interface AchievementRateProps {
   progress: number;
@@ -53,7 +54,7 @@ const styles = StyleSheet.create({
   },
   studyButton: {
     borderWidth: 1,
-    borderColor: '#001742',
+    borderColor: palette.app_main_color,
     borderRadius: 10,
     paddingHorizontal: 16,
     paddingVertical: 8,
@@ -78,7 +79,7 @@ const styles = StyleSheet.create({
   },
   progressBarFill: {
     height: 6,
-    backgroundColor: '#001742',
+    backgroundColor: palette.app_main_color,
   },
   // 캐릭터
   characterContainer: {
