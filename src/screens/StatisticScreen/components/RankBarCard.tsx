@@ -3,8 +3,14 @@ import {StyleSheet, Text, View} from 'react-native';
 const RankBarCard = () => {
   return (
     <View style={styles.container}>
-      <View style={styles.leftBox}></View>
-      <View style={styles.rightBox}></View>
+      <View style={[styles.box, styles.left]}>
+        <Text style={styles.targetRangeText}>19세 학생 중</Text>
+        <View style={styles.highlightWrap}>
+          <Text style={styles.rankingRateText}>상위 10%</Text>
+          <View style={styles.underline} />
+        </View>
+      </View>
+      <View style={[styles.box, styles.right]}></View>
     </View>
   );
 };
@@ -17,14 +23,34 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: 'white',
   },
-  leftBox: {
+  box: {
     flex: 1,
-    backgroundColor: 'orange',
-    height: 200,
+    height: 150,
   },
-  rightBox: {
-    flex: 1,
-    backgroundColor: 'yellow',
-    height: 200,
+  left: {
+    alignItems: 'center',
   },
+  targetRangeText: {
+    fontSize: 18,
+  },
+  highlightWrap: {
+    position: 'relative',
+  },
+  rankingRateText: {
+    fontSize: 24,
+    color: '#0667FF',
+    fontWeight: 'bold',
+    zIndex: 1, // 텍스트가 하이라이트 위에 오도록
+  },
+  underline: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    bottom: 2, // 텍스트와 간격
+    height: 13, // 밑줄 두께
+    backgroundColor: '#CDE1FF',
+    borderRadius: 5,
+    zIndex: 0,
+  },
+  right: {},
 });

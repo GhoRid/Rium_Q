@@ -1,8 +1,8 @@
 //하단 네비게이터
-export {default as 홈} from './icon/home.svg';
-export {default as 계획} from './icon/plan.svg';
-export {default as 통계} from './icon/statistics.svg';
-export {default as 마이페이지} from './icon/person.svg';
+export {default as Home} from './icon/home.svg';
+export {default as Plan} from './icon/plan.svg';
+export {default as Statistic} from './icon/statistics.svg';
+export {default as MyPage} from './icon/person.svg';
 
 export {default as 앱로고1} from './icon/logo1.svg';
 export {default as 앱로고2} from './icon/logo2.svg';

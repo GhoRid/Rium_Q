@@ -1,21 +1,22 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {Text, View} from 'react-native';
+import {Text, TouchableOpacity} from 'react-native';
 import HomeScreen from '../../screens/HomeScreen/HomeScreen';
 import PlanScreen from '../../screens/PlanScreen/PlanScreen';
-import TimerScreen from '../../screens/TimerScreen/TimerScreen';
-import SettingsScreen from '../../screens/SettingsScreen';
-import MyPageScreen from '../../screens/MyPageScreen/MyPageScreen';
 import CustomTabBar from './CustomTabBar';
+import MyPageScreen from '../../screens/MyPageScreen/MyPageScreen';
 import {SafeAreaView, useSafeAreaInsets} from 'react-native-safe-area-context';
 import CustomHeader from '../../components/Header/CustomHeader';
 import SvgIcon from '../../components/SvgIcon';
 import TestScreen from '../../screens/TestScreen';
 import StatisticScreen from '../../screens/\bStatisticScreen/\bStatisticScreen';
+import {useNavigation, NavigationProp} from '@react-navigation/native';
+import {RootStackParamList} from '../../types/screens';
 
 const Tab = createBottomTabNavigator();
 
 const TabNavigator = () => {
   const insets = useSafeAreaInsets();
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
   return (
     <SafeAreaView
@@ -30,31 +31,43 @@ const TabNavigator = () => {
         // screenOptions={{headerShown: false}}
       >
         <Tab.Screen
-          name="홈"
+          name="Home"
           component={HomeScreen}
           options={{
+            tabBarLabel: '홈',
             header: () => (
               <CustomHeader
                 leftItem={<SvgIcon name="앱로고2" width={65} color="#1C2E4A" />} // 왼쪽 아이콘
-                rightItem={<SvgIcon name="알림" size={35} />} // 오른쪽 아이콘
+                rightItem={
+                  <TouchableOpacity
+                    onPress={() => {
+                      navigation.navigate('Notification');
+                      console.log('알림 아이콘 클릭됨');
+                    }}>
+                    <SvgIcon name="알림" size={35} />
+                  </TouchableOpacity>
+                } // 오른쪽 아이콘
               />
             ),
           }}
         />
         <Tab.Screen
-          name="계획"
+          name="Plan"
+          // tabBarLabel="Plan"
           component={PlanScreen}
-          options={{headerShown: false}}
+          options={{tabBarLabel: '계획', headerShown: false}}
         />
         <Tab.Screen
-          name="공부 시작"
+          name="Test"
+          navigationKey="Test"
           component={TestScreen}
           options={{headerShown: false}}
         />
         <Tab.Screen
-          name="통계"
+          name="Statistic"
           component={StatisticScreen}
           options={{
+            tabBarLabel: '통계',
             header: () => (
               <CustomHeader
                 leftItem={
@@ -71,9 +84,9 @@ const TabNavigator = () => {
           }}
         />
         <Tab.Screen
-          name="마이페이지"
+          name="MyPage"
           component={MyPageScreen}
-          options={{headerShown: false}}
+          options={{tabBarLabel: 'MyPage', headerShown: false}}
         />
       </Tab.Navigator>
     </SafeAreaView>

@@ -31,7 +31,7 @@ const CustomTabBar = ({state, descriptors, navigation}: any) => {
         }
 
         // 일반 탭 버튼
-        const icons = ['🏠', '📝', '📊', '👤']; // 아이콘 이모지 (0~1, 3~4만 사용)
+        console.log(route);
 
         return (
           <TouchableOpacity
