@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     paddingVertical: 18,
     paddingHorizontal: 16,
-    backgroundColor: '#fff',
+    backgroundColor: 'white',
     borderBottomWidth: 1,
     borderBottomColor: '#F2F5F9',
     minHeight: 48,
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     backgroundColor: '#FF3636',
     position: 'absolute',
-    right: 10,
+    right: 20,
     top: 22,
   },
 });

@@ -18,6 +18,7 @@ const BackButtonHeaderLeft = ({
   return (
     <View style={styles.container}>
       <TouchableOpacity
+        style={styles.backButtonBox}
         onPress={onPressBackBtn ? onPressBackBtn : () => navigation.goBack()}>
         <SvgIcon name="좌측방향" size={24} color="black" />
       </TouchableOpacity>
@@ -32,6 +33,9 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
+  },
+  backButtonBox: {
+    padding: 5,
   },
   text: {
     fontSize: 20,
