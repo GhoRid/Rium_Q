@@ -1,4 +1,5 @@
 import {StyleSheet, Text, View} from 'react-native';
+import SaveCode from './SaveCode';
 
 const RankBarCard = () => {
   return (
@@ -22,12 +23,14 @@ const styles = StyleSheet.create({
     padding: 20,
     flexDirection: 'row',
     backgroundColor: 'white',
+    marginBottom: 30,
   },
   box: {
     flex: 1,
     height: 150,
   },
   left: {
+    marginTop: 30,
     alignItems: 'center',
   },
   targetRangeText: {

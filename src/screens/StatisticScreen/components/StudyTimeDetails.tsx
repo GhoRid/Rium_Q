@@ -1,6 +1,8 @@
+import {NavigationProp, useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {View, Text, StyleSheet, FlatList, TouchableOpacity} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import {RootStackParamList} from '../../../types/screens';
 
 const studyData = [
   {
@@ -34,9 +36,10 @@ const studyData = [
   },
 ];
 
-const StudyTimePreview = () => {
+const StudyTimeDetails = () => {
   const firstDateGroup = studyData[0];
   const previewRecords = firstDateGroup.records.slice(0, 3);
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
   return (
     <View style={styles.container}>
@@ -76,7 +79,9 @@ const StudyTimePreview = () => {
       {/* 더보기 버튼 */}
       <TouchableOpacity
         style={styles.moreButton}
-        // onPress={onPressMore}
+        onPress={() => {
+          navigation.navigate('StudyTimeDetail');
+        }}
         activeOpacity={0.8}>
         <Text style={styles.moreText}>더보기</Text>
       </TouchableOpacity>
@@ -84,7 +89,7 @@ const StudyTimePreview = () => {
   );
 };
 
-export default StudyTimePreview;
+export default StudyTimeDetails;
 
 const styles = StyleSheet.create({
   container: {

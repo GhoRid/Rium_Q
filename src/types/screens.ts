@@ -9,4 +9,5 @@ export interface RootStackParamList extends ParamListBase {
   MyPage: undefined;
   Notification: undefined;
   Test: undefined;
+  StudyTimeDetail: undefined;
 }
