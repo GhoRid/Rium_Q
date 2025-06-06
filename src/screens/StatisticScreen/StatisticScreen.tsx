@@ -8,6 +8,7 @@ const StatisticScreen = () => {
     <ScrollView style={styles.container}>
       {/* 학습 통계 요약 */}
       <StudyTimeOverviewSection />
+
       {/* 개별 학습 시간 */}
       <RankingComparisonSection />
       {/* 랭킹 바 차트 */}
