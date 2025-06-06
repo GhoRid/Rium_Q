@@ -1,5 +1,9 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import BarChart from './BarChart';
+import {useState} from 'react';
+import PureStudyTimeTab from './PureStudyTimeTab';
+import BySubjectChartTab from './BySubjectChartTab';
+import GoalAchievementChartTab from './GoalAchievementChartTab';
 
 const sampleData = [
   {label: '24.12', value: 125},
@@ -19,13 +23,38 @@ const sampleDataExample = [
   {label: '10월', value: 154},
 ];
 
+type TabName = '순공시간' | '과목별' | '목표달성률';
+
 const StudyTimeOverviewSection = () => {
+  const [selectedTab, setSelectedTab] = useState<TabName>('순공시간');
+
   return (
     <View style={styles.container}>
-      <BarChart
-        data={sampleDataExample}
-        key={JSON.stringify(sampleDataExample)}
-      />
+      <View style={styles.tabBar}>
+        {(['순공시간', '과목별', '목표달성률'] as TabName[]).map(tab => (
+          <TouchableOpacity
+            key={tab}
+            style={styles.tabItem}
+            onPress={() => setSelectedTab(tab)}>
+            <Text
+              style={[
+                styles.tabText,
+                selectedTab === tab && styles.tabTextActive,
+              ]}>
+              {tab}
+            </Text>
+          </TouchableOpacity>
+        ))}
+      </View>
+
+      {/* 2) 탭에 따라 다른 콘텐츠 렌더링 */}
+      <View style={styles.contentContainer}>
+        {selectedTab === '순공시간' && (
+          <PureStudyTimeTab data={sampleDataExample} />
+        )}
+        {selectedTab === '과목별' && <BySubjectChartTab />}
+        {selectedTab === '목표달성률' && <GoalAchievementChartTab />}
+      </View>
     </View>
   );
 };
@@ -34,9 +63,30 @@ export default StudyTimeOverviewSection;
 
 const styles = StyleSheet.create({
   container: {
-    padding: 20,
-    backgroundColor: '#fff',
+    backgroundColor: 'white',
     marginTop: 10,
     marginBottom: 10,
+  },
+  tabBar: {
+    flexDirection: 'row',
+    padding: 20,
+  },
+  tabItem: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  tabText: {
+    fontSize: 16,
+    color: '#999',
+  },
+  tabTextActive: {
+    color: '#000',
+    fontWeight: '600',
+  },
+  contentContainer: {
+    flex: 1,
+    height: 320,
+    paddingHorizontal: 20,
   },
 });
