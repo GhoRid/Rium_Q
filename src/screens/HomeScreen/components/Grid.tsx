@@ -1,8 +1,12 @@
 import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 import SvgIcon from '../../../components/SvgIcon';
 import palette from '../../../utils/palette';
+import {NavigationProp, useNavigation} from '@react-navigation/native';
+import {RootStackParamList} from '../../../types/screens';
 
 const Grid = () => {
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+
   return (
     <View style={styles.grid}>
       {/* 왼쪽 세로 긴 카드 */}
@@ -14,7 +18,11 @@ const Grid = () => {
 
       {/* 오른쪽 세로 두 줄 카드 */}
       <View style={styles.rightColumn}>
-        <TouchableOpacity style={styles.seatCard}>
+        <TouchableOpacity
+          style={styles.seatCard}
+          onPress={() => {
+            navigation.navigate('SeatReservation');
+          }}>
           <View style={styles.seatTextContainer}>
             <Text style={styles.seatText}>좌석{'\n'}예약하기</Text>
           </View>

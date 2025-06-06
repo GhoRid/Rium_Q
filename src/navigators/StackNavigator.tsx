@@ -9,6 +9,7 @@ import SvgIcon from '../components/SvgIcon';
 import {Text} from 'react-native';
 import BackButtonHeaderLeft from '../components/Header/BackButtonHeaderLeft';
 import StudyTimeDetailScreen from '../screens/StudyTimeDetailScreen/StudyTimeDetailScreen';
+import SeatReservationScreen from '../screens/SeatReservationScreen/SeatReservationScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -55,6 +56,16 @@ const StackNavigator = () => {
         <Stack.Screen
           name="StudyTimeDetail"
           component={StudyTimeDetailScreen}
+          options={{
+            // title: '', // ← 제목 제거
+            headerStyle: {
+              // backgroundColor: '#313131',
+            },
+          }}
+        />
+        <Stack.Screen
+          name="SeatReservation"
+          component={SeatReservationScreen}
           options={{
             // title: '', // ← 제목 제거
             headerStyle: {
