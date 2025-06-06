@@ -22,11 +22,7 @@ const PureStudyTimeTab = ({data}: PureStudyTimeTabProps) => {
         {options.map(option => (
           <TouchableOpacity
             key={option}
-            style={[
-              styles.segment,
-              // 선택된 탭이면 배경색을 조금 더 밝게(또는 강조) 보여주고 싶다면 이곳에 추가 스타일
-              // 여기에선 전체 컨테이너이므로 배경은 동일하지만, 필요시 segment별 스타일 조절 가능
-            ]}
+            style={styles.segment}
             activeOpacity={0.7}
             onPress={() => setSelected(option)}>
             <Text
@@ -51,18 +47,15 @@ const styles = StyleSheet.create({
   },
   periodTabContainer: {
     flexDirection: 'row',
-    backgroundColor: '#E4E4E4', // 전체 바탕을 연회색으로
-    borderRadius: 15, // 둥근 모서리
-    paddingVertical: 10, // 상하 여백
-    paddingHorizontal: 4, // 좌우 여백 (각 segment 간격 확보)
+    backgroundColor: '#E4E4E4',
+    borderRadius: 15,
+    paddingHorizontal: 4,
     alignItems: 'center',
-    justifyContent: 'space-between',
-    width: '90%', // 전체 너비 사용
+    justifyContent: 'space-around',
+    width: '90%',
   },
   segment: {
-    flex: 1, // 동일 너비
-    alignItems: 'center',
-    paddingVertical: 6, // 세로 터치 영역 확보
+    paddingVertical: 12, // 세로 터치 영역 확보
   },
   text: {
     fontSize: 14,
