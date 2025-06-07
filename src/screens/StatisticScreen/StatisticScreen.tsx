@@ -5,7 +5,7 @@ import StudyTimeDetails from './components/StudyTimeDetails';
 
 const StatisticScreen = () => {
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       {/* 학습 통계 요약 */}
       <StudyTimeOverviewSection />
 

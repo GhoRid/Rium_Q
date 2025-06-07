@@ -1,5 +1,4 @@
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import BarChart from './BarChart';
 import {useState} from 'react';
 import PureStudyTimeTab from './PureStudyTimeTab';
 import BySubjectChartTab from './BySubjectChartTab';

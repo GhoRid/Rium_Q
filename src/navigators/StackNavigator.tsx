@@ -57,10 +57,11 @@ const StackNavigator = () => {
           name="StudyTimeDetail"
           component={StudyTimeDetailScreen}
           options={{
-            // title: '', // ← 제목 제거
-            headerStyle: {
-              // backgroundColor: '#313131',
-            },
+            header: () => (
+              <CustomHeader
+                leftItem={<BackButtonHeaderLeft pageName="개별 학습 시간" />}
+              />
+            ),
           }}
         />
         <Stack.Screen
