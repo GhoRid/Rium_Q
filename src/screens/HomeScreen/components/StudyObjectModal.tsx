@@ -6,6 +6,7 @@ import {
   View,
   TouchableWithoutFeedback,
 } from 'react-native';
+import SvgIcon from '../../../components/SvgIcon';
 
 type StudyObjectModalProps = {
   modalVisible: boolean;
@@ -33,7 +34,14 @@ const StudyObjectModal = ({
       <View style={styles.centeredContainer}>
         <TouchableWithoutFeedback>
           <View style={styles.modalContent}>
-            <Text style={styles.title}>오늘의 계획이에요!</Text>
+            <View style={styles.modalHeaderBox}>
+              <Text style={styles.title}>오늘의 계획이에요!</Text>
+              <SvgIcon
+                name="취소"
+                size={20}
+                onPress={() => setModalVisible(false)}
+              />
+            </View>
             {data.map((item, index) => (
               <View key={index} style={styles.itemRow}>
                 <Text style={[styles.subject, getSubjectStyle(item.subject)]}>
@@ -86,10 +94,15 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     elevation: 5,
   },
+  modalHeaderBox: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: 16,
+  },
   title: {
     fontSize: 18,
     fontWeight: '700',
-    marginBottom: 16,
   },
   itemRow: {
     flexDirection: 'row',

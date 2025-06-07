@@ -1,160 +1,131 @@
 import React, {useEffect, useRef} from 'react';
-import {View, StyleSheet, Dimensions, Animated, Text} from 'react-native';
-import Svg, {Rect, G, Text as SvgText} from 'react-native-svg';
+import {StyleSheet, Animated, View} from 'react-native';
+import Svg, {
+  Defs,
+  LinearGradient,
+  Stop,
+  Path,
+  G,
+  Text as SvgText,
+} from 'react-native-svg';
 
-interface SaveCodeProps {
-  data: {
-    label: string;
-    value: number;
-  }[];
-  width: number;
-  height: number;
-  BAR_SPACING: number;
-}
+type BarProps = {
+  value: number;
+  label: string;
+  color: string;
+};
 
-const AnimatedRect = Animated.createAnimatedComponent(Rect);
-const AnimatedG = Animated.createAnimatedComponent(G);
+const CHART_HEIGHT = 120;
+const BAR_WIDTH = 40;
+const RADIUS = 20;
+const SVG_WIDTH = 60;
 
-const screenWidth = Dimensions.get('window').width;
-const CHART_PADDING_HORIZONTAL = 20;
-const chartWidth = screenWidth - CHART_PADDING_HORIZONTAL * 2;
-const chartHeight = 180;
+const Bar = ({value, label, color}: BarProps) => {
+  const animatedHeight = useRef(new Animated.Value(0)).current;
 
-const SaveCode: React.FC<SaveCodeProps> = ({
-  data,
-  width,
-  height,
-  BAR_SPACING = 10,
-}) => {
-  const barWidth = (width - BAR_SPACING * (data.length - 1)) / data.length;
-  const maxValue = Math.max(...data.map(item => item.value));
-  const finalHeights = data.map(item =>
-    maxValue > 0 ? (item.value / maxValue) * height : 0,
-  );
-
-  // 애니메이션 값 초기화 (처음엔 모두 0)
-  const animatedHeightsRef = useRef<Animated.Value[]>(
-    finalHeights.map(() => new Animated.Value(0)),
-  );
-
-  // mount 시점에 각 막대 높이 애니메이션 실행
   useEffect(() => {
-    const animations = animatedHeightsRef.current.map((animVal, idx) =>
-      Animated.timing(animVal, {
-        toValue: finalHeights[idx],
-        duration: 500,
-        useNativeDriver: false,
-      }),
-    );
-    Animated.stagger(100, animations).start();
-  }, [finalHeights]);
+    const height = (value / 8) * CHART_HEIGHT;
+
+    Animated.timing(animatedHeight, {
+      toValue: height,
+      duration: 600,
+      useNativeDriver: false,
+    }).start();
+  }, [value]);
+
+  const AnimatedPath = Animated.createAnimatedComponent(Path);
+  const AnimatedG = Animated.createAnimatedComponent(G);
+
+  const animatedY = animatedHeight.interpolate({
+    inputRange: [0, CHART_HEIGHT],
+    outputRange: [CHART_HEIGHT, 0],
+  });
+
+  const finalHeight = (value / 8) * CHART_HEIGHT;
+  const labelY = CHART_HEIGHT - finalHeight - 6;
+  const movedUp = Animated.subtract(finalHeight, animatedHeight);
+
+  // 막대의 path를 만들어주는 함수 (상단만 둥근 사각형)
+  const createRoundedBarPath = (
+    x: number,
+    y: number,
+    width: number,
+    height: number,
+    radius: number,
+  ) => {
+    return `
+      M${x},${y + radius}
+      A${radius},${radius} 0 0 1 ${x + radius},${y}
+      H${x + width - radius}
+      A${radius},${radius} 0 0 1 ${x + width},${y + radius}
+      V${y + height}
+      H${x}
+      Z
+    `;
+  };
+
+  const barX = (SVG_WIDTH - BAR_WIDTH) / 2;
 
   return (
-    <View style={styles.container}>
-      {/* 1) viewBox가 지정된 Svg */}
-      <Svg
-        width={chartWidth}
-        height={chartHeight}
-        viewBox={`0 0 ${chartWidth} ${chartHeight}`}
-        // key={JSON.stringify(data)} // 데이터 변경 시 새로 그리기
-      >
-        {data.map((item, index) => {
-          const isLast = index === data.length - 1;
-          const xPos = index * (barWidth + BAR_SPACING);
-          const animatedHeight = animatedHeightsRef.current[index];
+    <View style={styles.wrapper}>
+      <Svg width={SVG_WIDTH} height={CHART_HEIGHT}>
+        <Defs>
+          <LinearGradient id={`grad-${label}`} x1="0" y1="0" x2="0" y2="1">
+            <Stop offset="0" stopColor={color} stopOpacity="1" />
+            <Stop offset="1" stopColor={color} stopOpacity="0.1" />
+          </LinearGradient>
+        </Defs>
 
-          // (1) Rect 애니메이션용 y 값 계산
-          const animatedY = Animated.subtract(chartHeight, animatedHeight);
+        {/* 애니메이션 Path */}
+        <AnimatedPath
+          d={Animated.multiply(animatedHeight, 1).interpolate({
+            inputRange: [0, CHART_HEIGHT],
+            outputRange: [
+              createRoundedBarPath(barX, CHART_HEIGHT, BAR_WIDTH, 0, RADIUS),
+              createRoundedBarPath(barX, 0, BAR_WIDTH, CHART_HEIGHT, RADIUS),
+            ],
+          })}
+          fill={`url(#grad-${label})`}
+        />
 
-          // (2) Text 최종 y 위치(애니메이션 끝난 다음 값)
-          const finalYForText = chartHeight - finalHeights[index] - 8;
-
-          // (3) 그룹이 위로 옮겨질 거리:
-          // "애니메이션이 없을 때(맨 처음엔 animatedHeight=0) finalHeights 만큼 내려있다가,
-          // 애니가 끝나면(finalHeights가 모두 animatedHeight로 수렴) 0만큼만 이동된 상태"가 되어야 함.
-          // 즉, movedUp = finalHeights[index] - animatedHeight
-          const movedUp = Animated.subtract(
-            finalHeights[index],
-            animatedHeight,
-          );
-
-          return (
-            <React.Fragment key={index}>
-              {/* 막대 (Animated) */}
-              <AnimatedRect
-                x={xPos}
-                y={animatedY}
-                width={barWidth}
-                height={animatedHeight}
-                rx={4}
-                fill={isLast ? '#0667FF' : '#EEEEEE'}
-              />
-
-              {/* 숫자 레이블: 
-                  - SvgText 자체는 x,y를 모두 숫자로 고정 (`x={xPos + barWidth/2}`, `y={finalYForText}`)
-                  - 이 SvgText를 <AnimatedG>로 감싸서, transform으로 Y축(=movedUp) 이동만 시킴 */}
-              <AnimatedG
-                transform={[
-                  {
-                    translateY: movedUp,
-                    // 'movedUp'이 0에서 finalHeights[index] → finalHeights[index]에서 0으로 변한다.
-                  },
-                ]}>
-                <SvgText
-                  x={xPos + barWidth / 2} // x축은 절대 고정값 (예: 150이 아니어도, 이 방법대로 하면 0으로 찍히지 않습니다)
-                  y={finalYForText} // y축도 최종 위치(애니 끝난 상태 기준)로 고정
-                  fontSize="14"
-                  fill={isLast ? '#0667FF' : '#999999'}
-                  fontWeight="bold"
-                  textAnchor="middle">
-                  {item.value}
-                </SvgText>
-              </AnimatedG>
-            </React.Fragment>
-          );
-        })}
+        {/* 숫자 텍스트 */}
+        <AnimatedG transform={[{translateY: movedUp}]}>
+          <SvgText
+            x={SVG_WIDTH / 2}
+            y={labelY}
+            fontSize="14"
+            fill={color}
+            fontWeight="bold"
+            textAnchor="middle">
+            {value} 시간
+          </SvgText>
+        </AnimatedG>
       </Svg>
 
-      {/* 3) X축(막대 아랫부분) 레이블 */}
-      <View style={styles.labelsContainer}>
-        {data.map((item, index) => {
-          const isLast = index === data.length - 1;
-          return (
-            <Text
-              key={index}
-              style={[
-                styles.label,
-                isLast && styles.labelHighlighted,
-                {width: barWidth},
-              ]}
-              numberOfLines={1}>
-              {item.label}
-            </Text>
-          );
-        })}
+      {/* 하단 라벨 */}
+      <View style={[styles.labelContainer, {width: SVG_WIDTH}]}>
+        <Animated.Text style={[styles.label, {color}]} numberOfLines={1}>
+          {label}
+        </Animated.Text>
       </View>
     </View>
   );
 };
 
-export default SaveCode;
+export default Bar;
 
 const styles = StyleSheet.create({
-  container: {
-    paddingTop: 20,
+  wrapper: {
+    alignItems: 'center',
+    marginHorizontal: 10,
+    justifyContent: 'center',
   },
-  labelsContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+  labelContainer: {
     marginTop: 8,
   },
   label: {
     fontSize: 12,
-    color: '#999999',
     textAlign: 'center',
-  },
-  labelHighlighted: {
-    color: '#0667FF',
     fontWeight: 'bold',
   },
 });
