@@ -1,5 +1,7 @@
 import {StyleSheet, Text, View} from 'react-native';
 import SaveCode from './SaveCode';
+import Bar from './Bar';
+import palette from '../../../utils/palette';
 
 const RankBarCard = () => {
   return (
@@ -11,7 +13,10 @@ const RankBarCard = () => {
           <View style={styles.underline} />
         </View>
       </View>
-      <View style={[styles.box, styles.right]}></View>
+      <View style={[styles.box, styles.right]}>
+        <Bar value={6.4} label="익끼님" color={palette.app_blue} />
+        <Bar value={5.1} label="19세 하루 평균" color="#BBBBBB" />
+      </View>
     </View>
   );
 };
@@ -27,10 +32,11 @@ const styles = StyleSheet.create({
   },
   box: {
     flex: 1,
-    height: 150,
+    height: 130,
+    marginTop: 20,
+    paddingBottom: 10,
   },
   left: {
-    marginTop: 30,
     alignItems: 'center',
   },
   targetRangeText: {
@@ -55,5 +61,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     zIndex: 0,
   },
-  right: {},
+  right: {
+    flexDirection: 'row',
+  },
 });
