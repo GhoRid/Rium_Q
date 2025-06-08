@@ -5,7 +5,7 @@ const TestScreen = () => {
   return (
     <View>
       <Text>dd</Text>
-      <BubbleChart />
+      <BubbleChart key={JSON.stringify('ㄴ에ㅔㅇ에')} />
     </View>
   );
 };

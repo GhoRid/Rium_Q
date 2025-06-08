@@ -21,7 +21,13 @@ const GoalAchievementChartTab = () => {
         selectedTag={selectedTag}
         setSelectedTag={setSelectedTag}
       />
-      <RoundProgressbar score={84} percentage={42} name="이끼" />
+      <RoundProgressbar
+        score={84}
+        percentage={42}
+        name="이끼"
+        //초기화 키.
+        key={JSON.stringify('dsd')}
+      />
     </View>
   );
 };
