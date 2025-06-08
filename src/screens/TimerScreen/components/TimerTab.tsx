@@ -1,6 +1,6 @@
 import {ParamListBase, useNavigation} from '@react-navigation/native';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {RootStackParamList} from '../../../screens';
+import {RootStackParamList} from '../../../types/screens';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
 const TimerTab = () => {

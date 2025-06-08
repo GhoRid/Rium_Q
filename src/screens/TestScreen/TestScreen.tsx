@@ -1,9 +1,11 @@
 import {Text, View} from 'react-native';
+import BubbleChart from './BubbleChart';
 
 const TestScreen = () => {
   return (
     <View>
-      <Text>테스트</Text>
+      <Text>dd</Text>
+      <BubbleChart />
     </View>
   );
 };
