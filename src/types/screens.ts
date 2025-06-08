@@ -11,4 +11,5 @@ export interface RootStackParamList extends ParamListBase {
   Test: undefined;
   StudyTimeDetail: undefined;
   SeatReservation: undefined;
+  Setting: undefined;
 }

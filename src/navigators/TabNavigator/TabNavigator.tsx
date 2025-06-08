@@ -29,6 +29,7 @@ const TabNavigator = () => {
         tabBar={props => <CustomTabBar {...props} />}
         // screenOptions={{headerShown: false}}
       >
+        {/* 홈 스크린 */}
         <Tab.Screen
           name="Home"
           component={HomeScreen}
@@ -56,18 +57,21 @@ const TabNavigator = () => {
             ),
           }}
         />
+        {/* 계획 스크린 */}
         <Tab.Screen
           name="Plan"
           // tabBarLabel="Plan"
           component={PlanScreen}
           options={{tabBarLabel: '계획', headerShown: false}}
         />
+        {/* 테스트 스크린 */}
         <Tab.Screen
           name="Test"
           navigationKey="Test"
           component={TestScreen}
           options={{headerShown: false}}
         />
+        {/* 통계 스크린 */}
         <Tab.Screen
           name="Statistic"
           component={StatisticScreen}
@@ -88,10 +92,31 @@ const TabNavigator = () => {
             ),
           }}
         />
+        {/* 마이페이지 스크린 */}
         <Tab.Screen
           name="MyPage"
           component={MyPageScreen}
-          options={{tabBarLabel: '마이', headerShown: false}}
+          options={{
+            tabBarLabel: '마이',
+            header: () => (
+              <CustomHeader
+                leftItem={
+                  <View style={{flexDirection: 'row'}}>
+                    <Text style={{fontSize: 24, fontWeight: '700'}}>익끼</Text>
+                    <Text style={{fontSize: 24}}>님</Text>
+                  </View>
+                }
+                rightItem={
+                  <TouchableOpacity
+                    onPress={() => {
+                      navigation.navigate('Setting');
+                    }}>
+                    <SvgIcon name="설정" size={30} />
+                  </TouchableOpacity>
+                }
+              />
+            ),
+          }}
         />
       </Tab.Navigator>
     </View>

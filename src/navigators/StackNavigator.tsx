@@ -10,6 +10,7 @@ import {Text} from 'react-native';
 import BackButtonHeaderLeft from '../components/Header/BackButtonHeaderLeft';
 import StudyTimeDetailScreen from '../screens/StudyTimeDetailScreen/StudyTimeDetailScreen';
 import SeatReservationScreen from '../screens/SeatReservationScreen/SeatReservationScreen';
+import SettingsScreen from '../screens/SettingsScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -67,6 +68,16 @@ const StackNavigator = () => {
         <Stack.Screen
           name="SeatReservation"
           component={SeatReservationScreen}
+          options={{
+            // title: '', // ← 제목 제거
+            headerStyle: {
+              // backgroundColor: '#313131',
+            },
+          }}
+        />
+        <Stack.Screen
+          name="Setting"
+          component={SettingsScreen}
           options={{
             // title: '', // ← 제목 제거
             headerStyle: {
