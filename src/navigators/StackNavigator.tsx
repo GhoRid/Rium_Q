@@ -26,12 +26,14 @@ const StackNavigator = () => {
       <Stack.Navigator
       // screenOptions={{headerShown: false}}
       >
+        {/* 탭 스크린(기본) */}
         <Stack.Screen
           name="Tab"
           navigationKey="Tab"
           component={TabNavigator}
           options={{headerShown: false}}
         />
+        {/* 테스트 스크린 */}
         <Stack.Screen name="Test" component={TestScreen} navigationKey="test" />
         <Stack.Screen
           name="Notification"
@@ -44,6 +46,7 @@ const StackNavigator = () => {
             ),
           }}
         />
+        {/* 타이머 스크린 */}
         <Stack.Screen
           name="Timer"
           component={TimerScreen}
@@ -54,6 +57,7 @@ const StackNavigator = () => {
             },
           }}
         />
+        {/* 개별 학습 시간 스크린 */}
         <Stack.Screen
           name="StudyTimeDetail"
           component={StudyTimeDetailScreen}
@@ -65,6 +69,7 @@ const StackNavigator = () => {
             ),
           }}
         />
+        {/* 좌석 예약 스크린 */}
         <Stack.Screen
           name="SeatReservation"
           component={SeatReservationScreen}
@@ -75,6 +80,7 @@ const StackNavigator = () => {
             },
           }}
         />
+        {/* 설정 스크린 */}
         <Stack.Screen
           name="Setting"
           component={SettingsScreen}
