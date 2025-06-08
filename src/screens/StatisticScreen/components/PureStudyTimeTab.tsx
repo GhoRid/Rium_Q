@@ -23,7 +23,7 @@ const PureStudyTimeTab = ({data}: PureStudyTimeTabProps) => {
           <TouchableOpacity
             key={option}
             style={styles.segment}
-            activeOpacity={0.7}
+            activeOpacity={1}
             onPress={() => setSelected(option)}>
             <Text
               style={[styles.text, selected === option && styles.textActive]}>
@@ -49,10 +49,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: '#E4E4E4',
     borderRadius: 15,
-    paddingHorizontal: 4,
+
     alignItems: 'center',
     justifyContent: 'space-around',
-    width: '90%',
+    width: '80%',
   },
   segment: {
     paddingVertical: 12, // 세로 터치 영역 확보

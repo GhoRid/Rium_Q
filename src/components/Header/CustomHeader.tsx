@@ -19,7 +19,7 @@ export default CustomHeader;
 
 const styles = StyleSheet.create({
   headerContainer: {
-    height: 60,
+    height: 50,
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: 20,

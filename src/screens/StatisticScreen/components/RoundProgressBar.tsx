@@ -1,64 +1,66 @@
 import React, {useEffect, useRef} from 'react';
 import {Animated, StyleSheet, Text, View} from 'react-native';
 import Svg, {Circle, G} from 'react-native-svg';
+import palette from '../../../utils/palette';
 
-const SIZE = 220;
-const STROKE_WIDTH = 15;
-const RADIUS = (SIZE - STROKE_WIDTH) / 2;
-const CIRCUMFERENCE = 2 * Math.PI * RADIUS; // 원 전체
-const HALF_CIRCUMFERENCE = CIRCUMFERENCE / 2;
-const ANIMATION_DURATION = 1000;
-
-type Props = {
-  score?: number;
-  percentage?: number; // 0~100
-  name?: string;
+type RoundProgressbarProps = {
+  score: number;
+  percentage: number; // 0~100
+  name: string;
 };
+
+const SIZE = 300;
+const STROKE_WIDTH = 10;
+const RADIUS = (SIZE - STROKE_WIDTH) / 2;
+const CIRCUMFERENCE = 2 * Math.PI * RADIUS;
+const HALF_CIRCUMFERENCE = CIRCUMFERENCE / 2;
+const HEIGHT = SIZE / 2 + STROKE_WIDTH;
 
 const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 
-export default function RoundProgressbar({
-  score = 40,
-  percentage = 68,
-  name = '석왕 익끼',
-}: Props) {
+const RoundProgressbar = ({score, percentage, name}: RoundProgressbarProps) => {
   const animatedValue = useRef(new Animated.Value(0)).current;
 
   const strokeDashoffset = animatedValue.interpolate({
     inputRange: [0, 100],
-    outputRange: [HALF_CIRCUMFERENCE, 0], // 반원만 채우기
+    outputRange: [HALF_CIRCUMFERENCE, 0], // 길어지는 느낌
+    extrapolate: 'clamp',
   });
 
   useEffect(() => {
     Animated.timing(animatedValue, {
       toValue: percentage,
-      duration: ANIMATION_DURATION,
+      duration: 1000,
       useNativeDriver: false,
     }).start();
   }, [percentage]);
 
   return (
     <View style={styles.container}>
-      <Svg width={SIZE} height={SIZE}>
-        <G rotation="-90" origin={`${SIZE / 2}, ${SIZE / 2}`}>
-          {/* 전체 배경 원 */}
+      <Svg width={SIZE} height={HEIGHT}>
+        <G rotation="-180" origin={`${SIZE / 2}, ${SIZE / 2}`}>
+          {/* 배경 반원 */}
           <Circle
             cx={SIZE / 2}
             cy={SIZE / 2}
             r={RADIUS}
-            stroke="#eee"
+            stroke="#F1F1F1"
             strokeWidth={STROKE_WIDTH}
+            strokeLinecap="round"
             fill="none"
+            strokeDasharray={HALF_CIRCUMFERENCE}
+            strokeDashoffset={0}
           />
-          {/* 반원만 보이게 조정된 파란색 원 */}
+          {/* 애니메이션 반원 */}
           <AnimatedCircle
             cx={SIZE / 2}
             cy={SIZE / 2}
             r={RADIUS}
-            stroke="#007BFF"
+            stroke={palette.app_blue}
             strokeWidth={STROKE_WIDTH}
             strokeLinecap="round"
             fill="none"
+            // 중요 - strokeDasharray는 전체 둘레를 기준으로 설정
             strokeDasharray={`${HALF_CIRCUMFERENCE}, ${CIRCUMFERENCE}`}
             strokeDashoffset={strokeDashoffset}
           />
@@ -73,7 +75,9 @@ export default function RoundProgressbar({
       </View>
     </View>
   );
-}
+};
+
+export default RoundProgressbar;
 
 const styles = StyleSheet.create({
   container: {
@@ -82,7 +86,7 @@ const styles = StyleSheet.create({
   },
   textContainer: {
     position: 'absolute',
-    top: 50,
+    top: 30,
     alignItems: 'center',
   },
   nameText: {

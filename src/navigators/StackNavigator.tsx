@@ -85,10 +85,11 @@ const StackNavigator = () => {
           name="Setting"
           component={SettingsScreen}
           options={{
-            // title: '', // ← 제목 제거
-            headerStyle: {
-              // backgroundColor: '#313131',
-            },
+            header: () => (
+              <CustomHeader
+                leftItem={<BackButtonHeaderLeft pageName="설정" />}
+              />
+            ),
           }}
         />
       </Stack.Navigator>
