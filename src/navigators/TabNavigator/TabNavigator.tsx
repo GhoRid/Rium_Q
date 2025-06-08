@@ -8,10 +8,10 @@ import {SafeAreaView, useSafeAreaInsets} from 'react-native-safe-area-context';
 import CustomHeader from '../../components/Header/CustomHeader';
 import SvgIcon from '../../components/SvgIcon';
 import TestScreen from '../../screens/TestScreen/TestScreen';
-import StatisticScreen from '../../screens/\bStatisticScreen/\bStatisticScreen';
 import {useNavigation, NavigationProp} from '@react-navigation/native';
 import {RootStackParamList} from '../../types/screens';
 import palette from '../../utils/palette';
+import StatisticScreen from '../../screens/StatisticScreen/StatisticScreen';
 
 const Tab = createBottomTabNavigator();
 
