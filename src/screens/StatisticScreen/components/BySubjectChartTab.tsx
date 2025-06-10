@@ -1,8 +1,19 @@
 import {View, Text, StyleSheet} from 'react-native';
+import BubbleChartForce from '../../TestScreen/BubbleChart';
+
+const DATA = [
+  {name: 'Apples', value: 70},
+  {name: 'Oranges', value: 44},
+  {name: 'Kiwis', value: 65},
+  {name: 'Bananas', value: 39},
+  {name: 'Pears', value: 10},
+  // {name: 'Satsumas', value: 25},
+  // {name: 'Pineapples', value: 30},
+];
 
 const BySubjectChartTab = () => (
   <View style={styles.placeholder}>
-    <Text>과목별 파이 차트 예시</Text>
+    <BubbleChartForce key={JSON.stringify('ㄴ에ㅔㅇ에')} DATA={DATA} />
   </View>
 );
 
