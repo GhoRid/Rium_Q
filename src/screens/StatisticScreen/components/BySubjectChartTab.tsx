@@ -1,5 +1,5 @@
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
-import BubbleChartForce from '../../TestScreen/BubbleChart';
+import BubbleChartForce from './BubbleChart';
 import {useState} from 'react';
 
 const DATA = [

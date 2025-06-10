@@ -1,5 +1,5 @@
 import {Pressable, Text, View} from 'react-native';
-import BubbleChart from './BubbleChart';
+import BubbleChart from '../StatisticScreen/components/BubbleChart';
 import {useState} from 'react';
 
 const DATA = [
