@@ -20,7 +20,7 @@ const BySubjectChartTab = () => {
 
   return (
     <View style={styles.placeholder}>
-      <BubbleChartForce key={JSON.stringify('ㄴ에ㅔㅇ에')} DATA={DATA} />
+      <BubbleChartForce DATA={DATA} key={1} />
 
       <View style={styles.periodTabContainer}>
         {options.map(option => (
