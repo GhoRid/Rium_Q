@@ -43,16 +43,20 @@ const styles = StyleSheet.create({
     flex: 1,
     gap: 20,
     alignItems: 'center',
-    justifyContent: 'center',
+    position: 'absolute',
+    bottom: 20,
+    left: 0,
+    right: 0,
   },
   periodTabContainer: {
     flexDirection: 'row',
     backgroundColor: '#E4E4E4',
     borderRadius: 15,
-
     alignItems: 'center',
     justifyContent: 'space-around',
     width: '80%',
+    // gap: 70,
+    // paddingHorizontal: 60,
   },
   segment: {
     paddingVertical: 12, // 세로 터치 영역 확보

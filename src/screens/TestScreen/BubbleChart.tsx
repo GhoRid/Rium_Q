@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import {View, Dimensions, Animated, StyleSheet} from 'react-native';
 import Svg, {Circle, Text as SvgText, G} from 'react-native-svg';
-import {scaleOrdinal} from 'd3-scale';
+import {scaleLinear} from 'd3-scale';
+import {interpolateRgb} from 'd3-interpolate';
 import {forceSimulation, forceX, forceY, forceCollide} from 'd3-force';
 import * as d3Chromatic from 'd3-scale-chromatic';
 
@@ -17,18 +18,24 @@ interface BubbleNode extends DataNode {
 }
 interface Props {
   DATA: DataNode[];
+  maxColor?: string;
+  minColor?: string;
 }
 
-const BubbleChartForce = ({DATA}: Props) => {
+const BubbleChartForce = ({
+  DATA,
+  maxColor = '#0667FF',
+  minColor = '#B5CCF0',
+}: Props) => {
   const {width: screenWidth} = Dimensions.get('window');
-  const CHART_WIDTH = screenWidth;
+  const CHART_WIDTH = screenWidth / 2; // 화면 너비의 절반 안에서만 배치되도록
   const CHART_HEIGHT = 250;
   const [nodes, setNodes] = useState<BubbleNode[]>([]);
+  const maxValue = Math.max(...DATA.map(d => d.value));
+  const minValue = Math.min(...DATA.map(d => d.value));
+  const maxRadius = CHART_HEIGHT / 3.7; // 최대 반지름 설정
 
   useEffect(() => {
-    const maxValue = Math.max(...DATA.map(d => d.value));
-    const maxRadius = CHART_HEIGHT / 4;
-
     const initialNodes = DATA.map(d => ({
       ...d,
       x: Math.random() * CHART_WIDTH, // ⭐ 무작위 위치
@@ -38,15 +45,15 @@ const BubbleChartForce = ({DATA}: Props) => {
     }));
 
     const sim = forceSimulation(initialNodes)
-      .force('x', forceX(CHART_WIDTH / 2).strength(0.05)) //  클수록 좌우로 좁아짐
+      .force('x', forceX(CHART_WIDTH / 2).strength(0.04)) //  클수록 좌우로 좁아짐
       .force('y', forceY(CHART_HEIGHT / 2).strength(0.15)) // 클수록 높이 낮아짐
       .force(
         'collide',
-        forceCollide(d => d.r + 10),
+        forceCollide(d => d.r + 5),
       )
       .stop();
 
-    for (let i = 0; i < 300; i++) sim.tick(); // 충분히 반복
+    for (let i = 0; i < 300; i++) sim.tick();
 
     setNodes([...initialNodes]);
 
@@ -61,13 +68,18 @@ const BubbleChartForce = ({DATA}: Props) => {
     Animated.stagger(50, animations).start();
   }, [DATA]);
 
-  const colorScale = scaleOrdinal<string, string>(d3Chromatic.schemeCategory10);
   const AnimatedG = Animated.createAnimatedComponent(G as any);
+
+  const colorInterpolator = interpolateRgb(minColor, maxColor);
+  const colorScale = scaleLinear<string>()
+    .domain([minValue, maxValue])
+    .range([minColor, maxColor])
+    .interpolate(() => colorInterpolator);
 
   return (
     <View style={[styles.container, {width: CHART_WIDTH}]}>
       <Svg
-        width={CHART_WIDTH}
+        width={screenWidth}
         height={CHART_HEIGHT}
         viewBox={`0 0 ${CHART_WIDTH} ${CHART_HEIGHT}`}>
         {nodes.map((node, idx) => {
@@ -87,7 +99,7 @@ const BubbleChartForce = ({DATA}: Props) => {
                 ],
                 opacity: node.anim,
               }}>
-              <Circle r={node.r} fill={colorScale(node.name)} />
+              <Circle r={node.r} fill={colorScale(node.value)} />
               <SvgText
                 fill="#fff"
                 fontSize={14}
@@ -118,7 +130,6 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     justifyContent: 'center',
-    marginVertical: 20,
   },
 });
 

@@ -82,6 +82,7 @@ const styles = StyleSheet.create({
   tabTextActive: {
     color: '#000',
     fontWeight: '600',
+    position: 'relative', // 자식 컴포넌트가 절대 위치를 사용할 수 있도록
   },
   contentContainer: {
     flex: 1,
