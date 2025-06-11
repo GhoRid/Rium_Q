@@ -3,11 +3,11 @@ import BubbleChartForce from './BubbleChart';
 import {useState} from 'react';
 
 const DATA = [
-  {name: 'Apples', value: 70},
-  {name: 'Oranges', value: 44},
-  {name: 'Kiwis', value: 65},
-  {name: 'Bananas', value: 39},
-  {name: 'Pears', value: 10},
+  {name: 'Apples', value: 700},
+  {name: 'Oranges', value: 440},
+  {name: 'Kiwis', value: 650},
+  {name: 'Bananas', value: 390},
+  {name: 'Pears', value: 300},
   // {name: 'Satsumas', value: 25},
   // {name: 'Pineapples', value: 30},
 ];

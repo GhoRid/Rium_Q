@@ -21,7 +21,10 @@ const CustomTabBar = ({state, descriptors, navigation}: any) => {
           return (
             <TouchableOpacity
               key={route.key}
-              onPress={onPress}
+              // onPress={onPress}
+              onPress={() => {
+                navigation.navigate('Timer');
+              }}
               //   style={styles.centerButtonContainer}
               activeOpacity={0.8}>
               <View style={styles.centerButton}>

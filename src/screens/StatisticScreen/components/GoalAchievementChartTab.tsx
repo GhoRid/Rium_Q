@@ -23,7 +23,7 @@ const GoalAchievementChartTab = () => {
       />
       <RoundProgressbar
         score={84}
-        percentage={42}
+        percentage={12}
         name="이끼"
         //초기화 키.
         key={JSON.stringify('dsd')}
