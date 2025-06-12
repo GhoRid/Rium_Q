@@ -82,9 +82,10 @@ const StackNavigator = () => {
       <Stack.Screen
         name="Timer"
         component={TimerScreen}
-        options={{
-          header: () => <CustomHeader leftItem={<BackButtonHeaderLeft />} />,
-        }}
+        options={{headerShown: false}}
+        // options={{
+        //   header: () => <CustomHeader leftItem={<BackButtonHeaderLeft />} />,
+        // }}
       />
     </Stack.Navigator>
     // </SafeAreaView>

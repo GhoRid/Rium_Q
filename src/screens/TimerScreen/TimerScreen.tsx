@@ -8,8 +8,14 @@ import {
   Easing,
   StatusBar,
 } from 'react-native';
+import {SafeAreaView} from 'react-native-safe-area-context';
+import SvgIcon from '../../components/SvgIcon';
+import {NavigationProp, useNavigation} from '@react-navigation/native';
+import {RootStackParamList} from '../../types/screens';
 
 const TimerScreen = () => {
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+
   const [seconds, setSeconds] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
@@ -51,7 +57,7 @@ const TimerScreen = () => {
     return `${h}:${m}:${s}`;
   };
 
-  // 배경 및 텍스트 색상 애니메이션
+  // 색상 애니메이션 설정
   const whiteToBlack = animation.interpolate({
     inputRange: [0, 1],
     outputRange: ['#ffffff', '#000000'],
@@ -64,7 +70,7 @@ const TimerScreen = () => {
 
   const subTextColor = animation.interpolate({
     inputRange: [0, 1],
-    outputRange: ['#888888', '#888888'], // 회색은 고정
+    outputRange: ['#888888', '#888888'],
   });
 
   const buttonBorderColor = animation.interpolate({
@@ -73,46 +79,57 @@ const TimerScreen = () => {
   });
 
   return (
-    <Animated.View style={[styles.container, {backgroundColor: whiteToBlack}]}>
+    <Animated.View style={{flex: 1, backgroundColor: whiteToBlack}}>
       <StatusBar
         barStyle={isRunning ? 'light-content' : 'dark-content'}
         backgroundColor="transparent"
+        translucent
       />
-
-      <Animated.Text style={[styles.timer, {color: blackToWhite}]}>
-        {formatTime(seconds)}
-      </Animated.Text>
-
-      {isRunning && (
-        <View style={styles.row}>
-          <Animated.Text style={[styles.todayLabel, {color: subTextColor}]}>
-            오늘
-          </Animated.Text>
-          <Animated.Text style={[styles.todayTime, {color: blackToWhite}]}>
-            {formatTime(seconds)}
-          </Animated.Text>
+      <SafeAreaView style={{flex: 1}}>
+        {/* 헤더 영역 */}
+        <View style={styles.headerBox}>
+          {!isRunning && (
+            <TouchableOpacity
+              onPress={() => {
+                navigation.goBack();
+              }}>
+              <SvgIcon name="좌측방향" size={32} color="#888" />
+            </TouchableOpacity>
+          )}
         </View>
-      )}
 
-      {isRunning && (
-        <Animated.Text style={[styles.caution, {color: blackToWhite}]}>
-          학습 시 주의사항
+        <Animated.Text style={[styles.timer, {color: blackToWhite}]}>
+          {formatTime(seconds)}
         </Animated.Text>
-      )}
 
-      <View style={{flex: 1}} />
+        {isRunning && (
+          <View style={styles.row}>
+            <Animated.Text style={[styles.todayLabel, {color: subTextColor}]}>
+              오늘
+            </Animated.Text>
+            <Animated.Text style={[styles.todayTime, {color: blackToWhite}]}>
+              {formatTime(seconds)}
+            </Animated.Text>
+          </View>
+        )}
 
-      <TouchableOpacity
-        onPress={() => {
-          setIsRunning(prev => !prev);
-        }}>
-        <Animated.View
-          style={[styles.button, {borderColor: buttonBorderColor}]}>
-          <Animated.Text style={[styles.buttonText, {color: blackToWhite}]}>
-            {isRunning ? '공부 종료' : '공부 시작'}
+        {isRunning && (
+          <Animated.Text style={[styles.caution, {color: blackToWhite}]}>
+            학습 시 주의사항
           </Animated.Text>
-        </Animated.View>
-      </TouchableOpacity>
+        )}
+
+        <View style={{flex: 1}} />
+
+        <TouchableOpacity onPress={() => setIsRunning(prev => !prev)}>
+          <Animated.View
+            style={[styles.button, {borderColor: buttonBorderColor}]}>
+            <Animated.Text style={[styles.buttonText, {color: blackToWhite}]}>
+              {isRunning ? '공부 종료' : '공부 시작'}
+            </Animated.Text>
+          </Animated.View>
+        </TouchableOpacity>
+      </SafeAreaView>
     </Animated.View>
   );
 };
@@ -120,16 +137,18 @@ const TimerScreen = () => {
 export default TimerScreen;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: 100,
-    paddingHorizontal: 24,
-  },
   timer: {
     fontSize: 40,
     fontWeight: 'bold',
     alignSelf: 'center',
+    marginTop: 40,
     marginBottom: 20,
+  },
+  headerBox: {
+    width: '100%',
+    height: 60,
+    paddingHorizontal: 16,
+    flexDirection: 'row',
   },
   row: {
     flexDirection: 'row',
