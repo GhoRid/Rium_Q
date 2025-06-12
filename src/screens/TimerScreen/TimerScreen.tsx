@@ -148,7 +148,7 @@ export default TimerScreen;
 
 const styles = StyleSheet.create({
   timer: {
-    fontSize: 40,
+    fontSize: 50,
     fontWeight: 'bold',
     alignSelf: 'center',
     marginTop: 40,

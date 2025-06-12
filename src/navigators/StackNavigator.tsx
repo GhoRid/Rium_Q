@@ -11,6 +11,7 @@ import BackButtonHeaderLeft from '../components/Header/BackButtonHeaderLeft';
 import StudyTimeDetailScreen from '../screens/StudyTimeDetailScreen/StudyTimeDetailScreen';
 import SeatReservationScreen from '../screens/SeatReservationScreen/SeatReservationScreen';
 import SettingsScreen from '../screens/SettingsScreen';
+import LoginScreen from '../screens/LoginScreen/LoginScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -33,6 +34,8 @@ const StackNavigator = () => {
       <Stack.Screen name="Setting" component={SettingsScreen} />
       {/* 타이머 스크린 */}
       <Stack.Screen name="Timer" component={TimerScreen} />
+      {/* 로그인 진입 페이지 */}
+      <Stack.Screen name="Login" component={LoginScreen} />
     </Stack.Navigator>
   );
 };
