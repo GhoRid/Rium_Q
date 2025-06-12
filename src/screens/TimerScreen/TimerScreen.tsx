@@ -1,7 +1,6 @@
 import React, {useState, useEffect, useRef} from 'react';
 import {
   View,
-  Text,
   StyleSheet,
   TouchableOpacity,
   Animated,
@@ -12,9 +11,13 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import SvgIcon from '../../components/SvgIcon';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {RootStackParamList} from '../../types/screens';
+import {formatHHMMSS} from '../../utils/time';
+import {loadTimer, saveTimer} from '../../storage';
 
 const TimerScreen = () => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+  // 총 공부 시간 가져오기
+  // const totalTime = loadTimer();
 
   const [seconds, setSeconds] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
@@ -50,11 +53,13 @@ const TimerScreen = () => {
     };
   }, [isRunning]);
 
-  const formatTime = (totalSeconds: number): string => {
-    const h = String(Math.floor(totalSeconds / 3600)).padStart(2, '0');
-    const m = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, '0');
-    const s = String(totalSeconds % 60).padStart(2, '0');
-    return `${h}:${m}:${s}`;
+  const toggleTimer = () => {
+    setIsRunning(prev => !prev);
+    if (isRunning == false) {
+      // 공부 시작 시 타이머 저장
+      console.log('공부 끝');
+      saveTimer(seconds);
+    }
   };
 
   // 색상 애니메이션 설정
@@ -71,11 +76,6 @@ const TimerScreen = () => {
   const subTextColor = animation.interpolate({
     inputRange: [0, 1],
     outputRange: ['#888888', '#888888'],
-  });
-
-  const buttonBorderColor = animation.interpolate({
-    inputRange: [0, 1],
-    outputRange: ['#000000', '#ffffff'],
   });
 
   return (
@@ -99,7 +99,7 @@ const TimerScreen = () => {
         </View>
 
         <Animated.Text style={[styles.timer, {color: blackToWhite}]}>
-          {formatTime(seconds)}
+          {formatHHMMSS(seconds)}
         </Animated.Text>
 
         {isRunning && (
@@ -108,7 +108,7 @@ const TimerScreen = () => {
               오늘
             </Animated.Text>
             <Animated.Text style={[styles.todayTime, {color: blackToWhite}]}>
-              {formatTime(seconds)}
+              {formatHHMMSS(seconds)}
             </Animated.Text>
           </View>
         )}
@@ -119,11 +119,11 @@ const TimerScreen = () => {
           </Animated.Text>
         )}
 
+        {/* 중간 여백 채우기 */}
         <View style={{flex: 1}} />
 
-        <TouchableOpacity onPress={() => setIsRunning(prev => !prev)}>
-          <Animated.View
-            style={[styles.button, {borderColor: buttonBorderColor}]}>
+        <TouchableOpacity onPress={toggleTimer}>
+          <Animated.View style={[styles.button, {borderColor: blackToWhite}]}>
             <Animated.Text style={[styles.buttonText, {color: blackToWhite}]}>
               {isRunning ? '공부 종료' : '공부 시작'}
             </Animated.Text>

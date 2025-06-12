@@ -5,6 +5,7 @@ import AchievementRate from './components/AchievementRate';
 import Grid from './components/Grid';
 import Carousel from './components/Carousel';
 import StudyObjectModal from './components/StudyObjectModal';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const studyData = [
   {subject: '국어', aim: '모의고사 1회차'},
