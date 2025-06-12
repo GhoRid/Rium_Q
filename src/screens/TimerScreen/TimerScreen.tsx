@@ -1,64 +1,119 @@
-import React, {useState, useEffect} from 'react';
-import {View, Text, StyleSheet, TouchableOpacity, FlatList} from 'react-native';
-
-const DUMMY_DATA = Array.from({length: 5}).map((_, i) => ({
-  id: i.toString(),
-  subject: '국어',
-  title: '2024학년도 수능 모의고사',
-}));
+import React, {useState, useEffect, useRef} from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Animated,
+  Easing,
+  StatusBar,
+} from 'react-native';
 
 const TimerScreen = () => {
-  const [seconds, setSeconds] = useState(4482); // 1:14:42
-  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [seconds, setSeconds] = useState(0);
+  const [isRunning, setIsRunning] = useState(false);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
+  const animation = useRef(new Animated.Value(0)).current;
+
+  // 색상 애니메이션 트리거
   useEffect(() => {
-    const interval = setInterval(() => {
-      setSeconds(prev => prev + 1);
-    }, 1000);
-    return () => clearInterval(interval);
-  }, []);
+    Animated.timing(animation, {
+      toValue: isRunning ? 1 : 0,
+      duration: 500,
+      easing: Easing.inOut(Easing.ease),
+      useNativeDriver: false,
+    }).start();
+  }, [isRunning]);
 
-  const formatTime = (totalSeconds: number) => {
-    const hours = String(Math.floor(totalSeconds / 3600)).padStart(2, '0');
-    const minutes = String(Math.floor((totalSeconds % 3600) / 60)).padStart(
-      2,
-      '0',
-    );
-    const secs = String(totalSeconds % 60).padStart(2, '0');
-    return `${hours}:${minutes}:${secs}`;
+  // 타이머 로직
+  useEffect(() => {
+    if (isRunning) {
+      intervalRef.current = setInterval(() => {
+        setSeconds(prev => prev + 1);
+      }, 1000);
+    } else {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+        intervalRef.current = null;
+      }
+    }
+
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
+  }, [isRunning]);
+
+  const formatTime = (totalSeconds: number): string => {
+    const h = String(Math.floor(totalSeconds / 3600)).padStart(2, '0');
+    const m = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, '0');
+    const s = String(totalSeconds % 60).padStart(2, '0');
+    return `${h}:${m}:${s}`;
   };
 
-  const renderItem = ({item}: {item: (typeof DUMMY_DATA)[0]}) => {
-    const isSelected = item.id === selectedId;
-    return (
-      <TouchableOpacity
-        style={[styles.optionBox, isSelected && styles.selectedBox]}
-        onPress={() => setSelectedId(item.id)}>
-        <Text style={[styles.subject, isSelected && styles.selectedText]}>
-          {item.subject}
-        </Text>
-        <Text style={[styles.title, isSelected && styles.selectedText]}>
-          {item.title}
-        </Text>
-      </TouchableOpacity>
-    );
-  };
+  // 배경 및 텍스트 색상 애니메이션
+  const whiteToBlack = animation.interpolate({
+    inputRange: [0, 1],
+    outputRange: ['#ffffff', '#000000'],
+  });
+
+  const blackToWhite = animation.interpolate({
+    inputRange: [0, 1],
+    outputRange: ['#000000', '#ffffff'],
+  });
+
+  const subTextColor = animation.interpolate({
+    inputRange: [0, 1],
+    outputRange: ['#888888', '#888888'], // 회색은 고정
+  });
+
+  const buttonBorderColor = animation.interpolate({
+    inputRange: [0, 1],
+    outputRange: ['#000000', '#ffffff'],
+  });
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.timer}>{formatTime(seconds)}</Text>
-      <Text style={styles.question}>어떤 공부를 했나요?</Text>
-      <FlatList
-        data={DUMMY_DATA}
-        renderItem={renderItem}
-        keyExtractor={item => item.id}
-        style={styles.list}
-        contentContainerStyle={{paddingBottom: 20}}
+    <Animated.View style={[styles.container, {backgroundColor: whiteToBlack}]}>
+      <StatusBar
+        barStyle={isRunning ? 'light-content' : 'dark-content'}
+        backgroundColor="transparent"
       />
-      <TouchableOpacity style={styles.button}>
-        <Text style={styles.buttonText}>공부 시작</Text>
+
+      <Animated.Text style={[styles.timer, {color: blackToWhite}]}>
+        {formatTime(seconds)}
+      </Animated.Text>
+
+      {isRunning && (
+        <View style={styles.row}>
+          <Animated.Text style={[styles.todayLabel, {color: subTextColor}]}>
+            오늘
+          </Animated.Text>
+          <Animated.Text style={[styles.todayTime, {color: blackToWhite}]}>
+            {formatTime(seconds)}
+          </Animated.Text>
+        </View>
+      )}
+
+      {isRunning && (
+        <Animated.Text style={[styles.caution, {color: blackToWhite}]}>
+          학습 시 주의사항
+        </Animated.Text>
+      )}
+
+      <View style={{flex: 1}} />
+
+      <TouchableOpacity
+        onPress={() => {
+          setIsRunning(prev => !prev);
+        }}>
+        <Animated.View
+          style={[styles.button, {borderColor: buttonBorderColor}]}>
+          <Animated.Text style={[styles.buttonText, {color: blackToWhite}]}>
+            {isRunning ? '공부 종료' : '공부 시작'}
+          </Animated.Text>
+        </Animated.View>
       </TouchableOpacity>
-    </View>
+    </Animated.View>
   );
 };
 
@@ -67,60 +122,43 @@ export default TimerScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingTop: 100,
     paddingHorizontal: 24,
-    paddingTop: 80,
-    backgroundColor: '#fff',
   },
   timer: {
     fontSize: 40,
     fontWeight: 'bold',
     alignSelf: 'center',
-    marginBottom: 40,
+    marginBottom: 20,
   },
-  question: {
-    fontSize: 16,
-    fontWeight: '600',
-    marginBottom: 12,
-  },
-  list: {
-    flexGrow: 0,
-  },
-  optionBox: {
-    borderWidth: 1,
-    borderColor: '#eee',
-    padding: 16,
-    borderRadius: 12,
-    marginBottom: 12,
-    backgroundColor: '#fff',
+  row: {
     flexDirection: 'row',
-    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 20,
   },
-  selectedBox: {
-    borderColor: '#007aff',
-    backgroundColor: '#e6f0ff',
+  todayLabel: {
+    fontSize: 16,
+    marginRight: 8,
   },
-  subject: {
-    fontWeight: 'bold',
-    marginRight: 6,
-    color: '#000',
+  todayTime: {
+    fontSize: 16,
   },
-  title: {
-    flexShrink: 1,
-    color: '#000',
-  },
-  selectedText: {
-    color: '#007aff',
+  caution: {
+    fontSize: 14,
+    marginTop: 8,
+    textAlign: 'center',
   },
   button: {
-    backgroundColor: '#0c1e3c',
-    paddingVertical: 16,
-    borderRadius: 100,
+    alignSelf: 'center',
+    marginBottom: 40,
+    width: '80%',
     alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 24,
+    borderWidth: 1,
+    paddingVertical: 12,
+    paddingHorizontal: 40,
+    borderRadius: 100,
   },
   buttonText: {
-    color: '#fff',
     fontSize: 16,
     fontWeight: '600',
   },

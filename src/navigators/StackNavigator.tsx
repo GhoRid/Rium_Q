@@ -18,79 +18,76 @@ const StackNavigator = () => {
   const insets = useSafeAreaInsets();
 
   return (
-    <SafeAreaView
-      style={{
-        flex: 1,
-        backgroundColor: 'white',
-      }}>
-      <Stack.Navigator
-      // screenOptions={{headerShown: false}}
-      >
-        {/* 탭 스크린(기본) */}
-        <Stack.Screen
-          name="Tab"
-          navigationKey="Tab"
-          component={TabNavigator}
-          options={{headerShown: false}}
-        />
-        {/* 테스트 스크린 */}
-        <Stack.Screen name="Test" component={TestScreen} navigationKey="test" />
-        <Stack.Screen
-          name="Notification"
-          component={NotificationScreen}
-          options={{
-            header: () => (
-              <CustomHeader
-                leftItem={<BackButtonHeaderLeft pageName="알림" />}
-              />
-            ),
-          }}
-        />
-        {/* 타이머 스크린 */}
-        <Stack.Screen
-          name="Timer"
-          component={TimerScreen}
-          options={{
-            header: () => <CustomHeader leftItem={<BackButtonHeaderLeft />} />,
-          }}
-        />
-        {/* 개별 학습 시간 스크린 */}
-        <Stack.Screen
-          name="StudyTimeDetail"
-          component={StudyTimeDetailScreen}
-          options={{
-            header: () => (
-              <CustomHeader
-                leftItem={<BackButtonHeaderLeft pageName="개별 학습 시간" />}
-              />
-            ),
-          }}
-        />
-        {/* 좌석 예약 스크린 */}
-        <Stack.Screen
-          name="SeatReservation"
-          component={SeatReservationScreen}
-          options={{
-            // title: '', // ← 제목 제거
-            headerStyle: {
-              // backgroundColor: '#313131',
-            },
-          }}
-        />
-        {/* 설정 스크린 */}
-        <Stack.Screen
-          name="Setting"
-          component={SettingsScreen}
-          options={{
-            header: () => (
-              <CustomHeader
-                leftItem={<BackButtonHeaderLeft pageName="설정" />}
-              />
-            ),
-          }}
-        />
-      </Stack.Navigator>
-    </SafeAreaView>
+    // <SafeAreaView
+    //   style={{
+    //     flex: 1,
+    //     backgroundColor: 'white',
+    //   }}>
+    <Stack.Navigator
+    // screenOptions={{headerShown: false}}
+    >
+      {/* 탭 스크린(기본) */}
+      <Stack.Screen
+        name="Tab"
+        navigationKey="Tab"
+        component={TabNavigator}
+        options={{headerShown: false}}
+      />
+      {/* 테스트 스크린 */}
+      <Stack.Screen name="Test" component={TestScreen} navigationKey="test" />
+      <Stack.Screen
+        name="Notification"
+        component={NotificationScreen}
+        options={{
+          header: () => (
+            <CustomHeader leftItem={<BackButtonHeaderLeft pageName="알림" />} />
+          ),
+        }}
+      />
+
+      {/* 개별 학습 시간 스크린 */}
+      <Stack.Screen
+        name="StudyTimeDetail"
+        component={StudyTimeDetailScreen}
+        options={{
+          header: () => (
+            <CustomHeader
+              leftItem={<BackButtonHeaderLeft pageName="개별 학습 시간" />}
+            />
+          ),
+        }}
+      />
+      {/* 좌석 예약 스크린 */}
+      <Stack.Screen
+        name="SeatReservation"
+        component={SeatReservationScreen}
+        options={{
+          // title: '', // ← 제목 제거
+          headerStyle: {
+            // backgroundColor: '#313131',
+          },
+        }}
+      />
+      {/* 설정 스크린 */}
+      <Stack.Screen
+        name="Setting"
+        component={SettingsScreen}
+        options={{
+          header: () => (
+            <CustomHeader leftItem={<BackButtonHeaderLeft pageName="설정" />} />
+          ),
+        }}
+      />
+      {/* 타이머 스크린 */}
+      <Stack.Screen
+        name="Timer"
+        component={TimerScreen}
+        options={{
+          header: () => <CustomHeader leftItem={<BackButtonHeaderLeft />} />,
+        }}
+      />
+    </Stack.Navigator>
+    // </SafeAreaView>
   );
 };
 

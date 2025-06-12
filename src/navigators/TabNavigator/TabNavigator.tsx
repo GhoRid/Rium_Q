@@ -20,15 +20,12 @@ const TabNavigator = () => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
   return (
-    <View
+    <SafeAreaView
       style={{
         flex: 1,
         backgroundColor: 'white',
       }}>
-      <Tab.Navigator
-        tabBar={props => <CustomTabBar {...props} />}
-        // screenOptions={{headerShown: false}}
-      >
+      <Tab.Navigator tabBar={props => <CustomTabBar {...props} />}>
         {/* 홈 스크린 */}
         <Tab.Screen
           name="Home"
@@ -60,7 +57,6 @@ const TabNavigator = () => {
         {/* 계획 스크린 */}
         <Tab.Screen
           name="Plan"
-          // tabBarLabel="Plan"
           component={PlanScreen}
           options={{tabBarLabel: '계획', headerShown: false}}
         />
@@ -119,7 +115,7 @@ const TabNavigator = () => {
           }}
         />
       </Tab.Navigator>
-    </View>
+    </SafeAreaView>
   );
 };
 
