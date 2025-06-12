@@ -10,7 +10,7 @@ import SvgIcon from '../../components/SvgIcon';
 import TestScreen from '../../screens/TestScreen/TestScreen';
 import {useNavigation, NavigationProp} from '@react-navigation/native';
 import {RootStackParamList} from '../../types/screens';
-import palette from '../../utils/palette';
+import palette from '../../styles/palette';
 import StatisticScreen from '../../screens/StatisticScreen/StatisticScreen';
 
 const Tab = createBottomTabNavigator();

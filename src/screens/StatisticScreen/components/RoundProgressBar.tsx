@@ -1,7 +1,7 @@
 import React, {useEffect, useRef} from 'react';
 import {Animated, StyleSheet, Text, View} from 'react-native';
 import Svg, {Circle, G} from 'react-native-svg';
-import palette from '../../../utils/palette';
+import palette from '../../../styles/palette';
 
 type RoundProgressbarProps = {
   score: number;

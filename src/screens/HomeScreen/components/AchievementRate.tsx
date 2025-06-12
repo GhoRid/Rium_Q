@@ -1,5 +1,5 @@
 import {Pressable, View, Text, StyleSheet, Image} from 'react-native';
-import palette from '../../../utils/palette';
+import palette from '../../../styles/palette';
 
 interface AchievementRateProps {
   progress: number;

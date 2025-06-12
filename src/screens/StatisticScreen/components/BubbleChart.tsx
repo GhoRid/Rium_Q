@@ -4,7 +4,7 @@ import Svg, {Circle, Text as SvgText, G} from 'react-native-svg';
 import {scaleLinear} from 'd3-scale';
 import {interpolateRgb} from 'd3-interpolate';
 import {forceSimulation, forceX, forceY, forceCollide} from 'd3-force';
-import palette from '../../../utils/palette';
+import palette from '../../../styles/palette';
 
 interface DataNode {
   name: string;

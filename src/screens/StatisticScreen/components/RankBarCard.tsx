@@ -1,7 +1,7 @@
 import {StyleSheet, Text, View} from 'react-native';
 import SaveCode from './SaveCode';
 import Bar from './Bar';
-import palette from '../../../utils/palette';
+import palette from '../../../styles/palette';
 
 const RankBarCard = () => {
   return (

@@ -1,6 +1,6 @@
 import {View, Text, TouchableOpacity, StyleSheet, Platform} from 'react-native';
 import SvgIcon from '../../components/SvgIcon';
-import palette from '../../utils/palette';
+import palette from '../../styles/palette';
 
 const CustomTabBar = ({state, descriptors, navigation}: any) => {
   return (
