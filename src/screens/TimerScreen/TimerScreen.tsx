@@ -95,51 +95,51 @@ const TimerScreen = () => {
         backgroundColor="transparent"
         translucent
       />
-      {/* <SafeAreaView style={{flex: 1}}> */}
-      {/* 헤더 영역 */}
-      <View style={styles.headerBox}>
-        {!isRunning && (
-          <TouchableOpacity
-            onPress={() => {
-              navigation.goBack();
-            }}>
-            <SvgIcon name="좌측방향" size={32} color="#888" />
-          </TouchableOpacity>
-        )}
-      </View>
-
-      <Animated.Text style={[styles.timer, {color: blackToWhite}]}>
-        {formatHHMMSS(seconds)}
-      </Animated.Text>
-
-      {isRunning && (
-        <View style={styles.row}>
-          <Animated.Text style={[styles.todayLabel, {color: subTextColor}]}>
-            오늘
-          </Animated.Text>
-          <Animated.Text style={[styles.todayTime, {color: blackToWhite}]}>
-            {formatHHMMSS(totalTime)}
-          </Animated.Text>
+      <SafeAreaView style={{flex: 1}}>
+        {/* 헤더 영역 */}
+        <View style={styles.headerBox}>
+          {!isRunning && (
+            <TouchableOpacity
+              onPress={() => {
+                navigation.goBack();
+              }}>
+              <SvgIcon name="좌측방향" size={32} color="#888" />
+            </TouchableOpacity>
+          )}
         </View>
-      )}
 
-      {isRunning && (
-        <Animated.Text style={[styles.caution, {color: blackToWhite}]}>
-          학습 시 주의사항
+        <Animated.Text style={[styles.timer, {color: blackToWhite}]}>
+          {formatHHMMSS(seconds)}
         </Animated.Text>
-      )}
 
-      {/* 중간 여백 채우기 */}
-      <View style={{flex: 1}} />
+        {isRunning && (
+          <View style={styles.row}>
+            <Animated.Text style={[styles.todayLabel, {color: subTextColor}]}>
+              오늘
+            </Animated.Text>
+            <Animated.Text style={[styles.todayTime, {color: blackToWhite}]}>
+              {formatHHMMSS(totalTime)}
+            </Animated.Text>
+          </View>
+        )}
 
-      <TouchableOpacity onPress={toggleTimer}>
-        <Animated.View style={[styles.button, {borderColor: blackToWhite}]}>
-          <Animated.Text style={[styles.buttonText, {color: blackToWhite}]}>
-            {isRunning ? '공부 종료' : '공부 시작'}
+        {isRunning && (
+          <Animated.Text style={[styles.caution, {color: blackToWhite}]}>
+            학습 시 주의사항
           </Animated.Text>
-        </Animated.View>
-      </TouchableOpacity>
-      {/* </SafeAreaView> */}
+        )}
+
+        {/* 중간 여백 채우기 */}
+        <View style={{flex: 1}} />
+
+        <TouchableOpacity onPress={toggleTimer}>
+          <Animated.View style={[styles.button, {borderColor: blackToWhite}]}>
+            <Animated.Text style={[styles.buttonText, {color: blackToWhite}]}>
+              {isRunning ? '공부 종료' : '공부 시작'}
+            </Animated.Text>
+          </Animated.View>
+        </TouchableOpacity>
+      </SafeAreaView>
     </Animated.View>
   );
 };

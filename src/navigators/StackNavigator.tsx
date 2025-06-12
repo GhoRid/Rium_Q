@@ -20,12 +20,7 @@ const StackNavigator = () => {
   return (
     <Stack.Navigator screenOptions={{headerShown: false}}>
       {/* 탭 스크린(기본) */}
-      <Stack.Screen
-        name="Tab"
-        navigationKey="Tab"
-        component={TabNavigator}
-        options={{headerShown: false}}
-      />
+      <Stack.Screen name="Tab" navigationKey="Tab" component={TabNavigator} />
       {/* 테스트 스크린 */}
       <Stack.Screen name="Test" component={TestScreen} navigationKey="test" />
       <Stack.Screen name="Notification" component={NotificationScreen} />
@@ -33,32 +28,11 @@ const StackNavigator = () => {
       {/* 개별 학습 시간 스크린 */}
       <Stack.Screen name="StudyTimeDetail" component={StudyTimeDetailScreen} />
       {/* 좌석 예약 스크린 */}
-      <Stack.Screen
-        name="SeatReservation"
-        component={SeatReservationScreen}
-        options={{
-          // title: '', // ← 제목 제거
-          headerStyle: {
-            // backgroundColor: '#313131',
-          },
-        }}
-      />
+      <Stack.Screen name="SeatReservation" component={SeatReservationScreen} />
       {/* 설정 스크린 */}
-      <Stack.Screen
-        name="Setting"
-        component={SettingsScreen}
-        options={{
-          header: () => (
-            <CustomHeader leftItem={<BackButtonHeaderLeft pageName="설정" />} />
-          ),
-        }}
-      />
+      <Stack.Screen name="Setting" component={SettingsScreen} />
       {/* 타이머 스크린 */}
-      <Stack.Screen
-        name="Timer"
-        component={TimerScreen}
-        options={{headerShown: false}}
-      />
+      <Stack.Screen name="Timer" component={TimerScreen} />
     </Stack.Navigator>
   );
 };
