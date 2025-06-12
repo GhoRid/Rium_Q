@@ -7,7 +7,7 @@ import {
   Easing,
   StatusBar,
 } from 'react-native';
-import {SafeAreaView} from 'react-native-safe-area-context';
+import {SafeAreaView, useSafeAreaInsets} from 'react-native-safe-area-context';
 import SvgIcon from '../../components/SvgIcon';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {RootStackParamList} from '../../types/screens';
@@ -15,15 +15,24 @@ import {formatHHMMSS} from '../../utils/time';
 import {loadTimer, saveTimer} from '../../storage';
 
 const TimerScreen = () => {
+  const insets = useSafeAreaInsets();
+
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   // 총 공부 시간 가져오기
-  // const totalTime = loadTimer();
-
   const [seconds, setSeconds] = useState(0);
+  const [totalTime, setTotalTime] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   const animation = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    const load = async () => {
+      const value = await loadTimer();
+      setTotalTime(value);
+    };
+    load();
+  }, []);
 
   // 색상 애니메이션 트리거
   useEffect(() => {
@@ -40,6 +49,7 @@ const TimerScreen = () => {
     if (isRunning) {
       intervalRef.current = setInterval(() => {
         setSeconds(prev => prev + 1);
+        setTotalTime(prev => prev + 1); // 화면에 반영
       }, 1000);
     } else {
       if (intervalRef.current) {
@@ -53,12 +63,11 @@ const TimerScreen = () => {
     };
   }, [isRunning]);
 
-  const toggleTimer = () => {
+  const toggleTimer = async () => {
     setIsRunning(prev => !prev);
-    if (isRunning == false) {
-      // 공부 시작 시 타이머 저장
+    if (isRunning === true) {
       console.log('공부 끝');
-      saveTimer(seconds);
+      await saveTimer(totalTime);
     }
   };
 
@@ -79,57 +88,58 @@ const TimerScreen = () => {
   });
 
   return (
-    <Animated.View style={{flex: 1, backgroundColor: whiteToBlack}}>
+    <Animated.View
+      style={{flex: 1, backgroundColor: whiteToBlack, paddingTop: -insets.top}}>
       <StatusBar
         barStyle={isRunning ? 'light-content' : 'dark-content'}
         backgroundColor="transparent"
         translucent
       />
-      <SafeAreaView style={{flex: 1}}>
-        {/* 헤더 영역 */}
-        <View style={styles.headerBox}>
-          {!isRunning && (
-            <TouchableOpacity
-              onPress={() => {
-                navigation.goBack();
-              }}>
-              <SvgIcon name="좌측방향" size={32} color="#888" />
-            </TouchableOpacity>
-          )}
-        </View>
-
-        <Animated.Text style={[styles.timer, {color: blackToWhite}]}>
-          {formatHHMMSS(seconds)}
-        </Animated.Text>
-
-        {isRunning && (
-          <View style={styles.row}>
-            <Animated.Text style={[styles.todayLabel, {color: subTextColor}]}>
-              오늘
-            </Animated.Text>
-            <Animated.Text style={[styles.todayTime, {color: blackToWhite}]}>
-              {formatHHMMSS(seconds)}
-            </Animated.Text>
-          </View>
+      {/* <SafeAreaView style={{flex: 1}}> */}
+      {/* 헤더 영역 */}
+      <View style={styles.headerBox}>
+        {!isRunning && (
+          <TouchableOpacity
+            onPress={() => {
+              navigation.goBack();
+            }}>
+            <SvgIcon name="좌측방향" size={32} color="#888" />
+          </TouchableOpacity>
         )}
+      </View>
 
-        {isRunning && (
-          <Animated.Text style={[styles.caution, {color: blackToWhite}]}>
-            학습 시 주의사항
+      <Animated.Text style={[styles.timer, {color: blackToWhite}]}>
+        {formatHHMMSS(seconds)}
+      </Animated.Text>
+
+      {isRunning && (
+        <View style={styles.row}>
+          <Animated.Text style={[styles.todayLabel, {color: subTextColor}]}>
+            오늘
           </Animated.Text>
-        )}
+          <Animated.Text style={[styles.todayTime, {color: blackToWhite}]}>
+            {formatHHMMSS(totalTime)}
+          </Animated.Text>
+        </View>
+      )}
 
-        {/* 중간 여백 채우기 */}
-        <View style={{flex: 1}} />
+      {isRunning && (
+        <Animated.Text style={[styles.caution, {color: blackToWhite}]}>
+          학습 시 주의사항
+        </Animated.Text>
+      )}
 
-        <TouchableOpacity onPress={toggleTimer}>
-          <Animated.View style={[styles.button, {borderColor: blackToWhite}]}>
-            <Animated.Text style={[styles.buttonText, {color: blackToWhite}]}>
-              {isRunning ? '공부 종료' : '공부 시작'}
-            </Animated.Text>
-          </Animated.View>
-        </TouchableOpacity>
-      </SafeAreaView>
+      {/* 중간 여백 채우기 */}
+      <View style={{flex: 1}} />
+
+      <TouchableOpacity onPress={toggleTimer}>
+        <Animated.View style={[styles.button, {borderColor: blackToWhite}]}>
+          <Animated.Text style={[styles.buttonText, {color: blackToWhite}]}>
+            {isRunning ? '공부 종료' : '공부 시작'}
+          </Animated.Text>
+        </Animated.View>
+      </TouchableOpacity>
+      {/* </SafeAreaView> */}
     </Animated.View>
   );
 };

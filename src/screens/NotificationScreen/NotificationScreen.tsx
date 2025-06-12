@@ -2,6 +2,9 @@ import React, {useState} from 'react';
 import {View, Text, StyleSheet, ScrollView, FlatList} from 'react-native';
 import Filter from './components/Filter';
 import NoticeItem from './components/NoticeItem';
+import {SafeAreaView} from 'react-native-safe-area-context';
+import CustomHeader from '../../components/Header/CustomHeader';
+import BackButtonHeaderLeft from '../../components/Header/BackButtonHeaderLeft';
 
 // 예시 알림 데이터
 const todayNotices = [
@@ -64,7 +67,8 @@ const NotificationScreen = () => {
   const [selectedFilter, setSelectedFilter] = useState('전체');
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
+      <CustomHeader leftItem={<BackButtonHeaderLeft pageName="알림" />} />
       <Filter
         filter={FILTERS}
         selectedTag={selectedFilter}
@@ -76,7 +80,7 @@ const NotificationScreen = () => {
           <NoticeItem key={notice.id} notice={notice} />
         ))}
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 };
 

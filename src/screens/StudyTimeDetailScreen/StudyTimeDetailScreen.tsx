@@ -1,4 +1,7 @@
 import {FlatList, StyleSheet, Text, View} from 'react-native';
+import {SafeAreaView} from 'react-native-safe-area-context';
+import CustomHeader from '../../components/Header/CustomHeader';
+import BackButtonHeaderLeft from '../../components/Header/BackButtonHeaderLeft';
 
 const studyData = [
   {
@@ -34,26 +37,31 @@ const studyData = [
 
 const StudyTimeDetailScreen = () => {
   return (
-    <View style={styles.container}>
-      <Text style={styles.sectionTitle}></Text>
-
-      <Text style={styles.dateText}>{studyData[0].date}</Text>
-      <FlatList
-        data={studyData[0].records}
-        keyExtractor={item => item.id}
-        renderItem={({item}) => (
-          <View style={styles.card}>
-            <Text style={styles.timeText}>{item.time}</Text>
-            <View style={styles.row}>
-              <Text style={styles.bold}>{item.subject}</Text>
-              <Text style={styles.divider}> | </Text>
-              <Text style={styles.description}>{item.description}</Text>
-            </View>
-          </View>
-        )}
-        style={styles.list}
+    <SafeAreaView style={styles.container}>
+      <CustomHeader
+        leftItem={<BackButtonHeaderLeft pageName="개별 학습 시간" />}
       />
-    </View>
+      <View style={styles.contentContainer}>
+        <Text style={styles.sectionTitle}></Text>
+
+        <Text style={styles.dateText}>{studyData[0].date}</Text>
+        <FlatList
+          data={studyData[0].records}
+          keyExtractor={item => item.id}
+          renderItem={({item}) => (
+            <View style={styles.card}>
+              <Text style={styles.timeText}>{item.time}</Text>
+              <View style={styles.row}>
+                <Text style={styles.bold}>{item.subject}</Text>
+                <Text style={styles.divider}> | </Text>
+                <Text style={styles.description}>{item.description}</Text>
+              </View>
+            </View>
+          )}
+          style={styles.list}
+        />
+      </View>
+    </SafeAreaView>
   );
 };
 
@@ -62,8 +70,10 @@ export default StudyTimeDetailScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 20,
     backgroundColor: 'white',
+  },
+  contentContainer: {
+    padding: 20,
   },
   sectionTitle: {
     fontSize: 18,
