@@ -51,10 +51,7 @@ const StackNavigator = () => {
           name="Timer"
           component={TimerScreen}
           options={{
-            title: '', // ← 제목 제거
-            headerStyle: {
-              backgroundColor: '#313131',
-            },
+            header: () => <CustomHeader leftItem={<BackButtonHeaderLeft />} />,
           }}
         />
         {/* 개별 학습 시간 스크린 */}
