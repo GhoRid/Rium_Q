@@ -5,3 +5,5 @@ const shadow = {
   shadowRadius: 4,
   elevation: 2,
 };
+
+export default shadow;

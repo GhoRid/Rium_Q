@@ -3,6 +3,7 @@ import SvgIcon from '../../../components/SvgIcon';
 import palette from '../../../styles/palette';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {RootStackParamList} from '../../../types/screens';
+import shadow from '../../../styles/shadow';
 
 const Grid = () => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
@@ -38,14 +39,6 @@ const Grid = () => {
 };
 
 export default Grid;
-
-const shadow = {
-  shadowColor: '#000',
-  shadowOpacity: 0.1,
-  shadowOffset: {width: 0, height: 2},
-  shadowRadius: 4,
-  elevation: 2,
-};
 
 const styles = StyleSheet.create({
   grid: {

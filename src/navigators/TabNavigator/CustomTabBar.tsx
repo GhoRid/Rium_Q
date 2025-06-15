@@ -59,18 +59,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     alignItems: 'center',
     justifyContent: 'space-between',
-    // elevation: 10,
-    // shadowColor: '#000',
-    // shadowOpacity: 0.05,
-    // shadowOffset: {width: 0, height: -1},
-    // shadowRadius: 5,
   },
   tabItem: {
     alignItems: 'center',
     justifyContent: 'center',
     flex: 1,
     gap: 5,
-    // backgroundColor: 'orange',
   },
   centerButton: {
     width: 70,

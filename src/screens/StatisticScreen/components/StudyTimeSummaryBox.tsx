@@ -1,6 +1,7 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import SvgIcon from '../../../components/SvgIcon';
+import shadow from '../../../styles/shadow';
 
 const StudyTimeSummaryBox = () => {
   return (
@@ -33,14 +34,6 @@ const StudyTimeSummaryBox = () => {
 };
 
 export default StudyTimeSummaryBox;
-
-const shadow = {
-  shadowColor: '#000',
-  shadowOpacity: 0.1,
-  shadowOffset: {width: 0, height: 2},
-  shadowRadius: 4,
-  elevation: 2,
-};
 
 const styles = StyleSheet.create({
   container: {
