@@ -50,9 +50,7 @@ const BarChart: React.FC<BarChartProps> = ({data}) => {
       <Svg
         width={chartWidth}
         height={chartHeight}
-        viewBox={`0 0 ${chartWidth} ${chartHeight}`}
-        // key={JSON.stringify(data)} // 데이터 변경 시 새로 그리기
-      >
+        viewBox={`0 0 ${chartWidth} ${chartHeight}`}>
         {data.map((item, index) => {
           const isLast = index === data.length - 1;
           const xPos = index * (barWidth + BAR_SPACING);
@@ -137,6 +135,7 @@ export default BarChart;
 const styles = StyleSheet.create({
   container: {
     paddingTop: 20,
+    paddingHorizontal: 20,
   },
   labelsContainer: {
     flexDirection: 'row',

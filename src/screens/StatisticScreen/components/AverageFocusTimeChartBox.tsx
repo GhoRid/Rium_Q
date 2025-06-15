@@ -5,6 +5,16 @@ import AverageFocusTimeByDate from './AverageFocusTimeByDate';
 
 type TabName = '시간대별 평균 집중 시간' | '요일별 평균 집중 시간';
 
+const sampleDataExample = [
+  {label: '월', value: 6.2},
+  {label: '화', value: 4.2},
+  {label: '수', value: 6.3},
+  {label: '목', value: 5.7},
+  {label: '금', value: 2.1},
+  {label: '토', value: 10},
+  {label: '일', value: 8.2},
+];
+
 const AverageFocusTimeChartBox = () => {
   const [selectedTab, setSelectedTab] =
     useState<TabName>('시간대별 평균 집중 시간');
@@ -35,7 +45,9 @@ const AverageFocusTimeChartBox = () => {
         {selectedTab === '시간대별 평균 집중 시간' && (
           <AverageFocusTimeByHour />
         )}
-        {selectedTab === '요일별 평균 집중 시간' && <AverageFocusTimeByDate />}
+        {selectedTab === '요일별 평균 집중 시간' && (
+          <AverageFocusTimeByDate data={sampleDataExample} />
+        )}
       </View>
     </View>
   );

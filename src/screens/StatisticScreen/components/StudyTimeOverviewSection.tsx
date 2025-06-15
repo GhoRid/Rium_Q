@@ -48,9 +48,7 @@ const StudyTimeOverviewSection = () => {
 
       {/* 2) 탭에 따라 다른 콘텐츠 렌더링 */}
       <View style={styles.contentContainer}>
-        {selectedTab === '순공시간' && (
-          <PureStudyTimeTab data={sampleDataExample} />
-        )}
+        {selectedTab === '순공시간' && <PureStudyTimeTab data={sampleData} />}
         {selectedTab === '과목별' && <BySubjectChartTab />}
         {selectedTab === '목표달성률' && <GoalAchievementChartTab />}
       </View>
