@@ -11,8 +11,6 @@ const DATA = [
   // {name: 'Pineapples', value: 30},
 ];
 
-type Period = '1주일' | '1개월' | '3개월' | '6개월';
-
 const BySubjectChartTab = () => {
   return (
     <View style={styles.placeholder}>

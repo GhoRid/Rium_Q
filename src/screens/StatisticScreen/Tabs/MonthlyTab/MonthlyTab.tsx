@@ -1,6 +1,10 @@
 import {StyleSheet, View} from 'react-native';
 
-const MonthlyTab = () => {
+type MonthlyTabProps = {
+  period: string;
+};
+
+const MonthlyTab = ({period}: MonthlyTabProps) => {
   return <View style={styles.container}></View>;
 };
 export default MonthlyTab;

@@ -6,10 +6,10 @@ import StudyTimeSummaryBox from './components/StudyTimeSummaryBox';
 import PeriodSelector from './components/PeriodSelector';
 import {useState} from 'react';
 import AverageFocusTimeChartBox from './components/AverageFocusTimeChartBox';
-import PeriodTab from './Tabs/PeriodTab';
-import DailyTab from './Tabs/DailyTab';
-import WeeklyTab from './Tabs/WeeklyTab';
-import MonthlyTab from './Tabs/MonthlyTab';
+import PeriodTab from './Tabs/PeriodTab/PeriodTab';
+import DailyTab from './Tabs/DailyTab/DailyTab';
+import WeeklyTab from './Tabs/WeeklyTab/WeeklyTab';
+import MonthlyTab from './Tabs/MonthlyTab/MonthlyTab';
 
 const FILTERS = ['기간', '일간', '주간', '월간'];
 type FilterType = (typeof FILTERS)[number];

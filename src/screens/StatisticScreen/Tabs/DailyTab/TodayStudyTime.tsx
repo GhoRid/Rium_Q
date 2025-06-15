@@ -1,6 +1,7 @@
 import {View, Text, StyleSheet} from 'react-native';
-import shadow from '../../../styles/shadow';
-import DonutChart from './charts/DonutGraph';
+import shadow from '../../../../styles/shadow';
+import DonutChart from '../../components/charts/DonutGraph';
+import StudyTimeSummaryBox from '../../components/StudyTimeSummaryBox';
 
 const donutData = [
   {label: '수학', value: 32, time: '04:30:24', color: '#0667FF'},
@@ -10,30 +11,14 @@ const donutData = [
   {label: '그 외', value: 11, time: '01:30:13', color: '#ccc'},
 ];
 
-const TodayStudyTime = () => {
+type TodayStudyTimeProps = {
+  period: string;
+};
+
+const TodayStudyTime = ({period}: TodayStudyTimeProps) => {
   return (
     <View style={styles.container}>
-      <View style={styles.timeText}>
-        {/* 날짜 정보 */}
-        <View style={styles.header}>
-          <Text style={styles.periodLabel}>6월 15일(일)</Text>
-        </View>
-
-        {/* 통계 카드 */}
-        <View style={styles.card}>
-          {/* 총 시간 */}
-          <View style={styles.timeItem}>
-            <Text style={styles.titleText}>총 시간</Text>
-            <Text style={styles.valueText}>44:44:44</Text>
-          </View>
-
-          {/* 하루 평균 */}
-          <View style={styles.timeItem}>
-            <Text style={styles.titleText}>최대 집중 시간</Text>
-            <Text style={styles.valueText}>00:44:44</Text>
-          </View>
-        </View>
-      </View>
+      <StudyTimeSummaryBox period={period} />
 
       {/* 도넛 그래프 컴포넌트 */}
       <DonutChart data={donutData} />

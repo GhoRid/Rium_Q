@@ -1,8 +1,11 @@
 import {StyleSheet, View} from 'react-native';
-import Calendar from '../components/CalendarByDate';
-import CalendarByWeek from '../components/CalendarByWeek';
+import CalendarByWeek from './CalendarByWeek';
 
-const WeeklyTab = () => {
+type WeeklyTabProps = {
+  period: string;
+};
+
+const WeeklyTab = ({period}: WeeklyTabProps) => {
   return (
     <View style={styles.container}>
       <CalendarByWeek />
