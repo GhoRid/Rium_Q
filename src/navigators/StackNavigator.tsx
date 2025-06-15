@@ -24,8 +24,8 @@ const StackNavigator = () => {
       <Stack.Screen name="Tab" navigationKey="Tab" component={TabNavigator} />
       {/* 테스트 스크린 */}
       <Stack.Screen name="Test" component={TestScreen} navigationKey="test" />
+      {/* 알림 스크린 */}
       <Stack.Screen name="Notification" component={NotificationScreen} />
-
       {/* 개별 학습 시간 스크린 */}
       <Stack.Screen name="StudyTimeDetail" component={StudyTimeDetailScreen} />
       {/* 좌석 예약 스크린 */}

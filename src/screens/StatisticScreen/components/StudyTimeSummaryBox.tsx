@@ -1,34 +1,92 @@
-import {StyleSheet, View} from 'react-native';
+import React from 'react';
+import {View, Text, StyleSheet} from 'react-native';
+import SvgIcon from '../../../components/SvgIcon';
 
 const StudyTimeSummaryBox = () => {
-  return <View style={styles.container}></View>;
+  return (
+    <View style={styles.container}>
+      {/* 날짜 정보 */}
+      <View style={styles.header}>
+        <Text style={styles.periodLabel}>지난 28일</Text>
+        <View style={styles.dateRangeContainer}>
+          <Text style={styles.dateRangeText}>5/15 ~ 6/11</Text>
+          <SvgIcon name="아래방향" size={16} />
+        </View>
+      </View>
+
+      {/* 통계 카드 */}
+      <View style={styles.card}>
+        {/* 총 시간 */}
+        <View style={styles.timeItem}>
+          <Text style={styles.titleText}>총 시간</Text>
+          <Text style={styles.valueText}>44:44:44</Text>
+        </View>
+
+        {/* 하루 평균 */}
+        <View style={styles.timeItem}>
+          <Text style={styles.titleText}>하루 평균</Text>
+          <Text style={styles.valueText}>00:44:44</Text>
+        </View>
+      </View>
+    </View>
+  );
 };
 
 export default StudyTimeSummaryBox;
 
+const shadow = {
+  shadowColor: '#000',
+  shadowOpacity: 0.1,
+  shadowOffset: {width: 0, height: 2},
+  shadowRadius: 4,
+  elevation: 2,
+};
+
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     padding: 20,
-    backgroundColor: '#fff',
+    backgroundColor: 'white',
   },
   header: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 20,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 12,
   },
-  reportItem: {
-    marginBottom: 15,
-    padding: 15,
-    borderRadius: 8,
-    backgroundColor: '#f0f0f0',
-  },
-  itemTitle: {
-    fontSize: 18,
-    fontWeight: '600',
-  },
-  itemTime: {
+  periodLabel: {
     fontSize: 16,
-    color: '#555',
+    fontWeight: '600',
+    color: '#000',
+  },
+  dateRangeContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4,
+  },
+  dateRangeText: {
+    color: '#999',
+    fontSize: 14,
+  },
+  card: {
+    backgroundColor: '#fff',
+    borderRadius: 16,
+    paddingVertical: 16,
+    paddingHorizontal: 24,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    ...shadow,
+  },
+  timeItem: {
+    alignItems: 'center',
+  },
+  titleText: {
+    color: '#0667FF',
+    fontSize: 14,
+    marginBottom: 4,
+  },
+  valueText: {
+    fontSize: 20,
+    fontWeight: '600',
+    color: '#222',
   },
 });

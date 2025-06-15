@@ -1,6 +1,5 @@
 import {StyleSheet, View} from 'react-native';
 import Filter from './Filter';
-import {useState} from 'react';
 
 type FilterProps = {
   filters: string[];
@@ -28,7 +27,7 @@ export default PeriodSelector;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    // flex: 1,
     paddingHorizontal: 20,
     backgroundColor: '#fff',
   },

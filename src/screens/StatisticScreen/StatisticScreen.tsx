@@ -11,25 +11,26 @@ const FILTERS = ['기간', '일간', '주간', '월간'];
 const StatisticScreen = () => {
   const [selectedPeriod, setSelectedPeriod] = useState<string>('기간');
   return (
-    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+    <View style={styles.container}>
       <PeriodSelector
         filters={FILTERS}
         selectedPeriod={selectedPeriod}
         setSelectedPeriod={setSelectedPeriod}
       />
+      <ScrollView showsVerticalScrollIndicator={false}>
+        {/* 공부 시간 요약 */}
+        <StudyTimeSummaryBox />
 
-      {/* 공부 시간 요약 */}
-      <StudyTimeSummaryBox />
+        {/* 학습 통계 요약 */}
+        <StudyTimeOverviewSection />
 
-      {/* 학습 통계 요약 */}
-      <StudyTimeOverviewSection />
+        {/* 개별 학습 시간 */}
+        <StudyTimeDetails />
 
-      {/* 개별 학습 시간 */}
-      <StudyTimeDetails />
-
-      {/* 랭킹 바 차트 */}
-      <RankBarCard />
-    </ScrollView>
+        {/* 랭킹 바 차트 */}
+        <RankBarCard />
+      </ScrollView>
+    </View>
   );
 };
 
@@ -38,6 +39,6 @@ export default StatisticScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    gap: 10,
+    // gap: 10,
   },
 });
