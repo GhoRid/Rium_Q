@@ -4,11 +4,19 @@ import RankBarCard from './components/RankBarCard';
 import StudyTimeDetails from './components/StudyTimeDetails';
 import StudyTimeSummaryBox from './components/StudyTimeSummaryBox';
 import PeriodSelector from './components/PeriodSelector';
+import {useState} from 'react';
+
+const FILTERS = ['기간', '일간', '주간', '월간'];
 
 const StatisticScreen = () => {
+  const [selectedPeriod, setSelectedPeriod] = useState<string>('기간');
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
-      <PeriodSelector />
+      <PeriodSelector
+        filters={FILTERS}
+        selectedPeriod={selectedPeriod}
+        setSelectedPeriod={setSelectedPeriod}
+      />
 
       {/* 공부 시간 요약 */}
       <StudyTimeSummaryBox />

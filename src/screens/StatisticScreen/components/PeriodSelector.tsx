@@ -2,17 +2,23 @@ import {StyleSheet, View} from 'react-native';
 import Filter from './Filter';
 import {useState} from 'react';
 
-const FILTERS = ['기간', '일간', '주간', '월간'];
+type FilterProps = {
+  filters: string[];
+  selectedPeriod: string;
+  setSelectedPeriod: (tag: string) => void;
+};
 
-const PeriodSelector = () => {
-  const [selectedTag, setSelectedTag] = useState<string>('기간');
-
+const PeriodSelector = ({
+  filters,
+  selectedPeriod,
+  setSelectedPeriod,
+}: FilterProps) => {
   return (
     <View style={styles.container}>
       <Filter
-        filter={FILTERS}
-        selectedTag={selectedTag}
-        setSelectedTag={setSelectedTag}
+        filter={filters}
+        selectedTag={selectedPeriod}
+        setSelectedTag={setSelectedPeriod}
       />
     </View>
   );
