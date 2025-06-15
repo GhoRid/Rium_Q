@@ -78,7 +78,7 @@ const Calendar = () => {
           <TouchableOpacity onPress={handlePrevMonth}>
             <Text style={styles.navText}>{'<'}</Text>
           </TouchableOpacity>
-          <Text style={styles.monthLabel}>{`${year}년 ${month}월`}</Text>
+          <Text style={styles.title}>{`${year}년 ${month}월`}</Text>
           <TouchableOpacity onPress={handleNextMonth}>
             <Text style={styles.navText}>{'>'}</Text>
           </TouchableOpacity>
@@ -165,7 +165,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
   },
-  monthLabel: {
+  title: {
     fontSize: 16,
     fontWeight: '600',
   },

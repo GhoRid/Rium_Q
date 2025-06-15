@@ -87,6 +87,7 @@ const styles = StyleSheet.create({
   wrapper: {
     flexDirection: 'row',
     alignItems: 'center',
+    backgroundColor: 'white',
   },
   legendContainer: {},
   legendItem: {

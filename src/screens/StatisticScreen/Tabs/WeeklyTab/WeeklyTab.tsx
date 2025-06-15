@@ -1,8 +1,9 @@
 import {StyleSheet, View} from 'react-native';
 import CalendarByWeek from './CalendarByWeek';
-import WeeklyStudyTime from './WeeklyStudyTime';
 import StudyTimeDetails from '../../components/StudyTimeDetails';
 import RankBarCard from '../../components/RankBarCard';
+import StudyTimeSummaryBox from '../../components/StudyTimeSummaryBox';
+import StudyTimeOverviewSection from '../../components/StudyTimeOverviewSection';
 
 type WeeklyTabProps = {
   period: string;
@@ -15,7 +16,10 @@ const WeeklyTab = ({period}: WeeklyTabProps) => {
       <CalendarByWeek />
 
       {/* 주간 학습 시간 */}
-      <WeeklyStudyTime period={period} />
+      <View>
+        <StudyTimeSummaryBox period={period} />
+        <StudyTimeOverviewSection />
+      </View>
 
       {/* 개별 학습 시간 */}
       <StudyTimeDetails />
