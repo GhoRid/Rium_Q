@@ -15,7 +15,7 @@ const AnimatedG = Animated.createAnimatedComponent(G);
 const screenWidth = Dimensions.get('window').width;
 const CHART_PADDING_HORIZONTAL = 20;
 const chartWidth = screenWidth - CHART_PADDING_HORIZONTAL * 2;
-const chartHeight = 180;
+const chartHeight = 220;
 const TOP_LABEL_SPACE = 20;
 const availableHeight = chartHeight - TOP_LABEL_SPACE;
 

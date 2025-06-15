@@ -5,7 +5,7 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import BubbleChart from '../StatisticScreen/components/BubbleChart';
+import BubbleChart from '../StatisticScreen/components/charts/BubbleChart';
 import {useState} from 'react';
 import YearMonthPicker from './YearMonthPicker';
 import SvgIcon from '../../components/SvgIcon';

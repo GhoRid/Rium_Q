@@ -1,5 +1,5 @@
 import {StyleSheet, View} from 'react-native';
-import BarChart from './BarChart';
+import BarChart from './charts/BarChart';
 
 interface PureStudyTimeTabProps {
   data: {
@@ -23,7 +23,6 @@ export default PureStudyTimeTab;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    gap: 20,
     alignItems: 'center',
   },
 });

@@ -1,5 +1,5 @@
 import {View, StyleSheet} from 'react-native';
-import BubbleChartForce from './BubbleChart';
+import BubbleChartForce from './charts/BubbleChart';
 
 const DATA = [
   {name: 'Apples', value: 700},

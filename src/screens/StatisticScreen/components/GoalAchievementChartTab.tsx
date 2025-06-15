@@ -1,5 +1,5 @@
 import {View, StyleSheet} from 'react-native';
-import RoundProgressbar from './RoundProgressBar';
+import RoundProgressbar from './charts/RoundProgressBar';
 
 const FILTERS = [
   '전체 목표 달성률',
