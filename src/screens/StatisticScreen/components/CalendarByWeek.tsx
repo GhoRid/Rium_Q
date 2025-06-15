@@ -64,7 +64,7 @@ const toTimeStr = (total: number) => {
   return `${h}:${m}:00`;
 };
 
-const WeeklyCalendar = () => {
+const CalendarByWeek = () => {
   const [baseDate, setBaseDate] = useState(new Date(2025, 5, 1));
 
   const weeks = eachWeekOfInterval(
@@ -131,7 +131,7 @@ const WeeklyCalendar = () => {
   );
 };
 
-export default WeeklyCalendar;
+export default CalendarByWeek;
 
 const styles = StyleSheet.create({
   container: {
