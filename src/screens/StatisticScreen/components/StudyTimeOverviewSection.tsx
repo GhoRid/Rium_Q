@@ -86,6 +86,6 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     flex: 1,
-    height: 320,
+    height: 280,
   },
 });

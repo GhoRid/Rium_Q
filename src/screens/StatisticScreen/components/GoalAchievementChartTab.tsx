@@ -16,11 +16,11 @@ const GoalAchievementChartTab = () => {
 
   return (
     <View style={styles.placeholder}>
-      <Filter
+      {/* <Filter
         filter={FILTERS}
         selectedTag={selectedTag}
         setSelectedTag={setSelectedTag}
-      />
+      /> */}
       <RoundProgressbar
         score={84}
         percentage={12}

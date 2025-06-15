@@ -1,11 +1,13 @@
+//앱 로고
+export {default as 앱로고1} from './icon/logo1.svg';
+export {default as 앱로고2} from './icon/logo2.svg';
+
 //하단 네비게이터
 export {default as Home} from './icon/home.svg';
 export {default as Plan} from './icon/plan.svg';
 export {default as Statistic} from './icon/statistics.svg';
 export {default as MyPage} from './icon/person.svg';
 
-export {default as 앱로고1} from './icon/logo1.svg';
-export {default as 앱로고2} from './icon/logo2.svg';
 export {default as 알림} from './icon/bell.svg';
 export {default as 설정} from './icon/setting.svg';
 export {default as 하트} from './icon/heart.svg';
