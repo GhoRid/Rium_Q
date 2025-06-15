@@ -26,7 +26,7 @@ const sampleDataExample = [
   {label: '10월', value: 154},
 ];
 
-const StudyTimeOverviewSection = () => {
+const StudyTimeOverviewCharts = () => {
   const [selectedTab, setSelectedTab] = useState<TabName>('순공시간');
 
   return (
@@ -57,7 +57,7 @@ const StudyTimeOverviewSection = () => {
   );
 };
 
-export default StudyTimeOverviewSection;
+export default StudyTimeOverviewCharts;
 
 const styles = StyleSheet.create({
   container: {

@@ -1,6 +1,6 @@
 import {StyleSheet, View} from 'react-native';
 import StudyTimeSummaryBox from '../../components/StudyTimeSummaryBox';
-import StudyTimeOverviewSection from '../../components/StudyTimeOverviewSection';
+import StudyTimeOverviewCharts from '../../components/StudyTimeOverviewCharts';
 import AverageFocusTimeChartBox from '../../components/AverageFocusTimeChartBox';
 import StudyTimeDetails from '../../components/StudyTimeDetails';
 import RankBarCard from '../../components/RankBarCard';
@@ -16,7 +16,7 @@ const PeriodTab = ({period}: PeriodTabProps) => {
       <StudyTimeSummaryBox period={period} />
 
       {/* 학습 통계 요약 */}
-      <StudyTimeOverviewSection />
+      <StudyTimeOverviewCharts />
 
       {/* 평균 집중 시간 차트 */}
       <AverageFocusTimeChartBox />

@@ -3,7 +3,7 @@ import CalendarByWeek from './CalendarByWeek';
 import StudyTimeDetails from '../../components/StudyTimeDetails';
 import RankBarCard from '../../components/RankBarCard';
 import StudyTimeSummaryBox from '../../components/StudyTimeSummaryBox';
-import StudyTimeOverviewSection from '../../components/StudyTimeOverviewSection';
+import StudyTimeOverviewCharts from '../../components/StudyTimeOverviewCharts';
 
 type WeeklyTabProps = {
   period: string;
@@ -18,7 +18,7 @@ const WeeklyTab = ({period}: WeeklyTabProps) => {
       {/* 주간 학습 시간 */}
       <View>
         <StudyTimeSummaryBox period={period} />
-        <StudyTimeOverviewSection />
+        <StudyTimeOverviewCharts />
       </View>
 
       {/* 개별 학습 시간 */}
