@@ -19,26 +19,27 @@ const Filter = ({filter, selectedTag, setSelectedTag}: FilterProps) => {
         horizontal
         showsHorizontalScrollIndicator={false}
         style={styles.filterContainer}
-        contentContainerStyle={{paddingHorizontal: 15, gap: 10}}>
-        {filter.map((element: string, idx: number) => (
-          <TouchableOpacity
-            key={idx}
-            style={
-              selectedTag == element
-                ? styles.selectedFilterButton
-                : styles.filterButton
-            }
-            onPress={() => setSelectedTag(element)}>
-            <Text
-              style={
-                selectedTag == element
-                  ? styles.selectedFilterText
-                  : styles.filterText
-              }>
-              {element}
-            </Text>
-          </TouchableOpacity>
-        ))}
+        contentContainerStyle={styles.filterContentContainerStyle}>
+        {filter.map((element: string, idx: number) => {
+          const isSelected = selectedTag === element;
+          return (
+            <TouchableOpacity
+              key={idx}
+              style={[
+                styles.filterButtonBase,
+                isSelected ? styles.selectedFilterButton : styles.filterButton,
+              ]}
+              onPress={() => setSelectedTag(element)}>
+              <Text
+                style={[
+                  styles.filterTextBase,
+                  isSelected ? styles.selectedFilterText : styles.filterText,
+                ]}>
+                {element}
+              </Text>
+            </TouchableOpacity>
+          );
+        })}
       </ScrollView>
     </View>
   );
@@ -50,24 +51,31 @@ const styles = StyleSheet.create({
   filterContainer: {
     paddingVertical: 10,
   },
-  filterButton: {
+  filterContentContainerStyle: {
+    gap: 10,
+  },
+  // 공통 버튼 스타일
+  filterButtonBase: {
     alignItems: 'center',
-    paddingVertical: 4,
-    paddingHorizontal: 10,
+    justifyContent: 'center',
+    paddingVertical: 6,
+    paddingHorizontal: 12,
     borderWidth: 1,
-    borderColor: '#BCBCBC',
     borderRadius: 15,
+  },
+  // 비선택 상태
+  filterButton: {
+    borderColor: '#BCBCBC',
+  },
+  filterTextBase: {
+    fontSize: 14,
   },
   filterText: {
-    fontSize: 14,
     color: '#BCBCBC',
   },
+  // 선택된 상태
   selectedFilterButton: {
     borderColor: '#0667FF',
-    borderWidth: 1,
-    borderRadius: 15,
-    paddingVertical: 4,
-    paddingHorizontal: 10,
     backgroundColor: '#E6F0FF',
   },
   selectedFilterText: {
