@@ -7,6 +7,7 @@ import {
   TouchableWithoutFeedback,
 } from 'react-native';
 import SvgIcon from '../../../components/SvgIcon';
+import palette from '../../../styles/palette';
 
 type StudyObjectModalProps = {
   modalVisible: boolean;
@@ -34,6 +35,7 @@ const StudyObjectModal = ({
       <View style={styles.centeredContainer}>
         <TouchableWithoutFeedback>
           <View style={styles.modalContent}>
+            <Text style={styles.dateText}>5/28</Text>
             <View style={styles.modalHeaderBox}>
               <Text style={styles.title}>오늘의 계획이에요!</Text>
               <SvgIcon
@@ -77,6 +79,10 @@ const styles = StyleSheet.create({
     ...StyleSheet.absoluteFillObject,
     backgroundColor: 'rgba(0,0,0,0.3)',
   },
+  dateText: {
+    fontSize: 16,
+    color: palette.app_blue,
+  },
   centeredContainer: {
     position: 'absolute',
     top: 0,
@@ -98,7 +104,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginBottom: 16,
+    marginBottom: 30,
   },
   title: {
     fontSize: 18,
