@@ -96,8 +96,6 @@ const styles = StyleSheet.create({
     paddingTop: 20,
     paddingHorizontal: 20,
     backgroundColor: 'white',
-    marginBottom: 10,
-    // position: 'relative',
   },
   titleBox: {
     marginBottom: 20,

@@ -58,8 +58,6 @@ export default AverageFocusTimeChartBox;
 const styles = StyleSheet.create({
   container: {
     backgroundColor: 'white',
-    marginTop: 10,
-    marginBottom: 10,
   },
   tabBar: {
     flexDirection: 'row',

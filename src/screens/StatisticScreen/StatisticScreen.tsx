@@ -18,7 +18,9 @@ const StatisticScreen = () => {
         selectedPeriod={selectedPeriod}
         setSelectedPeriod={setSelectedPeriod}
       />
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.contentCotainerStyle}>
         {/* 공부 시간 요약 */}
         <StudyTimeSummaryBox />
 
@@ -43,6 +45,8 @@ export default StatisticScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // gap: 10,
+  },
+  contentCotainerStyle: {
+    gap: 10,
   },
 });
