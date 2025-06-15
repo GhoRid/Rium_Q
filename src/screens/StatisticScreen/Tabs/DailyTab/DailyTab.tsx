@@ -1,7 +1,7 @@
 import {StyleSheet, View} from 'react-native';
 import RankBarCard from '../../components/RankBarCard';
 import StudyTimeDetails from '../../components/StudyTimeDetails';
-import Calendar from './CalendarByDate';
+import CalendarByDate from './CalendarByDate';
 import TodayStudyTime from './TodayStudyTime';
 
 type DailyTabProps = {
@@ -11,8 +11,10 @@ type DailyTabProps = {
 const DailyTab = ({period}: DailyTabProps) => {
   return (
     <View style={styles.container}>
-      <Calendar />
+      {/* 일간 달력 */}
+      <CalendarByDate />
 
+      {/* 오늘 학습 시간 */}
       <TodayStudyTime period={period} />
 
       {/* 개별 학습 시간 */}

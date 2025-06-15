@@ -1,11 +1,6 @@
-import {View, Text, StyleSheet, ScrollView} from 'react-native';
-import StudyTimeOverviewSection from './components/StudyTimeOverviewSection';
-import RankBarCard from './components/RankBarCard';
-import StudyTimeDetails from './components/StudyTimeDetails';
-import StudyTimeSummaryBox from './components/StudyTimeSummaryBox';
+import {View, StyleSheet, ScrollView} from 'react-native';
 import PeriodSelector from './components/PeriodSelector';
 import {useState} from 'react';
-import AverageFocusTimeChartBox from './components/AverageFocusTimeChartBox';
 import PeriodTab from './Tabs/PeriodTab/PeriodTab';
 import DailyTab from './Tabs/DailyTab/DailyTab';
 import WeeklyTab from './Tabs/WeeklyTab/WeeklyTab';
@@ -27,10 +22,10 @@ const StatisticScreen = () => {
         showsVerticalScrollIndicator={false}
         // contentContainerStyle={styles.contentCotainerStyle}
       >
-        {selectedPeriod === '기간' && <PeriodTab />}
-        {selectedPeriod === '일간' && <DailyTab />}
-        {selectedPeriod === '주간' && <WeeklyTab />}
-        {selectedPeriod === '월간' && <MonthlyTab />}
+        {selectedPeriod === '기간' && <PeriodTab period={selectedPeriod} />}
+        {selectedPeriod === '일간' && <DailyTab period={selectedPeriod} />}
+        {selectedPeriod === '주간' && <WeeklyTab period={selectedPeriod} />}
+        {selectedPeriod === '월간' && <MonthlyTab period={selectedPeriod} />}
       </ScrollView>
     </View>
   );

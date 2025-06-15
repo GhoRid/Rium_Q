@@ -144,6 +144,7 @@ const styles = StyleSheet.create({
   navRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+    alignItems: 'center',
     width: SCREEN_WIDTH - 40,
     paddingHorizontal: 20,
     marginBottom: 30,
