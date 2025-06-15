@@ -2,11 +2,14 @@ import {StyleSheet, View} from 'react-native';
 import RankBarCard from '../components/RankBarCard';
 import StudyTimeDetails from '../components/StudyTimeDetails';
 import Calendar from '../components/Calendar';
+import TodayStudyTime from '../components/TodayStudyTime';
 
 const DailyTab = () => {
   return (
     <View style={styles.container}>
       <Calendar />
+
+      <TodayStudyTime />
 
       {/* 개별 학습 시간 */}
       <StudyTimeDetails />
