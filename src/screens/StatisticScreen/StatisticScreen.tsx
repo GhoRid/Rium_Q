@@ -6,11 +6,16 @@ import StudyTimeSummaryBox from './components/StudyTimeSummaryBox';
 import PeriodSelector from './components/PeriodSelector';
 import {useState} from 'react';
 import AverageFocusTimeChartBox from './components/AverageFocusTimeChartBox';
+import PeriodTab from './Tabs/PeriodTab';
+import DailyTab from './Tabs/DailyTab';
+import WeeklyTab from './Tabs/WeeklyTab';
+import MonthlyTab from './Tabs/MonthlyTab';
 
 const FILTERS = ['기간', '일간', '주간', '월간'];
+type FilterType = (typeof FILTERS)[number];
 
 const StatisticScreen = () => {
-  const [selectedPeriod, setSelectedPeriod] = useState<string>('기간');
+  const [selectedPeriod, setSelectedPeriod] = useState<FilterType>('기간');
   return (
     <View style={styles.container}>
       <PeriodSelector
@@ -20,21 +25,12 @@ const StatisticScreen = () => {
       />
       <ScrollView
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={styles.contentCotainerStyle}>
-        {/* 공부 시간 요약 */}
-        <StudyTimeSummaryBox />
-
-        {/* 학습 통계 요약 */}
-        <StudyTimeOverviewSection />
-
-        {/* 평균 집중 시간 차트 */}
-        <AverageFocusTimeChartBox />
-
-        {/* 개별 학습 시간 */}
-        <StudyTimeDetails />
-
-        {/* 랭킹 바 차트 */}
-        <RankBarCard />
+        // contentContainerStyle={styles.contentCotainerStyle}
+      >
+        {selectedPeriod === '기간' && <PeriodTab />}
+        {selectedPeriod === '일간' && <DailyTab />}
+        {selectedPeriod === '주간' && <WeeklyTab />}
+        {selectedPeriod === '월간' && <MonthlyTab />}
       </ScrollView>
     </View>
   );
@@ -45,8 +41,5 @@ export default StatisticScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  contentCotainerStyle: {
-    gap: 10,
   },
 });
