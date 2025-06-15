@@ -4,6 +4,10 @@ import PureStudyTimeTab from './PureStudyTimeTab';
 import BySubjectChartTab from './BySubjectChartTab';
 import GoalAchievementChartTab from './GoalAchievementChartTab';
 
+// 탭 이름 배열과 타입 선언
+const TAB_NAMES = ['순공시간', '과목별', '목표달성률'] as const;
+type TabName = (typeof TAB_NAMES)[number];
+
 const sampleData = [
   {label: '24.12', value: 125},
   {label: '1월', value: 235},
@@ -22,15 +26,13 @@ const sampleDataExample = [
   {label: '10월', value: 154},
 ];
 
-type TabName = '순공시간' | '과목별' | '목표달성률';
-
 const StudyTimeOverviewSection = () => {
   const [selectedTab, setSelectedTab] = useState<TabName>('순공시간');
 
   return (
     <View style={styles.container}>
       <View style={styles.tabBar}>
-        {(['순공시간', '과목별', '목표달성률'] as TabName[]).map(tab => (
+        {TAB_NAMES.map(tab => (
           <TouchableOpacity
             key={tab}
             style={styles.tabItem}
@@ -46,7 +48,6 @@ const StudyTimeOverviewSection = () => {
         ))}
       </View>
 
-      {/* 2) 탭에 따라 다른 콘텐츠 렌더링 */}
       <View style={styles.contentContainer}>
         {selectedTab === '순공시간' && <PureStudyTimeTab data={sampleData} />}
         {selectedTab === '과목별' && <BySubjectChartTab />}
@@ -78,7 +79,7 @@ const styles = StyleSheet.create({
   tabTextActive: {
     color: '#000',
     fontWeight: '600',
-    position: 'relative', // 자식 컴포넌트가 절대 위치를 사용할 수 있도록
+    position: 'relative',
   },
   contentContainer: {
     flex: 1,

@@ -3,8 +3,11 @@ import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import AverageFocusTimeByHour from './AverageFocusTimeByHour';
 import AverageFocusTimeByDate from './AverageFocusTimeByDate';
 
-type TabName = '시간대별 평균 집중 시간' | '요일별 평균 집중 시간';
+// 1. 고정된 탭 이름 배열과 타입 선언
+const TAB_NAMES = ['시간대별 평균 집중 시간', '요일별 평균 집중 시간'] as const;
+type TabName = (typeof TAB_NAMES)[number];
 
+// 2. 예시 데이터
 const sampleDataExample = [
   {label: '월', value: 6.2},
   {label: '화', value: 4.2},
@@ -21,10 +24,9 @@ const AverageFocusTimeChartBox = () => {
 
   return (
     <View style={styles.container}>
+      {/* 탭 영역 */}
       <View style={styles.tabBar}>
-        {(
-          ['시간대별 평균 집중 시간', '요일별 평균 집중 시간'] as TabName[]
-        ).map(tab => (
+        {TAB_NAMES.map(tab => (
           <TouchableOpacity
             key={tab}
             style={styles.tabItem}
@@ -40,7 +42,7 @@ const AverageFocusTimeChartBox = () => {
         ))}
       </View>
 
-      {/* 2) 탭에 따라 다른 콘텐츠 렌더링 */}
+      {/* 탭에 따른 콘텐츠 */}
       <View style={styles.contentContainer}>
         {selectedTab === '시간대별 평균 집중 시간' && (
           <AverageFocusTimeByHour />
@@ -75,7 +77,7 @@ const styles = StyleSheet.create({
   tabTextActive: {
     color: '#000',
     fontWeight: '600',
-    position: 'relative', // 자식 컴포넌트가 절대 위치를 사용할 수 있도록
+    position: 'relative',
   },
   contentContainer: {
     flex: 1,
