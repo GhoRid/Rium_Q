@@ -49,7 +49,7 @@ const BubbleChartForce = ({
       anim: new Animated.Value(0),
     }));
     const sim = forceSimulation(initialNodes)
-      .force('x', forceX(CHART_WIDTH / 2).strength(0.04)) //  클수록 좌우로 좁아짐
+      .force('x', forceX(CHART_WIDTH / 2).strength(0.05)) //  클수록 좌우로 좁아짐
       .force('y', forceY(CHART_HEIGHT / 2).strength(0.15)) // 클수록 높이 낮아짐
       .force(
         'collide',

@@ -1,6 +1,5 @@
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import BarChart from './BarChart';
-import {useState} from 'react';
 
 interface PureStudyTimeTabProps {
   data: {
@@ -12,9 +11,6 @@ interface PureStudyTimeTabProps {
 type Period = '월별' | '주별' | '일별';
 
 const PureStudyTimeTab = ({data}: PureStudyTimeTabProps) => {
-  const [selected, setSelected] = useState<Period>('월별');
-  const options: Period[] = ['월별', '주별', '일별'];
-
   return (
     <View style={styles.container}>
       <BarChart data={data} key={JSON.stringify(data)} />
@@ -29,9 +25,5 @@ const styles = StyleSheet.create({
     flex: 1,
     gap: 20,
     alignItems: 'center',
-    position: 'absolute',
-    bottom: 20,
-    left: 0,
-    right: 0,
   },
 });

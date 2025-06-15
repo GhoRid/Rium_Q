@@ -1,6 +1,5 @@
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import BubbleChartForce from './BubbleChart';
-import {useState} from 'react';
 
 const DATA = [
   {name: 'Apples', value: 700},
@@ -15,9 +14,6 @@ const DATA = [
 type Period = '1주일' | '1개월' | '3개월' | '6개월';
 
 const BySubjectChartTab = () => {
-  const [selected, setSelected] = useState<Period>('1주일');
-  const options: Period[] = ['1주일', '1개월', '3개월', '6개월'];
-
   return (
     <View style={styles.placeholder}>
       <BubbleChartForce DATA={DATA} key={1} />
@@ -31,10 +27,5 @@ const styles = StyleSheet.create({
   placeholder: {
     flex: 1,
     alignItems: 'center',
-    gap: 20,
-    position: 'absolute',
-    bottom: 20,
-    left: 0,
-    right: 0,
   },
 });

@@ -1,6 +1,4 @@
-import {View, Text, StyleSheet} from 'react-native';
-import Filter from './Filter';
-import {useState} from 'react';
+import {View, StyleSheet} from 'react-native';
 import RoundProgressbar from './RoundProgressBar';
 
 const FILTERS = [
@@ -12,15 +10,8 @@ const FILTERS = [
 ];
 
 const GoalAchievementChartTab = () => {
-  const [selectedTag, setSelectedTag] = useState<string>('전체 목표 달성률');
-
   return (
     <View style={styles.placeholder}>
-      {/* <Filter
-        filter={FILTERS}
-        selectedTag={selectedTag}
-        setSelectedTag={setSelectedTag}
-      /> */}
       <RoundProgressbar
         score={84}
         percentage={12}
