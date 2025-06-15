@@ -1,7 +1,7 @@
 import {StyleSheet, View} from 'react-native';
 import RankBarCard from '../components/RankBarCard';
 import StudyTimeDetails from '../components/StudyTimeDetails';
-import Calendar from '../components/Calendar';
+import Calendar from '../components/CalendarByDate';
 import TodayStudyTime from '../components/TodayStudyTime';
 
 const DailyTab = () => {
