@@ -8,8 +8,6 @@ interface PureStudyTimeTabProps {
   }[];
 }
 
-type Period = '월별' | '주별' | '일별';
-
 const PureStudyTimeTab = ({data}: PureStudyTimeTabProps) => {
   return (
     <View style={styles.container}>

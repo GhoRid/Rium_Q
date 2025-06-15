@@ -1,7 +1,44 @@
-import {StyleSheet, View} from 'react-native';
+import {useState} from 'react';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import AverageFocusTimeByHour from './AverageFocusTimeByHour';
+import AverageFocusTimeByDate from './AverageFocusTimeByDate';
+
+type TabName = '시간대별 평균 집중 시간' | '요일별 평균 집중 시간';
 
 const AverageFocusTimeChartBox = () => {
-  return <View style={styles.container}></View>;
+  const [selectedTab, setSelectedTab] =
+    useState<TabName>('시간대별 평균 집중 시간');
+
+  return (
+    <View style={styles.container}>
+      <View style={styles.tabBar}>
+        {(
+          ['시간대별 평균 집중 시간', '요일별 평균 집중 시간'] as TabName[]
+        ).map(tab => (
+          <TouchableOpacity
+            key={tab}
+            style={styles.tabItem}
+            onPress={() => setSelectedTab(tab)}>
+            <Text
+              style={[
+                styles.tabText,
+                selectedTab === tab && styles.tabTextActive,
+              ]}>
+              {tab}
+            </Text>
+          </TouchableOpacity>
+        ))}
+      </View>
+
+      {/* 2) 탭에 따라 다른 콘텐츠 렌더링 */}
+      <View style={styles.contentContainer}>
+        {selectedTab === '시간대별 평균 집중 시간' && (
+          <AverageFocusTimeByHour />
+        )}
+        {selectedTab === '요일별 평균 집중 시간' && <AverageFocusTimeByDate />}
+      </View>
+    </View>
+  );
 };
 
 export default AverageFocusTimeChartBox;
@@ -9,16 +46,29 @@ export default AverageFocusTimeChartBox;
 const styles = StyleSheet.create({
   container: {
     backgroundColor: 'white',
+    marginTop: 10,
+    marginBottom: 10,
+  },
+  tabBar: {
+    flexDirection: 'row',
     padding: 20,
-    borderRadius: 10,
-    marginVertical: 10,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
+  },
+  tabItem: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  tabText: {
+    fontSize: 16,
+    color: '#999',
+  },
+  tabTextActive: {
+    color: '#000',
+    fontWeight: '600',
+    position: 'relative', // 자식 컴포넌트가 절대 위치를 사용할 수 있도록
+  },
+  contentContainer: {
+    flex: 1,
+    height: 280,
   },
 });
