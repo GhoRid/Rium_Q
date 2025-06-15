@@ -1,4 +1,3 @@
-import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import SvgIcon from '../../../components/SvgIcon';
 import shadow from '../../../styles/shadow';
@@ -37,14 +36,15 @@ export default StudyTimeSummaryBox;
 
 const styles = StyleSheet.create({
   container: {
-    padding: 20,
+    padding: 25,
     backgroundColor: 'white',
+    gap: 30,
   },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 12,
+    paddingHorizontal: 10,
   },
   periodLabel: {
     fontSize: 16,
@@ -63,22 +63,21 @@ const styles = StyleSheet.create({
   card: {
     backgroundColor: '#fff',
     borderRadius: 16,
-    paddingVertical: 16,
-    paddingHorizontal: 24,
+    padding: 20,
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
     ...shadow,
   },
   timeItem: {
     alignItems: 'center',
+    gap: 4,
   },
   titleText: {
     color: '#0667FF',
     fontSize: 14,
-    marginBottom: 4,
   },
   valueText: {
-    fontSize: 20,
+    fontSize: 24,
     fontWeight: '600',
     color: '#222',
   },
