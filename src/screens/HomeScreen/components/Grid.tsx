@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     gap: '4%',
-    height: '40%',
+    height: '35%',
   },
   leftColumn: {
     width: '48%',

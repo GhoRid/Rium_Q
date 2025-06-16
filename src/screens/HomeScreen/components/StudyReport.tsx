@@ -1,5 +1,6 @@
 import {View, Text, StyleSheet} from 'react-native';
 import LineGraph from './LineGraph';
+import shadow from '../../../styles/shadow';
 
 const StudyReport = () => {
   return (
@@ -19,11 +20,8 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     padding: 20,
     marginBottom: 20,
-    height: '25%',
-    elevation: 2,
-    shadowColor: '#000',
-    shadowOpacity: 0.1,
-    shadowOffset: {width: 0, height: 2},
+    height: '30%',
+    ...shadow,
   },
   cardTitle: {
     fontSize: 16,
