@@ -22,6 +22,9 @@ export {default as 아래방향} from './icon/directionDown.svg';
 export {default as 취소} from './icon/close.svg';
 export {default as 더하기} from './icon/plus.svg';
 
+export {default as 카카오로그인} from './icon/kakaotalkLogo.svg';
+export {default as 애플로고} from './icon/AppleLogo.svg';
+
 export {default as 택배배송} from './icon/delivery.svg';
 export {default as 순위상승} from './icon/triangleUp.svg';
 export {default as 순위하락} from './icon/triangleDown.svg';
