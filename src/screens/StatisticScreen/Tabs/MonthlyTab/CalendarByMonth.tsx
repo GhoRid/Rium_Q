@@ -80,8 +80,8 @@ const CalendarByMonth = () => {
 
   return (
     <View style={styles.container}>
+      {/* 헤더 */}
       <View style={styles.calendar}>
-        {/* 헤더 */}
         <View style={styles.navRow}>
           <TouchableOpacity onPress={handlePrev}>
             <Text style={styles.navText}>{'<'}</Text>
@@ -149,7 +149,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     width: SCREEN_WIDTH - 40,
-    alignSelf: 'center',
+    paddingHorizontal: 20,
     marginBottom: 30,
   },
   navText: {
