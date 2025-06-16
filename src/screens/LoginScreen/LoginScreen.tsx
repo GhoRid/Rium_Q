@@ -1,15 +1,18 @@
-import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import CustomHeader from '../../components/Header/CustomHeader';
-import BackButtonHeaderLeft from '../../components/Header/BackButtonHeaderLeft';
 import LoginButton from './components/LoginButton';
+import SvgIcon from '../../components/SvgIcon';
+import SignUpBox from './components/SignUpBox';
 
 const LoginScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
-      <CustomHeader leftItem={<BackButtonHeaderLeft />} />
-      <View>
-        <Text>로그인</Text>
+      {/* <CustomHeader leftItem={<BackButtonHeaderLeft />} /> */}
+
+      <View style={{flex: 1}} />
+
+      <View style={styles.logoBox}>
+        <SvgIcon name="앱로고2" width={130} height={50} />
       </View>
 
       <View style={{flex: 1}} />
@@ -34,6 +37,7 @@ const LoginScreen = () => {
           borderColor="#BCBCBC"
         />
       </View>
+      <SignUpBox />
     </SafeAreaView>
   );
 };
@@ -44,6 +48,10 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#FFFFFF',
     paddingHorizontal: 25,
+  },
+  logoBox: {
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   loginButtons: {
     gap: 16,
