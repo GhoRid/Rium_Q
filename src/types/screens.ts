@@ -1,7 +1,14 @@
-import {ParamListBase} from '@react-navigation/native';
+import {NavigatorScreenParams, ParamListBase} from '@react-navigation/native';
 
+interface TabNavigatorParamList extends ParamListBase {
+  Home: undefined;
+  Plan: undefined;
+  Statistic: undefined;
+  MyPage: undefined;
+  Test: undefined;
+}
 export interface RootStackParamList extends ParamListBase {
-  Tab: undefined;
+  Tab: NavigatorScreenParams<TabNavigatorParamList>;
   Home: undefined;
   Plan: undefined;
   Timer: undefined;

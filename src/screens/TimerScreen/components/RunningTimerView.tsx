@@ -1,4 +1,3 @@
-import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {Animated, StyleSheet, TouchableOpacity, View, Text} from 'react-native';
 import {RootStackParamList} from '../../../types/screens';
 import {formatHHMMSS} from '../../../utils/time';

@@ -20,7 +20,8 @@ const FinishedView = ({animation, blackToWhite}: FinishedViewProps) => {
 
       <View style={styles.buttonRow}>
         <TouchableOpacity
-          style={[styles.bottomButton, {backgroundColor: '#F3F4F6'}]}>
+          style={[styles.bottomButton, {backgroundColor: '#F3F4F6'}]}
+          onPress={() => navigation.navigate('Tab', {screen: 'Statistic'})}>
           <Text style={[styles.bottomButtonText, {color: '#111'}]}>
             내 통계
           </Text>
