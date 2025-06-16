@@ -1,10 +1,13 @@
 import {View, Text, StyleSheet} from 'react-native';
+import LineGraph from './LineGraph';
 
 const StudyReport = () => {
   return (
     <View style={styles.card}>
       <Text style={styles.cardTitle}>내 학습 리포트</Text>
       <Text style={styles.cardSubtitle}>요약 리포트 메인에 뭐 넣을지?</Text>
+
+      <LineGraph />
     </View>
   );
 };

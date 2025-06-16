@@ -6,6 +6,7 @@ import {
   Animated,
   Easing,
   StatusBar,
+  Text,
 } from 'react-native';
 import {SafeAreaView, useSafeAreaInsets} from 'react-native-safe-area-context';
 import SvgIcon from '../../components/SvgIcon';
@@ -13,17 +14,17 @@ import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {RootStackParamList} from '../../types/screens';
 import {formatHHMMSS} from '../../utils/time';
 import {loadTimer, saveTimer} from '../../storage';
+import FinishedView from './components/FinishedView';
 
 const TimerScreen = () => {
   const insets = useSafeAreaInsets();
-
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
-  // 총 공부 시간 가져오기
+
   const [seconds, setSeconds] = useState(0);
   const [totalTime, setTotalTime] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
+  const [isFinished, setIsFinished] = useState(false);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
-
   const animation = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
@@ -34,7 +35,6 @@ const TimerScreen = () => {
     load();
   }, []);
 
-  // 색상 애니메이션 트리거
   useEffect(() => {
     Animated.timing(animation, {
       toValue: isRunning ? 1 : 0,
@@ -44,12 +44,11 @@ const TimerScreen = () => {
     }).start();
   }, [isRunning]);
 
-  // 타이머 로직
   useEffect(() => {
     if (isRunning) {
       intervalRef.current = setInterval(() => {
         setSeconds(prev => prev + 1);
-        setTotalTime(prev => prev + 1); // 화면에 반영
+        setTotalTime(prev => prev + 1);
       }, 1000);
     } else {
       if (intervalRef.current) {
@@ -64,14 +63,16 @@ const TimerScreen = () => {
   }, [isRunning]);
 
   const toggleTimer = async () => {
-    setIsRunning(prev => !prev);
-    if (isRunning === true) {
-      console.log('공부 끝');
+    if (isRunning) {
       await saveTimer(totalTime);
+      setIsRunning(false);
+      setIsFinished(true);
+    } else {
+      setIsRunning(true);
+      setIsFinished(false);
     }
   };
 
-  // 색상 애니메이션 설정
   const whiteToBlack = animation.interpolate({
     inputRange: [0, 1],
     outputRange: ['#ffffff', '#000000'],
@@ -96,49 +97,55 @@ const TimerScreen = () => {
         translucent
       />
       <SafeAreaView style={{flex: 1}}>
-        {/* 헤더 영역 */}
+        {/* 헤더 */}
         <View style={styles.headerBox}>
-          {!isRunning && (
-            <TouchableOpacity
-              onPress={() => {
-                navigation.goBack();
-              }}>
+          {!isRunning && !isFinished && (
+            <TouchableOpacity onPress={() => navigation.goBack()}>
               <SvgIcon name="좌측방향" size={32} color="#888" />
             </TouchableOpacity>
           )}
         </View>
 
-        <Animated.Text style={[styles.timer, {color: blackToWhite}]}>
-          {formatHHMMSS(seconds)}
-        </Animated.Text>
+        {/* 본문 */}
+        {isFinished ? (
+          <FinishedView animation={animation} blackToWhite={blackToWhite} />
+        ) : (
+          <>
+            <Animated.Text style={[styles.timer, {color: blackToWhite}]}>
+              {formatHHMMSS(seconds)}
+            </Animated.Text>
 
-        {isRunning && (
-          <View style={styles.row}>
-            <Animated.Text style={[styles.todayLabel, {color: subTextColor}]}>
-              오늘
-            </Animated.Text>
-            <Animated.Text style={[styles.todayTime, {color: blackToWhite}]}>
-              {formatHHMMSS(totalTime)}
-            </Animated.Text>
-          </View>
+            {isRunning && (
+              <>
+                <View style={styles.row}>
+                  <Animated.Text
+                    style={[styles.todayLabel, {color: subTextColor}]}>
+                    오늘
+                  </Animated.Text>
+                  <Animated.Text
+                    style={[styles.todayTime, {color: blackToWhite}]}>
+                    {formatHHMMSS(totalTime)}
+                  </Animated.Text>
+                </View>
+                <Animated.Text style={[styles.caution, {color: blackToWhite}]}>
+                  학습 시 주의사항
+                </Animated.Text>
+              </>
+            )}
+
+            <View style={{flex: 1}} />
+
+            <TouchableOpacity onPress={toggleTimer}>
+              <Animated.View
+                style={[styles.button, {borderColor: blackToWhite}]}>
+                <Animated.Text
+                  style={[styles.buttonText, {color: blackToWhite}]}>
+                  {isRunning ? '공부 종료' : '공부 시작'}
+                </Animated.Text>
+              </Animated.View>
+            </TouchableOpacity>
+          </>
         )}
-
-        {isRunning && (
-          <Animated.Text style={[styles.caution, {color: blackToWhite}]}>
-            학습 시 주의사항
-          </Animated.Text>
-        )}
-
-        {/* 중간 여백 채우기 */}
-        <View style={{flex: 1}} />
-
-        <TouchableOpacity onPress={toggleTimer}>
-          <Animated.View style={[styles.button, {borderColor: blackToWhite}]}>
-            <Animated.Text style={[styles.buttonText, {color: blackToWhite}]}>
-              {isRunning ? '공부 종료' : '공부 시작'}
-            </Animated.Text>
-          </Animated.View>
-        </TouchableOpacity>
       </SafeAreaView>
     </Animated.View>
   );
@@ -147,18 +154,18 @@ const TimerScreen = () => {
 export default TimerScreen;
 
 const styles = StyleSheet.create({
+  headerBox: {
+    width: '100%',
+    height: 60,
+    paddingHorizontal: 16,
+    flexDirection: 'row',
+  },
   timer: {
     fontSize: 50,
     fontWeight: 'bold',
     alignSelf: 'center',
     marginTop: 40,
     marginBottom: 20,
-  },
-  headerBox: {
-    width: '100%',
-    height: 60,
-    paddingHorizontal: 16,
-    flexDirection: 'row',
   },
   row: {
     flexDirection: 'row',
@@ -188,6 +195,25 @@ const styles = StyleSheet.create({
     borderRadius: 100,
   },
   buttonText: {
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  finishText: {
+    fontSize: 24,
+    fontWeight: 'bold',
+  },
+  buttonRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    marginBottom: 40,
+    paddingHorizontal: 20,
+  },
+  bottomButton: {
+    paddingVertical: 14,
+    paddingHorizontal: 24,
+    borderRadius: 16,
+  },
+  bottomButtonText: {
     fontSize: 16,
     fontWeight: '600',
   },
