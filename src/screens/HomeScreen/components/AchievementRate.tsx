@@ -1,16 +1,24 @@
 import {Pressable, View, Text, StyleSheet, Image} from 'react-native';
 import palette from '../../../styles/palette';
+import {NavigationProp, useNavigation} from '@react-navigation/native';
+import {RootStackParamList} from '../../../types/screens';
 
-interface AchievementRateProps {
+type AchievementRateProps = {
   progress: number;
-}
+};
 
 const AchievementRate = ({progress}: AchievementRateProps) => {
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+
   return (
     <View style={styles.container}>
       <View style={styles.goalHeader}>
         <Text style={styles.goalTitle}>오늘의 목표 달성률</Text>
-        <Pressable style={styles.studyButton}>
+        <Pressable
+          style={styles.studyButton}
+          onPress={() => {
+            navigation.navigate('Timer');
+          }}>
           <Text style={styles.studyButtonText}>공부하기</Text>
         </Pressable>
       </View>

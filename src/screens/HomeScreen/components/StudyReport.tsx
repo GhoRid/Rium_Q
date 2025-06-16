@@ -1,14 +1,21 @@
 import {View, Text, StyleSheet} from 'react-native';
 import LineGraph from './LineGraph';
 import shadow from '../../../styles/shadow';
+import {useState} from 'react';
 
 const StudyReport = () => {
-  return (
-    <View style={styles.card}>
-      <Text style={styles.cardTitle}>내 학습 리포트</Text>
-      <Text style={styles.cardSubtitle}>요약 리포트 메인에 뭐 넣을지?</Text>
+  const [parentWidth, setParentWidth] = useState(0);
 
-      <LineGraph />
+  return (
+    <View
+      style={styles.card}
+      onLayout={e => {
+        const width = e.nativeEvent.layout.width;
+        setParentWidth(width);
+      }}>
+      <Text style={styles.cardTitle}>내 학습 리포트</Text>
+
+      <LineGraph parentWidth={parentWidth} />
     </View>
   );
 };
@@ -26,9 +33,5 @@ const styles = StyleSheet.create({
   cardTitle: {
     fontSize: 16,
     fontWeight: 'bold',
-    marginBottom: 6,
-  },
-  cardSubtitle: {
-    color: '#555',
   },
 });
