@@ -39,7 +39,11 @@ const CustomTabBar = ({state, descriptors, navigation}: any) => {
             key={route.key}
             onPress={onPress}
             style={styles.tabItem}>
-            <SvgIcon name={route.name} />
+            <SvgIcon
+              name={route.name}
+              color={palette.app_main_color}
+              fill={isFocused ? palette.app_main_color : 'none'}
+            />
             <Text style={{fontSize: 12, color: isFocused ? '#1a2b48' : '#888'}}>
               {label}
             </Text>
