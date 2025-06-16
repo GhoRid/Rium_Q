@@ -15,6 +15,7 @@ import {RootStackParamList} from '../../types/screens';
 import {formatHHMMSS} from '../../utils/time';
 import {loadTimer, saveTimer} from '../../storage';
 import FinishedView from './components/FinishedView';
+import RunningTimerView from './components/RunningTimerView';
 
 const TimerScreen = () => {
   const insets = useSafeAreaInsets();
@@ -110,41 +111,14 @@ const TimerScreen = () => {
         {isFinished ? (
           <FinishedView animation={animation} blackToWhite={blackToWhite} />
         ) : (
-          <>
-            <Animated.Text style={[styles.timer, {color: blackToWhite}]}>
-              {formatHHMMSS(seconds)}
-            </Animated.Text>
-
-            {isRunning && (
-              <>
-                <View style={styles.row}>
-                  <Animated.Text
-                    style={[styles.todayLabel, {color: subTextColor}]}>
-                    오늘
-                  </Animated.Text>
-                  <Animated.Text
-                    style={[styles.todayTime, {color: blackToWhite}]}>
-                    {formatHHMMSS(totalTime)}
-                  </Animated.Text>
-                </View>
-                <Animated.Text style={[styles.caution, {color: blackToWhite}]}>
-                  학습 시 주의사항
-                </Animated.Text>
-              </>
-            )}
-
-            <View style={{flex: 1}} />
-
-            <TouchableOpacity onPress={toggleTimer}>
-              <Animated.View
-                style={[styles.button, {borderColor: blackToWhite}]}>
-                <Animated.Text
-                  style={[styles.buttonText, {color: blackToWhite}]}>
-                  {isRunning ? '공부 종료' : '공부 시작'}
-                </Animated.Text>
-              </Animated.View>
-            </TouchableOpacity>
-          </>
+          <RunningTimerView
+            animation={animation}
+            blackToWhite={blackToWhite}
+            totalTime={totalTime}
+            seconds={seconds}
+            isRunning={isRunning}
+            toggleTimer={toggleTimer}
+          />
         )}
       </SafeAreaView>
     </Animated.View>
