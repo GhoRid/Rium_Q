@@ -14,10 +14,10 @@ const PADDING = 20;
 
 const originalData: DataPoint[] = [
   {date: '5/12', value: 4},
-  {date: '5/13', value: 3.5},
-  {date: '5/14', value: 4},
-  {date: '5/15', value: 6.5},
-  {date: '5/16', value: 5},
+  {date: '5/13', value: 2},
+  {date: '5/14', value: 3},
+  {date: '5/15', value: 7.4},
+  {date: '5/16', value: 5.4},
   {date: '오늘', value: 6.8},
 ];
 
@@ -74,7 +74,7 @@ const LineGraph = ({parentWidth}: LineGraphProps) => {
         {/* 그래프 */}
         <Svg width={chartWidth} height={CHART_HEIGHT + 20}>
           <Defs>
-            <LinearGradient id="grad" x1="0" y1="0" x2="0" y2="1">
+            <LinearGradient id="grad" x1="0" y1="0" x2="0" y2="0.9">
               <Stop offset="0" stopColor="#1C2E4A" stopOpacity="0.5" />
               <Stop offset="1" stopColor="#FFFFFF" stopOpacity="0" />
             </LinearGradient>
