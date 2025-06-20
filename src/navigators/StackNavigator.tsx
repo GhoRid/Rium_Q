@@ -1,17 +1,14 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {SafeAreaView, useSafeAreaInsets} from 'react-native-safe-area-context';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import TestScreen from '../screens/TestScreen/TestScreen';
 import TabNavigator from './TabNavigator/TabNavigator';
 import NotificationScreen from '../screens/NotificationScreen/NotificationScreen';
 import TimerScreen from '../screens/TimerScreen/TimerScreen';
-import CustomHeader from '../components/Header/CustomHeader';
-import SvgIcon from '../components/SvgIcon';
-import {Text} from 'react-native';
-import BackButtonHeaderLeft from '../components/Header/BackButtonHeaderLeft';
 import StudyTimeDetailScreen from '../screens/StudyTimeDetailScreen/StudyTimeDetailScreen';
 import SeatReservationScreen from '../screens/SeatReservationScreen/SeatReservationScreen';
 import SettingsScreen from '../screens/SettingsScreen/SettingsScreen';
 import LoginScreen from '../screens/LoginScreen/LoginScreen';
+import NotificationSettingsScreen from '../screens/NotificationSettingsScreen/NotificationSettingsScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -30,12 +27,17 @@ const StackNavigator = () => {
       <Stack.Screen name="StudyTimeDetail" component={StudyTimeDetailScreen} />
       {/* 좌석 예약 스크린 */}
       <Stack.Screen name="SeatReservation" component={SeatReservationScreen} />
-      {/* 설정 스크린 */}
-      <Stack.Screen name="Setting" component={SettingsScreen} />
       {/* 타이머 스크린 */}
       <Stack.Screen name="Timer" component={TimerScreen} />
       {/* 로그인 진입 페이지 */}
       <Stack.Screen name="Login" component={LoginScreen} />
+      {/* 설정 스크린 */}
+      <Stack.Screen name="Setting" component={SettingsScreen} />
+      {/* 알림 설정 스크린 */}
+      <Stack.Screen
+        name="NotificationSettings"
+        component={NotificationSettingsScreen}
+      />
     </Stack.Navigator>
   );
 };

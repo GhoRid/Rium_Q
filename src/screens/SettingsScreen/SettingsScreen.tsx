@@ -10,14 +10,22 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import CustomHeader from '../../components/Header/CustomHeader';
 import BackButtonHeaderLeft from '../../components/Header/BackButtonHeaderLeft';
 import SvgIcon from '../../components/SvgIcon';
+import {NavigationProp, useNavigation} from '@react-navigation/native';
+import {RootStackParamList} from '../../types/screens';
 
 const SettingsScreen = () => {
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+
   return (
     <SafeAreaView style={styles.container}>
       <CustomHeader leftItem={<BackButtonHeaderLeft pageName="설정" />} />
 
       <ScrollView contentContainerStyle={styles.content}>
-        <TouchableOpacity style={styles.item}>
+        <TouchableOpacity
+          style={styles.item}
+          onPress={() => {
+            navigation.navigate('NotificationSettings');
+          }}>
           <Text style={styles.itemText}>알림 설정</Text>
           <SvgIcon name="우측방향" size={24} color="#999" />
         </TouchableOpacity>
