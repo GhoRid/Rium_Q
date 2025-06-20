@@ -17,17 +17,10 @@ type DataPoint = {
   value: number;
 };
 
-const CHART_HEIGHT = 90;
+const CHART_HEIGHT = 100;
 const PADDING = 20;
-
-const originalData: DataPoint[] = [
-  {date: '5/12', value: 4},
-  {date: '5/13', value: 2},
-  {date: '5/14', value: 3},
-  {date: '5/15', value: 7.4},
-  {date: '5/16', value: 5.4},
-  {date: '오늘', value: 6.8},
-];
+const INTERVAL = 6000; // 6초마다 리셋
+const DATA_COUNT = 6;
 
 type LineGraphProps = {
   parentWidth: number;
@@ -36,17 +29,42 @@ type LineGraphProps = {
 const AnimatedPath = Animated.createAnimatedComponent(Path);
 const AnimatedRect = Animated.createAnimatedComponent(Rect);
 
+const generateRandomData = (): DataPoint[] => {
+  const now = new Date();
+  return Array.from({length: DATA_COUNT}, (_, i) => {
+    const d = new Date(now);
+    d.setDate(d.getDate() + i);
+    return {
+      date: d.toLocaleDateString('ko-KR').slice(5),
+      value: parseFloat((Math.random() * 8).toFixed(1)),
+    };
+  });
+};
+
 const LineGraph = ({parentWidth}: LineGraphProps) => {
+  const [data, setData] = useState<DataPoint[]>(generateRandomData());
   const [pathLength, setPathLength] = useState(0);
   const [circlePos, setCirclePos] = useState({cx: 0, cy: 0});
   const animation = useRef(new Animated.Value(0)).current;
   const pathRef = useRef<any>(null);
 
+  const maxValue = Math.max(...data.map(d => d.value)) * 1.1;
+
+  useEffect(() => {
+    const loop = setInterval(() => {
+      const next = generateRandomData();
+      animation.setValue(0);
+      setData(next);
+    }, INTERVAL);
+
+    return () => clearInterval(loop);
+  }, []);
+
   useEffect(() => {
     Animated.timing(animation, {
       toValue: 1,
-      duration: 2000,
-      easing: Easing.ease,
+      duration: 2000, //2초동안 그림
+      easing: Easing.ease, // ease-in-out 효과
       useNativeDriver: false,
     }).start();
 
@@ -56,46 +74,44 @@ const LineGraph = ({parentWidth}: LineGraphProps) => {
           const currentLength = pathLength * value;
           const point = pathRef.current.getPointAtLength(currentLength);
           setCirclePos({cx: point.x, cy: point.y});
-        } catch (e) {
-          console.warn('getPointAtLength error', e);
-        }
+        } catch (e) {}
       }
     });
 
     return () => {
       animation.removeListener(id);
     };
-  }, [pathLength]);
+  }, [pathLength, data]);
 
   if (parentWidth === 0) return null;
 
   const chartWidth = parentWidth - PADDING * 2 - 20;
 
-  const data = [
-    {date: '시작', value: originalData[0].value},
-    ...originalData,
-    {date: '끝', value: originalData[originalData.length - 1].value},
+  const extendedData = [
+    {date: '시작', value: data[0].value},
+    ...data,
+    {date: '끝', value: data[data.length - 1].value},
   ];
 
   const x = d3
     .scaleLinear()
-    .domain([0, data.length - 1])
+    .domain([0, extendedData.length - 1])
     .range([0, chartWidth]);
 
-  const y = d3.scaleLinear().domain([0, 8]).range([CHART_HEIGHT, 0]);
+  const y = d3.scaleLinear().domain([0, maxValue]).range([CHART_HEIGHT, 0]);
 
   const linePath = shape
     .line<DataPoint>()
     .x((_, i) => x(i))
     .y(d => y(d.value))
-    .curve(shape.curveCatmullRom.alpha(0.5))(data as any) as string;
+    .curve(shape.curveCatmullRom.alpha(0.5))(extendedData as any) as string;
 
   const areaPath = shape
     .area<DataPoint>()
     .x((_, i) => x(i))
     .y0(CHART_HEIGHT + 20)
     .y1(d => y(d.value))
-    .curve(shape.curveCatmullRom.alpha(0.5))(data as any) as string;
+    .curve(shape.curveCatmullRom.alpha(0.5))(extendedData as any) as string;
 
   const strokeDashoffset = animation.interpolate({
     inputRange: [0, 1],
@@ -138,15 +154,13 @@ const LineGraph = ({parentWidth}: LineGraphProps) => {
 
           <AnimatedPath
             ref={ref => {
-              if (ref && pathLength === 0) {
+              if (ref) {
                 requestAnimationFrame(() => {
                   try {
                     const length = (ref as any).getTotalLength();
                     setPathLength(length);
                     pathRef.current = ref;
-                  } catch (e) {
-                    console.warn('getTotalLength failed', e);
-                  }
+                  } catch (e) {}
                 });
               }
             }}
@@ -188,7 +202,6 @@ const styles = StyleSheet.create({
     width: 20,
     height: CHART_HEIGHT,
     justifyContent: 'space-between',
-    paddingTop: 10,
   },
   yLabel: {
     fontSize: 12,
