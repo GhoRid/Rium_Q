@@ -9,6 +9,7 @@ import SeatReservationScreen from '../screens/SeatReservationScreen/SeatReservat
 import SettingsScreen from '../screens/SettingsScreen/SettingsScreen';
 import LoginScreen from '../screens/LoginScreen/LoginScreen';
 import NotificationSettingsScreen from '../screens/NotificationSettingsScreen/NotificationSettingsScreen';
+import AnnouncementsScreen from '../screens/AnnouncementsScreen/AnnouncementsScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -38,6 +39,7 @@ const StackNavigator = () => {
         name="NotificationSettings"
         component={NotificationSettingsScreen}
       />
+      <Stack.Screen name="Announcements" component={AnnouncementsScreen} />
     </Stack.Navigator>
   );
 };

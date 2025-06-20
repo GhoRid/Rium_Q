@@ -16,36 +16,45 @@ import {RootStackParamList} from '../../types/screens';
 const SettingsScreen = () => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
+  const layer1 = [
+    {
+      title: '알림 설정',
+      onPress: () => navigation.navigate('NotificationSettings'),
+    },
+  ];
+
+  const layer2 = [
+    {title: '공지사항', onPress: () => navigation.navigate('Announcements')},
+    {title: '고객센터', onPress: () => {}},
+    {title: '계정 관리', onPress: () => {}},
+  ];
+
   return (
     <SafeAreaView style={styles.container}>
       <CustomHeader leftItem={<BackButtonHeaderLeft pageName="설정" />} />
 
       <ScrollView contentContainerStyle={styles.content}>
-        <TouchableOpacity
-          style={styles.item}
-          onPress={() => {
-            navigation.navigate('NotificationSettings');
-          }}>
-          <Text style={styles.itemText}>알림 설정</Text>
-          <SvgIcon name="우측방향" size={24} color="#999" />
-        </TouchableOpacity>
+        {layer1.map((item, index) => (
+          <TouchableOpacity
+            style={styles.item}
+            key={index}
+            onPress={item.onPress}>
+            <Text style={styles.itemText}>{item.title}</Text>
+            <SvgIcon name="우측방향" size={24} color="#999" />
+          </TouchableOpacity>
+        ))}
 
         <View style={styles.separator} />
 
-        <TouchableOpacity style={styles.item}>
-          <Text style={styles.itemText}>공지사항</Text>
-          <SvgIcon name="우측방향" size={24} color="#999" />
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.item}>
-          <Text style={styles.itemText}>고객센터</Text>
-          <SvgIcon name="우측방향" size={24} color="#999" />
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.item}>
-          <Text style={styles.itemText}>계정 관리</Text>
-          <SvgIcon name="우측방향" size={24} color="#999" />
-        </TouchableOpacity>
+        {layer2.map((item, index) => (
+          <TouchableOpacity
+            style={styles.item}
+            key={index}
+            onPress={item.onPress}>
+            <Text style={styles.itemText}>{item.title}</Text>
+            <SvgIcon name="우측방향" size={24} color="#999" />
+          </TouchableOpacity>
+        ))}
 
         <View style={styles.separator} />
 
