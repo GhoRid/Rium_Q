@@ -10,6 +10,7 @@ import SettingsScreen from '../screens/SettingsScreen/SettingsScreen';
 import LoginScreen from '../screens/LoginScreen/LoginScreen';
 import NotificationSettingsScreen from '../screens/NotificationSettingsScreen/NotificationSettingsScreen';
 import AnnouncementsScreen from '../screens/AnnouncementsScreen/AnnouncementsScreen';
+import CustomerServiceCenterScreen from '../screens/CustomerServiceCenterScreen/CustomerServiceCenterScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -41,6 +42,11 @@ const StackNavigator = () => {
       />
       {/* 공지사항 스크린 */}
       <Stack.Screen name="Announcements" component={AnnouncementsScreen} />
+      {/* 고객센터 스크린 */}
+      <Stack.Screen
+        name="CustomerServiceCenter"
+        component={CustomerServiceCenterScreen}
+      />
     </Stack.Navigator>
   );
 };
