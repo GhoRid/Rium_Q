@@ -19,19 +19,17 @@ const SettingsScreen = () => {
   const layer1 = [
     {
       title: '알림 설정',
-      onPress: () => navigation.navigate('NotificationSettings'),
+      navigateRoute: 'NotificationSettings',
     },
   ];
 
   const layer2 = [
-    {title: '공지사항', onPress: () => navigation.navigate('Announcements')},
+    {title: '공지사항', navigateRoute: 'Announcements'},
     {
       title: '고객센터',
-      onPress: () => {
-        navigation.navigate('CustomerServiceCenter');
-      },
+      navigateRoute: 'CustomerServiceCenter',
     },
-    {title: '계정 관리', onPress: () => {}},
+    {title: '계정 관리', navigateRoute: ''},
   ];
 
   return (
@@ -43,7 +41,7 @@ const SettingsScreen = () => {
           <TouchableOpacity
             style={styles.item}
             key={index}
-            onPress={item.onPress}>
+            onPress={() => navigation.navigate(item.navigateRoute)}>
             <Text style={styles.itemText}>{item.title}</Text>
             <SvgIcon name="우측방향" size={24} color="#999" />
           </TouchableOpacity>
@@ -55,7 +53,7 @@ const SettingsScreen = () => {
           <TouchableOpacity
             style={styles.item}
             key={index}
-            onPress={item.onPress}>
+            onPress={() => navigation.navigate(item.navigateRoute)}>
             <Text style={styles.itemText}>{item.title}</Text>
             <SvgIcon name="우측방향" size={24} color="#999" />
           </TouchableOpacity>
