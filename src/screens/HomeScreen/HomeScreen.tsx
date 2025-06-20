@@ -20,7 +20,6 @@ const HomeScreen = () => {
 
   return (
     <View style={styles.container}>
-      {/* <SvgIcon name="알림" /> */}
       {/* 상단: 과목 선택 + 시험명 */}
       <Carousel data={studyData} setModalVisible={setModalVisible} />
       {/* 모달 */}

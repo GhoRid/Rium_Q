@@ -1,4 +1,5 @@
-import {Pressable, View, Text, StyleSheet, Image} from 'react-native';
+import React, {useEffect, useRef, useState} from 'react';
+import {View, StyleSheet, Text, Image, Pressable, Animated} from 'react-native';
 import palette from '../../../styles/palette';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {RootStackParamList} from '../../../types/screens';
@@ -10,33 +11,85 @@ type AchievementRateProps = {
 const AchievementRate = ({progress}: AchievementRateProps) => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
+  const animation = useRef(new Animated.Value(0)).current;
+  const [animatedProgress, setAnimatedProgress] = useState(0);
+
+  useEffect(() => {
+    animation.setValue(0);
+
+    const id = animation.addListener(({value}) => {
+      setAnimatedProgress(Math.round(value));
+    });
+
+    Animated.timing(animation, {
+      toValue: progress,
+      duration: 1200,
+      useNativeDriver: false,
+    }).start();
+
+    return () => {
+      animation.removeListener(id);
+    };
+  }, [progress]);
+
   return (
     <View style={styles.container}>
       <View style={styles.goalHeader}>
         <Text style={styles.goalTitle}>오늘의 목표 달성률</Text>
         <Pressable
           style={styles.studyButton}
-          onPress={() => {
-            navigation.navigate('Timer');
-          }}>
+          onPress={() => navigation.navigate('Timer')}>
           <Text style={styles.studyButtonText}>공부하기</Text>
         </Pressable>
       </View>
 
-      {/* 진행바 */}
       <View style={styles.progressContainer}>
         <View style={styles.progressBarBackground}>
-          <View style={[styles.progressBarFill, {width: `${progress}%`}]} />
+          <Animated.View
+            style={[
+              styles.progressBarFill,
+              {
+                width: animation.interpolate({
+                  inputRange: [0, 100],
+                  outputRange: ['0%', '100%'],
+                }),
+              },
+            ]}
+          />
         </View>
-        {/* 석왕이 */}
+
         <View style={styles.characterContainer}>
-          <View style={[styles.character, {left: `${progress}%`}]}>
-            <Text style={styles.progressTextBubble}>{progress}% 달성!</Text>
-            <Image
+          <Animated.View
+            style={[
+              styles.character,
+              {
+                left: animation.interpolate({
+                  inputRange: [0, 100],
+                  outputRange: ['0%', '100%'],
+                }),
+                transform: [{translateX: -30}],
+              },
+            ]}>
+            <Text style={styles.progressTextBubble}>
+              {animatedProgress}% 달성!
+            </Text>
+            <Animated.Image
               source={require('../../../assets/images/seokwang.webp')}
-              style={styles.characterImage}
+              style={[
+                styles.characterImage,
+                {
+                  transform: [
+                    {
+                      rotate: animation.interpolate({
+                        inputRange: [0, 100],
+                        outputRange: ['0deg', '1440deg'],
+                      }),
+                    },
+                  ],
+                },
+              ]}
             />
-          </View>
+          </Animated.View>
         </View>
       </View>
     </View>
@@ -48,8 +101,6 @@ export default AchievementRate;
 const styles = StyleSheet.create({
   container: {
     marginBottom: 20,
-    // paddingBottom: 20,
-    // backgroundColor: '#5444',
   },
   goalHeader: {
     flexDirection: 'row',
@@ -71,13 +122,11 @@ const styles = StyleSheet.create({
     color: '#001742',
     fontSize: 16,
   },
-  // 진행바
   progressContainer: {
     marginTop: 70,
     position: 'relative',
-    paddingBottom: 20, // ✅ 이미지가 아래로 삐져나가도 잘리지 않게 공간 확보
+    paddingBottom: 20,
     marginHorizontal: 20,
-    // backgroundColor: 'orange',
   },
   progressBarBackground: {
     height: 6,
@@ -89,10 +138,9 @@ const styles = StyleSheet.create({
     height: 6,
     backgroundColor: palette.app_main_color,
   },
-  // 캐릭터
   characterContainer: {
     position: 'absolute',
-    top: -55, // 말풍선과 캐릭터를 위로 띄우기
+    top: -55,
     left: 0,
     right: 0,
   },
@@ -112,6 +160,6 @@ const styles = StyleSheet.create({
   characterImage: {
     width: 40,
     height: 40,
-    resizeMode: 'contain', // ✅ 이미지 비율 유지
+    resizeMode: 'contain',
   },
 });
