@@ -5,19 +5,15 @@ interface TabNavigatorParamList extends ParamListBase {
   Plan: undefined;
   Statistic: undefined;
   MyPage: undefined;
-  Test: undefined;
+  Empty: undefined;
 }
 export interface RootStackParamList extends ParamListBase {
   Tab: NavigatorScreenParams<TabNavigatorParamList>;
-  Home: undefined;
-  Plan: undefined;
-  Timer: undefined;
-  Statistic: undefined;
-  MyPage: undefined;
+  Login: undefined;
   Notification: undefined;
   Test: undefined;
   StudyTimeDetail: undefined;
   SeatReservation: undefined;
   Setting: undefined;
-  LoginScreen: undefined;
+  NotificationSettings: undefined;
 }
