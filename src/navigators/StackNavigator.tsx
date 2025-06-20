@@ -39,6 +39,7 @@ const StackNavigator = () => {
         name="NotificationSettings"
         component={NotificationSettingsScreen}
       />
+      {/* 공지사항 스크린 */}
       <Stack.Screen name="Announcements" component={AnnouncementsScreen} />
     </Stack.Navigator>
   );
