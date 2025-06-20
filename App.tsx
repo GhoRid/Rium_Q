@@ -13,13 +13,13 @@ export default function App() {
   return (
     <SafeAreaProvider>
       <QueryClientProvider client={queryClient}>
-        {isSplashFinished ? (
-          <NavigationContainer>
-            <StackNavigator />
-          </NavigationContainer>
-        ) : (
+        {/* {isSplashFinished ? ( */}
+        <NavigationContainer>
+          <StackNavigator />
+        </NavigationContainer>
+        {/* ) : (
           <SplashScreen onFinish={() => setIsSplashFinished(true)} />
-        )}
+        )} */}
       </QueryClientProvider>
     </SafeAreaProvider>
   );
