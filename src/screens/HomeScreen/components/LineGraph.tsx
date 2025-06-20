@@ -63,8 +63,8 @@ const LineGraph = ({parentWidth}: LineGraphProps) => {
   useEffect(() => {
     Animated.timing(animation, {
       toValue: 1,
-      duration: 2000, //2초동안 그림
-      easing: Easing.ease, // ease-in-out 효과
+      duration: 2000,
+      easing: Easing.ease,
       useNativeDriver: false,
     }).start();
 
@@ -192,7 +192,7 @@ export default LineGraph;
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 20,
+    marginTop: 10,
   },
   row: {
     flexDirection: 'row',

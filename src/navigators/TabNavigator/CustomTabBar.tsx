@@ -25,7 +25,6 @@ const CustomTabBar = ({state, descriptors, navigation}: any) => {
               onPress={() => {
                 navigation.navigate('Timer');
               }}
-              //   style={styles.centerButtonContainer}
               activeOpacity={0.8}>
               <View style={styles.centerButton}>
                 <SvgIcon name="앱로고1" size={32} color="white" />

@@ -1,22 +1,28 @@
-import {View, Text, StyleSheet} from 'react-native';
+import {Text, StyleSheet, TouchableOpacity} from 'react-native';
 import LineGraph from './LineGraph';
 import shadow from '../../../styles/shadow';
 import {useState} from 'react';
+import {NavigationProp, useNavigation} from '@react-navigation/native';
+import {RootStackParamList} from '../../../types/screens';
 
 const StudyReport = () => {
   const [parentWidth, setParentWidth] = useState(0);
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
   return (
-    <View
+    <TouchableOpacity
       style={styles.card}
       onLayout={e => {
         const width = e.nativeEvent.layout.width;
         setParentWidth(width);
+      }}
+      onPress={() => {
+        navigation.navigate('Statistic');
       }}>
       <Text style={styles.cardTitle}>내 학습 리포트</Text>
 
       <LineGraph parentWidth={parentWidth} />
-    </View>
+    </TouchableOpacity>
   );
 };
 export default StudyReport;

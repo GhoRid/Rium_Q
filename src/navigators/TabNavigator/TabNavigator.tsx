@@ -4,19 +4,18 @@ import HomeScreen from '../../screens/HomeScreen/HomeScreen';
 import PlanScreen from '../../screens/PlanScreen/PlanScreen';
 import CustomTabBar from './CustomTabBar';
 import MyPageScreen from '../../screens/MyPageScreen/MyPageScreen';
-import {SafeAreaView, useSafeAreaInsets} from 'react-native-safe-area-context';
+import {SafeAreaView} from 'react-native-safe-area-context';
 import CustomHeader from '../../components/Header/CustomHeader';
 import SvgIcon from '../../components/SvgIcon';
-import TestScreen from '../../screens/TestScreen/TestScreen';
 import {useNavigation, NavigationProp} from '@react-navigation/native';
 import {RootStackParamList} from '../../types/screens';
 import palette from '../../styles/palette';
 import StatisticScreen from '../../screens/StatisticScreen/StatisticScreen';
+import EmptyScreen from '../../screens/EmptyScreen';
 
 const Tab = createBottomTabNavigator();
 
 const TabNavigator = () => {
-  const insets = useSafeAreaInsets();
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
   return (
@@ -62,9 +61,8 @@ const TabNavigator = () => {
         />
         {/* 테스트 스크린 */}
         <Tab.Screen
-          name="Test"
-          navigationKey="Test"
-          component={TestScreen}
+          name="Empty"
+          component={EmptyScreen}
           options={{headerShown: false}}
         />
         {/* 통계 스크린 */}
