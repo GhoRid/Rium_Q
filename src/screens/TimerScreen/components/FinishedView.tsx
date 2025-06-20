@@ -1,6 +1,7 @@
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {Animated, StyleSheet, TouchableOpacity, View, Text} from 'react-native';
 import {RootStackParamList} from '../../../types/screens';
+import palette from '../../../styles/palette';
 
 type FinishedViewProps = {
   animation: Animated.Value;
@@ -18,7 +19,8 @@ const FinishedView = ({animation, blackToWhite}: FinishedViewProps) => {
         </Animated.Text>
       </View>
 
-      <View style={styles.buttonRow}>
+      <View style={{flex: 1}} />
+      <View style={styles.buttonRowBox}>
         <TouchableOpacity
           style={[styles.bottomButton, {backgroundColor: '#F3F4F6'}]}
           onPress={() => navigation.navigate('Tab', {screen: 'Statistic'})}>
@@ -27,8 +29,11 @@ const FinishedView = ({animation, blackToWhite}: FinishedViewProps) => {
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={[styles.bottomButton, {backgroundColor: '#13203A'}]}
-          onPress={() => navigation.goBack()}>
+          style={[
+            styles.bottomButton,
+            {backgroundColor: palette.app_main_color},
+          ]}
+          onPress={() => navigation.navigate('Tab', {screen: 'Home'})}>
           <Text style={[styles.bottomButtonText, {color: '#fff'}]}>홈으로</Text>
         </TouchableOpacity>
       </View>
@@ -43,16 +48,19 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
   },
-  buttonRow: {
+  buttonRowBox: {
     flexDirection: 'row',
     justifyContent: 'space-around',
     marginBottom: 40,
     paddingHorizontal: 20,
+    gap: 10,
   },
   bottomButton: {
-    paddingVertical: 14,
-    paddingHorizontal: 24,
-    borderRadius: 16,
+    flex: 1,
+    borderRadius: 50,
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   bottomButtonText: {
     fontSize: 16,
