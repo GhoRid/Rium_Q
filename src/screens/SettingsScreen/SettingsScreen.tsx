@@ -1,0 +1,108 @@
+import React from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  ScrollView,
+} from 'react-native';
+import {SafeAreaView} from 'react-native-safe-area-context';
+import CustomHeader from '../../components/Header/CustomHeader';
+import BackButtonHeaderLeft from '../../components/Header/BackButtonHeaderLeft';
+import SvgIcon from '../../components/SvgIcon';
+
+const SettingsScreen = () => {
+  return (
+    <SafeAreaView style={styles.container}>
+      <CustomHeader leftItem={<BackButtonHeaderLeft pageName="설정" />} />
+
+      <ScrollView contentContainerStyle={styles.content}>
+        <TouchableOpacity style={styles.item}>
+          <Text style={styles.itemText}>알림 설정</Text>
+          <SvgIcon name="우측방향" size={24} color="#999" />
+        </TouchableOpacity>
+
+        <View style={styles.separator} />
+
+        <TouchableOpacity style={styles.item}>
+          <Text style={styles.itemText}>공지사항</Text>
+          <SvgIcon name="우측방향" size={24} color="#999" />
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.item}>
+          <Text style={styles.itemText}>고객센터</Text>
+          <SvgIcon name="우측방향" size={24} color="#999" />
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.item}>
+          <Text style={styles.itemText}>계정 관리</Text>
+          <SvgIcon name="우측방향" size={24} color="#999" />
+        </TouchableOpacity>
+
+        <View style={styles.separator} />
+
+        <TouchableOpacity style={styles.item}>
+          <Text style={styles.itemText}>서비스 이용 약관</Text>
+          <SvgIcon name="우측방향" size={24} color="#999" />
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.item}>
+          <Text style={styles.itemTextBold}>개인정보 처리 방침</Text>
+          <SvgIcon name="우측방향" size={24} color="#999" />
+        </TouchableOpacity>
+
+        <View style={styles.versionContainer}>
+          <Text style={styles.versionLabel}>앱 버전 정보</Text>
+          <Text style={styles.versionText}>v1.0.0-beta</Text>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
+  );
+};
+
+export default SettingsScreen;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#FFFFFF',
+  },
+  content: {
+    padding: 10,
+  },
+  item: {
+    paddingHorizontal: 20,
+    paddingVertical: 16,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  itemText: {
+    fontSize: 16,
+    color: '#333',
+  },
+  itemTextBold: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#000',
+  },
+  separator: {
+    height: 1,
+    backgroundColor: '#eee',
+    marginVertical: 8,
+  },
+  versionContainer: {
+    paddingHorizontal: 20,
+    paddingVertical: 16,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  versionLabel: {
+    fontSize: 16,
+    color: '#444',
+  },
+  versionText: {
+    fontSize: 14,
+    color: '#bbb',
+  },
+});

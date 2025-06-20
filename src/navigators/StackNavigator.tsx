@@ -10,7 +10,7 @@ import {Text} from 'react-native';
 import BackButtonHeaderLeft from '../components/Header/BackButtonHeaderLeft';
 import StudyTimeDetailScreen from '../screens/StudyTimeDetailScreen/StudyTimeDetailScreen';
 import SeatReservationScreen from '../screens/SeatReservationScreen/SeatReservationScreen';
-import SettingsScreen from '../screens/SettingsScreen';
+import SettingsScreen from '../screens/SettingsScreen/SettingsScreen';
 import LoginScreen from '../screens/LoginScreen/LoginScreen';
 
 const Stack = createNativeStackNavigator();
@@ -21,9 +21,9 @@ const StackNavigator = () => {
   return (
     <Stack.Navigator screenOptions={{headerShown: false}}>
       {/* 탭 스크린(기본) */}
-      <Stack.Screen name="Tab" navigationKey="Tab" component={TabNavigator} />
+      <Stack.Screen name="Tab" component={TabNavigator} />
       {/* 테스트 스크린 */}
-      <Stack.Screen name="Test" component={TestScreen} navigationKey="test" />
+      <Stack.Screen name="Test" component={TestScreen} />
       {/* 알림 스크린 */}
       <Stack.Screen name="Notification" component={NotificationScreen} />
       {/* 개별 학습 시간 스크린 */}

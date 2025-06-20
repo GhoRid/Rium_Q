@@ -6,12 +6,10 @@ const MyPageScreen = () => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   return (
     <View>
-      <Text>Notifications Screen</Text>
-
       <Pressable
         onPress={() => navigation.navigate('Login')}
         style={{
-          backgroundColor: '#orange',
+          backgroundColor: 'orange',
           padding: 30,
           borderRadius: 5,
           marginTop: 20,
