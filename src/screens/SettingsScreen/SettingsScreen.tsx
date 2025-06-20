@@ -25,7 +25,12 @@ const SettingsScreen = () => {
 
   const layer2 = [
     {title: '공지사항', onPress: () => navigation.navigate('Announcements')},
-    {title: '고객센터', onPress: () => {}},
+    {
+      title: '고객센터',
+      onPress: () => {
+        navigation.navigate('CustomerServiceCenter');
+      },
+    },
     {title: '계정 관리', onPress: () => {}},
   ];
 
