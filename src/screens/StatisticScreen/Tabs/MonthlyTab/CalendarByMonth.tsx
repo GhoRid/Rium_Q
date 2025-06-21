@@ -17,6 +17,7 @@ import {
   endOfMonth,
 } from 'date-fns';
 import {scaleLinear} from 'd3-scale';
+import SvgIcon from '../../../../components/SvgIcon';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const PADDING = 10;
@@ -68,6 +69,13 @@ const toTimeStr = (minutes: number) => {
   return `${h}:${m}:00`;
 };
 
+/**
+ * 0이면 숫자 지우고
+ * 폰트 수정 (전체적으로)
+ * 월 올리기
+ *
+ */
+
 const CalendarByMonth = () => {
   const [baseDate, setBaseDate] = useState(new Date(2025, 5, 1));
 
@@ -83,11 +91,11 @@ const CalendarByMonth = () => {
       <View style={styles.calendar}>
         <View style={styles.navRow}>
           <TouchableOpacity onPress={handlePrev}>
-            <Text style={styles.navText}>{'<'}</Text>
+            <SvgIcon name="좌측방향" size={24} color="#000" strokeWidth={2} />
           </TouchableOpacity>
           <Text style={styles.title}>{year}년</Text>
           <TouchableOpacity onPress={handleNext}>
-            <Text style={styles.navText}>{'>'}</Text>
+            <SvgIcon name="우측방향" size={24} color="#000" />
           </TouchableOpacity>
         </View>
 
@@ -96,6 +104,7 @@ const CalendarByMonth = () => {
           {Array.from({length: 12}, (_, idx) => {
             const total = getTotalMinutesOfMonth(year, idx);
             const bgColor = colorScale(total);
+
             const timeStr = toTimeStr(total);
 
             const isSelected = selectedMonth === idx;
@@ -109,7 +118,11 @@ const CalendarByMonth = () => {
                   isSelected && styles.selectedCell,
                 ]}>
                 <Text style={styles.monthLabel}>{idx + 1}월</Text>
-                <Text style={styles.timeText}>{timeStr}</Text>
+                {total <= 0 ? (
+                  <Text style={styles.timeText}> </Text>
+                ) : (
+                  <Text style={styles.timeText}>{timeStr}</Text>
+                )}
               </View>
             );
           })}
@@ -137,7 +150,9 @@ export default CalendarByMonth;
 
 const styles = StyleSheet.create({
   container: {
-    padding: 10,
+    paddingHorizontal: 10,
+    paddingTop: 20,
+
     backgroundColor: 'white',
   },
   calendar: {
@@ -157,7 +172,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 16,
-    fontWeight: '600',
+    fontWeight: '800',
   },
   grid: {
     width: CONTENT_WIDTH,
@@ -169,6 +184,8 @@ const styles = StyleSheet.create({
     height: CELL_SIZE,
     justifyContent: 'center',
     alignItems: 'center',
+    padding: 15,
+    gap: 7,
   },
   selectedCell: {
     borderWidth: 1,
