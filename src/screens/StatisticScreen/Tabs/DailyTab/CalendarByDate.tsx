@@ -112,7 +112,7 @@ const Calendar = () => {
                   style={[styles.dateText, !isCurrentMonth && {color: '#ccc'}]}>
                   {day.getDate()}
                 </Text>
-                {time && (
+                {time ? (
                   <Text
                     style={[
                       styles.timeText,
@@ -120,6 +120,8 @@ const Calendar = () => {
                     ]}>
                     {time}
                   </Text>
+                ) : (
+                  <Text> </Text>
                 )}
               </View>
             );

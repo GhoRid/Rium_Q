@@ -108,7 +108,12 @@ const CalendarByWeek = () => {
                   {backgroundColor: colorScale(totalMinutes)},
                 ]}>
                 <Text style={styles.weekLabel}>{weekLabel}</Text>
-                <Text style={styles.timeText}>{timeStr}</Text>
+
+                {totalMinutes <= 0 ? (
+                  <Text style={styles.timeText}> </Text>
+                ) : (
+                  <Text style={styles.timeText}>{timeStr}</Text>
+                )}
               </View>
             );
           })}
