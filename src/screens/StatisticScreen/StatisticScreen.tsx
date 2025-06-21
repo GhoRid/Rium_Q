@@ -1,6 +1,6 @@
 import {View, StyleSheet, ScrollView} from 'react-native';
 import PeriodSelector from './components/PeriodSelector';
-import {useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import PeriodTab from './Tabs/PeriodTab/PeriodTab';
 import DailyTab from './Tabs/DailyTab/DailyTab';
 import WeeklyTab from './Tabs/WeeklyTab/WeeklyTab';
@@ -11,6 +11,15 @@ type FilterType = (typeof FILTERS)[number];
 
 const StatisticScreen = () => {
   const [selectedPeriod, setSelectedPeriod] = useState<FilterType>('기간');
+  const scrollRef = useRef<ScrollView>(null);
+
+  useEffect(() => {
+    scrollRef.current?.scrollTo({
+      y: 0,
+      animated: false, // 기본적으로 true
+    });
+  }, [selectedPeriod]);
+
   return (
     <View style={styles.container}>
       <PeriodSelector
@@ -18,7 +27,7 @@ const StatisticScreen = () => {
         selectedPeriod={selectedPeriod}
         setSelectedPeriod={setSelectedPeriod}
       />
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <ScrollView showsVerticalScrollIndicator={false} ref={scrollRef}>
         {selectedPeriod === '기간' && <PeriodTab period={selectedPeriod} />}
         {selectedPeriod === '일간' && <DailyTab period={selectedPeriod} />}
         {selectedPeriod === '주간' && <WeeklyTab period={selectedPeriod} />}

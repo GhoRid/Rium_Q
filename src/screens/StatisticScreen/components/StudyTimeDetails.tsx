@@ -64,7 +64,7 @@ const StudyTimeDetails = () => {
         style={styles.list}
       />
       {/* 자연스러운 fade-out */}
-      <LinearGradient
+      {/* <LinearGradient
         colors={[
           'rgba(255,255,255,0)',
           'rgba(255,255,255,0.7)',
@@ -75,7 +75,7 @@ const StudyTimeDetails = () => {
         locations={[0, 0.35, 0.7, 0.92, 1]}
         style={styles.fadedOverlay}
         pointerEvents="none"
-      />
+      /> */}
       {/* 더보기 버튼 */}
       <TouchableOpacity
         style={styles.moreButton}
