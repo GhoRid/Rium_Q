@@ -136,7 +136,9 @@ export default CalendarByWeek;
 
 const styles = StyleSheet.create({
   container: {
-    padding: 10,
+    paddingHorizontal: 10,
+    paddingTop: 20,
+    paddingBottom: 10,
     backgroundColor: 'white',
   },
   calendar: {
