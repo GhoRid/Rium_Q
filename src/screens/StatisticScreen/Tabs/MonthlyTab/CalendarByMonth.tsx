@@ -59,7 +59,6 @@ const getTotalMinutesOfMonth = (year: number, month: number) => {
       total += h * 60 + m;
     }
   }
-
   return total;
 };
 
