@@ -18,10 +18,7 @@ const StatisticScreen = () => {
         selectedPeriod={selectedPeriod}
         setSelectedPeriod={setSelectedPeriod}
       />
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        // contentContainerStyle={styles.contentCotainerStyle}
-      >
+      <ScrollView showsVerticalScrollIndicator={false}>
         {selectedPeriod === '기간' && <PeriodTab period={selectedPeriod} />}
         {selectedPeriod === '일간' && <DailyTab period={selectedPeriod} />}
         {selectedPeriod === '주간' && <WeeklyTab period={selectedPeriod} />}

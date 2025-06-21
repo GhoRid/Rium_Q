@@ -15,7 +15,7 @@ const StudyTimeSummaryBox = ({period, data}: StudyTimeSummaryBoxProps) => {
     <View style={styles.container}>
       {/* 날짜 정보 */}
       {period === '기간' ? (
-        <View style={styles.header}>
+        <View style={[styles.header, {justifyContent: 'space-between'}]}>
           <Text style={styles.periodLabel}>지난 28일</Text>
           <View style={styles.dateRangeContainer}>
             <Text style={styles.dateRangeText}>5/15 ~ 6/11</Text>
@@ -23,7 +23,7 @@ const StudyTimeSummaryBox = ({period, data}: StudyTimeSummaryBoxProps) => {
           </View>
         </View>
       ) : (
-        <View style={styles.header}>
+        <View style={[styles.header, {justifyContent: 'center'}]}>
           <Text style={styles.periodLabel}>6월 15일(일)</Text>
         </View>
       )}
@@ -57,6 +57,7 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+
     alignItems: 'center',
     paddingHorizontal: 10,
   },
