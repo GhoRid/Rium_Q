@@ -1,5 +1,5 @@
-import React from 'react';
-import {View, StyleSheet, Dimensions} from 'react-native';
+import React, {useRef, useEffect, useState} from 'react';
+import {View, StyleSheet, Dimensions, Animated} from 'react-native';
 import Svg, {
   Path,
   Defs,
@@ -19,7 +19,7 @@ const {width} = Dimensions.get('window');
 const CHART_HEIGHT = 220;
 const LEFT_PADDING = 40;
 const RIGHT_PADDING = 20;
-const TOP_OFFSET = 16; // ✅ 위쪽 여백
+const TOP_OFFSET = 16;
 const TICK_COUNT = 6;
 
 const LineGraph = ({data}: LineGraphProps) => {
@@ -30,29 +30,52 @@ const LineGraph = ({data}: LineGraphProps) => {
 
   const y = scale.scaleLinear().domain([0, 60]).range([CHART_HEIGHT, 0]);
 
-  const area = shape
-    .area<{hour: number; value: number}>()
-    .x((_, i) => x(i))
-    .y0(() => y(0))
-    .y1(d => y(d.value))
-    .curve(shape.curveMonotoneX)(data);
-
-  const line = shape
-    .line<{hour: number; value: number}>()
-    .x((_, i) => x(i))
-    .y(d => y(d.value))
-    .curve(shape.curveMonotoneX)(data);
-
   const yTicks = y.ticks(TICK_COUNT);
   const xLabels = data.map((d, i) => ({
     label: d.hour.toString(),
     x: x(i),
   }));
 
+  const animatedValue = useRef(new Animated.Value(0)).current;
+  const [animatedPath, setAnimatedPath] = useState('');
+  const [animatedArea, setAnimatedArea] = useState('');
+
+  useEffect(() => {
+    const id = animatedValue.addListener(({value}) => {
+      const interpolated = data.map(d => ({
+        ...d,
+        value: d.value * value,
+      }));
+
+      const line = shape
+        .line<{hour: number; value: number}>()
+        .x((_, i) => x(i))
+        .y(d => y(d.value))
+        .curve(shape.curveMonotoneX)(interpolated);
+
+      const area = shape
+        .area<{hour: number; value: number}>()
+        .x((_, i) => x(i))
+        .y0(() => y(0))
+        .y1(d => y(d.value))
+        .curve(shape.curveMonotoneX)(interpolated);
+
+      setAnimatedPath(line || '');
+      setAnimatedArea(area || '');
+    });
+
+    Animated.timing(animatedValue, {
+      toValue: 1,
+      duration: 1000,
+      useNativeDriver: false, // 꼭 false!
+    }).start();
+
+    return () => animatedValue.removeListener(id);
+  }, [data]);
+
   return (
     <View style={styles.container}>
       <Svg width={width} height={CHART_HEIGHT + TOP_OFFSET + 20}>
-        {/* 수평 가이드선 + Y축 숫자 */}
         {yTicks.map((tick, index) => (
           <React.Fragment key={`y-tick-${index}`}>
             <Line
@@ -74,7 +97,6 @@ const LineGraph = ({data}: LineGraphProps) => {
           </React.Fragment>
         ))}
 
-        {/* 단위 텍스트 */}
         <SvgText
           x={RIGHT_PADDING}
           y={y(yTicks[6]) + TOP_OFFSET - 8}
@@ -83,27 +105,28 @@ const LineGraph = ({data}: LineGraphProps) => {
           (분)
         </SvgText>
 
-        {/* 면 채움 영역 */}
         <Defs>
           <LinearGradient id="grad" x1="0" y1="0" x2="0" y2="1">
             <Stop offset="0%" stopColor="#007BFF" stopOpacity={0.25} />
             <Stop offset="100%" stopColor="#007BFF" stopOpacity={0} />
           </LinearGradient>
         </Defs>
+
+        {/* 애니메이션 영역 */}
         <Path
-          d={area!}
+          d={animatedArea}
           fill="url(#grad)"
           transform={`translate(0, ${TOP_OFFSET})`}
         />
         <Path
-          d={line!}
-          fill="none"
+          d={animatedPath}
           stroke="#007BFF"
           strokeWidth={2}
+          fill="none"
           transform={`translate(0, ${TOP_OFFSET})`}
         />
 
-        {/* X축 시간 라벨 */}
+        {/* X축 라벨 */}
         {xLabels.map(({label, x}, i) => (
           <SvgText
             key={`x-label-${i}`}
