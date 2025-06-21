@@ -20,6 +20,7 @@ import {
   isSameMonth,
 } from 'date-fns';
 import {scaleLinear} from 'd3-scale';
+import SvgIcon from '../../../../components/SvgIcon';
 
 const DAYS = ['일', '월', '화', '수', '목', '금', '토'];
 const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -76,11 +77,11 @@ const Calendar = () => {
         {/* 상단 네비게이션 */}
         <View style={styles.navRow}>
           <TouchableOpacity onPress={handlePrevMonth}>
-            <Text style={styles.navText}>{'<'}</Text>
+            <SvgIcon name="좌측방향" size={24} color="#000" />
           </TouchableOpacity>
           <Text style={styles.title}>{`${year}년 ${month}월`}</Text>
           <TouchableOpacity onPress={handleNextMonth}>
-            <Text style={styles.navText}>{'>'}</Text>
+            <SvgIcon name="우측방향" size={24} color="#000" />
           </TouchableOpacity>
         </View>
 

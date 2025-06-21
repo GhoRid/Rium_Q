@@ -14,6 +14,7 @@ import {
   subWeeks,
 } from 'date-fns';
 import {scaleLinear} from 'd3-scale';
+import SvgIcon from '../../../../components/SvgIcon';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const PADDING = 10;
@@ -84,11 +85,11 @@ const CalendarByWeek = () => {
       <View style={styles.calendar}>
         <View style={styles.navRow}>
           <TouchableOpacity onPress={handlePrev}>
-            <Text style={styles.navText}>{'<'}</Text>
+            <SvgIcon name="좌측방향" size={24} color="#000" />
           </TouchableOpacity>
           <Text style={styles.title}>2025년 2분기</Text>
           <TouchableOpacity onPress={handleNext}>
-            <Text style={styles.navText}>{'>'}</Text>
+            <SvgIcon name="우측방향" size={24} color="#000" />
           </TouchableOpacity>
         </View>
 

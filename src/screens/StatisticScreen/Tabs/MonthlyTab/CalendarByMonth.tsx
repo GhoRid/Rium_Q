@@ -91,7 +91,7 @@ const CalendarByMonth = () => {
       <View style={styles.calendar}>
         <View style={styles.navRow}>
           <TouchableOpacity onPress={handlePrev}>
-            <SvgIcon name="좌측방향" size={24} color="#000" strokeWidth={2} />
+            <SvgIcon name="좌측방향" size={24} color="#000" />
           </TouchableOpacity>
           <Text style={styles.title}>{year}년</Text>
           <TouchableOpacity onPress={handleNext}>
@@ -152,7 +152,7 @@ const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 10,
     paddingTop: 20,
-
+    paddingBottom: 10,
     backgroundColor: 'white',
   },
   calendar: {
