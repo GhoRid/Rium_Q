@@ -20,7 +20,7 @@ const BackButtonHeaderLeft = ({
       <TouchableOpacity
         style={styles.backButtonBox}
         onPress={onPressBackBtn ? onPressBackBtn : () => navigation.goBack()}>
-        <SvgIcon name="좌측방향" size={24} color="black" />
+        <SvgIcon name="좌측방향" size={30} color="#BDBDBD" strokeWidth={3} />
       </TouchableOpacity>
       {pageName && <Text style={styles.text}>{pageName}</Text>}
     </View>
