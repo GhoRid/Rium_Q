@@ -5,7 +5,7 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import CustomHeader from '../../components/Header/CustomHeader';
 import BackButtonHeaderLeft from '../../components/Header/BackButtonHeaderLeft';
 
-const EditInfoScreen = () => {
+const EditMyInfoScreen = () => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   return (
     <SafeAreaView style={styles.contianer}>
@@ -23,7 +23,7 @@ const EditInfoScreen = () => {
     </SafeAreaView>
   );
 };
-export default EditInfoScreen;
+export default EditMyInfoScreen;
 
 const styles = StyleSheet.create({
   contianer: {
