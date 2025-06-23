@@ -19,7 +19,9 @@ const NotificationSettingsScreen = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <CustomHeader leftItem={<BackButtonHeaderLeft pageName="알림 설정" />} />
+      <CustomHeader
+        leftItem={<BackButtonHeaderLeft screenName="알림 설정" />}
+      />
 
       <View style={styles.content}>
         <SettingRow

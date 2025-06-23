@@ -34,7 +34,7 @@ const SettingsScreen = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <CustomHeader leftItem={<BackButtonHeaderLeft pageName="설정" />} />
+      <CustomHeader leftItem={<BackButtonHeaderLeft screenName="설정" />} />
 
       <ScrollView contentContainerStyle={styles.content}>
         {layer1.map((item, index) => (

@@ -6,7 +6,7 @@ import BackButtonHeaderLeft from '../../components/Header/BackButtonHeaderLeft';
 const CustomerServiceCenterScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
-      <CustomHeader leftItem={<BackButtonHeaderLeft pageName="고객센터" />} />
+      <CustomHeader leftItem={<BackButtonHeaderLeft screenName="고객센터" />} />
     </SafeAreaView>
   );
 };

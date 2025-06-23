@@ -68,7 +68,7 @@ const NotificationScreen = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <CustomHeader leftItem={<BackButtonHeaderLeft pageName="알림" />} />
+      <CustomHeader leftItem={<BackButtonHeaderLeft screenName="알림" />} />
       <Filter
         filter={FILTERS}
         selectedTag={selectedFilter}

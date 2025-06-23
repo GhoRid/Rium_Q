@@ -5,12 +5,12 @@ import SvgIcon from '../SvgIcon';
 
 type BackButtonHeaderLeftProps = {
   onPressBackBtn?: () => void;
-  pageName?: string;
+  screenName?: string;
 };
 
 const BackButtonHeaderLeft = ({
   onPressBackBtn,
-  pageName,
+  screenName,
 }: BackButtonHeaderLeftProps) => {
   const isAndroid = Platform.OS === 'android';
   const navigation = useNavigation();
@@ -22,7 +22,7 @@ const BackButtonHeaderLeft = ({
         onPress={onPressBackBtn ? onPressBackBtn : () => navigation.goBack()}>
         <SvgIcon name="좌측방향" size={30} color="#BDBDBD" strokeWidth={3} />
       </TouchableOpacity>
-      {pageName && <Text style={styles.text}>{pageName}</Text>}
+      {screenName && <Text style={styles.text}>{screenName}</Text>}
     </View>
   );
 };

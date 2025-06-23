@@ -39,7 +39,7 @@ const StudyTimeDetailScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
       <CustomHeader
-        leftItem={<BackButtonHeaderLeft pageName="개별 학습 시간" />}
+        leftItem={<BackButtonHeaderLeft screenName="개별 학습 시간" />}
       />
       <View style={styles.contentContainer}>
         <Text style={styles.sectionTitle}></Text>

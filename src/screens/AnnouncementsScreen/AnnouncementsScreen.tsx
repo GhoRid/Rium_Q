@@ -6,7 +6,7 @@ import BackButtonHeaderLeft from '../../components/Header/BackButtonHeaderLeft';
 const AnnouncementsScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
-      <CustomHeader leftItem={<BackButtonHeaderLeft pageName="공지사항" />} />
+      <CustomHeader leftItem={<BackButtonHeaderLeft screenName="공지사항" />} />
     </SafeAreaView>
   );
 };
