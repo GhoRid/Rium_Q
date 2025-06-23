@@ -1,65 +1,97 @@
-import {Pressable, ScrollView, StyleSheet, Text, View} from 'react-native';
 import React, {useState} from 'react';
+import {View, Text, StyleSheet, ScrollView, Pressable} from 'react-native';
 import {
   login,
   logout,
   getProfile as getKakaoProfile,
 } from '@react-native-seoul/kakao-login';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {useQuery} from '@tanstack/react-query';
+import {kakaoLogin} from '../../apis/api/user';
 
 const PlanScreen = () => {
-  const [result, setResult] = useState('');
+  const [resultText, setResultText] = useState('');
+  const [storedToken, setStoredToken] = useState('');
 
-  const signInWithKakao = async () => {
-    // 카카오 계정 로그인 기능
+  const {data, refetch} = useQuery({
+    queryKey: ['kakaoLogin'],
+    queryFn: () => {
+      const parsed = JSON.parse(resultText);
+      return kakaoLogin({code: parsed.accessToken});
+    },
+    enabled: false,
+  });
+
+  // console.log('백엔등', data);
+  if (data) {
+    AsyncStorage.setItem('token', JSON.stringify(data));
+  }
+
+  const handleKakaoLogin = async () => {
     try {
       const token = await login();
-      setResult(JSON.stringify(token));
+      setResultText(JSON.stringify(token, null, 2));
     } catch (err) {
-      console.error('login err', err);
+      console.error('카카오 로그인 실패:', err);
     }
   };
 
-  const signOutWithKakao = async () => {
-    // 카카오 계정 로그아웃 기능
+  const handleLogout = async () => {
     try {
       const message = await logout();
-      setResult(message);
+      setResultText(message);
     } catch (err) {
-      console.error('signOut error', err);
+      console.error('로그아웃 실패:', err);
     }
   };
 
-  const getProfile = async () => {
-    // 카카오계정 프로필정보 불러오기
+  const handleProfile = async () => {
     try {
       const profile = await getKakaoProfile();
-      setResult(JSON.stringify(profile));
+      setResultText(JSON.stringify(profile, null, 2));
     } catch (err) {
-      console.error('signOut error', err);
+      console.error('프로필 조회 실패:', err);
     }
+  };
+
+  const handleStorageRead = async () => {
+    const token = await AsyncStorage.getItem('token');
+    if (token) setStoredToken(token);
   };
 
   return (
     <View style={styles.container}>
       <View style={styles.resultContainer}>
         <ScrollView>
-          <Text>{result}</Text>
-          <View style={{height: 100}} />
+          <Text selectable>{resultText}</Text>
         </ScrollView>
       </View>
-      <Pressable
-        style={styles.button}
-        onPress={() => {
-          signInWithKakao();
-        }}>
+
+      <Pressable style={styles.button} onPress={handleKakaoLogin}>
         <Text style={styles.text}>카카오 로그인</Text>
       </Pressable>
-      <Pressable style={styles.button} onPress={() => getProfile()}>
+
+      <Pressable style={styles.button} onPress={handleProfile}>
         <Text style={styles.text}>프로필 조회</Text>
       </Pressable>
-      <Pressable style={styles.button} onPress={() => signOutWithKakao()}>
+
+      <Pressable style={styles.button} onPress={handleLogout}>
         <Text style={styles.text}>카카오 로그아웃</Text>
       </Pressable>
+
+      <Pressable style={styles.button} onPress={() => refetch()}>
+        <Text style={styles.text}>백엔드 조회</Text>
+      </Pressable>
+
+      <Pressable style={styles.button} onPress={handleStorageRead}>
+        <Text style={styles.text}>AsyncStorage 조회</Text>
+      </Pressable>
+
+      {storedToken !== '' && (
+        <View style={styles.resultContainer}>
+          <Text selectable>{storedToken}</Text>
+        </View>
+      )}
     </View>
   );
 };
@@ -68,10 +100,9 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: 'flex-end',
     alignItems: 'center',
-    paddingBottom: 100,
+    paddingBottom: 40,
   },
   resultContainer: {
-    flexDirection: 'column',
     width: '100%',
     padding: 24,
   },
@@ -81,12 +112,12 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     width: 250,
     height: 40,
-    paddingHorizontal: 20,
-    paddingVertical: 10,
+    justifyContent: 'center',
     marginTop: 10,
   },
   text: {
     textAlign: 'center',
+    fontWeight: '600',
   },
 });
 

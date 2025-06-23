@@ -1,11 +1,6 @@
 // hooks/usePhotoPermission.ts
 import {Platform, Alert, Linking} from 'react-native';
-import {
-  PERMISSIONS,
-  request,
-  RESULTS,
-  openSettings,
-} from 'react-native-permissions';
+import {PERMISSIONS, request, RESULTS} from 'react-native-permissions';
 import {launchImageLibrary} from 'react-native-image-picker';
 
 export const usePhotoPermission = () => {
@@ -23,11 +18,11 @@ export const usePhotoPermission = () => {
     ) {
       const res = await launchImageLibrary({
         mediaType: 'photo',
-        selectionLimit: 1,
+        // selectionLimit: 1,
       });
 
       if (res.didCancel) return null;
-      if (res.assets && res.assets.length > 0) return res.assets[0].uri ?? null;
+      if (res.assets && res.assets.length > 0) return res.assets[0].uri ?? null; // 이미지 선택시 이미지 return
       return null;
     }
 

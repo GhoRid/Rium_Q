@@ -1,3 +1,4 @@
+[media pointer="file-service://file-BRjC9445g5SHCQzkoqn7Hg"]
 import React, {useEffect, useRef, useState} from 'react';
 import {View, StyleSheet, Text, Animated, Easing} from 'react-native';
 import Svg, {
@@ -5,9 +6,9 @@ import Svg, {
   Defs,
   LinearGradient,
   Stop,
+  Circle,
   ClipPath,
   Rect,
-  Circle,
 } from 'react-native-svg';
 import * as shape from 'd3-shape';
 import * as d3 from 'd3-scale';
@@ -19,7 +20,7 @@ type DataPoint = {
 
 const CHART_HEIGHT = 100;
 const PADDING = 20;
-const INTERVAL = 6000;
+const INTERVAL = 6000; // 6초마다 리셋
 const DATA_COUNT = 6;
 
 type LineGraphProps = {
@@ -28,7 +29,6 @@ type LineGraphProps = {
 
 const AnimatedPath = Animated.createAnimatedComponent(Path);
 const AnimatedRect = Animated.createAnimatedComponent(Rect);
-const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 
 const generateRandomData = (): DataPoint[] => {
   const now = new Date();
@@ -45,17 +45,48 @@ const generateRandomData = (): DataPoint[] => {
 const LineGraph = ({parentWidth}: LineGraphProps) => {
   const [data, setData] = useState<DataPoint[]>(generateRandomData());
   const [pathLength, setPathLength] = useState(0);
-  const [isReady, setIsReady] = useState(false);
-
+  const [circlePos, setCirclePos] = useState({cx: 0, cy: 0});
   const animation = useRef(new Animated.Value(0)).current;
   const pathRef = useRef<any>(null);
-  const pathNodeRef = useRef<any>(null);
 
-  const animatedCX = useRef(new Animated.Value(0)).current;
-  const animatedCY = useRef(new Animated.Value(0)).current;
+  const maxValue = Math.max(...data.map(d => d.value)) * 1.1;
+
+  useEffect(() => {
+    const loop = setInterval(() => {
+      const next = generateRandomData();
+      animation.setValue(0);
+      setData(next);
+    }, INTERVAL);
+
+    return () => clearInterval(loop);
+  }, []);
+
+  useEffect(() => {
+    Animated.timing(animation, {
+      toValue: 1,
+      duration: 2000,
+      easing: Easing.ease,
+      useNativeDriver: false,
+    }).start();
+
+    const id = animation.addListener(({value}) => {
+      if (pathRef.current && pathLength > 0) {
+        try {
+          const currentLength = pathLength * value;
+          const point = pathRef.current.getPointAtLength(currentLength);
+          setCirclePos({cx: point.x, cy: point.y});
+        } catch (e) {}
+      }
+    });
+
+    return () => {
+      animation.removeListener(id);
+    };
+  }, [pathLength, data]);
+
+  if (parentWidth === 0) return null;
 
   const chartWidth = parentWidth - PADDING * 2 - 20;
-  const maxValue = Math.max(...data.map(d => d.value)) * 1.1;
 
   const extendedData = [
     {date: '시작', value: data[0].value},
@@ -93,84 +124,6 @@ const LineGraph = ({parentWidth}: LineGraphProps) => {
     outputRange: [0, chartWidth],
   });
 
-  // ✅ 데이터 자동 갱신
-  useEffect(() => {
-    const loop = setInterval(() => {
-      animation.setValue(0);
-      setIsReady(false);
-      setData(generateRandomData());
-    }, INTERVAL);
-    return () => clearInterval(loop);
-  }, []);
-
-  // ✅ pathRef 연결 후 getTotalLength 보장
-  useEffect(() => {
-    let attempts = 0;
-    let retryTimeout: ReturnType<typeof setTimeout>;
-
-    const checkPathReady = () => {
-      retryTimeout = setTimeout(() => {
-        try {
-          const ref = pathRef.current;
-
-          // console.log(ref && typeof ref.getNode === 'function');
-          if (ref && typeof ref.getNode === 'function') {
-            const node = ref.getNode();
-            const length = node?.getTotalLength?.();
-            if (length && length > 0) {
-              pathNodeRef.current = node;
-              setPathLength(length);
-              setIsReady(true);
-              // console.log('✅ path 연결 및 길이 준비 완료:', length);
-              return;
-            }
-          }
-        } catch (e) {
-          // console.warn('❌ getTotalLength 실패:', e);
-        }
-
-        // 재시도
-        attempts++;
-        if (attempts < 10) {
-          checkPathReady();
-        } else {
-          // console.warn('❌ 10회 재시도 후 getTotalLength 실패');
-        }
-      }, 100);
-    };
-
-    checkPathReady();
-
-    return () => clearTimeout(retryTimeout);
-  }, [linePath]);
-
-  // ✅ 원 애니메이션
-  useEffect(() => {
-    const id = animation.addListener(({value}) => {
-      if (!isReady || !pathNodeRef.current || pathLength <= 0) return;
-      try {
-        const point = pathNodeRef.current.getPointAtLength(pathLength * value);
-        animatedCX.setValue(point.x);
-        animatedCY.setValue(point.y);
-      } catch (e) {
-        // console.warn('❌ getPointAtLength 에러:', e);
-      }
-    });
-    return () => animation.removeListener(id);
-  }, [isReady, pathLength]);
-
-  // ✅ 그래프 생성 애니메이션
-  useEffect(() => {
-    Animated.timing(animation, {
-      toValue: 1,
-      duration: 2000,
-      easing: Easing.ease,
-      useNativeDriver: false,
-    }).start();
-  }, [data]);
-
-  if (parentWidth === 0) return null;
-
   return (
     <View style={styles.container}>
       <View style={styles.row}>
@@ -182,7 +135,7 @@ const LineGraph = ({parentWidth}: LineGraphProps) => {
           ))}
         </View>
 
-        <Svg width={chartWidth + 10} height={CHART_HEIGHT + 40}>
+        <Svg width={chartWidth + 10} height={CHART_HEIGHT + 20}>
           <Defs>
             <LinearGradient id="grad" x1="0" y1="0" x2="0" y2="0.9">
               <Stop offset="0" stopColor="#1C2E4A" stopOpacity="0.5" />
@@ -202,7 +155,15 @@ const LineGraph = ({parentWidth}: LineGraphProps) => {
 
           <AnimatedPath
             ref={ref => {
-              if (ref) pathRef.current = ref;
+              if (ref) {
+                requestAnimationFrame(() => {
+                  try {
+                    const length = (ref as any).getTotalLength();
+                    setPathLength(length);
+                    pathRef.current = ref;
+                  } catch (e) {}
+                });
+              }
             }}
             d={linePath}
             stroke="#1C2E4A"
@@ -210,18 +171,18 @@ const LineGraph = ({parentWidth}: LineGraphProps) => {
             fill="none"
             strokeDasharray={pathLength}
             strokeDashoffset={strokeDashoffset}
-            clipPath="url(#clipPath)"
           />
 
-          <AnimatedCircle
-            r={8}
-            stroke="#ccc"
-            strokeWidth={1.5}
-            fill="white"
-            cx={animatedCX}
-            cy={animatedCY}
-            // opacity={isReady ? 1 : 0}
-          />
+          {pathLength > 0 && (
+            <Circle
+              r={8}
+              stroke="#ccc"
+              strokeWidth={1.5}
+              fill="white"
+              cx={circlePos.cx}
+              cy={circlePos.cy}
+            />
+          )}
         </Svg>
       </View>
     </View>
