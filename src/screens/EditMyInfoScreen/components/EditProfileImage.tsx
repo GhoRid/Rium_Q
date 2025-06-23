@@ -1,17 +1,29 @@
-import {StyleSheet, TouchableOpacity, View, Text} from 'react-native';
+// components/EditProfileImage.tsx
+
+import React from 'react';
+import {StyleSheet, TouchableOpacity, View, Text, Image} from 'react-native';
 import SvgIcon from '../../../components/SvgIcon';
 import palette from '../../../styles/palette';
 
 const AVATAR_SIZE = 85;
 
-const EditProfileImage = () => {
+type Props = {
+  imageUri: string | null;
+  onPress: () => void;
+};
+
+const EditProfileImage = ({imageUri, onPress}: Props) => {
   return (
     <View style={styles.profileSection}>
       <View style={styles.avatarContainer}>
         <View style={styles.avatarCircle}>
-          <SvgIcon name="기본프로필" size={85} />
+          {imageUri ? (
+            <Image source={{uri: imageUri}} style={styles.image} />
+          ) : (
+            <SvgIcon name="기본프로필" size={AVATAR_SIZE} />
+          )}
         </View>
-        <TouchableOpacity style={styles.refreshButton}>
+        <TouchableOpacity style={styles.refreshButton} onPress={onPress}>
           <SvgIcon name="새로고침" size={15} color="white" />
         </TouchableOpacity>
       </View>
@@ -42,9 +54,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderWidth: 3,
     borderColor: palette.app_main_color,
+    overflow: 'hidden',
   },
-  emoji: {
-    fontSize: 40,
+  image: {
+    width: AVATAR_SIZE,
+    height: AVATAR_SIZE,
+    borderRadius: AVATAR_SIZE / 2,
   },
   refreshButton: {
     position: 'absolute',
@@ -56,10 +71,6 @@ const styles = StyleSheet.create({
     height: 30,
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  refreshIcon: {
-    color: '#fff',
-    fontSize: 16,
   },
   nameText: {
     fontSize: 20,

@@ -26,6 +26,7 @@
     "react": "19.0.0",
     "react-native": "0.79.2",
     "react-native-bootsplash": "^6.3.8",
+    "react-native-image-picker": "^8.2.1",
     "react-native-linear-gradient": "^2.8.3",
     "react-native-pager-view": "^6.8.0",
     "react-native-permissions": "^5.4.1",
