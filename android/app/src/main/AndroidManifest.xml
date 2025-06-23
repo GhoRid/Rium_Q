@@ -1,6 +1,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
+
+    <!-- 앱 권한 목록 -->
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application
       android:name=".MainApplication"
@@ -23,17 +27,17 @@
         </intent-filter>
       </activity>
       <activity
-   android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
-   android:exported="true">
-  <intent-filter>
-      <action android:name="android.intent.action.VIEW" />
-      <category android:name="android.intent.category.DEFAULT" />
-      <category android:name="android.intent.category.BROWSABLE" />
+        android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
+        android:exported="true">
+        <intent-filter>
+          <action android:name="android.intent.action.VIEW" />
+          <category android:name="android.intent.category.DEFAULT" />
+          <category android:name="android.intent.category.BROWSABLE" />
 
-      <!-- Redirect URI: "kakao{NATIVE_APP_KEY}://oauth“ -->
-      <data android:host="oauth"
-          android:scheme="kakao62fa79a297dfad621a53d433f29e9bf2" />
-  </intent-filter>
-</activity>
+          <!-- Redirect URI: "kakao{NATIVE_APP_KEY}://oauth“ -->
+          <data android:host="oauth"
+            android:scheme="kakao62fa79a297dfad621a53d433f29e9bf2" />
+        </intent-filter>
+      </activity>
     </application>
 </manifest>
