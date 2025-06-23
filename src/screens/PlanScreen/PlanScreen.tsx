@@ -6,31 +6,16 @@ import {
   getProfile as getKakaoProfile,
 } from '@react-native-seoul/kakao-login';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {useQuery} from '@tanstack/react-query';
-import {kakaoLogin} from '../../apis/api/user';
+import {signInWithKakaoAndSave} from '../../services/auth/kakao';
 
 const PlanScreen = () => {
   const [resultText, setResultText] = useState('');
   const [storedToken, setStoredToken] = useState('');
 
-  const {data, refetch} = useQuery({
-    queryKey: ['kakaoLogin'],
-    queryFn: () => {
-      const parsed = JSON.parse(resultText);
-      return kakaoLogin({code: parsed.accessToken});
-    },
-    enabled: false,
-  });
-
-  // console.log('백엔등', data);
-  if (data) {
-    AsyncStorage.setItem('token', JSON.stringify(data));
-  }
-
   const handleKakaoLogin = async () => {
     try {
-      const token = await login();
-      setResultText(JSON.stringify(token, null, 2));
+      const data = await signInWithKakaoAndSave();
+      setResultText(JSON.stringify(data, null, 2));
     } catch (err) {
       console.error('카카오 로그인 실패:', err);
     }
@@ -60,7 +45,7 @@ const PlanScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <ScrollView>
       <View style={styles.resultContainer}>
         <ScrollView>
           <Text selectable>{resultText}</Text>
@@ -79,10 +64,6 @@ const PlanScreen = () => {
         <Text style={styles.text}>카카오 로그아웃</Text>
       </Pressable>
 
-      <Pressable style={styles.button} onPress={() => refetch()}>
-        <Text style={styles.text}>백엔드 조회</Text>
-      </Pressable>
-
       <Pressable style={styles.button} onPress={handleStorageRead}>
         <Text style={styles.text}>AsyncStorage 조회</Text>
       </Pressable>
@@ -92,7 +73,7 @@ const PlanScreen = () => {
           <Text selectable>{storedToken}</Text>
         </View>
       )}
-    </View>
+    </ScrollView>
   );
 };
 

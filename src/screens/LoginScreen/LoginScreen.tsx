@@ -3,30 +3,40 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import LoginButton from './components/LoginButton';
 import SvgIcon from '../../components/SvgIcon';
 import SignUpBox from './components/SignUpBox';
-import {login as kakaoLogin} from '@react-native-seoul/kakao-login';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
+import {signInWithKakaoAndSave} from '../../services/auth/kakao';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const LoginScreen = () => {
-  const [result, setResult] = useState('');
+  const [resultText, setResultText] = useState<string>('');
 
-  const signInWithKakao = async () => {
-    // 카카오 계정 로그인 기능
+  const handleKakaoLogin = async () => {
     try {
-      const token = await kakaoLogin();
-      setResult(JSON.stringify(token));
+      const data = await signInWithKakaoAndSave();
+      setResultText(JSON.stringify(data, null, 2));
     } catch (err) {
-      console.log('login err', err);
+      console.error('카카오 로그인 실패:', err);
       Alert.alert(
         '로그인 실패',
-        '카카오 계정 로그인이 실패했습니다. \n다시 시도해주세요.',
+        '카카오 로그인에 실패했습니다.\n다시 시도해주세요.',
       );
     }
   };
 
+  useEffect(() => {
+    const saveTokens = async () => {
+      if (resultText) {
+        Alert.alert('로그인 결과', resultText);
+        const parsedResult = JSON.parse(resultText);
+        await AsyncStorage.setItem('accessToken', parsedResult.jwt);
+        await AsyncStorage.setItem('refreshToken', parsedResult.refreshToken);
+      }
+    };
+    saveTokens();
+  }, [resultText]);
+
   return (
     <SafeAreaView style={styles.container}>
-      {/* <CustomHeader leftItem={<BackButtonHeaderLeft />} /> */}
-
       <View style={{flex: 1}} />
 
       <View style={styles.logoBox}>
@@ -41,7 +51,7 @@ const LoginScreen = () => {
           backgroundColor="#FEE500"
           textColor="#000"
           iconName="카카오로그인"
-          onPress={signInWithKakao}
+          onPress={handleKakaoLogin}
         />
         <LoginButton
           text="애플 로그인"
