@@ -16,4 +16,5 @@ export interface RootStackParamList extends ParamListBase {
   SeatReservation: undefined;
   Setting: undefined;
   NotificationSettings: undefined;
+  EditMyInfo: undefined;
 }

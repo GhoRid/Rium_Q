@@ -10,7 +10,7 @@ const UserProfile = () => {
     <TouchableOpacity
       style={styles.profileCard}
       onPress={() => {
-        // navigation.navigate('EditMyInfo')
+        navigation.navigate('EditMyInfo');
       }}>
       <View style={styles.profileRow}>
         <View style={styles.profileRowLeft}>

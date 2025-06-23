@@ -11,6 +11,7 @@ import LoginScreen from '../screens/LoginScreen/LoginScreen';
 import NotificationSettingsScreen from '../screens/NotificationSettingsScreen/NotificationSettingsScreen';
 import AnnouncementsScreen from '../screens/AnnouncementsScreen/AnnouncementsScreen';
 import CustomerServiceCenterScreen from '../screens/CustomerServiceCenterScreen/CustomerServiceCenterScreen';
+import EditMyInfoScreen from '../screens/EditMyInfoScreen/EditMyInfoScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -21,6 +22,8 @@ const StackNavigator = () => {
     <Stack.Navigator screenOptions={{headerShown: false}}>
       {/* 탭 스크린(기본) */}
       <Stack.Screen name="Tab" component={TabNavigator} />
+      {/* 로그인 진입 페이지 */}
+      <Stack.Screen name="Login" component={LoginScreen} />
       {/* 테스트 스크린 */}
       <Stack.Screen name="Test" component={TestScreen} />
       {/* 알림 스크린 */}
@@ -31,8 +34,8 @@ const StackNavigator = () => {
       <Stack.Screen name="SeatReservation" component={SeatReservationScreen} />
       {/* 타이머 스크린 */}
       <Stack.Screen name="Timer" component={TimerScreen} />
-      {/* 로그인 진입 페이지 */}
-      <Stack.Screen name="Login" component={LoginScreen} />
+      {/* 내 정보 수정 스크린 */}
+      <Stack.Screen name="EditMyInfo" component={EditMyInfoScreen} />
       {/* 설정 스크린 */}
       <Stack.Screen name="Setting" component={SettingsScreen} />
       {/* 알림 설정 스크린 */}
