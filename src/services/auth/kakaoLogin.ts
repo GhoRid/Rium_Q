@@ -8,13 +8,12 @@ export const signInWithKakaoAndSave = async () => {
     // 1. 카카오 SDK 로그인
     const {accessToken} = await kakaoLoginSDK();
 
-    console.log('카카오 로그인 성공:', accessToken);
-
     // 2. 백엔드에 accessToken 전달
     const backendResponse = await backendKakaoLogin({code: accessToken});
 
     // 3. AsyncStorage에 저장
     await AsyncStorage.setItem('token', JSON.stringify(backendResponse.jwt));
+    console.log('JWT 저장 완료:', JSON.stringify(backendResponse.jwt));
     await AsyncStorage.setItem(
       'refreshToken',
       JSON.stringify(backendResponse.refreshToken),

@@ -14,7 +14,7 @@ const MyPageScreen = () => {
         menuList={['선호 학습 시간', '학원 관리', '계획 관리', '성적 관리']}
       />
 
-      <Pressable
+      {/* <Pressable
         onPress={() => navigation.navigate('Login')}
         style={{
           backgroundColor: 'orange',
@@ -23,7 +23,7 @@ const MyPageScreen = () => {
           marginTop: 20,
         }}>
         <Text>Go to Login</Text>
-      </Pressable>
+      </Pressable> */}
     </View>
   );
 };
