@@ -4,11 +4,10 @@ import {RootStackParamList} from '../../../types/screens';
 import palette from '../../../styles/palette';
 
 type FinishedViewProps = {
-  animation: Animated.Value;
   blackToWhite: Animated.AnimatedInterpolation<string>;
 };
 
-const FinishedView = ({animation, blackToWhite}: FinishedViewProps) => {
+const FinishedView = ({blackToWhite}: FinishedViewProps) => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
   return (

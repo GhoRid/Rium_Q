@@ -12,10 +12,12 @@ import {SafeAreaView, useSafeAreaInsets} from 'react-native-safe-area-context';
 import SvgIcon from '../../components/SvgIcon';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {RootStackParamList} from '../../types/screens';
-import {formatHHMMSS} from '../../utils/time';
+import {formatHHMMSS} from '../../utils/timeTranslate';
 import {loadTimer, saveTimer} from '../../storage';
 import FinishedView from './components/FinishedView';
 import RunningTimerView from './components/RunningTimerView';
+import {useMutation} from '@tanstack/react-query';
+import {saveStudyTimer} from '../../apis/api/timer';
 
 const TimerScreen = () => {
   const insets = useSafeAreaInsets();
@@ -27,6 +29,23 @@ const TimerScreen = () => {
   const [isFinished, setIsFinished] = useState(false);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const animation = useRef(new Animated.Value(0)).current;
+  const [planId, setPlanId] = useState<number | null>(0);
+
+  const {mutate: saveStudyTime} = useMutation({
+    mutationFn: saveStudyTimer,
+    onSuccess: () => {
+      console.log('타이머 저장 성공');
+    },
+    onError: error => {
+      console.error('타이머 저장 실패:', error);
+    },
+  });
+
+  // const handleSaveTimer = async () => {
+  //   const startTime = new Date(Date.now() - totalTime * 1000).toISOString();
+
+  //   saveStudyTime({planId: 1, startTime, endTime}); // planId는 실제로 사용되는 값으로 변경 필요
+  // };
 
   useEffect(() => {
     const load = async () => {
@@ -84,11 +103,6 @@ const TimerScreen = () => {
     outputRange: ['#000000', '#ffffff'],
   });
 
-  const subTextColor = animation.interpolate({
-    inputRange: [0, 1],
-    outputRange: ['#888888', '#888888'],
-  });
-
   return (
     <Animated.View
       style={{flex: 1, backgroundColor: whiteToBlack, paddingTop: -insets.top}}>
@@ -109,10 +123,9 @@ const TimerScreen = () => {
 
         {/* 본문 */}
         {isFinished ? (
-          <FinishedView animation={animation} blackToWhite={blackToWhite} />
+          <FinishedView blackToWhite={blackToWhite} />
         ) : (
           <RunningTimerView
-            animation={animation}
             blackToWhite={blackToWhite}
             totalTime={totalTime}
             seconds={seconds}

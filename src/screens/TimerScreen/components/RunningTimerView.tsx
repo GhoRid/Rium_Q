@@ -1,9 +1,7 @@
 import {Animated, StyleSheet, TouchableOpacity, View, Text} from 'react-native';
-import {RootStackParamList} from '../../../types/screens';
-import {formatHHMMSS} from '../../../utils/time';
+import {formatHHMMSS} from '../../../utils/timeTranslate';
 
 type RunningTimerViewProps = {
-  animation: Animated.Value;
   blackToWhite: Animated.AnimatedInterpolation<string>;
   totalTime: number;
   seconds: number;
@@ -12,7 +10,6 @@ type RunningTimerViewProps = {
 };
 
 const RunningTimerView = ({
-  animation,
   blackToWhite,
   totalTime,
   seconds,
