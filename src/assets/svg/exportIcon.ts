@@ -16,6 +16,8 @@ export {default as 책상} from './icon/desk.svg';
 export {default as 기본프로필} from './icon/defaultProfile.svg';
 export {default as 새로고침} from './icon/reload.svg';
 
+export {default as 전화} from './icon/calling.svg';
+
 export {default as 둘러보기} from './icon/file-search.svg';
 export {default as 지도} from './icon/map.svg';
 // export {default as 주문내역} from './icon/check-square.svg';

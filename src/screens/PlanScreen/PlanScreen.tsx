@@ -3,6 +3,7 @@ import {View, Text, StyleSheet, ScrollView, Pressable} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios, {AxiosError} from 'axios';
 import {signInWithKakaoAndSave} from '../../services/auth/kakaoLogin';
+import palette from '../../styles/palette';
 
 const PlanScreen = () => {
   const [resultText, setResultText] = useState('');
@@ -74,7 +75,7 @@ const styles = StyleSheet.create({
     padding: 24,
   },
   button: {
-    backgroundColor: '#FEE500',
+    backgroundColor: palette.kakao_yellow,
     borderRadius: 40,
     borderWidth: 1,
     width: 250,

@@ -2,11 +2,17 @@ import {StyleSheet, Text, View, Switch} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import CustomHeader from '../../components/Header/CustomHeader';
 import BackButtonHeaderLeft from '../../components/Header/BackButtonHeaderLeft';
+import Connections from './components/Connections';
+import FAQSection from './components/FAQSection';
 
 const CustomerServiceCenterScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
       <CustomHeader leftItem={<BackButtonHeaderLeft screenName="고객센터" />} />
+
+      <Connections />
+      <View style={styles.seperator} />
+      <FAQSection />
     </SafeAreaView>
   );
 };
@@ -18,13 +24,8 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
   },
-  content: {
-    paddingHorizontal: 20,
-    paddingTop: 20,
-  },
-  separator: {
-    height: 1,
-    backgroundColor: '#eee',
-    marginVertical: 10,
+  seperator: {
+    height: 10,
+    backgroundColor: '#F0F0F0',
   },
 });

@@ -4,6 +4,7 @@ import LoginButton from './components/LoginButton';
 import SvgIcon from '../../components/SvgIcon';
 import SignUpBox from './components/SignUpBox';
 import {signInWithKakaoAndSave} from '../../services/auth/kakaoLogin';
+import palette from '../../styles/palette';
 
 type LoginScreenProps = {
   setIsLoggedIn: (isLoggedIn: boolean) => void;
@@ -36,7 +37,7 @@ const LoginScreen = ({setIsLoggedIn}: LoginScreenProps) => {
       <View style={styles.loginButtons}>
         <LoginButton
           text="카카오 로그인"
-          backgroundColor="#FEE500"
+          backgroundColor={palette.kakao_yellow}
           textColor="#000"
           iconName="카카오"
           onPress={handleKakaoLogin}
