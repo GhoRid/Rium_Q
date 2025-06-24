@@ -17,4 +17,5 @@ export interface RootStackParamList extends ParamListBase {
   Setting: undefined;
   NotificationSettings: undefined;
   EditMyInfo: undefined;
+  ManageAccount: undefined;
 }

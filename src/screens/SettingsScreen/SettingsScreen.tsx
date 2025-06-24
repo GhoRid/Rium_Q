@@ -29,7 +29,7 @@ const SettingsScreen = () => {
       title: '고객센터',
       navigateRoute: 'CustomerServiceCenter',
     },
-    {title: '계정 관리', navigateRoute: ''},
+    {title: '계정 관리', navigateRoute: 'ManageAccount'},
   ];
 
   return (

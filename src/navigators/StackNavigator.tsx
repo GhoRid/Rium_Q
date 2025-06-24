@@ -11,6 +11,7 @@ import NotificationSettingsScreen from '../screens/NotificationSettingsScreen/No
 import AnnouncementsScreen from '../screens/AnnouncementsScreen/AnnouncementsScreen';
 import CustomerServiceCenterScreen from '../screens/CustomerServiceCenterScreen/CustomerServiceCenterScreen';
 import EditMyInfoScreen from '../screens/EditMyInfoScreen/EditMyInfoScreen';
+import ManageAccountScreen from '../screens/ManageAccountScreen/ManageAccountScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -53,6 +54,8 @@ const StackNavigator = () => {
         name="CustomerServiceCenter"
         component={CustomerServiceCenterScreen}
       />
+      {/* 계정 관리 스크린 */}
+      <Stack.Screen name="ManageAccount" component={ManageAccountScreen} />
     </Stack.Navigator>
   );
 };
