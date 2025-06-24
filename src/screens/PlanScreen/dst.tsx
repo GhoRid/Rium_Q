@@ -2,20 +2,11 @@ import React, {useState} from 'react';
 import {View, Text, StyleSheet, ScrollView, Pressable} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {signInWithKakaoAndSave} from '../../services/auth/kakao';
-import axios, {AxiosError} from 'axios';
+import {AxiosError} from 'axios';
 
 const PlanScreen = () => {
   const [resultText, setResultText] = useState('');
   const [storedToken, setStoredToken] = useState('');
-
-  const testHttpRequest = async () => {
-    try {
-      const res = await axios.get('http://httpbin.org/get');
-      console.log('✅ 응답 성공:', res.data);
-    } catch (err) {
-      console.log('❌ 네트워크 오류:', err);
-    }
-  };
 
   const handleKakaoLogin = async () => {
     try {
@@ -24,7 +15,7 @@ const PlanScreen = () => {
     } catch (err) {
       const error = err as AxiosError;
 
-      console.log('❌ 메시지:', error);
+      console.log('❌ 메시지:', error.message);
       console.log('❌ 응답:', error.response?.data);
     }
   };
@@ -48,10 +39,6 @@ const PlanScreen = () => {
 
       <Pressable style={styles.button} onPress={handleStorageRead}>
         <Text style={styles.text}>AsyncStorage 조회</Text>
-      </Pressable>
-
-      <Pressable style={styles.button} onPress={testHttpRequest}>
-        <Text style={styles.text}>http 테스트</Text>
       </Pressable>
 
       {storedToken !== '' && (

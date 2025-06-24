@@ -8,6 +8,8 @@ export const signInWithKakaoAndSave = async () => {
     // 1. 카카오 SDK 로그인
     const {accessToken} = await kakaoLoginSDK();
 
+    console.log('카카오 로그인 성공:', accessToken);
+
     // 2. 백엔드에 accessToken 전달
     const backendResponse = await backendKakaoLogin({code: accessToken});
 
