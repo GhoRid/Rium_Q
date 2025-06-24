@@ -29,7 +29,7 @@ export {default as 취소} from './icon/close.svg';
 export {default as 더하기} from './icon/plus.svg';
 
 // 로그인 관련
-export {default as 카카오로그인} from './icon/kakaotalkLogo.svg';
+export {default as 카카오} from './icon/kakaotalkLogo.svg';
 export {default as 애플로고} from './icon/AppleLogo.svg';
 export {default as 회원가입} from './icon/SignUp.svg';
 

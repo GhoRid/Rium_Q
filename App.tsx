@@ -15,34 +15,23 @@ export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean | null>(null);
 
   useEffect(() => {
-    const checkOnFocus = async () => {
-      const isAuthed = await checkAuth();
-      setIsLoggedIn(isAuthed);
-    };
-
-    const subscription = AppState.addEventListener('change', state => {
-      if (state === 'active') {
-        checkOnFocus(); // ✅ 앱이 다시 포커스 될 때 토큰 검사
-      }
-    });
-
-    return () => subscription.remove();
+    checkAuth().then(setIsLoggedIn);
   }, []);
+
+  if (!isSplashFinished) {
+    return <SplashScreen onFinish={() => setIsSplashFinished(true)} />;
+  }
 
   return (
     <SafeAreaProvider>
       <QueryClientProvider client={queryClient}>
-        {isSplashFinished ? (
-          <NavigationContainer>
-            {isLoggedIn === null ? null : isLoggedIn ? (
-              <StackNavigator />
-            ) : (
-              <LoginScreen setIsLoggedIn={setIsLoggedIn} />
-            )}
-          </NavigationContainer>
-        ) : (
-          <SplashScreen onFinish={() => setIsSplashFinished(true)} />
-        )}
+        <NavigationContainer>
+          {isLoggedIn === null ? null : isLoggedIn ? (
+            <StackNavigator setIsLoggedIn={setIsLoggedIn} />
+          ) : (
+            <LoginScreen setIsLoggedIn={setIsLoggedIn} />
+          )}
+        </NavigationContainer>
       </QueryClientProvider>
     </SafeAreaProvider>
   );

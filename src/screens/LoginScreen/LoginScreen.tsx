@@ -38,7 +38,7 @@ const LoginScreen = ({setIsLoggedIn}: LoginScreenProps) => {
           text="카카오 로그인"
           backgroundColor="#FEE500"
           textColor="#000"
-          iconName="카카오로그인"
+          iconName="카카오"
           onPress={handleKakaoLogin}
         />
         <LoginButton

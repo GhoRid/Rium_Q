@@ -15,7 +15,11 @@ import ManageAccountScreen from '../screens/ManageAccountScreen/ManageAccountScr
 
 const Stack = createNativeStackNavigator();
 
-const StackNavigator = () => {
+type StackNavigatorProps = {
+  setIsLoggedIn: (isLoggedIn: boolean) => void;
+};
+
+const StackNavigator = ({setIsLoggedIn}: StackNavigatorProps) => {
   const insets = useSafeAreaInsets();
 
   return (
@@ -55,7 +59,12 @@ const StackNavigator = () => {
         component={CustomerServiceCenterScreen}
       />
       {/* 계정 관리 스크린 */}
-      <Stack.Screen name="ManageAccount" component={ManageAccountScreen} />
+      <Stack.Screen
+        name="ManageAccount"
+        children={props => (
+          <ManageAccountScreen {...props} setIsLoggedIn={setIsLoggedIn} />
+        )}
+      />
     </Stack.Navigator>
   );
 };
