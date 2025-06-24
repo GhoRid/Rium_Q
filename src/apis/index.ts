@@ -22,7 +22,7 @@ const reissueToken = async (base: AxiosInstance) => {
   }
 };
 
-// ✅ 요청 전: 토큰을 AsyncStorage에서 꺼내기
+//백엔드 통신 토큰 이름은 token
 instance.interceptors.request.use(async config => {
   const token = await AsyncStorage.getItem('token');
   if (token) {

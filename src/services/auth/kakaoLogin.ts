@@ -1,7 +1,7 @@
 // services/auth/kakao.ts
 import {login as kakaoLoginSDK} from '@react-native-seoul/kakao-login';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {kakaoLogin as backendKakaoLogin} from '../../apis/api/user';
+import {backendKakaoLogin} from '../../apis/api/user';
 
 export const signInWithKakaoAndSave = async () => {
   try {
@@ -14,9 +14,12 @@ export const signInWithKakaoAndSave = async () => {
     const backendResponse = await backendKakaoLogin({code: accessToken});
 
     // 3. AsyncStorage에 저장
-    await AsyncStorage.setItem('token', JSON.stringify(backendResponse));
+    await AsyncStorage.setItem('token', JSON.stringify(backendResponse.jwt));
+    await AsyncStorage.setItem(
+      'refreshToken',
+      JSON.stringify(backendResponse.refreshToken),
+    );
 
-    // 4. 반환 (예: 사용자 정보 또는 토큰)
     return backendResponse;
   } catch (error) {
     throw error;

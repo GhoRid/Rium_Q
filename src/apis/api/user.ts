@@ -1,9 +1,12 @@
 import {instance} from '..';
-import {KakaoLoginRequest, KakaoLoginResponse} from '../../types/api';
+import {
+  backendKakaoLoginRequest,
+  backendKakaoLoginResponse,
+} from '../../types/api';
 
-export const kakaoLogin = async ({
+export const backendKakaoLogin = async ({
   code,
-}: KakaoLoginRequest): Promise<KakaoLoginResponse> => {
+}: backendKakaoLoginRequest): Promise<backendKakaoLoginResponse> => {
   // 👉 요청 URL 직접 조합
   const fullUrl = `${
     instance.defaults.baseURL
@@ -11,7 +14,7 @@ export const kakaoLogin = async ({
   console.log('🔗 실제 요청 URL:', fullUrl);
 
   // 요청 실행
-  const response = await instance.get<KakaoLoginResponse>(
+  const response = await instance.get<backendKakaoLoginResponse>(
     '/auth/kakao/callback',
     {
       params: {code},

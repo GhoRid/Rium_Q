@@ -31,6 +31,9 @@ const TimerScreen = () => {
   const animation = useRef(new Animated.Value(0)).current;
   const [planId, setPlanId] = useState<number | null>(0);
 
+  const now = new Date();
+  console.log('ISO 시간:', now.toISOString());
+
   const {mutate: saveStudyTime} = useMutation({
     mutationFn: saveStudyTimer,
     onSuccess: () => {

@@ -1,10 +1,5 @@
 import {instance} from '..';
-
-type saveStudyTimerRequest = {
-  planId: number;
-  startTime: string; // ISO 형식의 문자열
-  endTime: string; // ISO 형식의 문자열
-};
+import {saveStudyTimerRequest} from '../../types/api';
 
 export const saveStudyTimer = async (studyData: saveStudyTimerRequest) => {
   try {
