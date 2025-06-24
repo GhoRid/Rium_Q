@@ -7,7 +7,6 @@ import TimerScreen from '../screens/TimerScreen/TimerScreen';
 import StudyTimeDetailScreen from '../screens/StudyTimeDetailScreen/StudyTimeDetailScreen';
 import SeatReservationScreen from '../screens/SeatReservationScreen/SeatReservationScreen';
 import SettingsScreen from '../screens/SettingsScreen/SettingsScreen';
-import LoginScreen from '../screens/LoginScreen/LoginScreen';
 import NotificationSettingsScreen from '../screens/NotificationSettingsScreen/NotificationSettingsScreen';
 import AnnouncementsScreen from '../screens/AnnouncementsScreen/AnnouncementsScreen';
 import CustomerServiceCenterScreen from '../screens/CustomerServiceCenterScreen/CustomerServiceCenterScreen';
@@ -21,9 +20,13 @@ const StackNavigator = () => {
   return (
     <Stack.Navigator screenOptions={{headerShown: false}}>
       {/* 탭 스크린(기본) */}
-      <Stack.Screen name="Tab" component={TabNavigator} />
-      {/* 로그인 진입 페이지 */}
-      <Stack.Screen name="Login" component={LoginScreen} />
+      <Stack.Screen
+        name="Tab"
+        component={TabNavigator}
+        options={{
+          gestureEnabled: false,
+        }}
+      />
       {/* 테스트 스크린 */}
       <Stack.Screen name="Test" component={TestScreen} />
       {/* 알림 스크린 */}

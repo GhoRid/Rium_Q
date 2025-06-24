@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import {View, Text, StyleSheet, ScrollView, Pressable} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {signInWithKakaoAndSave} from '../../services/auth/kakao';
 import axios, {AxiosError} from 'axios';
+import {signInWithKakaoAndSave} from '../../services/auth/kakaoLogin';
 
 const PlanScreen = () => {
   const [resultText, setResultText] = useState('');

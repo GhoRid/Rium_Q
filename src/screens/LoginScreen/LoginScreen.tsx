@@ -3,17 +3,17 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import LoginButton from './components/LoginButton';
 import SvgIcon from '../../components/SvgIcon';
 import SignUpBox from './components/SignUpBox';
-import {useEffect, useState} from 'react';
-import {signInWithKakaoAndSave} from '../../services/auth/kakao';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import {signInWithKakaoAndSave} from '../../services/auth/kakaoLogin';
 
-const LoginScreen = () => {
-  const [resultText, setResultText] = useState<string>('');
+type LoginScreenProps = {
+  setIsLoggedIn: (isLoggedIn: boolean) => void;
+};
 
+const LoginScreen = ({setIsLoggedIn}: LoginScreenProps) => {
   const handleKakaoLogin = async () => {
     try {
       const data = await signInWithKakaoAndSave();
-      setResultText(JSON.stringify(data, null, 2));
+      setIsLoggedIn(true);
     } catch (err) {
       console.error('카카오 로그인 실패:', err);
       Alert.alert(
@@ -22,18 +22,6 @@ const LoginScreen = () => {
       );
     }
   };
-
-  useEffect(() => {
-    const saveTokens = async () => {
-      if (resultText) {
-        Alert.alert('로그인 결과', resultText);
-        const parsedResult = JSON.parse(resultText);
-        await AsyncStorage.setItem('accessToken', parsedResult.jwt);
-        await AsyncStorage.setItem('refreshToken', parsedResult.refreshToken);
-      }
-    };
-    saveTokens();
-  }, [resultText]);
 
   return (
     <SafeAreaView style={styles.container}>
