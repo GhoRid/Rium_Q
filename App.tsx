@@ -6,7 +6,6 @@ import SplashScreen from './src/screens/SplashScreen';
 import StackNavigator from './src/navigators/StackNavigator';
 import {checkAuth} from './src/services/auth/checkAuth'; // ✅ 서비스 로직 임포트
 import LoginScreen from './src/screens/LoginScreen/LoginScreen';
-import {AppState} from 'react-native';
 
 const queryClient = new QueryClient();
 
@@ -18,20 +17,20 @@ export default function App() {
     checkAuth().then(setIsLoggedIn);
   }, []);
 
-  if (!isSplashFinished) {
-    return <SplashScreen onFinish={() => setIsSplashFinished(true)} />;
-  }
-
   return (
     <SafeAreaProvider>
       <QueryClientProvider client={queryClient}>
-        <NavigationContainer>
-          {isLoggedIn === null ? null : isLoggedIn ? (
-            <StackNavigator setIsLoggedIn={setIsLoggedIn} />
-          ) : (
-            <LoginScreen setIsLoggedIn={setIsLoggedIn} />
-          )}
-        </NavigationContainer>
+        {isSplashFinished ? (
+          <NavigationContainer>
+            {isLoggedIn === null ? null : isLoggedIn ? (
+              <StackNavigator setIsLoggedIn={setIsLoggedIn} />
+            ) : (
+              <LoginScreen setIsLoggedIn={setIsLoggedIn} />
+            )}
+          </NavigationContainer>
+        ) : (
+          <SplashScreen onFinish={() => setIsSplashFinished(true)} />
+        )}
       </QueryClientProvider>
     </SafeAreaProvider>
   );

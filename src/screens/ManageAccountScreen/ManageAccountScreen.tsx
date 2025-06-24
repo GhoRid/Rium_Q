@@ -27,26 +27,30 @@ const ManageAccountScreen = ({setIsLoggedIn}: ManageAccountScreenProps) => {
         leftItem={<BackButtonHeaderLeft screenName="계정 관리" />}
       />
 
-      {/* 계정 영역 */}
-      <View style={styles.row}>
-        <View style={styles.rowLeft}>
-          <SvgIcon name="카카오" />
-          <Text style={styles.label}>카카오 계정</Text>
+      <View style={styles.contentContainer}>
+        {/* 계정 영역 */}
+        <View style={styles.row}>
+          <View style={styles.rowLeft}>
+            <View style={styles.ikonContainer}>
+              <SvgIcon name="카카오" size={12} />
+            </View>
+            <Text style={styles.label}>카카오 계정</Text>
+          </View>
+          <TouchableOpacity onPress={handleLogout}>
+            <Text style={styles.logoutText}>로그아웃</Text>
+          </TouchableOpacity>
         </View>
-        <TouchableOpacity onPress={handleLogout}>
-          <Text style={styles.logoutText}>로그아웃</Text>
-        </TouchableOpacity>
-      </View>
 
-      {/* 구분선 */}
-      <View style={styles.separator} />
+        {/* 구분선 */}
+        <View style={styles.separator} />
 
-      {/* 회원 탈퇴 안내 */}
-      <View style={styles.withdrawContainer}>
-        <Text style={styles.withdrawLabel}>회원 정보를 삭제하시겠어요?</Text>
-        <TouchableOpacity>
-          <Text style={styles.withdrawButton}>회원 탈퇴</Text>
-        </TouchableOpacity>
+        {/* 회원 탈퇴 안내 */}
+        <View style={styles.withdrawContainer}>
+          <Text style={styles.withdrawLabel}>회원 정보를 삭제하시겠어요?</Text>
+          <TouchableOpacity>
+            <Text style={styles.withdrawButton}>회원 탈퇴</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </SafeAreaView>
   );
@@ -59,20 +63,28 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
   },
+  contentContainer: {
+    padding: 20,
+    flex: 1,
+    gap: 25,
+  },
   row: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingVertical: 12,
   },
   rowLeft: {
     flexDirection: 'row',
     alignItems: 'center',
+    gap: 15,
   },
-  icon: {
+  ikonContainer: {
     width: 28,
     height: 28,
-    marginRight: 10,
+    borderRadius: 14,
+    backgroundColor: '#FEE500',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   label: {
     fontSize: 16,
@@ -81,12 +93,12 @@ const styles = StyleSheet.create({
   },
   logoutText: {
     fontSize: 15,
+    fontWeight: '700',
     color: '#888',
   },
   separator: {
     height: 1,
     backgroundColor: '#EDEDED',
-    marginVertical: 16,
   },
   withdrawContainer: {
     flexDirection: 'row',
