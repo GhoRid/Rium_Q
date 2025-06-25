@@ -44,12 +44,6 @@ const TimerScreen = () => {
     },
   });
 
-  // const handleSaveTimer = async () => {
-  //   const startTime = new Date(Date.now() - totalTime * 1000).toISOString();
-
-  //   saveStudyTime({planId: 1, startTime, endTime}); // planId는 실제로 사용되는 값으로 변경 필요
-  // };
-
   useEffect(() => {
     const load = async () => {
       const value = await loadTimer();
@@ -59,15 +53,15 @@ const TimerScreen = () => {
   }, []);
 
   useEffect(() => {
+    //화면 전환 애니메이션
     Animated.timing(animation, {
       toValue: isRunning ? 1 : 0,
       duration: 500,
       easing: Easing.inOut(Easing.ease),
       useNativeDriver: false,
     }).start();
-  }, [isRunning]);
 
-  useEffect(() => {
+    // 타이머 시간 관련
     if (isRunning) {
       intervalRef.current = setInterval(() => {
         setSeconds(prev => prev + 1);

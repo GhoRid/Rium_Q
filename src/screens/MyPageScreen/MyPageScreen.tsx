@@ -1,5 +1,5 @@
 import {NavigationProp, useNavigation} from '@react-navigation/native';
-import {View, Text, Pressable, StyleSheet} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import {RootStackParamList} from '../../types/screens';
 import UserProfile from './components/UserProfile';
 import MenuList from './components/MenuList';
