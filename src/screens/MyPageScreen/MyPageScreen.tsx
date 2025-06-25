@@ -1,11 +1,13 @@
 import {NavigationProp, useNavigation} from '@react-navigation/native';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, Text} from 'react-native';
 import {RootStackParamList} from '../../types/screens';
 import UserProfile from './components/UserProfile';
 import MenuList from './components/MenuList';
+import AppText from '../../components/AppText';
 
 const MyPageScreen = () => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+
   return (
     <View style={styles.contianer}>
       <UserProfile />
@@ -24,6 +26,9 @@ const MyPageScreen = () => {
         }}>
         <Text>Go to Login</Text>
       </Pressable> */}
+      <AppText style={styles.test}>
+        아아아여억라ㅣㄷㅈ링나라디ㅐ벵,차2025 asdc
+      </AppText>
     </View>
   );
 };
@@ -34,5 +39,9 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     padding: 20,
+  },
+  test: {
+    fontSize: 20,
+    color: 'red',
   },
 });
