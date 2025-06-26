@@ -7,28 +7,21 @@ import {
   Dimensions,
 } from 'react-native';
 import AppText from './AppText';
+import {CustomModalContent} from '../types/components';
 
 const {width} = Dimensions.get('window');
-
-type ModalContent = {
-  title: string;
-  content?: string;
-  confirmText: string;
-  confirmColor: string;
-  onConfirm: () => void;
-};
 
 type Props = {
   visible: boolean;
   setVisible: (v: boolean) => void;
-  data: ModalContent;
+  data: CustomModalContent;
 };
 
 const CustomModal = ({visible, setVisible, data}: Props) => {
   return (
     <Modal visible={visible} transparent animationType="fade">
       <View style={styles.overlay}>
-        <View style={styles.modalContentBox}>
+        <View style={styles.CustomModalContentBox}>
           <View style={styles.contentContainer}>
             <AppText style={styles.messageTitle}>{data.title}</AppText>
             {data.content && (
@@ -67,7 +60,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  modalContentBox: {
+  CustomModalContentBox: {
     width: width * 0.8,
     backgroundColor: '#fff',
     borderRadius: 20,

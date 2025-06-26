@@ -9,14 +9,7 @@ import {useState} from 'react';
 
 import palette from '../../styles/palette';
 import CustomModal from '../../components/CustomModal';
-
-type ModalContent = {
-  title: string;
-  content?: string;
-  confirmText: string;
-  confirmColor: string;
-  onConfirm: () => void;
-};
+import {CustomModalContent} from '../../types/components';
 
 type SettingAccountScreenProps = {
   setIsLoggedIn: (isLoggedIn: boolean) => void;
@@ -24,7 +17,7 @@ type SettingAccountScreenProps = {
 
 const SettingAccountScreen = ({setIsLoggedIn}: SettingAccountScreenProps) => {
   const [modalVisible, setModalVisible] = useState(false);
-  const [modalContent, setModalContent] = useState<ModalContent>({
+  const [modalContent, setModalContent] = useState<CustomModalContent>({
     title: '',
     confirmText: '',
     confirmColor: '',
@@ -41,15 +34,15 @@ const SettingAccountScreen = ({setIsLoggedIn}: SettingAccountScreenProps) => {
     }
   };
 
-  const logoutData: ModalContent = {
+  const logoutData: CustomModalContent = {
     title: '로그아웃 하시겠어요?',
     confirmText: '로그아웃',
     confirmColor: palette.app_main_color,
     onConfirm: handleLogoutConfirm,
   };
 
-  const withdrawalData: ModalContent = {
-    title: '회원 정보를 삭제하시겠어요?',
+  const withdrawalData: CustomModalContent = {
+    title: '서비스를 탈퇴하시겠어요?',
     content: '회원탈퇴 시 모든 데이터가 삭제되며,\n복구가 불가능합니다.',
     confirmText: '회원 탈퇴',
     confirmColor: '#E3383B',
