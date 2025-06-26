@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   Dimensions,
 } from 'react-native';
-import AppText from '../../../components/AppText';
+import AppText from './AppText';
 
 const {width} = Dimensions.get('window');
 
