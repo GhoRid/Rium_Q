@@ -7,30 +7,55 @@ import {logout} from '../../services/auth/logout';
 import AppText from '../../components/AppText';
 import {useState} from 'react';
 import CustomModal from './components/CustomModal';
+import palette from '../../styles/palette';
+
+type ModalContent = {
+  title: string;
+  content?: string;
+  confirmText: string;
+  confirmColor: string;
+  onConfirm: () => void;
+};
 
 type SettingAccountScreenProps = {
   setIsLoggedIn: (isLoggedIn: boolean) => void;
 };
 
 const SettingAccountScreen = ({setIsLoggedIn}: SettingAccountScreenProps) => {
-  const [modalVisible, setModalVisible] = useState<boolean>(false);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [modalContent, setModalContent] = useState<ModalContent>({
+    title: '',
+    confirmText: '',
+    confirmColor: '',
+    onConfirm: () => {},
+  });
 
-  // 🔸 로그아웃 버튼 클릭 → 모달만 열기
-  const confirmLogout = () => {
-    setModalVisible(true);
-  };
-
-  // 🔸 모달에서 "확인" 눌렀을 때 진짜 로그아웃 수행
   const handleLogoutConfirm = async () => {
     try {
       await logout();
       setIsLoggedIn(false);
       Alert.alert('로그아웃되었습니다.');
-    } catch (error) {
+    } catch {
       Alert.alert('로그아웃 실패', '다시 시도해주세요.');
-    } finally {
-      setModalVisible(false);
     }
+  };
+
+  const logoutData: ModalContent = {
+    title: '로그아웃 하시겠어요?',
+    confirmText: '로그아웃',
+    confirmColor: palette.app_main_color,
+    onConfirm: handleLogoutConfirm,
+  };
+
+  const withdrawalData: ModalContent = {
+    title: '회원 정보를 삭제하시겠어요?',
+    content: '회원탈퇴 시 모든 데이터가 삭제되며,\n복구가 불가능합니다.',
+    confirmText: '회원 탈퇴',
+    confirmColor: '#E3383B',
+    onConfirm: () => {
+      Alert.alert('회원 탈퇴 요청됨');
+      // ✅ 실제 탈퇴 로직 수행
+    },
   };
 
   return (
@@ -48,7 +73,11 @@ const SettingAccountScreen = ({setIsLoggedIn}: SettingAccountScreenProps) => {
             </View>
             <AppText style={styles.label}>카카오 계정</AppText>
           </View>
-          <TouchableOpacity onPress={confirmLogout}>
+          <TouchableOpacity
+            onPress={() => {
+              setModalContent(logoutData);
+              setModalVisible(true);
+            }}>
             <AppText style={styles.logoutText}>로그아웃</AppText>
           </TouchableOpacity>
         </View>
@@ -61,17 +90,21 @@ const SettingAccountScreen = ({setIsLoggedIn}: SettingAccountScreenProps) => {
           <AppText style={styles.withdrawLabel}>
             회원 정보를 삭제하시겠어요?
           </AppText>
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              setModalContent(withdrawalData);
+              setModalVisible(true);
+            }}>
             <AppText style={styles.withdrawButton}>회원 탈퇴</AppText>
           </TouchableOpacity>
         </View>
       </View>
 
-      {/* 🔸 모달 표시 */}
+      {/* 공통 모달 */}
       <CustomModal
-        modalVisible={modalVisible}
-        setModalVisible={setModalVisible}
-        onConfirm={handleLogoutConfirm} // 모달 내 "확인" 버튼
+        visible={modalVisible}
+        setVisible={setModalVisible}
+        data={modalContent}
       />
     </SafeAreaView>
   );

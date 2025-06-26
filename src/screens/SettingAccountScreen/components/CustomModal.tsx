@@ -7,37 +7,49 @@ import {
   Dimensions,
 } from 'react-native';
 import AppText from '../../../components/AppText';
-import palette from '../../../styles/palette';
-
-type Props = {
-  modalVisible: boolean;
-  setModalVisible: (visible: boolean) => void;
-  onConfirm: () => void;
-};
 
 const {width} = Dimensions.get('window');
 
-const CustomModal = ({modalVisible, setModalVisible, onConfirm}: Props) => {
+type ModalContent = {
+  title: string;
+  content?: string;
+  confirmText: string;
+  confirmColor: string;
+  onConfirm: () => void;
+};
+
+type Props = {
+  visible: boolean;
+  setVisible: (v: boolean) => void;
+  data: ModalContent;
+};
+
+const CustomModal = ({visible, setVisible, data}: Props) => {
   return (
-    <Modal visible={modalVisible} transparent animationType="fade">
+    <Modal visible={visible} transparent animationType="fade">
       <View style={styles.overlay}>
         <View style={styles.modalContentBox}>
           <View style={styles.contentContainer}>
-            <AppText style={styles.message}>로그아웃 하시겠어요?</AppText>
-            {/* <AppText style={styles.message}>로그아웃 하시겠어요?</AppText> */}
+            <AppText style={styles.messageTitle}>{data.title}</AppText>
+            {data.content && (
+              <AppText style={styles.messageContent}>{data.content}</AppText>
+            )}
           </View>
 
           <View style={styles.buttonContainer}>
             <TouchableOpacity
-              style={[styles.basebutton, styles.cancelButton]}
-              onPress={() => setModalVisible(false)}>
+              style={[styles.basebutton, {backgroundColor: '#F7F7F7'}]}
+              onPress={() => setVisible(false)}>
               <AppText style={styles.cancelText}>취소</AppText>
             </TouchableOpacity>
 
             <TouchableOpacity
-              style={[styles.basebutton, styles.confirmButton]}
-              onPress={onConfirm}>
-              <AppText style={styles.confirmText}>로그아웃</AppText>
+              style={[styles.basebutton, {backgroundColor: data.confirmColor}]}
+              onPress={() => {
+                data.onConfirm();
+                setVisible(false);
+              }}>
+              <AppText style={styles.confirmText}>{data.confirmText}</AppText>
             </TouchableOpacity>
           </View>
         </View>
@@ -63,12 +75,17 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     paddingHorizontal: 30,
-    paddingVertical: 40,
+    paddingVertical: 50,
     gap: 4,
   },
-  message: {
+  messageTitle: {
     fontSize: 18,
-    fontWeight: 700,
+    fontWeight: '700',
+    color: '#333',
+  },
+  messageContent: {
+    fontSize: 16,
+    fontWeight: '400',
     color: '#333',
   },
   buttonContainer: {
@@ -76,16 +93,9 @@ const styles = StyleSheet.create({
   },
   basebutton: {
     padding: 15,
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  cancelButton: {
-    flex: 1,
-    backgroundColor: '#F7F7F7',
-  },
-  confirmButton: {
-    flex: 1,
-    backgroundColor: palette.app_main_color,
   },
   cancelText: {
     fontSize: 16,
