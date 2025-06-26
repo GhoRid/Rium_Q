@@ -1,9 +1,10 @@
-import {Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {StyleSheet, TouchableOpacity} from 'react-native';
 import LineGraph from './LineGraph';
 import shadow from '../../../styles/shadow';
 import {useState} from 'react';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {RootStackParamList} from '../../../types/screens';
+import AppText from '../../../components/AppText';
 
 const StudyReport = () => {
   const [parentWidth, setParentWidth] = useState(0);
@@ -19,7 +20,7 @@ const StudyReport = () => {
       onPress={() => {
         navigation.navigate('Statistic');
       }}>
-      <Text style={styles.cardTitle}>내 학습 리포트</Text>
+      <AppText style={styles.cardTitle}>내 학습 리포트</AppText>
 
       <LineGraph parentWidth={parentWidth} />
     </TouchableOpacity>

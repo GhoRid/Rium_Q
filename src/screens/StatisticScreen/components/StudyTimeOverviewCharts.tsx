@@ -1,8 +1,9 @@
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {useState} from 'react';
 import PureStudyTimeTab from './PureStudyTimeTab';
 import BySubjectChartTab from './BySubjectChartTab';
 import GoalAchievementChartTab from './GoalAchievementChartTab';
+import AppText from '../../../components/AppText';
 
 // 탭 이름 배열과 타입 선언
 const TAB_NAMES = ['순공시간', '과목별', '목표달성률'] as const;
@@ -37,13 +38,13 @@ const StudyTimeOverviewCharts = () => {
             key={tab}
             style={styles.tabItem}
             onPress={() => setSelectedTab(tab)}>
-            <Text
+            <AppText
               style={[
                 styles.tabText,
-                selectedTab === tab && styles.tabTextActive,
+                ...(selectedTab === tab ? [styles.tabTextActive] : []),
               ]}>
               {tab}
-            </Text>
+            </AppText>
           </TouchableOpacity>
         ))}
       </View>

@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
-import {View, Text, StyleSheet, ScrollView, FlatList} from 'react-native';
+import {StyleSheet, ScrollView} from 'react-native';
 import Filter from './components/Filter';
 import NoticeItem from './components/NoticeItem';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import CustomHeader from '../../components/Header/CustomHeader';
 import BackButtonHeaderLeft from '../../components/Header/BackButtonHeaderLeft';
+import AppText from '../../components/AppText';
 
 // 예시 알림 데이터
 const todayNotices = [
@@ -75,7 +76,7 @@ const NotificationScreen = () => {
         setSelectedTag={setSelectedFilter}
       />
       <ScrollView contentContainerStyle={styles.scrollBox}>
-        <Text style={styles.dateText}>오늘</Text>
+        <AppText style={styles.dateText}>오늘</AppText>
         {todayNotices.map(notice => (
           <NoticeItem key={notice.id} notice={notice} />
         ))}

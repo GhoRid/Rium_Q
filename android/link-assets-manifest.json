@@ -2,10 +2,6 @@
   "migIndex": 1,
   "data": [
     {
-      "path": "src/assets/fonts/DoHyeon-Regular.ttf",
-      "sha1": "8caf7749d6cee533cc03e16769e5ccf7691bc3d1"
-    },
-    {
       "path": "src/assets/fonts/NotoSansKR-Black.ttf",
       "sha1": "e85f81607e7ecfe1c21be93e0278cbb754d68deb"
     },

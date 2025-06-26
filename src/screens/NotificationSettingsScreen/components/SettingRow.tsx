@@ -1,5 +1,6 @@
 import {StyleSheet, Switch, View, Text} from 'react-native';
 import palette from '../../../styles/palette';
+import AppText from '../../../components/AppText';
 
 const SettingRow = ({
   label,
@@ -12,7 +13,7 @@ const SettingRow = ({
 }) => {
   return (
     <View style={styles.row}>
-      <Text style={styles.label}>{label}</Text>
+      <AppText style={styles.label}>{label}</AppText>
       <Switch
         value={value}
         onValueChange={onToggle}

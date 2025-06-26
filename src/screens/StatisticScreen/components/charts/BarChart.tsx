@@ -1,6 +1,7 @@
 import React, {useEffect, useRef} from 'react';
-import {View, StyleSheet, Dimensions, Animated, Text} from 'react-native';
+import {View, StyleSheet, Dimensions, Animated} from 'react-native';
 import Svg, {Rect, G, Text as SvgText} from 'react-native-svg';
+import AppText from '../../../../components/AppText';
 
 interface BarChartProps {
   data: {
@@ -113,16 +114,16 @@ const BarChart: React.FC<BarChartProps> = ({data}) => {
         {data.map((item, index) => {
           const isLast = index === data.length - 1;
           return (
-            <Text
+            <AppText
               key={index}
               style={[
                 styles.label,
-                isLast && styles.labelHighlighted,
+                ...(isLast ? [styles.labelHighlighted] : []),
                 {width: barWidth},
               ]}
               numberOfLines={1}>
               {item.label}
-            </Text>
+            </AppText>
           );
         })}
       </View>

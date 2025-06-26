@@ -1,8 +1,9 @@
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import SvgIcon from '../../../components/SvgIcon';
 import shadow from '../../../styles/shadow';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {RootStackParamList} from '../../../types/screens';
+import AppText from '../../../components/AppText';
 
 const UserProfile = () => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
@@ -16,15 +17,17 @@ const UserProfile = () => {
         <View style={styles.profileRowLeft}>
           <SvgIcon name="기본프로필" size={45} />
           <View style={styles.nameRow}>
-            <Text style={styles.nameBold}>익끼</Text>
-            <Text style={styles.nameNormal}>님</Text>
+            <AppText style={styles.nameBold}>익끼</AppText>
+            <AppText style={styles.nameNormal}>님</AppText>
           </View>
         </View>
         <SvgIcon name="우측방향" size={24} />
       </View>
 
       <TouchableOpacity style={styles.inputButton}>
-        <Text style={styles.inputButtonText}>내 정보를 입력해주세요!</Text>
+        <AppText style={styles.inputButtonText}>
+          내 정보를 입력해주세요!
+        </AppText>
       </TouchableOpacity>
     </TouchableOpacity>
   );

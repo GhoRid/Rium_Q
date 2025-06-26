@@ -1,5 +1,6 @@
-import {StyleSheet, View, Text} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import SvgIcon from '../../../components/SvgIcon';
+import AppText from '../../../components/AppText';
 
 const DATA = [
   {
@@ -23,8 +24,8 @@ const EditList = () => {
       {DATA.map((item, index) => (
         <View style={styles.infoItem} key={index}>
           <View style={styles.vertacal}>
-            <Text style={styles.label}>{item.label}</Text>
-            <Text style={styles.value}>{item.value}</Text>
+            <AppText style={styles.label}>{item.label}</AppText>
+            <AppText style={styles.value}>{item.value}</AppText>
           </View>
           <SvgIcon name="우측방향" size={24} color="#BDBDBD" />
         </View>

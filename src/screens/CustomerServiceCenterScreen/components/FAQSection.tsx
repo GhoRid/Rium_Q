@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
-import {StyleSheet, Text, View, FlatList} from 'react-native';
+import {StyleSheet, View, FlatList} from 'react-native';
 import FAQCategoryTabs from './FAQCategoryTabs';
 import FAQItem from './FAQItem';
+import AppText from '../../../components/AppText';
 
 const FAQSection = () => {
   const [selectedCategory, setSelectedCategory] = useState('전체');
@@ -26,7 +27,7 @@ const FAQSection = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>자주 묻는 질문</Text>
+      <AppText style={styles.title}>자주 묻는 질문</AppText>
       <FAQCategoryTabs
         categories={categories}
         selected={selectedCategory}

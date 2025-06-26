@@ -15,6 +15,7 @@ import {
 } from 'date-fns';
 import {scaleLinear} from 'd3-scale';
 import SvgIcon from '../../../../components/SvgIcon';
+import AppText from '../../../../components/AppText';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const PADDING = 10;
@@ -87,7 +88,7 @@ const CalendarByWeek = () => {
           <TouchableOpacity onPress={handlePrev}>
             <SvgIcon name="좌측방향" size={24} color="#000" />
           </TouchableOpacity>
-          <Text style={styles.title}>2025년 2분기</Text>
+          <AppText style={styles.title}>2025년 2분기</AppText>
           <TouchableOpacity onPress={handleNext}>
             <SvgIcon name="우측방향" size={24} color="#000" />
           </TouchableOpacity>
@@ -107,12 +108,12 @@ const CalendarByWeek = () => {
                   styles.cell,
                   {backgroundColor: colorScale(totalMinutes)},
                 ]}>
-                <Text style={styles.weekLabel}>{weekLabel}</Text>
+                <AppText style={styles.weekLabel}>{weekLabel}</AppText>
 
                 {totalMinutes <= 0 ? (
-                  <Text style={styles.timeText}> </Text>
+                  <AppText style={styles.timeText}> </AppText>
                 ) : (
-                  <Text style={styles.timeText}>{timeStr}</Text>
+                  <AppText style={styles.timeText}>{timeStr}</AppText>
                 )}
               </View>
             );
@@ -122,7 +123,7 @@ const CalendarByWeek = () => {
 
       {/* 범례 */}
       <View style={styles.legendContainer}>
-        <Text style={styles.legendLabel}>Less</Text>
+        <AppText style={styles.legendLabel}>Less</AppText>
         <View style={styles.legendBar}>
           {COLOR_LEVELS.map((color, idx) => (
             <View
@@ -131,7 +132,7 @@ const CalendarByWeek = () => {
             />
           ))}
         </View>
-        <Text style={styles.legendLabel}>More</Text>
+        <AppText style={styles.legendLabel}>More</AppText>
       </View>
     </View>
   );

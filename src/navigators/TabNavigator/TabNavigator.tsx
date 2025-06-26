@@ -1,5 +1,5 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {Text, TouchableOpacity, View} from 'react-native';
+import {TouchableOpacity, View} from 'react-native';
 import HomeScreen from '../../screens/HomeScreen/HomeScreen';
 import PlanScreen from '../../screens/PlanScreen/PlanScreen';
 import CustomTabBar from './CustomTabBar';
@@ -12,6 +12,7 @@ import {RootStackParamList} from '../../types/screens';
 import palette from '../../styles/palette';
 import StatisticScreen from '../../screens/StatisticScreen/StatisticScreen';
 import EmptyScreen from '../../screens/EmptyScreen';
+import AppText from '../../components/AppText';
 
 const Tab = createBottomTabNavigator();
 
@@ -74,13 +75,13 @@ const TabNavigator = () => {
             header: () => (
               <CustomHeader
                 leftItem={
-                  <Text
+                  <AppText
                     style={{
                       fontSize: 20,
                       fontWeight: 'bold',
                     }}>
                     익끼 님의 학습 리포트
-                  </Text>
+                  </AppText>
                 } // 왼쪽 아이콘
               />
             ),
@@ -96,8 +97,10 @@ const TabNavigator = () => {
               <CustomHeader
                 leftItem={
                   <View style={{flexDirection: 'row'}}>
-                    <Text style={{fontSize: 24, fontWeight: '700'}}>익끼</Text>
-                    <Text style={{fontSize: 24}}>님</Text>
+                    <AppText style={{fontSize: 24, fontWeight: '700'}}>
+                      익끼
+                    </AppText>
+                    <AppText style={{fontSize: 24}}>님</AppText>
                   </View>
                 }
                 rightItem={

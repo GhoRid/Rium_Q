@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {View, StyleSheet, Text, Animated, Easing} from 'react-native';
+import {View, StyleSheet, Animated, Easing} from 'react-native';
 import Svg, {
   Path,
   Defs,
@@ -10,6 +10,7 @@ import Svg, {
 } from 'react-native-svg';
 import * as shape from 'd3-shape';
 import * as d3 from 'd3-scale';
+import AppText from '../../../components/AppText';
 
 type DataPoint = {
   date: string;
@@ -134,7 +135,7 @@ const LineGraph = ({parentWidth}: LineGraphProps) => {
         <View style={styles.yAxis}>
           {[8, 4, 0].map(value => (
             <View key={value}>
-              <Text style={styles.yLabel}>{value}</Text>
+              <AppText style={styles.yLabel}>{value}</AppText>
             </View>
           ))}
         </View>

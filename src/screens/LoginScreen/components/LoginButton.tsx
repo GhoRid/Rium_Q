@@ -1,6 +1,7 @@
 import React from 'react';
-import {TouchableOpacity, View, Text, StyleSheet} from 'react-native';
+import {TouchableOpacity, View, StyleSheet} from 'react-native';
 import SvgIcon from '../../../components/SvgIcon';
+import AppText from '../../../components/AppText';
 
 type LoginButtonProps = {
   text: string;
@@ -39,7 +40,7 @@ const LoginButton = ({
       </View>
 
       {/* 텍스트 중앙 정렬 */}
-      <Text style={[styles.text, {color: textColor}]}>{text}</Text>
+      <AppText style={[styles.text, {color: textColor}]}>{text}</AppText>
     </TouchableOpacity>
   );
 };

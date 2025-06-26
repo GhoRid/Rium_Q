@@ -1,8 +1,8 @@
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import React from 'react';
-import {View, Text, StyleSheet, FlatList, TouchableOpacity} from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
+import {View, StyleSheet, FlatList, TouchableOpacity} from 'react-native';
 import {RootStackParamList} from '../../../types/screens';
+import AppText from '../../../components/AppText';
 
 const studyData = [
   {
@@ -44,19 +44,19 @@ const StudyTimeDetails = () => {
   return (
     <View style={styles.container}>
       <View style={styles.titleBox}>
-        <Text style={styles.sectionTitle}>개별 학습 시간</Text>
+        <AppText style={styles.sectionTitle}>개별 학습 시간</AppText>
       </View>
-      <Text style={styles.dateText}>{firstDateGroup.date}</Text>
+      <AppText style={styles.dateText}>{firstDateGroup.date}</AppText>
       <FlatList
         data={previewRecords}
         keyExtractor={item => item.id}
         renderItem={({item}) => (
           <View style={styles.card}>
-            <Text style={styles.timeText}>{item.time}</Text>
+            <AppText style={styles.timeText}>{item.time}</AppText>
             <View style={styles.row}>
-              <Text style={styles.bold}>{item.subject}</Text>
-              <Text style={styles.divider}> | </Text>
-              <Text style={styles.description}>{item.description}</Text>
+              <AppText style={styles.bold}>{item.subject}</AppText>
+              <AppText style={styles.divider}> | </AppText>
+              <AppText style={styles.description}>{item.description}</AppText>
             </View>
           </View>
         )}
@@ -83,7 +83,7 @@ const StudyTimeDetails = () => {
           navigation.navigate('StudyTimeDetail');
         }}
         activeOpacity={0.8}>
-        <Text style={styles.moreText}>더보기</Text>
+        <AppText style={styles.moreText}>더보기</AppText>
       </TouchableOpacity>
     </View>
   );

@@ -9,6 +9,7 @@ import BubbleChart from '../StatisticScreen/components/charts/BubbleChart';
 import {useState} from 'react';
 import YearMonthPicker from './YearMonthPicker';
 import SvgIcon from '../../components/SvgIcon';
+import AppText from '../../components/AppText';
 
 const DATA = [
   {name: 'Apples', value: 70},
@@ -24,7 +25,7 @@ const TestScreen = () => {
   const [countUp, setCountUp] = useState(0);
   return (
     <View style={styles.container}>
-      {/* <Text>dd</Text>
+      {/* <AppText>dd</AppText>
       <BubbleChart key={countUp} DATA={DATA} />
       <Pressable
         onPress={() => {
@@ -37,11 +38,11 @@ const TestScreen = () => {
           alignItems: 'center',
           justifyContent: 'center',
         }}>
-        <Text>버튼</Text>
+        <AppText>버튼</AppText>
       </Pressable> */}
       {/* <YearMonthPicker /> */}
-      <Text style={styles.timeText}> 12시간 10분 2초</Text>
-      <Text style={styles.ddText}> 총 시간: 12시간 10분 2초</Text>
+      <AppText style={styles.timeText}> 12시간 10분 2초</AppText>
+      <AppText style={styles.ddText}> 총 시간: 12시간 10분 2초</AppText>
       <TouchableOpacity
         onPress={() => {
           setCountUp(prev => prev + 1);

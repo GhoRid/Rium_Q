@@ -1,6 +1,7 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
-import Svg, {Circle, G, Text as SvgText} from 'react-native-svg';
+import {View, StyleSheet} from 'react-native';
+import Svg, {Circle, Text as SvgText} from 'react-native-svg';
+import AppText from '../../../../components/AppText';
 
 type SubjectData = {
   label: string;
@@ -72,8 +73,8 @@ const DonutChart = ({data}: DonutChartProps) => {
         {data.map((item, index) => (
           <View key={index} style={styles.legendItem}>
             <View style={[styles.dot, {backgroundColor: item.color}]} />
-            <Text style={styles.label}>{item.label}</Text>
-            <Text style={styles.time}>{item.time}</Text>
+            <AppText style={styles.label}>{item.label}</AppText>
+            <AppText style={styles.time}>{item.time}</AppText>
           </View>
         ))}
       </View>

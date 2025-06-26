@@ -2,6 +2,7 @@ import {FlatList, StyleSheet, Text, View} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import CustomHeader from '../../components/Header/CustomHeader';
 import BackButtonHeaderLeft from '../../components/Header/BackButtonHeaderLeft';
+import AppText from '../../components/AppText';
 
 const studyData = [
   {
@@ -42,19 +43,19 @@ const StudyTimeDetailScreen = () => {
         leftItem={<BackButtonHeaderLeft screenName="개별 학습 시간" />}
       />
       <View style={styles.contentContainer}>
-        <Text style={styles.sectionTitle}></Text>
+        <AppText style={styles.sectionTitle}></AppText>
 
-        <Text style={styles.dateText}>{studyData[0].date}</Text>
+        <AppText style={styles.dateText}>{studyData[0].date}</AppText>
         <FlatList
           data={studyData[0].records}
           keyExtractor={item => item.id}
           renderItem={({item}) => (
             <View style={styles.card}>
-              <Text style={styles.timeText}>{item.time}</Text>
+              <AppText style={styles.timeText}>{item.time}</AppText>
               <View style={styles.row}>
-                <Text style={styles.bold}>{item.subject}</Text>
-                <Text style={styles.divider}> | </Text>
-                <Text style={styles.description}>{item.description}</Text>
+                <AppText style={styles.bold}>{item.subject}</AppText>
+                <AppText style={styles.divider}> | </AppText>
+                <AppText style={styles.description}>{item.description}</AppText>
               </View>
             </View>
           )}

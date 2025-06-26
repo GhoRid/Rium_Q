@@ -1,6 +1,7 @@
-import {View, Text, StyleSheet} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import SvgIcon from '../../../components/SvgIcon';
 import shadow from '../../../styles/shadow';
+import AppText from '../../../components/AppText';
 
 type StudyTimeSummaryBoxProps = {
   period: string;
@@ -16,15 +17,15 @@ const StudyTimeSummaryBox = ({period, data}: StudyTimeSummaryBoxProps) => {
       {/* 날짜 정보 */}
       {period === '기간' ? (
         <View style={[styles.header, {justifyContent: 'space-between'}]}>
-          <Text style={styles.periodLabel}>지난 28일</Text>
+          <AppText style={styles.periodLabel}>지난 28일</AppText>
           <View style={styles.dateRangeContainer}>
-            <Text style={styles.dateRangeText}>5/15 ~ 6/11</Text>
+            <AppText style={styles.dateRangeText}>5/15 ~ 6/11</AppText>
             <SvgIcon name="아래방향" size={16} />
           </View>
         </View>
       ) : (
         <View style={[styles.header, {justifyContent: 'center'}]}>
-          <Text style={styles.periodLabel}>6월 15일(일)</Text>
+          <AppText style={styles.periodLabel}>6월 15일(일)</AppText>
         </View>
       )}
 
@@ -32,14 +33,14 @@ const StudyTimeSummaryBox = ({period, data}: StudyTimeSummaryBoxProps) => {
       <View style={styles.card}>
         {/* 총 시간 */}
         <View style={styles.timeItem}>
-          <Text style={styles.titleText}>총 시간</Text>
-          <Text style={styles.valueText}>44:44:44</Text>
+          <AppText style={styles.titleText}>총 시간</AppText>
+          <AppText style={styles.valueText}>44:44:44</AppText>
         </View>
 
         {/* 하루 평균 */}
         <View style={styles.timeItem}>
-          <Text style={styles.titleText}>하루 평균</Text>
-          <Text style={styles.valueText}>00:44:44</Text>
+          <AppText style={styles.titleText}>하루 평균</AppText>
+          <AppText style={styles.valueText}>00:44:44</AppText>
         </View>
       </View>
     </View>

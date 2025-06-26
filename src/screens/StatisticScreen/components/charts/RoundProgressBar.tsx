@@ -1,7 +1,8 @@
 import React, {useEffect, useRef} from 'react';
-import {Animated, StyleSheet, Text, View} from 'react-native';
+import {Animated, StyleSheet, View} from 'react-native';
 import Svg, {Circle, G} from 'react-native-svg';
 import palette from '../../../../styles/palette';
+import AppText from '../../../../components/AppText';
 
 type RoundProgressbarProps = {
   score: number;
@@ -68,10 +69,10 @@ const RoundProgressbar = ({score, percentage, name}: RoundProgressbarProps) => {
       </Svg>
 
       <View style={styles.textContainer}>
-        <Text style={styles.nameText}>{name}</Text>
-        <Text style={styles.imageText}>이미지{'\n'}삽입 예정</Text>
-        <Text style={styles.scoreText}>{score}점</Text>
-        <Text style={styles.percentText}>상위 {percentage}%</Text>
+        <AppText style={styles.nameText}>{name}</AppText>
+        <AppText style={styles.imageText}>이미지{'\n'}삽입 예정</AppText>
+        <AppText style={styles.scoreText}>{score}점</AppText>
+        <AppText style={styles.percentText}>상위 {percentage}%</AppText>
       </View>
     </View>
   );

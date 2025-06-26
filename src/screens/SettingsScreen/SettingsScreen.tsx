@@ -1,17 +1,12 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  ScrollView,
-} from 'react-native';
+import {View, StyleSheet, TouchableOpacity, ScrollView} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import CustomHeader from '../../components/Header/CustomHeader';
 import BackButtonHeaderLeft from '../../components/Header/BackButtonHeaderLeft';
 import SvgIcon from '../../components/SvgIcon';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {RootStackParamList} from '../../types/screens';
+import AppText from '../../components/AppText';
 
 const SettingsScreen = () => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
@@ -42,7 +37,7 @@ const SettingsScreen = () => {
             style={styles.item}
             key={index}
             onPress={() => navigation.navigate(item.navigateRoute)}>
-            <Text style={styles.itemText}>{item.title}</Text>
+            <AppText style={styles.itemText}>{item.title}</AppText>
             <SvgIcon name="우측방향" size={24} color="#999" />
           </TouchableOpacity>
         ))}
@@ -54,7 +49,7 @@ const SettingsScreen = () => {
             style={styles.item}
             key={index}
             onPress={() => navigation.navigate(item.navigateRoute)}>
-            <Text style={styles.itemText}>{item.title}</Text>
+            <AppText style={styles.itemText}>{item.title}</AppText>
             <SvgIcon name="우측방향" size={24} color="#999" />
           </TouchableOpacity>
         ))}
@@ -62,18 +57,18 @@ const SettingsScreen = () => {
         <View style={styles.separator} />
 
         <TouchableOpacity style={styles.item}>
-          <Text style={styles.itemText}>서비스 이용 약관</Text>
+          <AppText style={styles.itemText}>서비스 이용 약관</AppText>
           <SvgIcon name="우측방향" size={24} color="#999" />
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.item}>
-          <Text style={styles.itemTextBold}>개인정보 처리 방침</Text>
+          <AppText style={styles.itemTextBold}>개인정보 처리 방침</AppText>
           <SvgIcon name="우측방향" size={24} color="#999" />
         </TouchableOpacity>
 
         <View style={styles.versionContainer}>
-          <Text style={styles.versionLabel}>앱 버전 정보</Text>
-          <Text style={styles.versionText}>v1.0.0-beta</Text>
+          <AppText style={styles.versionLabel}>앱 버전 정보</AppText>
+          <AppText style={styles.versionText}>v1.0.0-beta</AppText>
         </View>
       </ScrollView>
     </SafeAreaView>

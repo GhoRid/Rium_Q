@@ -1,7 +1,8 @@
 import {NavigationProp, useNavigation} from '@react-navigation/native';
-import {Animated, StyleSheet, TouchableOpacity, View, Text} from 'react-native';
+import {Animated, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {RootStackParamList} from '../../../types/screens';
 import palette from '../../../styles/palette';
+import AppText from '../../../components/AppText';
 
 type FinishedViewProps = {
   blackToWhite: Animated.AnimatedInterpolation<string>;
@@ -23,9 +24,9 @@ const FinishedView = ({blackToWhite}: FinishedViewProps) => {
         <TouchableOpacity
           style={[styles.bottomButton, {backgroundColor: '#F3F4F6'}]}
           onPress={() => navigation.navigate('Tab', {screen: 'Statistic'})}>
-          <Text style={[styles.bottomButtonText, {color: '#111'}]}>
+          <AppText style={[styles.bottomButtonText, {color: '#111'}]}>
             내 통계
-          </Text>
+          </AppText>
         </TouchableOpacity>
         <TouchableOpacity
           style={[
@@ -33,7 +34,9 @@ const FinishedView = ({blackToWhite}: FinishedViewProps) => {
             {backgroundColor: palette.app_main_color},
           ]}
           onPress={() => navigation.navigate('Tab', {screen: 'Home'})}>
-          <Text style={[styles.bottomButtonText, {color: '#fff'}]}>홈으로</Text>
+          <AppText style={[styles.bottomButtonText, {color: '#fff'}]}>
+            홈으로
+          </AppText>
         </TouchableOpacity>
       </View>
     </>

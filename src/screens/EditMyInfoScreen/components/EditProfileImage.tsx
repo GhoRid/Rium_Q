@@ -1,9 +1,10 @@
 // components/EditProfileImage.tsx
 
 import React from 'react';
-import {StyleSheet, TouchableOpacity, View, Text, Image} from 'react-native';
+import {StyleSheet, TouchableOpacity, View, Image} from 'react-native';
 import SvgIcon from '../../../components/SvgIcon';
 import palette from '../../../styles/palette';
+import AppText from '../../../components/AppText';
 
 const AVATAR_SIZE = 85;
 
@@ -27,9 +28,9 @@ const EditProfileImage = ({imageUri, onPress}: Props) => {
           <SvgIcon name="새로고침" size={15} color="white" />
         </TouchableOpacity>
       </View>
-      <Text style={styles.nameText}>
-        <Text style={styles.nameBold}>익끼</Text> 님
-      </Text>
+      <AppText style={styles.nameText}>
+        <AppText style={styles.nameBold}>익끼</AppText> 님
+      </AppText>
     </View>
   );
 };

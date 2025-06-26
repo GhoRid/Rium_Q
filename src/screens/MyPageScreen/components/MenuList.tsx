@@ -1,5 +1,6 @@
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import SvgIcon from '../../../components/SvgIcon';
+import AppText from '../../../components/AppText';
 
 type MenuListProps = {
   menuList: string[];
@@ -10,7 +11,7 @@ const MenuList = ({menuList}: MenuListProps) => {
     <View style={styles.container}>
       {menuList.map((label, idx) => (
         <TouchableOpacity style={styles.menuItem} key={idx}>
-          <Text style={styles.menuText}>{label}</Text>
+          <AppText style={styles.menuText}>{label}</AppText>
           <SvgIcon name="우측방향" size={24} />
         </TouchableOpacity>
       ))}

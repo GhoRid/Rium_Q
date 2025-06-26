@@ -1,14 +1,15 @@
 import {NavigationProp, useNavigation} from '@react-navigation/native';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import SvgIcon from '../../../components/SvgIcon';
 import {RootStackParamList} from '../../../types/screens';
+import AppText from '../../../components/AppText';
 
 const SignUpBox = () => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>처음이신가요?</Text>
+      <AppText style={styles.text}>처음이신가요?</AppText>
       <TouchableOpacity
         activeOpacity={0.8}
         onPress={() => {
@@ -16,7 +17,7 @@ const SignUpBox = () => {
           console.log('이메일로 가입하기 클릭');
         }}>
         <View style={styles.signUpBox}>
-          <Text style={styles.text2}>이메일로 가입하기</Text>
+          <AppText style={styles.text2}>이메일로 가입하기</AppText>
           <SvgIcon name="회원가입" size={16} color="black" />
         </View>
       </TouchableOpacity>

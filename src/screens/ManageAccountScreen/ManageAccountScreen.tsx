@@ -1,9 +1,10 @@
 import {SafeAreaView} from 'react-native-safe-area-context';
 import CustomHeader from '../../components/Header/CustomHeader';
 import BackButtonHeaderLeft from '../../components/Header/BackButtonHeaderLeft';
-import {Alert, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {Alert, StyleSheet, TouchableOpacity, View} from 'react-native';
 import SvgIcon from '../../components/SvgIcon';
 import {logout} from '../../services/auth/logout';
+import AppText from '../../components/AppText';
 
 type ManageAccountScreenProps = {
   setIsLoggedIn: (isLoggedIn: boolean) => void;
@@ -34,10 +35,10 @@ const ManageAccountScreen = ({setIsLoggedIn}: ManageAccountScreenProps) => {
             <View style={styles.ikonContainer}>
               <SvgIcon name="카카오" size={12} />
             </View>
-            <Text style={styles.label}>카카오 계정</Text>
+            <AppText style={styles.label}>카카오 계정</AppText>
           </View>
           <TouchableOpacity onPress={handleLogout}>
-            <Text style={styles.logoutText}>로그아웃</Text>
+            <AppText style={styles.logoutText}>로그아웃</AppText>
           </TouchableOpacity>
         </View>
 
@@ -46,9 +47,11 @@ const ManageAccountScreen = ({setIsLoggedIn}: ManageAccountScreenProps) => {
 
         {/* 회원 탈퇴 안내 */}
         <View style={styles.withdrawContainer}>
-          <Text style={styles.withdrawLabel}>회원 정보를 삭제하시겠어요?</Text>
+          <AppText style={styles.withdrawLabel}>
+            회원 정보를 삭제하시겠어요?
+          </AppText>
           <TouchableOpacity>
-            <Text style={styles.withdrawButton}>회원 탈퇴</Text>
+            <AppText style={styles.withdrawButton}>회원 탈퇴</AppText>
           </TouchableOpacity>
         </View>
       </View>

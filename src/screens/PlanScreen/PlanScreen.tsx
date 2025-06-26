@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
-import {View, Text, StyleSheet, ScrollView, Pressable} from 'react-native';
+import {View, StyleSheet, ScrollView, Pressable} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios, {AxiosError} from 'axios';
 import {signInWithKakaoAndSave} from '../../services/auth/kakaoLogin';
 import palette from '../../styles/palette';
+import AppText from '../../components/AppText';
 
 const PlanScreen = () => {
   const [resultText, setResultText] = useState('');
@@ -39,25 +40,25 @@ const PlanScreen = () => {
     <ScrollView>
       <View style={styles.resultContainer}>
         <ScrollView>
-          <Text selectable>{resultText}</Text>
+          <AppText selectable>{resultText}</AppText>
         </ScrollView>
       </View>
 
       <Pressable style={styles.button} onPress={handleKakaoLogin}>
-        <Text style={styles.text}>카카오 로그인</Text>
+        <AppText style={styles.text}>카카오 로그인</AppText>
       </Pressable>
 
       <Pressable style={styles.button} onPress={handleStorageRead}>
-        <Text style={styles.text}>AsyncStorage 조회</Text>
+        <AppText style={styles.text}>AsyncStorage 조회</AppText>
       </Pressable>
 
       <Pressable style={styles.button} onPress={testHttpRequest}>
-        <Text style={styles.text}>http 테스트</Text>
+        <AppText style={styles.text}>http 테스트</AppText>
       </Pressable>
 
       {storedToken !== '' && (
         <View style={styles.resultContainer}>
-          <Text selectable>{storedToken}</Text>
+          <AppText selectable>{storedToken}</AppText>
         </View>
       )}
     </ScrollView>

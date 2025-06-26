@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
-import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import {View, TouchableOpacity, StyleSheet} from 'react-native';
+import AppText from '../../../components/AppText';
 
 type Props = {
   question: string;
@@ -14,9 +15,9 @@ const FAQItem = ({question, answer}: Props) => {
       <TouchableOpacity
         style={styles.questionRow}
         onPress={() => setOpen(!open)}>
-        <Text style={[styles.questionText, open && styles.questionTextBold]}>
+        <AppText style={[styles.questionText, open && styles.questionTextBold]}>
           Q {question}
-        </Text>
+        </AppText>
         {/* <Feather
           name={open ? 'chevron-up' : 'chevron-down'}
           size={20}
@@ -26,7 +27,7 @@ const FAQItem = ({question, answer}: Props) => {
 
       {open && (
         <View style={styles.answerContainer}>
-          <Text style={styles.answerText}>A {answer}</Text>
+          <AppText style={styles.answerText}>A {answer}</AppText>
         </View>
       )}
     </View>

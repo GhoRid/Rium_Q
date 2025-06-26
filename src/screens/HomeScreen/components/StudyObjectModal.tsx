@@ -1,13 +1,8 @@
 import React from 'react';
-import {
-  Modal,
-  StyleSheet,
-  Text,
-  View,
-  TouchableWithoutFeedback,
-} from 'react-native';
+import {Modal, StyleSheet, View, TouchableWithoutFeedback} from 'react-native';
 import SvgIcon from '../../../components/SvgIcon';
 import palette from '../../../styles/palette';
+import AppText from '../../../components/AppText';
 
 type StudyObjectModalProps = {
   modalVisible: boolean;
@@ -35,9 +30,9 @@ const StudyObjectModal = ({
       <View style={styles.centeredContainer}>
         <TouchableWithoutFeedback>
           <View style={styles.modalContent}>
-            <Text style={styles.dateText}>5/28</Text>
+            <AppText style={styles.dateText}>5/28</AppText>
             <View style={styles.modalHeaderBox}>
-              <Text style={styles.title}>오늘의 계획이에요!</Text>
+              <AppText style={styles.title}>오늘의 계획이에요!</AppText>
               <SvgIcon
                 name="취소"
                 size={20}
@@ -46,10 +41,11 @@ const StudyObjectModal = ({
             </View>
             {data.map((item, index) => (
               <View key={index} style={styles.itemRow}>
-                <Text style={[styles.subject, getSubjectStyle(item.subject)]}>
+                <AppText
+                  style={[styles.subject, getSubjectStyle(item.subject)]}>
                   {item.subject}
-                </Text>
-                <Text style={styles.aim}>{item.aim}</Text>
+                </AppText>
+                <AppText style={styles.aim}>{item.aim}</AppText>
               </View>
             ))}
           </View>

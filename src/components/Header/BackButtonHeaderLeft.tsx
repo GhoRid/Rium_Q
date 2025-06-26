@@ -1,7 +1,8 @@
 import React from 'react';
-import {Platform, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {Platform, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import SvgIcon from '../SvgIcon';
+import AppText from '../AppText';
 
 type BackButtonHeaderLeftProps = {
   onPressBackBtn?: () => void;
@@ -22,7 +23,7 @@ const BackButtonHeaderLeft = ({
         onPress={onPressBackBtn ? onPressBackBtn : () => navigation.goBack()}>
         <SvgIcon name="좌측방향" size={30} color="#BDBDBD" strokeWidth={3} />
       </TouchableOpacity>
-      {screenName && <Text style={styles.text}>{screenName}</Text>}
+      {screenName && <AppText style={styles.text}>{screenName}</AppText>}
     </View>
   );
 };

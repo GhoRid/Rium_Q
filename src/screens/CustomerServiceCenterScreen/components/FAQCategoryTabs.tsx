@@ -1,6 +1,7 @@
 import React from 'react';
-import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import {View, TouchableOpacity, StyleSheet} from 'react-native';
 import palette from '../../../styles/palette';
+import AppText from '../../../components/AppText';
 
 type Props = {
   categories: string[];
@@ -16,13 +17,13 @@ const FAQCategoryTabs = ({categories, selected, onSelect}: Props) => {
           key={category}
           style={[styles.tab, selected === category && styles.selectedTab]}
           onPress={() => onSelect(category)}>
-          <Text
+          <AppText
             style={[
               styles.tabText,
               selected === category && styles.selectedTabText,
             ]}>
             {category}
-          </Text>
+          </AppText>
         </TouchableOpacity>
       ))}
     </View>

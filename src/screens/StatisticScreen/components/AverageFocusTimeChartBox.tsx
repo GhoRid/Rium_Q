@@ -1,7 +1,8 @@
 import {useState} from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import AverageFocusTimeByHour from './AverageFocusTimeByHour';
 import AverageFocusTimeByDate from './AverageFocusTimeByDate';
+import AppText from '../../../components/AppText';
 
 // 1. 고정된 탭 이름 배열과 타입 선언
 const TAB_NAMES = ['시간대별 평균 집중 시간', '요일별 평균 집중 시간'] as const;
@@ -31,13 +32,13 @@ const AverageFocusTimeChartBox = () => {
             key={tab}
             style={styles.tabItem}
             onPress={() => setSelectedTab(tab)}>
-            <Text
+            <AppText
               style={[
                 styles.tabText,
                 selectedTab === tab && styles.tabTextActive,
               ]}>
               {tab}
-            </Text>
+            </AppText>
           </TouchableOpacity>
         ))}
       </View>

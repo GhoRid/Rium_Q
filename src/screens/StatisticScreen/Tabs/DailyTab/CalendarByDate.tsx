@@ -1,11 +1,5 @@
 import React, {useState} from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  Dimensions,
-} from 'react-native';
+import {View, StyleSheet, TouchableOpacity, Dimensions} from 'react-native';
 import {
   getMonth,
   getYear,
@@ -21,6 +15,7 @@ import {
 } from 'date-fns';
 import {scaleLinear} from 'd3-scale';
 import SvgIcon from '../../../../components/SvgIcon';
+import AppText from '../../../../components/AppText';
 
 const DAYS = ['일', '월', '화', '수', '목', '금', '토'];
 const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -79,7 +74,7 @@ const Calendar = () => {
           <TouchableOpacity onPress={handlePrevMonth}>
             <SvgIcon name="좌측방향" size={24} color="#000" />
           </TouchableOpacity>
-          <Text style={styles.title}>{`${year}년 ${month}월`}</Text>
+          <AppText style={styles.title}>{`${year}년 ${month}월`}</AppText>
           <TouchableOpacity onPress={handleNextMonth}>
             <SvgIcon name="우측방향" size={24} color="#000" />
           </TouchableOpacity>
@@ -88,9 +83,9 @@ const Calendar = () => {
         {/* 요일 헤더 */}
         <View style={styles.headerRow}>
           {DAYS.map(day => (
-            <Text key={day} style={styles.dayHeader}>
+            <AppText key={day} style={styles.dayHeader}>
               {day}
-            </Text>
+            </AppText>
           ))}
         </View>
 
@@ -108,20 +103,20 @@ const Calendar = () => {
                   styles.cell,
                   {backgroundColor: getIntensityColor(time)},
                 ]}>
-                <Text
+                <AppText
                   style={[styles.dateText, !isCurrentMonth && {color: '#ccc'}]}>
                   {day.getDate()}
-                </Text>
+                </AppText>
                 {time ? (
-                  <Text
+                  <AppText
                     style={[
                       styles.timeText,
                       !isCurrentMonth && {color: '#ccc'},
                     ]}>
                     {time}
-                  </Text>
+                  </AppText>
                 ) : (
-                  <Text> </Text>
+                  <AppText> </AppText>
                 )}
               </View>
             );
@@ -131,7 +126,7 @@ const Calendar = () => {
 
       {/* 하단 범례 */}
       <View style={styles.legendContainer}>
-        <Text style={styles.legendLabel}>Less</Text>
+        <AppText style={styles.legendLabel}>Less</AppText>
         <View style={styles.legendBar}>
           {COLOR_LEVELS.map((color, idx) => (
             <View
@@ -140,7 +135,7 @@ const Calendar = () => {
             />
           ))}
         </View>
-        <Text style={styles.legendLabel}>More</Text>
+        <AppText style={styles.legendLabel}>More</AppText>
       </View>
     </View>
   );

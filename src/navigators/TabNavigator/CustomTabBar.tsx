@@ -1,6 +1,7 @@
-import {View, Text, TouchableOpacity, StyleSheet, Platform} from 'react-native';
+import {View, TouchableOpacity, StyleSheet, Platform} from 'react-native';
 import SvgIcon from '../../components/SvgIcon';
 import palette from '../../styles/palette';
+import AppText from '../../components/AppText';
 
 const CustomTabBar = ({state, descriptors, navigation}: any) => {
   return (
@@ -43,9 +44,10 @@ const CustomTabBar = ({state, descriptors, navigation}: any) => {
               color={palette.app_main_color}
               fill={isFocused ? palette.app_main_color : 'none'}
             />
-            <Text style={{fontSize: 12, color: isFocused ? '#1a2b48' : '#888'}}>
+            <AppText
+              style={{fontSize: 12, color: isFocused ? '#1a2b48' : '#888'}}>
               {label}
-            </Text>
+            </AppText>
           </TouchableOpacity>
         );
       })}

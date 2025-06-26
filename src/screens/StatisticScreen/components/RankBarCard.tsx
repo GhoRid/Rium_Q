@@ -1,14 +1,15 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import palette from '../../../styles/palette';
 import Bar from './charts/Bar';
+import AppText from '../../../components/AppText';
 
 const RankBarCard = () => {
   return (
     <View style={styles.container}>
       <View style={[styles.box, styles.left]}>
-        <Text style={styles.targetRangeText}>19세 학생 중</Text>
+        <AppText style={styles.targetRangeText}>19세 학생 중</AppText>
         <View style={styles.highlightWrap}>
-          <Text style={styles.rankingRateText}>상위 10%</Text>
+          <AppText style={styles.rankingRateText}>상위 10%</AppText>
           <View style={styles.underline} />
         </View>
       </View>

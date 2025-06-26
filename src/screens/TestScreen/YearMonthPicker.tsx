@@ -8,6 +8,7 @@ import {
   Dimensions,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import AppText from '../../components/AppText';
 
 const ITEM_HEIGHT = 40;
 const YEARS = Array.from({length: 10}, (_, i) => 2021 + i);
@@ -26,10 +27,11 @@ export default function YearMonthPicker() {
     <TouchableOpacity
       onPress={onPress}
       style={[styles.item, selected && styles.selectedItem]}>
-      <Text style={[styles.itemText, selected && styles.selectedText]}>
+      <AppText
+        style={[styles.itemText, ...(selected ? [styles.selectedText] : [])]}>
         {item}
         {suffix}
-      </Text>
+      </AppText>
     </TouchableOpacity>
   );
 
@@ -45,7 +47,7 @@ export default function YearMonthPicker() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>기간 선택</Text>
+      <AppText style={styles.title}>기간 선택</AppText>
       <View style={styles.pickerContainer}>
         {/* 연도 리스트 */}
         <View style={styles.listWrapper}>
@@ -87,10 +89,10 @@ export default function YearMonthPicker() {
       </View>
       <View style={styles.buttons}>
         <TouchableOpacity style={styles.cancelBtn}>
-          <Text style={styles.cancelText}>취소</Text>
+          <AppText style={styles.cancelText}>취소</AppText>
         </TouchableOpacity>
         <TouchableOpacity style={styles.confirmBtn}>
-          <Text style={styles.confirmText}>확인</Text>
+          <AppText style={styles.confirmText}>확인</AppText>
         </TouchableOpacity>
       </View>
     </View>

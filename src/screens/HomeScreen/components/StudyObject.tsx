@@ -1,4 +1,5 @@
-import {Pressable, View, Text, StyleSheet} from 'react-native';
+import {Pressable, View, StyleSheet} from 'react-native';
+import AppText from '../../../components/AppText';
 
 type StudyObjectProps = {
   subject: string;
@@ -8,9 +9,9 @@ const StudyObject = ({subject, aim}: StudyObjectProps) => {
   return (
     <View style={styles.row}>
       <Pressable style={styles.subjectChip}>
-        <Text style={styles.subjectChipText}>{subject}</Text>
+        <AppText style={styles.subjectChipText}>{subject}</AppText>
       </Pressable>
-      <Text style={styles.testText}>{aim}</Text>
+      <AppText style={styles.testText}>{aim}</AppText>
     </View>
   );
 };
