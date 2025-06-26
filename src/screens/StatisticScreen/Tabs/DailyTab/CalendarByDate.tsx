@@ -104,14 +104,17 @@ const Calendar = () => {
                   {backgroundColor: getIntensityColor(time)},
                 ]}>
                 <AppText
-                  style={[styles.dateText, !isCurrentMonth && {color: '#ccc'}]}>
+                  style={[
+                    styles.dateText,
+                    isCurrentMonth ? {} : {color: '#ccc'},
+                  ]}>
                   {day.getDate()}
                 </AppText>
                 {time ? (
                   <AppText
                     style={[
                       styles.timeText,
-                      !isCurrentMonth && {color: '#ccc'},
+                      isCurrentMonth ? {} : {color: '#ccc'},
                     ]}>
                     {time}
                   </AppText>

@@ -20,7 +20,7 @@ const FAQCategoryTabs = ({categories, selected, onSelect}: Props) => {
           <AppText
             style={[
               styles.tabText,
-              selected === category && styles.selectedTabText,
+              selected === category ? {} : styles.selectedTabText,
             ]}>
             {category}
           </AppText>

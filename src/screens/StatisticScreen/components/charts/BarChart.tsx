@@ -118,7 +118,7 @@ const BarChart: React.FC<BarChartProps> = ({data}) => {
               key={index}
               style={[
                 styles.label,
-                ...(isLast ? [styles.labelHighlighted] : []),
+                isLast ? styles.labelHighlighted : {},
                 {width: barWidth},
               ]}
               numberOfLines={1}>

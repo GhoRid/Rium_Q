@@ -15,7 +15,8 @@ const FAQItem = ({question, answer}: Props) => {
       <TouchableOpacity
         style={styles.questionRow}
         onPress={() => setOpen(!open)}>
-        <AppText style={[styles.questionText, open && styles.questionTextBold]}>
+        <AppText
+          style={[styles.questionText, open ? {} : styles.questionTextBold]}>
           Q {question}
         </AppText>
         {/* <Feather
