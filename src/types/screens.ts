@@ -15,7 +15,7 @@ export interface RootStackParamList extends ParamListBase {
   StudyTimeDetail: undefined;
   SeatReservation: undefined;
   Setting: undefined;
-  NotificationSettings: undefined;
+  SettingNotification: undefined;
   EditMyInfo: undefined;
-  ManageAccount: undefined;
+  SettingAccount: undefined;
 }

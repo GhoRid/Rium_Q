@@ -1,11 +1,11 @@
-import {StyleSheet, Text, View, Switch} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import CustomHeader from '../../components/Header/CustomHeader';
 import BackButtonHeaderLeft from '../../components/Header/BackButtonHeaderLeft';
 import {useState} from 'react';
 import SettingRow from './components/SettingRow';
 
-const NotificationSettingsScreen = () => {
+const SettingNotificationScreen = () => {
   const [settings, setSettings] = useState({
     alarm1: true,
     alarm2: false,
@@ -52,7 +52,7 @@ const NotificationSettingsScreen = () => {
   );
 };
 
-export default NotificationSettingsScreen;
+export default SettingNotificationScreen;
 
 const styles = StyleSheet.create({
   container: {

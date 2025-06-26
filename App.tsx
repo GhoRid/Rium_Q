@@ -20,17 +20,17 @@ export default function App() {
   return (
     <SafeAreaProvider>
       <QueryClientProvider client={queryClient}>
-        {isSplashFinished ? (
-          <NavigationContainer>
-            {isLoggedIn === null ? null : isLoggedIn ? (
-              <StackNavigator setIsLoggedIn={setIsLoggedIn} />
-            ) : (
-              <LoginScreen setIsLoggedIn={setIsLoggedIn} />
-            )}
-          </NavigationContainer>
-        ) : (
-          <SplashScreen onFinish={() => setIsSplashFinished(true)} />
-        )}
+        {/* {isSplashFinished ? ( */}
+        <NavigationContainer>
+          {isLoggedIn === null ? null : isLoggedIn ? (
+            <StackNavigator setIsLoggedIn={setIsLoggedIn} />
+          ) : (
+            <LoginScreen setIsLoggedIn={setIsLoggedIn} />
+          )}
+        </NavigationContainer>
+        {/* ) : (
+           <SplashScreen onFinish={() => setIsSplashFinished(true)} />
+        )} */}
       </QueryClientProvider>
     </SafeAreaProvider>
   );

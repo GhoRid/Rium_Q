@@ -7,11 +7,12 @@ import TimerScreen from '../screens/TimerScreen/TimerScreen';
 import StudyTimeDetailScreen from '../screens/StudyTimeDetailScreen/StudyTimeDetailScreen';
 import SeatReservationScreen from '../screens/SeatReservationScreen/SeatReservationScreen';
 import SettingsScreen from '../screens/SettingsScreen/SettingsScreen';
-import NotificationSettingsScreen from '../screens/NotificationSettingsScreen/NotificationSettingsScreen';
+
 import AnnouncementsScreen from '../screens/AnnouncementsScreen/AnnouncementsScreen';
 import CustomerServiceCenterScreen from '../screens/CustomerServiceCenterScreen/CustomerServiceCenterScreen';
 import EditMyInfoScreen from '../screens/EditMyInfoScreen/EditMyInfoScreen';
-import ManageAccountScreen from '../screens/ManageAccountScreen/ManageAccountScreen';
+import SettingAccountScreen from '../screens/SettingAccountScreen/SettingAccountScreen';
+import SettingNotificationScreen from '../screens/SettingNotification/SettingNotification';
 
 const Stack = createNativeStackNavigator();
 
@@ -48,8 +49,8 @@ const StackNavigator = ({setIsLoggedIn}: StackNavigatorProps) => {
       <Stack.Screen name="Setting" component={SettingsScreen} />
       {/* 알림 설정 스크린 */}
       <Stack.Screen
-        name="NotificationSettings"
-        component={NotificationSettingsScreen}
+        name="SettingNotification"
+        component={SettingNotificationScreen}
       />
       {/* 공지사항 스크린 */}
       <Stack.Screen name="Announcements" component={AnnouncementsScreen} />
@@ -60,9 +61,9 @@ const StackNavigator = ({setIsLoggedIn}: StackNavigatorProps) => {
       />
       {/* 계정 관리 스크린 */}
       <Stack.Screen
-        name="ManageAccount"
+        name="SettingAccount"
         children={props => (
-          <ManageAccountScreen {...props} setIsLoggedIn={setIsLoggedIn} />
+          <SettingAccountScreen {...props} setIsLoggedIn={setIsLoggedIn} />
         )}
       />
     </Stack.Navigator>

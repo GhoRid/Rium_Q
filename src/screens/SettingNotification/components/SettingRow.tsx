@@ -1,4 +1,4 @@
-import {StyleSheet, Switch, View, Text} from 'react-native';
+import {StyleSheet, Switch, View} from 'react-native';
 import palette from '../../../styles/palette';
 import AppText from '../../../components/AppText';
 

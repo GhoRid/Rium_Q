@@ -6,11 +6,11 @@ import SvgIcon from '../../components/SvgIcon';
 import {logout} from '../../services/auth/logout';
 import AppText from '../../components/AppText';
 
-type ManageAccountScreenProps = {
+type SettingAccountScreenProps = {
   setIsLoggedIn: (isLoggedIn: boolean) => void;
 };
 
-const ManageAccountScreen = ({setIsLoggedIn}: ManageAccountScreenProps) => {
+const SettingAccountScreen = ({setIsLoggedIn}: SettingAccountScreenProps) => {
   const handleLogout = async () => {
     try {
       await logout(); // ✅ 토큰 삭제
@@ -59,7 +59,7 @@ const ManageAccountScreen = ({setIsLoggedIn}: ManageAccountScreenProps) => {
   );
 };
 
-export default ManageAccountScreen;
+export default SettingAccountScreen;
 
 const styles = StyleSheet.create({
   container: {

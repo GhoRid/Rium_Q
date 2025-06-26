@@ -14,7 +14,7 @@ const SettingsScreen = () => {
   const layer1 = [
     {
       title: '알림 설정',
-      navigateRoute: 'NotificationSettings',
+      navigateRoute: 'SettingNotification',
     },
   ];
 
@@ -24,7 +24,7 @@ const SettingsScreen = () => {
       title: '고객센터',
       navigateRoute: 'CustomerServiceCenter',
     },
-    {title: '계정 관리', navigateRoute: 'ManageAccount'},
+    {title: '계정 관리', navigateRoute: 'SettingAccount'},
   ];
 
   return (
