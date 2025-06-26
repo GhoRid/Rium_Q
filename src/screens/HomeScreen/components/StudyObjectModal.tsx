@@ -1,5 +1,11 @@
 import React from 'react';
-import {Modal, StyleSheet, View, TouchableWithoutFeedback} from 'react-native';
+import {
+  Modal,
+  StyleSheet,
+  View,
+  TouchableWithoutFeedback,
+  Dimensions,
+} from 'react-native';
 import SvgIcon from '../../../components/SvgIcon';
 import palette from '../../../styles/palette';
 import AppText from '../../../components/AppText';
@@ -9,6 +15,8 @@ type StudyObjectModalProps = {
   setModalVisible: (visible: boolean) => void;
   data: {subject: string; aim: string}[];
 };
+
+const {width} = Dimensions.get('window');
 
 const StudyObjectModal = ({
   modalVisible,
@@ -28,28 +36,25 @@ const StudyObjectModal = ({
       </TouchableWithoutFeedback>
 
       <View style={styles.centeredContainer}>
-        <TouchableWithoutFeedback>
-          <View style={styles.modalContent}>
-            <AppText style={styles.dateText}>5/28</AppText>
-            <View style={styles.modalHeaderBox}>
-              <AppText style={styles.title}>오늘의 계획이에요!</AppText>
-              <SvgIcon
-                name="취소"
-                size={20}
-                onPress={() => setModalVisible(false)}
-              />
-            </View>
-            {data.map((item, index) => (
-              <View key={index} style={styles.itemRow}>
-                <AppText
-                  style={[styles.subject, getSubjectStyle(item.subject)]}>
-                  {item.subject}
-                </AppText>
-                <AppText style={styles.aim}>{item.aim}</AppText>
-              </View>
-            ))}
+        <View style={styles.modalContent}>
+          <AppText style={styles.dateText}>5/28</AppText>
+          <View style={styles.modalHeaderBox}>
+            <AppText style={styles.title}>오늘의 계획이에요!</AppText>
+            <SvgIcon
+              name="취소"
+              size={20}
+              onPress={() => setModalVisible(false)}
+            />
           </View>
-        </TouchableWithoutFeedback>
+          {data.map((item, index) => (
+            <View key={index} style={styles.itemRow}>
+              <AppText style={[styles.subject, getSubjectStyle(item.subject)]}>
+                {item.subject}
+              </AppText>
+              <AppText style={styles.aim}>{item.aim}</AppText>
+            </View>
+          ))}
+        </View>
       </View>
     </Modal>
   );
@@ -89,7 +94,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   modalContent: {
-    width: '90%',
+    width: width * 0.9,
     borderRadius: 16,
     backgroundColor: 'white',
     paddingVertical: 24,

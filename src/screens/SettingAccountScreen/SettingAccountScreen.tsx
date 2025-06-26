@@ -1,24 +1,35 @@
+import {Alert, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import CustomHeader from '../../components/Header/CustomHeader';
 import BackButtonHeaderLeft from '../../components/Header/BackButtonHeaderLeft';
-import {Alert, StyleSheet, TouchableOpacity, View} from 'react-native';
 import SvgIcon from '../../components/SvgIcon';
 import {logout} from '../../services/auth/logout';
 import AppText from '../../components/AppText';
+import {useState} from 'react';
+import CustomModal from './components/CustomModal';
 
 type SettingAccountScreenProps = {
   setIsLoggedIn: (isLoggedIn: boolean) => void;
 };
 
 const SettingAccountScreen = ({setIsLoggedIn}: SettingAccountScreenProps) => {
-  const handleLogout = async () => {
+  const [modalVisible, setModalVisible] = useState<boolean>(false);
+
+  // 🔸 로그아웃 버튼 클릭 → 모달만 열기
+  const confirmLogout = () => {
+    setModalVisible(true);
+  };
+
+  // 🔸 모달에서 "확인" 눌렀을 때 진짜 로그아웃 수행
+  const handleLogoutConfirm = async () => {
     try {
-      await logout(); // ✅ 토큰 삭제
-      setIsLoggedIn(false); // ✅ 상태 갱신 → 로그인 화면 전환 유도
+      await logout();
+      setIsLoggedIn(false);
       Alert.alert('로그아웃되었습니다.');
     } catch (error) {
-      console.log(error);
       Alert.alert('로그아웃 실패', '다시 시도해주세요.');
+    } finally {
+      setModalVisible(false);
     }
   };
 
@@ -37,7 +48,7 @@ const SettingAccountScreen = ({setIsLoggedIn}: SettingAccountScreenProps) => {
             </View>
             <AppText style={styles.label}>카카오 계정</AppText>
           </View>
-          <TouchableOpacity onPress={handleLogout}>
+          <TouchableOpacity onPress={confirmLogout}>
             <AppText style={styles.logoutText}>로그아웃</AppText>
           </TouchableOpacity>
         </View>
@@ -55,6 +66,13 @@ const SettingAccountScreen = ({setIsLoggedIn}: SettingAccountScreenProps) => {
           </TouchableOpacity>
         </View>
       </View>
+
+      {/* 🔸 모달 표시 */}
+      <CustomModal
+        modalVisible={modalVisible}
+        setModalVisible={setModalVisible}
+        onConfirm={handleLogoutConfirm} // 모달 내 "확인" 버튼
+      />
     </SafeAreaView>
   );
 };
