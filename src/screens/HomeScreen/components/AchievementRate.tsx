@@ -1,8 +1,9 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {View, StyleSheet, Text, Image, Pressable, Animated} from 'react-native';
+import {View, StyleSheet, Pressable, Animated} from 'react-native';
 import palette from '../../../styles/palette';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {RootStackParamList} from '../../../types/screens';
+import AppText from '../../../components/AppText';
 
 type AchievementRateProps = {
   progress: number;
@@ -35,11 +36,11 @@ const AchievementRate = ({progress}: AchievementRateProps) => {
   return (
     <View style={styles.container}>
       <View style={styles.goalHeader}>
-        <Text style={styles.goalTitle}>오늘의 목표 달성률</Text>
+        <AppText style={styles.goalTitle}>오늘의 목표 달성률</AppText>
         <Pressable
           style={styles.studyButton}
           onPress={() => navigation.navigate('Timer')}>
-          <Text style={styles.studyButtonText}>공부하기</Text>
+          <AppText style={styles.studyButtonText}>공부하기</AppText>
         </Pressable>
       </View>
 
@@ -70,9 +71,9 @@ const AchievementRate = ({progress}: AchievementRateProps) => {
                 transform: [{translateX: -30}],
               },
             ]}>
-            <Text style={styles.progressTextBubble}>
+            <AppText style={styles.progressTextBubble}>
               {animatedProgress}% 달성!
-            </Text>
+            </AppText>
             <Animated.Image
               source={require('../../../assets/images/seokwang.webp')}
               style={[

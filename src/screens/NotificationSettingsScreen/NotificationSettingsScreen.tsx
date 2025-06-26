@@ -25,17 +25,17 @@ const NotificationSettingsScreen = () => {
 
       <View style={styles.content}>
         <SettingRow
-          label="알림 1"
+          label="학습 알림"
           value={settings.alarm1}
           onToggle={() => toggle('alarm1')}
         />
         <SettingRow
-          label="알림 2"
+          label="동기 부여 알림 "
           value={settings.alarm2}
           onToggle={() => toggle('alarm2')}
         />
         <SettingRow
-          label="알림 2"
+          label="시스템 알림"
           value={settings.alarm3}
           onToggle={() => toggle('alarm3')}
         />
