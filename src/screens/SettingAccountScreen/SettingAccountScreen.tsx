@@ -16,7 +16,7 @@ type SettingAccountScreenProps = {
 };
 
 const SettingAccountScreen = ({setIsLoggedIn}: SettingAccountScreenProps) => {
-  const [modalVisible, setModalVisible] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const [modalContent, setModalContent] = useState<CustomModalContent>({
     title: '',
     confirmText: '',
@@ -70,7 +70,7 @@ const SettingAccountScreen = ({setIsLoggedIn}: SettingAccountScreenProps) => {
           <TouchableOpacity
             onPress={() => {
               setModalContent(logoutData);
-              setModalVisible(true);
+              setIsModalVisible(true);
             }}>
             <AppText style={styles.logoutText}>로그아웃</AppText>
           </TouchableOpacity>
@@ -87,7 +87,7 @@ const SettingAccountScreen = ({setIsLoggedIn}: SettingAccountScreenProps) => {
           <TouchableOpacity
             onPress={() => {
               setModalContent(withdrawalData);
-              setModalVisible(true);
+              setIsModalVisible(true);
             }}>
             <AppText style={styles.withdrawButton}>회원 탈퇴</AppText>
           </TouchableOpacity>
@@ -96,8 +96,8 @@ const SettingAccountScreen = ({setIsLoggedIn}: SettingAccountScreenProps) => {
 
       {/* 공통 모달 */}
       <CustomModal
-        visible={modalVisible}
-        setVisible={setModalVisible}
+        isModalVisible={isModalVisible}
+        setIsModalVisible={setIsModalVisible}
         data={modalContent}
       />
     </SafeAreaView>

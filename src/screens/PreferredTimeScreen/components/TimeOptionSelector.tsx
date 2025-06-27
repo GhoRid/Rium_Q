@@ -32,11 +32,21 @@ const TimeOptionSelector = ({options, selectedIds, onSelect}: Props) => {
             ]}
             activeOpacity={0.8}
             onPress={() => onSelect(option.id)}>
-            <View style={styles.radioWrapper}>
-              {/* <SvgIcon
-                name={isSelected ? '라디오선택' : '라디오기본'}
-                size={20}
-              /> */}
+            <View
+              style={[
+                styles.circleWrapper,
+                isSelected
+                  ? {borderColor: palette.app_main_color}
+                  : {
+                      borderColor: '#888',
+                    },
+              ]}>
+              <View
+                style={[
+                  styles.circle,
+                  isSelected ? {backgroundColor: palette.app_main_color} : {},
+                ]}
+              />
             </View>
             <AppText
               style={[
@@ -72,18 +82,29 @@ const styles = StyleSheet.create({
   },
   optionItemUnselected: {
     backgroundColor: '#fff',
-    borderColor: '#E0E0E0',
+    borderColor: '#888',
   },
-  radioWrapper: {
-    marginRight: 12,
+  circleWrapper: {
+    width: 15,
+    aspectRatio: 1,
+    borderRadius: 15,
+    borderWidth: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 15,
+  },
+  circle: {
+    width: 9,
+    aspectRatio: 1,
+    borderRadius: 9,
   },
   optionLabel: {
     fontSize: 16,
-    fontWeight: '400',
+    fontWeight: 400,
     color: '#888',
   },
   optionLabelSelected: {
-    fontWeight: '700',
+    fontWeight: 700,
     color: '#000',
   },
 });

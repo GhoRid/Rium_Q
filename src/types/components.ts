@@ -3,7 +3,7 @@
  */
 export type CustomModalContent = {
   /** 상단 제목 */
-  title: string;
+  title?: string;
   /** 설명 텍스트 (선택) */
   content?: string;
   /** 확인 버튼 텍스트 */

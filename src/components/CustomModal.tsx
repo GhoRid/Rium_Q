@@ -12,18 +12,20 @@ import {CustomModalContent} from '../types/components';
 const {width} = Dimensions.get('window');
 
 type Props = {
-  visible: boolean;
-  setVisible: (v: boolean) => void;
+  isModalVisible: boolean;
+  setIsModalVisible: (v: boolean) => void;
   data: CustomModalContent;
 };
 
-const CustomModal = ({visible, setVisible, data}: Props) => {
+const CustomModal = ({isModalVisible, setIsModalVisible, data}: Props) => {
   return (
-    <Modal visible={visible} transparent animationType="fade">
+    <Modal visible={isModalVisible} transparent animationType="fade">
       <View style={styles.overlay}>
         <View style={styles.CustomModalContentBox}>
           <View style={styles.contentContainer}>
-            <AppText style={styles.messageTitle}>{data.title}</AppText>
+            {data.title && (
+              <AppText style={styles.messageTitle}>{data.title}</AppText>
+            )}
             {data.content && (
               <AppText style={styles.messageContent}>{data.content}</AppText>
             )}
@@ -32,7 +34,7 @@ const CustomModal = ({visible, setVisible, data}: Props) => {
           <View style={styles.buttonContainer}>
             <TouchableOpacity
               style={[styles.basebutton, {backgroundColor: '#F7F7F7'}]}
-              onPress={() => setVisible(false)}>
+              onPress={() => setIsModalVisible(false)}>
               <AppText style={styles.cancelText}>취소</AppText>
             </TouchableOpacity>
 
@@ -40,7 +42,7 @@ const CustomModal = ({visible, setVisible, data}: Props) => {
               style={[styles.basebutton, {backgroundColor: data.confirmColor}]}
               onPress={() => {
                 data.onConfirm();
-                setVisible(false);
+                setIsModalVisible(false);
               }}>
               <AppText style={styles.confirmText}>{data.confirmText}</AppText>
             </TouchableOpacity>
@@ -68,8 +70,9 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     paddingHorizontal: 30,
-    paddingVertical: 50,
+    paddingVertical: 45,
     gap: 4,
+    alignItems: 'center',
   },
   messageTitle: {
     fontSize: 18,

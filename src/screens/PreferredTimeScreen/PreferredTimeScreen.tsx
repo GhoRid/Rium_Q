@@ -5,6 +5,10 @@ import BackButtonHeaderLeft from '../../components/Header/BackButtonHeaderLeft';
 import AppText from '../../components/AppText';
 import TimeOptionSelector from './components/TimeOptionSelector';
 import {useState} from 'react';
+import CustomModal from '../../components/CustomModal';
+import {CustomModalContent} from '../../types/components';
+import palette from '../../styles/palette';
+import BottomButtonGroup from './components/BottomButtonGroup';
 
 const TIME_OPTIONS = [
   {id: 1, label: '아침 06:00 ~ 09:00'},
@@ -16,6 +20,16 @@ const TIME_OPTIONS = [
 
 const PreferredTimeScreen = () => {
   const [selectedIds, setSelectedIds] = useState<number[]>([]);
+  const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
+
+  const modalContent: CustomModalContent = {
+    content: '저장이 완료되었습니다!',
+    confirmText: '확인',
+    confirmColor: palette.app_main_color,
+    onConfirm: () => {
+      setIsModalVisible(false);
+    },
+  };
 
   const handleSelect = (id: number) => {
     setSelectedIds(prev =>
@@ -38,6 +52,21 @@ const PreferredTimeScreen = () => {
           onSelect={handleSelect}
         />
       </View>
+
+      {/* 저장하기 버튼 */}
+      <BottomButtonGroup
+        onConfirm={() => setIsModalVisible(true)}
+        confirmDisabled={selectedIds.length === 0}
+      />
+
+      <View style={{flex: 1}} />
+
+      {/* 저장하기 모달 */}
+      <CustomModal
+        isModalVisible={isModalVisible}
+        setIsModalVisible={setIsModalVisible}
+        data={modalContent}
+      />
     </SafeAreaView>
   );
 };
