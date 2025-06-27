@@ -1,30 +1,20 @@
-import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {View, StyleSheet} from 'react-native';
-import {RootStackParamList} from '../../types/screens';
 import UserProfile from './components/UserProfile';
 import MenuList from './components/MenuList';
 
 const MyPageScreen = () => {
-  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+  const menuList = [
+    {label: '선호 학습 시간', route: 'PreferredTime'},
+    {label: '학원 관리', route: 'AcademyScreen'},
+    {label: '계획 관리', route: 'PlanScreen'},
+    {label: '성적 관리', route: 'ScoreScreen'},
+  ];
 
   return (
     <View style={styles.contianer}>
       <UserProfile />
 
-      <MenuList
-        menuList={['선호 학습 시간', '학원 관리', '계획 관리', '성적 관리']}
-      />
-
-      {/* <Pressable
-        onPress={() => navigation.navigate('Login')}
-        style={{
-          backgroundColor: 'orange',
-          padding: 30,
-          borderRadius: 5,
-          marginTop: 20,
-        }}>
-        <AppText>Go to Login</AppText>
-      </Pressable> */}
+      <MenuList menuList={menuList} />
     </View>
   );
 };

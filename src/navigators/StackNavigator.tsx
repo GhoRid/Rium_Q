@@ -13,6 +13,7 @@ import CustomerServiceCenterScreen from '../screens/CustomerServiceCenterScreen/
 import EditMyInfoScreen from '../screens/EditMyInfoScreen/EditMyInfoScreen';
 import SettingAccountScreen from '../screens/SettingAccountScreen/SettingAccountScreen';
 import SettingNotificationScreen from '../screens/SettingNotification/SettingNotification';
+import PreferredTimeScreen from '../screens/PreferredTimeScreen/PreferredTimeScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -45,6 +46,8 @@ const StackNavigator = ({setIsLoggedIn}: StackNavigatorProps) => {
       <Stack.Screen name="Timer" component={TimerScreen} />
       {/* 내 정보 수정 스크린 */}
       <Stack.Screen name="EditMyInfo" component={EditMyInfoScreen} />
+      {/* 선호 학습 시간 스크린 */}
+      <Stack.Screen name="PreferredTime" component={PreferredTimeScreen} />
       {/* 설정 스크린 */}
       <Stack.Screen name="Setting" component={SettingsScreen} />
       {/* 알림 설정 스크린 */}
