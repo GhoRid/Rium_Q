@@ -170,7 +170,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 16,
-    fontWeight: '600',
+    fontWeight: 600,
   },
   headerRow: {
     flexDirection: 'row',
@@ -180,7 +180,7 @@ const styles = StyleSheet.create({
   dayHeader: {
     width: CELL_SIZE,
     textAlign: 'center',
-    fontWeight: '600',
+    fontWeight: 600,
   },
   grid: {
     flexDirection: 'row',
@@ -195,7 +195,7 @@ const styles = StyleSheet.create({
   },
   dateText: {
     fontSize: 12,
-    fontWeight: '500',
+    fontWeight: 500,
   },
   timeText: {
     fontSize: 10,

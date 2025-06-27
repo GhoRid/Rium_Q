@@ -164,7 +164,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 16,
-    fontWeight: '600',
+    fontWeight: 600,
   },
   grid: {
     width: CONTENT_WIDTH, // 정확히 5칸

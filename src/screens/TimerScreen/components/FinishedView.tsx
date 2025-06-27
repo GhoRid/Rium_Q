@@ -66,6 +66,6 @@ const styles = StyleSheet.create({
   },
   bottomButtonText: {
     fontSize: 16,
-    fontWeight: '600',
+    fontWeight: 600,
   },
 });

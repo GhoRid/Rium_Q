@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
   smallText: {
     color: '#333',
     fontSize: 16,
-    fontWeight: '500',
+    fontWeight: 500,
   },
   seatCard: {
     height: '48%',

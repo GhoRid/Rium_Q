@@ -136,12 +136,12 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 16,
-    fontWeight: '500',
+    fontWeight: 500,
     color: '#111',
   },
   logoutText: {
     fontSize: 15,
-    fontWeight: '700',
+    fontWeight: 700,
     color: '#888',
   },
   separator: {
@@ -160,6 +160,6 @@ const styles = StyleSheet.create({
   withdrawButton: {
     fontSize: 14,
     color: '#C4C4C4',
-    fontWeight: '500',
+    fontWeight: 500,
   },
 });

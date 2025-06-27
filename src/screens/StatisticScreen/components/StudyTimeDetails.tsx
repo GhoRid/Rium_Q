@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
   },
   timeText: {
     fontSize: 18,
-    fontWeight: '600',
+    fontWeight: 600,
     marginBottom: 4,
   },
   row: {

@@ -73,12 +73,12 @@ const styles = StyleSheet.create({
   },
   messageTitle: {
     fontSize: 18,
-    fontWeight: '700',
+    fontWeight: 700,
     color: '#333',
   },
   messageContent: {
     fontSize: 16,
-    fontWeight: '400',
+    fontWeight: 400,
     color: '#333',
   },
   buttonContainer: {
@@ -92,12 +92,12 @@ const styles = StyleSheet.create({
   },
   cancelText: {
     fontSize: 16,
-    fontWeight: '500',
+    fontWeight: 500,
     color: '#1a2b48',
   },
   confirmText: {
     fontSize: 16,
-    fontWeight: '500',
+    fontWeight: 500,
     color: '#fff',
   },
 });

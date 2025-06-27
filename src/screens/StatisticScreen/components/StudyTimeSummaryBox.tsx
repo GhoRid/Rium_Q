@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
   },
   periodLabel: {
     fontSize: 16,
-    fontWeight: '600',
+    fontWeight: 600,
     color: '#000',
   },
   dateRangeContainer: {
@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
   },
   valueText: {
     fontSize: 24,
-    fontWeight: '600',
+    fontWeight: 600,
     color: '#222',
   },
 });
