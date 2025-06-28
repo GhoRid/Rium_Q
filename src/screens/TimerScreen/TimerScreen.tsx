@@ -3,7 +3,7 @@ import {StyleSheet, Animated, Easing, StatusBar} from 'react-native';
 import {SafeAreaView, useSafeAreaInsets} from 'react-native-safe-area-context';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {RootStackParamList} from '../../types/screens';
-import {formatHHMMSS} from '../../utils/timeTranslate';
+import {formatHHMMSS} from '../../utils/formatTime';
 import {loadTimer, saveTimer} from '../../storage';
 import FinishedView from './components/FinishedView';
 import RunningTimerView from './components/RunningTimerView';

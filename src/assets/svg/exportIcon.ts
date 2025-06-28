@@ -28,6 +28,7 @@ export {default as 검색} from './icon/search.svg';
 export {default as 우측방향} from './icon/directionRight.svg';
 export {default as 좌측방향} from './icon/directionLeft.svg';
 export {default as 아래방향} from './icon/directionDown.svg';
+export {default as 위방향} from './icon/directionUp.svg';
 export {default as 취소} from './icon/close.svg';
 export {default as 더하기} from './icon/plus.svg';
 

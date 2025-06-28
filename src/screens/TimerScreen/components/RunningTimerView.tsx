@@ -1,8 +1,9 @@
 import React, {useEffect, useRef} from 'react';
 import {Animated, StyleSheet, TouchableOpacity, View} from 'react-native';
-import {formatHHMMSS} from '../../../utils/timeTranslate';
+import {formatHHMMSS} from '../../../utils/formatTime';
 import AppText from '../../../components/AppText';
 import {formatDateToKorean} from '../../../utils/formatDate';
+import SubjectTimeAccordion from './SubjectTimeAccordion';
 
 type RunningTimerViewProps = {
   blackToWhite: Animated.AnimatedInterpolation<string>;
@@ -16,6 +17,27 @@ type RunningTimerViewProps = {
 const AnimatedAppText = Animated.createAnimatedComponent(AppText);
 
 const ANIMATED_HEIGHT = 50; // 애니메이션 높이
+
+const mockData = [
+  {
+    subject: '국어',
+    totalTime: 8492, // 초 단위
+    records: [
+      {title: '2024학년도 6월 국어 모의고사', time: 4830},
+      {title: '2024학년도 6월 국어 모의고사', time: 3662},
+    ],
+  },
+  {
+    subject: '수학',
+    totalTime: 3836,
+    records: [],
+  },
+  {
+    subject: '영어',
+    totalTime: 0,
+    records: [],
+  },
+];
 
 const RunningTimerView = ({
   blackToWhite,
@@ -52,6 +74,8 @@ const RunningTimerView = ({
           {formatHHMMSS(seconds)}
         </AnimatedAppText>
       </Animated.View>
+
+      <SubjectTimeAccordion data={mockData} />
 
       {isRunning && (
         <>
