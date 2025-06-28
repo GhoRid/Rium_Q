@@ -5,6 +5,7 @@ import palette from '../../../styles/palette';
 import AppText from '../../../components/AppText';
 import {formatReadableTime} from '../../../utils/formatTime';
 import SubjectTimeAccordion from './SubjectTimeAccordion';
+import {useEffect, useRef, useState} from 'react';
 
 type FinishedViewProps = {
   whiteToBlack?: Animated.AnimatedInterpolation<string>;
@@ -41,7 +42,25 @@ const FinishedView = ({
   setIsFinished,
 }: FinishedViewProps) => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
-  console.log(seconds);
+  const [continueSeconds, setContinueSeconds] = useState<number>(60);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+
+  useEffect(() => {
+    if (continueSeconds === 0 && intervalRef.current) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
+    }
+  }, [continueSeconds]);
+
+  useEffect(() => {
+    intervalRef.current = setInterval(() => {
+      setContinueSeconds(prev => prev - 1);
+    }, 1000);
+
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
+  }, []);
 
   return (
     <>
@@ -65,25 +84,33 @@ const FinishedView = ({
 
       <View style={{flex: 1}} />
 
-      {/* 하단 버튼 */}
-      <View style={styles.buttonRowBox}>
-        <TouchableOpacity
-          style={[styles.bottomButton, {backgroundColor: '#F3F4F6'}]}
-          onPress={() => setIsFinished(false)}>
-          <AppText style={[styles.bottomButtonText, {color: '#111'}]}>
-            이어서 공부하기
+      <View style={styles.bottomContent}>
+        {continueSeconds > 0 && (
+          <AppText style={styles.continueTipText}>
+            {continueSeconds}초 이내에 시작하면 집중이 이어집니다.
           </AppText>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[
-            styles.bottomButton,
-            {backgroundColor: palette.app_main_color},
-          ]}
-          onPress={() => navigation.navigate('Tab', {screen: 'Home'})}>
-          <AppText style={[styles.bottomButtonText, {color: '#fff'}]}>
-            홈으로
-          </AppText>
-        </TouchableOpacity>
+        )}
+
+        {/* 하단 버튼 */}
+        <View style={styles.buttonRowBox}>
+          <TouchableOpacity
+            style={[styles.bottomButton, {backgroundColor: '#F3F4F6'}]}
+            onPress={() => setIsFinished(false)}>
+            <AppText style={[styles.bottomButtonText, {color: '#111'}]}>
+              이어서 공부하기
+            </AppText>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[
+              styles.bottomButton,
+              {backgroundColor: palette.app_main_color},
+            ]}
+            onPress={() => navigation.navigate('Tab', {screen: 'Home'})}>
+            <AppText style={[styles.bottomButtonText, {color: '#fff'}]}>
+              홈으로
+            </AppText>
+          </TouchableOpacity>
+        </View>
       </View>
     </>
   );
@@ -111,6 +138,14 @@ const styles = StyleSheet.create({
   todayMaxText: {
     fontSize: 14,
     color: '#bcbcbc',
+  },
+  bottomContent: {
+    gap: 10,
+  },
+  continueTipText: {
+    fontSize: 14,
+    color: palette.app_blue,
+    textAlign: 'center',
   },
   buttonRowBox: {
     flexDirection: 'row',
