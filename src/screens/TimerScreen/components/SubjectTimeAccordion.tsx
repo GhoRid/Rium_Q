@@ -1,14 +1,9 @@
-import React, {useRef, useState, useEffect} from 'react';
-import {
-  View,
-  StyleSheet,
-  TouchableOpacity,
-  Platform,
-  Animated,
-} from 'react-native';
+import React, {useRef, useState, useEffect, useCallback} from 'react';
+import {View, StyleSheet, TouchableOpacity, Animated} from 'react-native';
 import {formatHHMMSS} from '../../../utils/formatTime';
 import AppText from '../../../components/AppText';
 import SvgIcon from '../../../components/SvgIcon';
+import {useFocusEffect} from '@react-navigation/native';
 
 type RecordItem = {
   title: string;
@@ -21,16 +16,21 @@ type SubjectItem = {
   records: RecordItem[];
 };
 
-type Props = {
+type SubjectTimeAccordionProps = {
   data: SubjectItem[];
+  whiteToBlack?: Animated.AnimatedInterpolation<string>;
 };
 
-const SubjectTimeAccordion = ({data}: Props) => {
+const SubjectTimeAccordion = ({
+  data,
+  whiteToBlack,
+}: SubjectTimeAccordionProps) => {
   const [expandedSubject, setExpandedSubject] = useState<string | null>(null);
-  const animatedControllers = useRef<Record<string, Animated.Value>>( // subject별 animation controller
+  const animatedControllers = useRef<Record<string, Animated.Value>>(
     {},
   ).current;
 
+  // 초기 Animated.Value 등록
   useEffect(() => {
     data.forEach(subject => {
       if (!animatedControllers[subject.subject]) {
@@ -39,11 +39,21 @@ const SubjectTimeAccordion = ({data}: Props) => {
     });
   }, [data]);
 
+  // ✅ 탭 포커스될 때 초기화
+  useFocusEffect(
+    useCallback(() => {
+      setExpandedSubject(null);
+      // 강제로 애니메이션 상태도 리셋
+      Object.keys(animatedControllers).forEach(key => {
+        animatedControllers[key].setValue(0);
+      });
+    }, []),
+  );
+
   const toggleSubject = (subject: string) => {
     const isExpanding = expandedSubject !== subject;
 
     if (expandedSubject && expandedSubject !== subject) {
-      // 기존 열려 있던 것 닫기
       Animated.timing(animatedControllers[expandedSubject], {
         toValue: 0,
         duration: 200,
@@ -70,12 +80,13 @@ const SubjectTimeAccordion = ({data}: Props) => {
   };
 
   return (
-    <View style={styles.container}>
+    <Animated.View style={{backgroundColor: whiteToBlack}}>
       {data.map(subject => {
         const isExpanded = expandedSubject === subject.subject;
         const animationValue = animatedControllers[subject.subject];
+        const rowHeight = 60;
+        const maxHeight = subject.records.length * rowHeight;
 
-        const maxHeight = subject.records.length * 60; // 각 row 높이 대략 60
         const heightInterpolate = animationValue?.interpolate({
           inputRange: [0, 1],
           outputRange: [0, maxHeight],
@@ -109,8 +120,9 @@ const SubjectTimeAccordion = ({data}: Props) => {
               style={[
                 styles.recordContainer,
                 {
-                  height: heightInterpolate,
-                  opacity: opacityInterpolate,
+                  height: isExpanded ? heightInterpolate : 0,
+                  opacity: isExpanded ? opacityInterpolate : 0,
+                  overflow: 'hidden',
                 },
               ]}>
               {subject.records.map((record, idx) => (
@@ -130,16 +142,14 @@ const SubjectTimeAccordion = ({data}: Props) => {
           </View>
         );
       })}
-    </View>
+    </Animated.View>
   );
 };
 
 export default SubjectTimeAccordion;
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#fff',
-  },
+  container: {},
   subjectWrapper: {
     position: 'relative',
   },
@@ -149,7 +159,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 20,
     paddingHorizontal: 24,
-    backgroundColor: '#fff',
   },
   rowRight: {
     flexDirection: 'row',
@@ -170,7 +179,6 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
   recordContainer: {
-    overflow: 'hidden',
     backgroundColor: '#f8f8f8',
   },
   recordRow: {

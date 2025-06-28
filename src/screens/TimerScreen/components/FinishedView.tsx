@@ -4,16 +4,38 @@ import {RootStackParamList} from '../../../types/screens';
 import palette from '../../../styles/palette';
 import AppText from '../../../components/AppText';
 import {formatReadableTime} from '../../../utils/formatTime';
+import SubjectTimeAccordion from './SubjectTimeAccordion';
 
 type FinishedViewProps = {
-  blackToWhite: Animated.AnimatedInterpolation<string>;
+  whiteToBlack?: Animated.AnimatedInterpolation<string>;
   seconds: number;
   totalTime: number;
   setIsFinished: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
+const mockData = [
+  {
+    subject: '국어',
+    totalTime: 8492, // 초 단위
+    records: [
+      {title: '2024학년도 6월 국어 모의고사', time: 4830},
+      {title: '2024학년도 6월 국어 모의고사', time: 3662},
+    ],
+  },
+  {
+    subject: '수학',
+    totalTime: 3836,
+    records: [],
+  },
+  {
+    subject: '영어',
+    totalTime: 0,
+    records: [],
+  },
+];
+
 const FinishedView = ({
-  blackToWhite,
+  whiteToBlack,
   seconds,
   totalTime,
   setIsFinished,
@@ -35,8 +57,9 @@ const FinishedView = ({
             {formatReadableTime(totalTime)}
           </AppText>
         </AppText>
-        {/* <AppText style={styles.todayMaxText}>{totalTime}</AppText> */}
       </View>
+
+      <SubjectTimeAccordion data={mockData} whiteToBlack={whiteToBlack} />
 
       <View style={{flex: 1}} />
 

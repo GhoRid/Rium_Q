@@ -75,9 +75,7 @@ const RunningTimerView = ({
         </AnimatedAppText>
       </Animated.View>
 
-      <SubjectTimeAccordion data={mockData} />
-
-      {isRunning && (
+      {isRunning ? (
         <>
           <View style={styles.row}>
             <AnimatedAppText style={styles.todayLabel}>오늘</AnimatedAppText>
@@ -89,6 +87,8 @@ const RunningTimerView = ({
             학습 시 주의사항
           </AnimatedAppText>
         </>
+      ) : (
+        <SubjectTimeAccordion data={mockData} />
       )}
 
       <View style={{flex: 1}} />

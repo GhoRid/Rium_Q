@@ -27,8 +27,6 @@ const TimerScreen = () => {
   const animation = useRef(new Animated.Value(0)).current;
   const [planId, setPlanId] = useState<number | null>(0);
 
-  console.log('ISO 시간:', now.toISOString());
-
   const {mutate: saveStudyTime} = useMutation({
     mutationFn: saveStudyTimer,
     onSuccess: () => {
@@ -113,7 +111,7 @@ const TimerScreen = () => {
         {/* 본문 */}
         {isFinished ? (
           <FinishedView
-            blackToWhite={blackToWhite}
+            whiteToBlack={whiteToBlack}
             seconds={seconds}
             totalTime={totalTime}
             setIsFinished={setIsFinished}
