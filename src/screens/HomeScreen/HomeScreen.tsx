@@ -5,6 +5,8 @@ import AchievementRate from './components/AchievementRate';
 import Grid from './components/Grid';
 import Carousel from './components/Carousel';
 import StudyObjectModal from './components/StudyObjectModal';
+import {useQuery} from '@tanstack/react-query';
+import {getmataDateIsPresent} from '../../apis/api/user';
 
 const studyData = [
   {subject: '국어', aim: '모의고사 1회차'},
@@ -17,6 +19,13 @@ const studyData = [
 
 const HomeScreen = () => {
   const [modalVisible, setModalVisible] = useState<boolean>(false);
+
+  const {data, isLoading} = useQuery({
+    queryKey: ['getmataDateIsPresent'],
+    queryFn: getmataDateIsPresent,
+  });
+
+  console.log(data);
 
   return (
     <View style={styles.container}>

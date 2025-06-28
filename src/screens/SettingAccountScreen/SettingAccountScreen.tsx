@@ -10,6 +10,9 @@ import {useState} from 'react';
 import palette from '../../styles/palette';
 import CustomModal from '../../components/CustomModal';
 import {CustomModalContent} from '../../types/components';
+import {useMutation} from '@tanstack/react-query';
+import {deleteUserAccount} from '../../apis/api/user';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 type SettingAccountScreenProps = {
   setIsLoggedIn: (isLoggedIn: boolean) => void;
@@ -34,6 +37,21 @@ const SettingAccountScreen = ({setIsLoggedIn}: SettingAccountScreenProps) => {
     }
   };
 
+  const {mutate: deleteUserAccountMutation} = useMutation({
+    mutationFn: deleteUserAccount,
+  });
+
+  const handleWithdrawal = async () => {
+    try {
+      await deleteUserAccountMutation();
+      AsyncStorage.removeItem('token');
+      setIsLoggedIn(false);
+      Alert.alert('회원 탈퇴가 완료되었습니다.');
+    } catch {
+      Alert.alert('회원 탈퇴 실패', '다시 시도해주세요.');
+    }
+  };
+
   const logoutData: CustomModalContent = {
     title: '로그아웃 하시겠어요?',
     confirmText: '로그아웃',
@@ -46,10 +64,7 @@ const SettingAccountScreen = ({setIsLoggedIn}: SettingAccountScreenProps) => {
     content: '회원탈퇴 시 모든 데이터가 삭제되며,\n복구가 불가능합니다.',
     confirmText: '회원 탈퇴',
     confirmColor: '#E3383B',
-    onConfirm: () => {
-      Alert.alert('회원 탈퇴 요청됨');
-      // ✅ 실제 탈퇴 로직 수행
-    },
+    onConfirm: handleWithdrawal,
   };
 
   return (

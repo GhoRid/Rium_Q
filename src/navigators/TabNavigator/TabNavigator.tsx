@@ -45,7 +45,6 @@ const TabNavigator = () => {
                   <TouchableOpacity
                     onPress={() => {
                       navigation.navigate('Notification');
-                      console.log('알림 아이콘 클릭됨');
                     }}>
                     <SvgIcon name="알림" size={35} />
                   </TouchableOpacity>

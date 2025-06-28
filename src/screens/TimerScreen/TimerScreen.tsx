@@ -3,16 +3,12 @@ import {StyleSheet, Animated, Easing, StatusBar} from 'react-native';
 import {SafeAreaView, useSafeAreaInsets} from 'react-native-safe-area-context';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {RootStackParamList} from '../../types/screens';
-import {formatHHMMSS} from '../../utils/formatTime';
-import {loadTimer, saveTimer} from '../../storage';
 import FinishedView from './components/FinishedView';
 import RunningTimerView from './components/RunningTimerView';
-import {useMutation} from '@tanstack/react-query';
-import {saveStudyTimer} from '../../apis/api/timer';
+import {useMutation, useQuery} from '@tanstack/react-query';
+import {getPlanTimer, saveStudyTimer} from '../../apis/api/timer';
 import CustomHeader from '../../components/Header/CustomHeader';
 import BackButtonHeaderLeft from '../../components/Header/BackButtonHeaderLeft';
-import {formatDateToKorean} from '../../utils/formatDate';
-import AppText from '../../components/AppText';
 
 const TimerScreen = () => {
   const insets = useSafeAreaInsets();
@@ -27,6 +23,13 @@ const TimerScreen = () => {
   const animation = useRef(new Animated.Value(0)).current;
   const [planId, setPlanId] = useState<number | null>(0);
 
+  const {data, isLoading, isError} = useQuery({
+    queryKey: ['timeRecord'],
+    queryFn: getPlanTimer,
+  });
+
+  console.log(data);
+
   const {mutate: saveStudyTime} = useMutation({
     mutationFn: saveStudyTimer,
     onSuccess: () => {
@@ -36,14 +39,6 @@ const TimerScreen = () => {
       console.error('타이머 저장 실패:', error);
     },
   });
-
-  useEffect(() => {
-    const load = async () => {
-      const value = await loadTimer();
-      setTotalTime(value);
-    };
-    load();
-  }, []);
 
   useEffect(() => {
     //화면 전환 애니메이션
@@ -74,7 +69,6 @@ const TimerScreen = () => {
 
   const toggleTimer = async () => {
     if (isRunning) {
-      await saveTimer(totalTime);
       setIsRunning(false);
       setIsFinished(true);
     } else {

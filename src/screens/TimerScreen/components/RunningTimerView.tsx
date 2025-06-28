@@ -23,8 +23,8 @@ const mockData = [
     subject: '국어',
     totalTime: 8492, // 초 단위
     records: [
-      {title: '2024학년도 6월 국어 모의고사', time: 4830},
-      {title: '2024학년도 6월 국어 모의고사', time: 3662},
+      {planId: 0, title: '2024학년도 6월 국어 모의고사', time: 4830},
+      {planId: 1, title: '2024학년도 6월 국어 모의고사', time: 3662},
     ],
   },
   {

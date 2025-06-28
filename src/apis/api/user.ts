@@ -11,9 +11,8 @@ export const backendKakaoLogin = async ({
   const fullUrl = `${
     instance.defaults.baseURL
   }/auth/kakao/callback?code=${encodeURIComponent(code)}`;
-  console.log('🔗 실제 요청 URL:', fullUrl);
+  // console.log('🔗 실제 요청 URL:', fullUrl);
 
-  // 요청 실행
   const response = await instance.get<backendKakaoLoginResponse>(
     '/auth/kakao/callback',
     {
@@ -22,4 +21,12 @@ export const backendKakaoLogin = async ({
   );
 
   return response.data;
+};
+
+export const getmataDateIsPresent = async () => {
+  return await instance.get('/metadata/ispresent');
+};
+
+export const deleteUserAccount = async () => {
+  return await instance.delete('/mypage/delete/myaccount');
 };

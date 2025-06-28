@@ -1,11 +1,19 @@
 import React, {useRef, useState, useEffect, useCallback} from 'react';
-import {View, StyleSheet, TouchableOpacity, Animated} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  Animated,
+  ViewStyle,
+} from 'react-native';
 import {formatHHMMSS} from '../../../utils/formatTime';
 import AppText from '../../../components/AppText';
 import SvgIcon from '../../../components/SvgIcon';
 import {useFocusEffect} from '@react-navigation/native';
+import LinearGradient from 'react-native-linear-gradient';
 
 type RecordItem = {
+  planId: number;
   title: string;
   time: number;
 };
@@ -26,11 +34,11 @@ const SubjectTimeAccordion = ({
   whiteToBlack,
 }: SubjectTimeAccordionProps) => {
   const [expandedSubject, setExpandedSubject] = useState<string | null>(null);
+  const [selectedRecord, setSelectedRecord] = useState<number | null>(null);
   const animatedControllers = useRef<Record<string, Animated.Value>>(
     {},
   ).current;
 
-  // 초기 Animated.Value 등록
   useEffect(() => {
     data.forEach(subject => {
       if (!animatedControllers[subject.subject]) {
@@ -39,11 +47,9 @@ const SubjectTimeAccordion = ({
     });
   }, [data]);
 
-  // ✅ 탭 포커스될 때 초기화
   useFocusEffect(
     useCallback(() => {
       setExpandedSubject(null);
-      // 강제로 애니메이션 상태도 리셋
       Object.keys(animatedControllers).forEach(key => {
         animatedControllers[key].setValue(0);
       });
@@ -115,6 +121,17 @@ const SubjectTimeAccordion = ({
                 />
               </View>
             </TouchableOpacity>
+            {isExpanded && subject.records.length > 0 && (
+              <LinearGradient
+                colors={[
+                  'rgba(255,255,255,0)',
+                  // 'rgba(255,255,255,0.5)',
+                  // 'rgba(255,255,255,1)',
+                ]}
+                style={styles.gradientOverlay}
+                pointerEvents="none"
+              />
+            )}
 
             <Animated.View
               style={[
@@ -125,19 +142,34 @@ const SubjectTimeAccordion = ({
                   overflow: 'hidden',
                 },
               ]}>
-              {subject.records.map((record, idx) => (
-                <View
-                  key={idx}
-                  style={[
-                    styles.recordRow,
-                    idx % 2 === 1 && styles.recordRowAlt,
-                  ]}>
-                  <AppText style={styles.recordTitle}>{record.title}</AppText>
-                  <AppText style={styles.recordTime}>
-                    {formatHHMMSS(record.time)}
-                  </AppText>
-                </View>
-              ))}
+              {subject.records.map((record, idx) => {
+                const isSelected = selectedRecord === record.planId;
+                return (
+                  <TouchableOpacity
+                    key={idx}
+                    onPress={() =>
+                      setSelectedRecord(prev =>
+                        prev === record.planId ? null : record.planId,
+                      )
+                    }
+                    style={styles.recordRow}>
+                    <AppText
+                      style={[
+                        styles.recordTitle,
+                        isSelected ? styles.selectedText : {},
+                      ]}>
+                      {record.title}
+                    </AppText>
+                    <AppText
+                      style={[
+                        styles.recordTime,
+                        isSelected ? styles.selectedText : {},
+                      ]}>
+                      {formatHHMMSS(record.time)}
+                    </AppText>
+                  </TouchableOpacity>
+                );
+              })}
             </Animated.View>
           </View>
         );
@@ -149,7 +181,6 @@ const SubjectTimeAccordion = ({
 export default SubjectTimeAccordion;
 
 const styles = StyleSheet.create({
-  container: {},
   subjectWrapper: {
     position: 'relative',
   },
@@ -179,7 +210,7 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
   recordContainer: {
-    backgroundColor: '#f8f8f8',
+    position: 'relative',
   },
   recordRow: {
     flexDirection: 'row',
@@ -187,11 +218,8 @@ const styles = StyleSheet.create({
     height: 60,
     alignItems: 'center',
     paddingHorizontal: 30,
-    backgroundColor: '#f8f8f8',
   },
-  recordRowAlt: {
-    backgroundColor: '#eeeeee',
-  },
+  recordRowAlt: {},
   recordTitle: {
     fontSize: 14,
     color: '#333',
@@ -200,5 +228,15 @@ const styles = StyleSheet.create({
   recordTime: {
     fontSize: 14,
     color: '#333',
+  },
+  selectedText: {
+    color: '#007AFF',
+    fontWeight: '700',
+  },
+  gradientOverlay: {
+    position: 'absolute',
+    bottom: 0,
+    height: 30,
+    width: '100%',
   },
 });
