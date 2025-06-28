@@ -45,7 +45,10 @@ const FinishedView = ({
 
   return (
     <>
-      <View>
+      <View
+        style={{
+          height: 150,
+        }}>
         <AppText style={styles.title}>고생했어요!</AppText>
         <AppText style={styles.timeText}>
           총 {formatReadableTime(seconds)} 집중했어요

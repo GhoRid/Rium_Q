@@ -135,6 +135,6 @@ export default TimerScreen;
 
 const styles = StyleSheet.create({
   headerBox: {
-    height: 60,
+    height: 50,
   },
 });

@@ -64,7 +64,11 @@ const RunningTimerView = ({
   return (
     <>
       <Animated.View
-        style={{transform: [{translateY}], marginTop: ANIMATED_HEIGHT}}>
+        style={{
+          transform: [{translateY}],
+          marginTop: ANIMATED_HEIGHT,
+          height: 100,
+        }}>
         {!isRunning ? (
           <AppText style={styles.dateText}>{formatDateToKorean(date)}</AppText>
         ) : (
