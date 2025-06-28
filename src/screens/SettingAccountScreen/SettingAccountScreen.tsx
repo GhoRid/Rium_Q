@@ -27,6 +27,10 @@ const SettingAccountScreen = ({setIsLoggedIn}: SettingAccountScreenProps) => {
     onConfirm: () => {},
   });
 
+  const {mutate: deleteUserAccountMutation} = useMutation({
+    mutationFn: deleteUserAccount,
+  });
+
   const handleLogoutConfirm = async () => {
     try {
       await logout();
@@ -37,13 +41,9 @@ const SettingAccountScreen = ({setIsLoggedIn}: SettingAccountScreenProps) => {
     }
   };
 
-  const {mutate: deleteUserAccountMutation} = useMutation({
-    mutationFn: deleteUserAccount,
-  });
-
   const handleWithdrawal = async () => {
     try {
-      await deleteUserAccountMutation();
+      deleteUserAccountMutation();
       AsyncStorage.removeItem('token');
       setIsLoggedIn(false);
       Alert.alert('회원 탈퇴가 완료되었습니다.');

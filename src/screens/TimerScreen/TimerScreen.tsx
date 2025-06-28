@@ -28,7 +28,7 @@ const TimerScreen = () => {
     queryFn: getPlanTimer,
   });
 
-  console.log(data);
+  console.log('계획', data);
 
   const {mutate: saveStudyTime} = useMutation({
     mutationFn: saveStudyTimer,
