@@ -45,21 +45,20 @@ const FinishedView = ({
 
   return (
     <>
-      <View
-        style={{
-          height: 150,
-        }}>
+      <View style={styles.textBox}>
         <AppText style={styles.title}>고생했어요!</AppText>
-        <AppText style={styles.timeText}>
-          총 {formatReadableTime(seconds)} 집중했어요
-        </AppText>
 
-        <AppText style={styles.todayMaxText}>
-          오늘 최대 집중 시간
-          <AppText style={{color: palette.app_blue}}>
-            {formatReadableTime(totalTime)}
+        <View style={styles.timeInfoTextBox}>
+          <AppText style={styles.timeText}>
+            총 {formatReadableTime(seconds)} 집중했어요
           </AppText>
-        </AppText>
+          <AppText style={styles.todayMaxText}>
+            {'오늘 최대 집중 시간  '}
+            <AppText style={{color: palette.app_blue}}>
+              {formatReadableTime(totalTime)}
+            </AppText>
+          </AppText>
+        </View>
       </View>
 
       <SubjectTimeAccordion data={mockData} whiteToBlack={whiteToBlack} />
@@ -93,6 +92,11 @@ const FinishedView = ({
 export default FinishedView;
 
 const styles = StyleSheet.create({
+  textBox: {
+    height: 150,
+    paddingHorizontal: 20,
+    gap: 20,
+  },
   title: {
     fontSize: 28,
     fontWeight: 'bold',
@@ -100,6 +104,9 @@ const styles = StyleSheet.create({
   timeText: {
     fontSize: 20,
     fontWeight: 'semibold',
+  },
+  timeInfoTextBox: {
+    gap: 10,
   },
   todayMaxText: {
     fontSize: 14,
