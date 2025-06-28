@@ -49,6 +49,15 @@ const RunningTimerView = ({
 }: RunningTimerViewProps) => {
   const translateY = useRef(new Animated.Value(-ANIMATED_HEIGHT)).current;
 
+  const cautionMessages = [
+    '타이머는 시작 후 일시정지할 수 없습니다.',
+    '집중 가능한 상태에서 시작해주세요.',
+    '학습 외 활동이 많아질 경우 기록이 왜곡될 수 있어요.',
+    '타이머 실행 중 전화 수신, 앱 종료 등에 주의해주세요.',
+    '배터리가 충분한지 확인하고, 알림은 미리 꺼두는 걸 추천해요.',
+    '기록은 학습 리포트에 반영됩니다.',
+  ];
+
   useEffect(() => {
     if (isRunning) {
       Animated.timing(translateY, {
@@ -87,9 +96,17 @@ const RunningTimerView = ({
               {formatHHMMSS(totalTime)}
             </AnimatedAppText>
           </View>
-          <AnimatedAppText style={[styles.caution, {color: blackToWhite}]}>
-            학습 시 주의사항
-          </AnimatedAppText>
+
+          <View style={styles.cautionBox}>
+            <AnimatedAppText style={[styles.cautionTitle]}>
+              학습 시 주의사항
+            </AnimatedAppText>
+            {cautionMessages.map((msg, idx) => (
+              <AnimatedAppText key={idx} style={styles.caution}>
+                ※ {msg}
+              </AnimatedAppText>
+            ))}
+          </View>
         </>
       ) : (
         <SubjectTimeAccordion data={mockData} />
@@ -136,10 +153,19 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: '#a7a7a7',
   },
+  cautionBox: {
+    padding: 20,
+  },
+  cautionTitle: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#888',
+    marginBottom: 12,
+  },
   caution: {
     fontSize: 14,
-    marginTop: 8,
-    textAlign: 'center',
+    marginTop: 4,
+    color: '#888',
   },
   button: {
     alignSelf: 'center',
