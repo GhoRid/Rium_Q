@@ -3,29 +3,50 @@ import {Animated, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {RootStackParamList} from '../../../types/screens';
 import palette from '../../../styles/palette';
 import AppText from '../../../components/AppText';
+import {formatReadableTime} from '../../../utils/timeTranslate';
 
 type FinishedViewProps = {
   blackToWhite: Animated.AnimatedInterpolation<string>;
+  seconds: number;
+  totalTime: number;
+  setIsFinished: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const FinishedView = ({blackToWhite}: FinishedViewProps) => {
+const FinishedView = ({
+  blackToWhite,
+  seconds,
+  totalTime,
+  setIsFinished,
+}: FinishedViewProps) => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+  console.log(seconds);
 
   return (
     <>
-      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <Animated.Text style={[styles.finishText, {color: blackToWhite}]}>
-          고생했어요!
-        </Animated.Text>
+      <View>
+        <AppText style={styles.title}>고생했어요!</AppText>
+        <AppText style={styles.timeText}>
+          총 {formatReadableTime(seconds)} 집중했어요
+        </AppText>
+
+        <AppText style={styles.todayMaxText}>
+          오늘 최대 집중 시간
+          <AppText style={{color: palette.app_blue}}>
+            {formatReadableTime(totalTime)}
+          </AppText>
+        </AppText>
+        {/* <AppText style={styles.todayMaxText}>{totalTime}</AppText> */}
       </View>
 
       <View style={{flex: 1}} />
+
+      {/* 하단 버튼 */}
       <View style={styles.buttonRowBox}>
         <TouchableOpacity
           style={[styles.bottomButton, {backgroundColor: '#F3F4F6'}]}
-          onPress={() => navigation.navigate('Tab', {screen: 'Statistic'})}>
+          onPress={() => setIsFinished(false)}>
           <AppText style={[styles.bottomButtonText, {color: '#111'}]}>
-            내 통계
+            이어서 공부하기
           </AppText>
         </TouchableOpacity>
         <TouchableOpacity
@@ -46,9 +67,17 @@ const FinishedView = ({blackToWhite}: FinishedViewProps) => {
 export default FinishedView;
 
 const styles = StyleSheet.create({
-  finishText: {
-    fontSize: 24,
+  title: {
+    fontSize: 28,
     fontWeight: 'bold',
+  },
+  timeText: {
+    fontSize: 20,
+    fontWeight: 'semibold',
+  },
+  todayMaxText: {
+    fontSize: 14,
+    color: '#bcbcbc',
   },
   buttonRowBox: {
     flexDirection: 'row',

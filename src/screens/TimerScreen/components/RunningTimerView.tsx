@@ -1,40 +1,69 @@
-import {Animated, StyleSheet, TouchableOpacity, View, Text} from 'react-native';
+import React, {useEffect, useRef} from 'react';
+import {Animated, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {formatHHMMSS} from '../../../utils/timeTranslate';
+import AppText from '../../../components/AppText';
+import {formatDateToKorean} from '../../../utils/formatDate';
 
 type RunningTimerViewProps = {
   blackToWhite: Animated.AnimatedInterpolation<string>;
+  date: Date;
   totalTime: number;
   seconds: number;
   isRunning: boolean;
   toggleTimer: () => void;
 };
 
+const AnimatedAppText = Animated.createAnimatedComponent(AppText);
+
+const ANIMATED_HEIGHT = 50; // 애니메이션 높이
+
 const RunningTimerView = ({
   blackToWhite,
+  date,
   totalTime,
   seconds,
   isRunning,
   toggleTimer,
 }: RunningTimerViewProps) => {
-  console.log(totalTime);
+  const translateY = useRef(new Animated.Value(-ANIMATED_HEIGHT)).current;
+
+  useEffect(() => {
+    if (isRunning) {
+      Animated.timing(translateY, {
+        toValue: 0,
+        duration: 300,
+        useNativeDriver: true,
+      }).start();
+    } else {
+      translateY.setValue(-ANIMATED_HEIGHT);
+    }
+  }, [isRunning]);
 
   return (
     <>
-      <Animated.Text style={[styles.timer, {color: blackToWhite}]}>
-        {formatHHMMSS(seconds)}
-      </Animated.Text>
+      <Animated.View
+        style={{transform: [{translateY}], marginTop: ANIMATED_HEIGHT}}>
+        {!isRunning ? (
+          <AppText style={styles.dateText}>{formatDateToKorean(date)}</AppText>
+        ) : (
+          <View style={{height: 20}} />
+        )}
+        <AnimatedAppText style={[styles.timer, {color: blackToWhite}]}>
+          {formatHHMMSS(seconds)}
+        </AnimatedAppText>
+      </Animated.View>
 
       {isRunning && (
         <>
           <View style={styles.row}>
-            <Animated.Text style={styles.todayLabel}>오늘</Animated.Text>
-            <Animated.Text style={[styles.todayTime, {color: blackToWhite}]}>
+            <AnimatedAppText style={styles.todayLabel}>오늘</AnimatedAppText>
+            <AnimatedAppText style={styles.todayTime}>
               {formatHHMMSS(totalTime)}
-            </Animated.Text>
+            </AnimatedAppText>
           </View>
-          <Animated.Text style={[styles.caution, {color: blackToWhite}]}>
+          <AnimatedAppText style={[styles.caution, {color: blackToWhite}]}>
             학습 시 주의사항
-          </Animated.Text>
+          </AnimatedAppText>
         </>
       )}
 
@@ -42,9 +71,9 @@ const RunningTimerView = ({
 
       <TouchableOpacity onPress={toggleTimer}>
         <Animated.View style={[styles.button, {borderColor: blackToWhite}]}>
-          <Animated.Text style={[styles.buttonText, {color: blackToWhite}]}>
+          <AnimatedAppText style={[styles.buttonText, {color: blackToWhite}]}>
             {isRunning ? '공부 종료' : '공부 시작'}
-          </Animated.Text>
+          </AnimatedAppText>
         </Animated.View>
       </TouchableOpacity>
     </>
@@ -54,12 +83,16 @@ const RunningTimerView = ({
 export default RunningTimerView;
 
 const styles = StyleSheet.create({
-  timer: {
-    fontSize: 50,
-    fontWeight: 'bold',
+  dateText: {
     alignSelf: 'center',
-    marginTop: 40,
-    marginBottom: 20,
+    color: '#333',
+    fontSize: 16,
+    height: 20,
+  },
+  timer: {
+    fontSize: 60,
+    fontWeight: '900',
+    alignSelf: 'center',
   },
   row: {
     flexDirection: 'row',
@@ -67,12 +100,13 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   todayLabel: {
-    fontSize: 16,
+    fontSize: 20,
     marginRight: 8,
     color: '#888',
   },
   todayTime: {
-    fontSize: 16,
+    fontSize: 20,
+    color: '#a7a7a7',
   },
   caution: {
     fontSize: 14,
@@ -91,6 +125,6 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: 16,
-    fontWeight: 600,
+    fontWeight: '600',
   },
 });

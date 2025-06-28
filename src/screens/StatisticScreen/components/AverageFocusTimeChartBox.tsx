@@ -35,7 +35,7 @@ const AverageFocusTimeChartBox = () => {
             <AppText
               style={[
                 styles.tabText,
-                selectedTab === tab ? {} : styles.tabTextActive,
+                selectedTab === tab ? styles.tabTextActive : {},
               ]}>
               {tab}
             </AppText>
@@ -45,9 +45,7 @@ const AverageFocusTimeChartBox = () => {
 
       {/* 탭에 따른 콘텐츠 */}
       <View style={styles.contentContainer}>
-        {selectedTab === '시간대별 평균 집중 시간' ? (
-          []
-        ) : (
+        {selectedTab === '시간대별 평균 집중 시간' && (
           <AverageFocusTimeByHour />
         )}
         {selectedTab === '요일별 평균 집중 시간' && (

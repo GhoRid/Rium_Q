@@ -24,6 +24,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 20,
     backgroundColor: 'white',
+    zIndex: 1000, // 헤더가 다른 요소 위에 오도록 설정
   },
   leftItem: {
     flexGrow: 1, // 왼쪽은 가능한 만큼 늘어남

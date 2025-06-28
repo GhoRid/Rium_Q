@@ -1,15 +1,6 @@
 import React, {useState, useEffect, useRef} from 'react';
-import {
-  View,
-  StyleSheet,
-  TouchableOpacity,
-  Animated,
-  Easing,
-  StatusBar,
-  Text,
-} from 'react-native';
+import {StyleSheet, Animated, Easing, StatusBar} from 'react-native';
 import {SafeAreaView, useSafeAreaInsets} from 'react-native-safe-area-context';
-import SvgIcon from '../../components/SvgIcon';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {RootStackParamList} from '../../types/screens';
 import {formatHHMMSS} from '../../utils/timeTranslate';
@@ -18,12 +9,17 @@ import FinishedView from './components/FinishedView';
 import RunningTimerView from './components/RunningTimerView';
 import {useMutation} from '@tanstack/react-query';
 import {saveStudyTimer} from '../../apis/api/timer';
+import CustomHeader from '../../components/Header/CustomHeader';
+import BackButtonHeaderLeft from '../../components/Header/BackButtonHeaderLeft';
+import {formatDateToKorean} from '../../utils/formatDate';
+import AppText from '../../components/AppText';
 
 const TimerScreen = () => {
   const insets = useSafeAreaInsets();
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
+  const now = new Date();
 
-  const [seconds, setSeconds] = useState(0);
+  const [seconds, setSeconds] = useState(84999);
   const [totalTime, setTotalTime] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
   const [isFinished, setIsFinished] = useState(false);
@@ -31,7 +27,6 @@ const TimerScreen = () => {
   const animation = useRef(new Animated.Value(0)).current;
   const [planId, setPlanId] = useState<number | null>(0);
 
-  const now = new Date();
   console.log('ISO 시간:', now.toISOString());
 
   const {mutate: saveStudyTime} = useMutation({
@@ -106,24 +101,27 @@ const TimerScreen = () => {
       <StatusBar
         barStyle={isRunning ? 'light-content' : 'dark-content'}
         backgroundColor="transparent"
-        translucent
+        // translucent
       />
       <SafeAreaView style={{flex: 1}}>
-        {/* 헤더 */}
-        <View style={styles.headerBox}>
-          {!isRunning && !isFinished && (
-            <TouchableOpacity onPress={() => navigation.goBack()}>
-              <SvgIcon name="좌측방향" size={32} color="#888" />
-            </TouchableOpacity>
-          )}
-        </View>
-
+        {/* ✅ 헤더 */}
+        {!isRunning && !isFinished ? (
+          <CustomHeader leftItem={<BackButtonHeaderLeft />} />
+        ) : (
+          <Animated.View style={styles.headerBox} />
+        )}
         {/* 본문 */}
         {isFinished ? (
-          <FinishedView blackToWhite={blackToWhite} />
+          <FinishedView
+            blackToWhite={blackToWhite}
+            seconds={seconds}
+            totalTime={totalTime}
+            setIsFinished={setIsFinished}
+          />
         ) : (
           <RunningTimerView
             blackToWhite={blackToWhite}
+            date={now}
             totalTime={totalTime}
             seconds={seconds}
             isRunning={isRunning}
@@ -139,9 +137,6 @@ export default TimerScreen;
 
 const styles = StyleSheet.create({
   headerBox: {
-    width: '100%',
     height: 60,
-    paddingHorizontal: 16,
-    flexDirection: 'row',
   },
 });
