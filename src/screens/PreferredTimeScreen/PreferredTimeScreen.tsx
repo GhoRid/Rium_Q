@@ -53,13 +53,13 @@ const PreferredTimeScreen = () => {
         />
       </View>
 
+      <View style={{flex: 1}} />
+
       {/* 저장하기 버튼 */}
       <BottomButtonGroup
         onConfirm={() => setIsModalVisible(true)}
         confirmDisabled={selectedIds.length === 0}
       />
-
-      <View style={{flex: 1}} />
 
       {/* 저장하기 모달 */}
       <CustomModal
