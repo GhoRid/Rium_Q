@@ -27,7 +27,7 @@ const RootNavigator = () => {
   const {data, isLoading} = useQuery({
     queryKey: ['getmataDateIsPresent'],
     queryFn: getmataDateIsPresent,
-    enabled: isLoggedIn === true,
+    enabled: isLoggedIn === true && skipSurvey === false,
   });
 
   if (!isSplashFinished) {
