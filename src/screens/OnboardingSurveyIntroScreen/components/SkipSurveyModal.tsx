@@ -5,11 +5,11 @@ import {
   StyleSheet,
   TouchableOpacity,
   Text,
-  Pressable,
   TouchableWithoutFeedback,
 } from 'react-native';
 import AppText from '../../../components/AppText';
 import palette from '../../../styles/palette';
+import SvgIcon from '../../../components/SvgIcon';
 
 type Props = {
   visible: boolean;
@@ -28,7 +28,13 @@ const SkipSurveyModal = ({visible, onConfirm, onRequestClose}: Props) => {
         <View style={styles.backdrop}>
           <TouchableWithoutFeedback>
             <View style={styles.modal}>
-              {/* <View style={styles.indicator} /> */}
+              {/* ✅ 상단 X 버튼 */}
+              <TouchableOpacity
+                style={styles.closeButton}
+                onPress={onRequestClose}>
+                <SvgIcon name="취소" size={30} color="#bdbdbd" />
+              </TouchableOpacity>
+
               <View style={styles.contentContainer}>
                 <AppText style={styles.title}>다음에 하시겠어요?</AppText>
 
@@ -37,6 +43,7 @@ const SkipSurveyModal = ({visible, onConfirm, onRequestClose}: Props) => {
                   {'\n'}계획 페이지에서 설문을 다시 진행할 수 있습니다.
                 </AppText>
               </View>
+
               <TouchableOpacity style={styles.button} onPress={onConfirm}>
                 <AppText style={styles.buttonText}>네, 다음에 할게요.</AppText>
               </TouchableOpacity>
@@ -64,18 +71,27 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     padding: 20,
   },
+  closeButton: {
+    position: 'absolute',
+    top: 16,
+    right: 16,
+    zIndex: 10,
+  },
+  closeText: {
+    fontSize: 24,
+    fontWeight: '600',
+    color: '#888',
+  },
   contentContainer: {
     paddingVertical: 20,
     paddingHorizontal: 20,
     marginBottom: 20,
-    // alignItems: 'center',
-    // justifyContent: 'center',
     gap: 40,
   },
   title: {
     textAlign: 'center',
     fontSize: 24,
-    fontWeight: 700,
+    fontWeight: '700',
   },
   desc: {
     fontSize: 18,
@@ -92,7 +108,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: '#fff',
-    fontWeight: 600,
+    fontWeight: '600',
     fontSize: 15,
   },
 });
