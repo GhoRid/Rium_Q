@@ -5,8 +5,8 @@ import StackNavigator from './StackNavigator';
 import SplashScreen from '../screens/SplashScreen';
 import {useQuery} from '@tanstack/react-query';
 import {getmataDateIsPresent} from '../apis/api/user';
-import OnboardingSurveyScreen from '../screens/OnboardingSurveyScreen/OnboardingSurveyScreen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import OnboardingNavigator from './OnboardingNavigator';
 
 const RootNavigator = () => {
   const [isSplashFinished, setIsSplashFinished] = useState(false);
@@ -43,7 +43,7 @@ const RootNavigator = () => {
   //   if (true && !skipSurvey) {
   if (true) {
     return (
-      <OnboardingSurveyScreen
+      <OnboardingNavigator
         onFinish={async () => {
           await AsyncStorage.setItem('surveySkipped', 'true');
           setSkipSurvey(true);
