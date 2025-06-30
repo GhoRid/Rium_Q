@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import AppText from '../../components/AppText';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {OnboardingStackParamList} from '../../navigators/OnboardingNavigator';
+import SkipSurveyModal from './components/SkipSurveyModal';
 
 type OnboardingSurveyIntroScreenProps = {
   onFinish: () => void; // "다음에 하기" 누를 때 호출
@@ -14,12 +15,19 @@ const OnboardingSurveyIntroScreen = ({
 }: OnboardingSurveyIntroScreenProps) => {
   const navigation = useNavigation<NavigationProp<OnboardingStackParamList>>();
 
-  const handleStartSurvey = () => {
-    navigation.navigate('survey');
-  };
+  const [showModal, setShowModal] = useState(false);
 
   const handleSkip = () => {
+    setShowModal(true);
+  };
+
+  const confirmSkip = () => {
     onFinish();
+    setShowModal(false);
+  };
+
+  const handleStartSurvey = () => {
+    navigation.navigate('survey');
   };
 
   return (
@@ -48,6 +56,13 @@ const OnboardingSurveyIntroScreen = ({
       <TouchableOpacity onPress={handleSkip}>
         <AppText style={styles.skipText}>다음에 알려줄게요</AppText>
       </TouchableOpacity>
+
+      {/* 모달창 부분 */}
+      <SkipSurveyModal
+        visible={showModal}
+        onConfirm={confirmSkip}
+        onRequestClose={() => setShowModal(false)}
+      />
     </SafeAreaView>
   );
 };

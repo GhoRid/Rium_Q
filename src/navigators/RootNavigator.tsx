@@ -40,7 +40,7 @@ const RootNavigator = () => {
     return <LoginScreen setIsLoggedIn={setIsLoggedIn} />;
   }
 
-  //   if (true && !skipSurvey) {
+  // if (true && !skipSurvey) {
   if (true) {
     return (
       <OnboardingNavigator
