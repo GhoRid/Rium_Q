@@ -20,13 +20,6 @@ const studyData = [
 const HomeScreen = () => {
   const [modalVisible, setModalVisible] = useState<boolean>(false);
 
-  const {data, isLoading} = useQuery({
-    queryKey: ['getmataDateIsPresent'],
-    queryFn: getmataDateIsPresent,
-  });
-
-  console.log(data);
-
   return (
     <View style={styles.container}>
       {/* 상단: 과목 선택 + 시험명 */}

@@ -7,7 +7,6 @@ import TimerScreen from '../screens/TimerScreen/TimerScreen';
 import StudyTimeDetailScreen from '../screens/StudyTimeDetailScreen/StudyTimeDetailScreen';
 import SeatReservationScreen from '../screens/SeatReservationScreen/SeatReservationScreen';
 import SettingsScreen from '../screens/SettingsScreen/SettingsScreen';
-
 import AnnouncementsScreen from '../screens/AnnouncementsScreen/AnnouncementsScreen';
 import CustomerServiceCenterScreen from '../screens/CustomerServiceCenterScreen/CustomerServiceCenterScreen';
 import EditMyInfoScreen from '../screens/EditMyInfoScreen/EditMyInfoScreen';

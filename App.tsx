@@ -6,31 +6,17 @@ import SplashScreen from './src/screens/SplashScreen';
 import StackNavigator from './src/navigators/StackNavigator';
 import {checkAuth} from './src/services/auth/checkAuth';
 import LoginScreen from './src/screens/LoginScreen/LoginScreen';
+import RootNavigator from './src/navigators/RootNavigator';
 
 const queryClient = new QueryClient();
 
 export default function App() {
-  const [isSplashFinished, setIsSplashFinished] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean | null>(null);
-
-  useEffect(() => {
-    checkAuth().then(setIsLoggedIn);
-  }, []);
-
   return (
     <SafeAreaProvider>
       <QueryClientProvider client={queryClient}>
-        {/* {isSplashFinished ? ( */}
         <NavigationContainer>
-          {isLoggedIn === null ? null : isLoggedIn ? (
-            <StackNavigator setIsLoggedIn={setIsLoggedIn} />
-          ) : (
-            <LoginScreen setIsLoggedIn={setIsLoggedIn} />
-          )}
+          <RootNavigator />
         </NavigationContainer>
-        {/* ) : (
-           <SplashScreen onFinish={() => setIsSplashFinished(true)} />
-        )} */}
       </QueryClientProvider>
     </SafeAreaProvider>
   );
