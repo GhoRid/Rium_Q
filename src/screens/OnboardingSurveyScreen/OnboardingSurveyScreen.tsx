@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
   },
   stepContainer: {
     width: width,
-    paddingHorizontal: 24,
+    paddingHorizontal: 30,
     paddingTop: 16,
   },
 });
