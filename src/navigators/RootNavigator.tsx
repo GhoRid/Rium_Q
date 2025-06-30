@@ -30,11 +30,9 @@ const RootNavigator = () => {
     enabled: isLoggedIn === true && skipSurvey === false,
   });
 
-  if (!isSplashFinished) {
+  if (!isSplashFinished || isLoggedIn === null) {
     return <SplashScreen onFinish={() => setIsSplashFinished(true)} />;
   }
-
-  if (isLoggedIn === null || isLoading) return null;
 
   if (!isLoggedIn) {
     return <LoginScreen setIsLoggedIn={setIsLoggedIn} />;

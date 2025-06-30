@@ -7,6 +7,7 @@ type Props = {
 };
 
 const {width} = Dimensions.get('window');
+const PADDING_HORIZONTAL = 30;
 
 const SurveyProgressBar = ({currentStep, totalSteps}: Props) => {
   const progressAnim = useRef(new Animated.Value(0)).current;
@@ -16,14 +17,14 @@ const SurveyProgressBar = ({currentStep, totalSteps}: Props) => {
   useEffect(() => {
     Animated.timing(progressAnim, {
       toValue: progressWidth,
-      duration: 300,
+      duration: 400,
       useNativeDriver: false,
     }).start();
   }, [progressWidth]);
 
   const animatedWidth = progressAnim.interpolate({
     inputRange: [0, 1],
-    outputRange: [0, width - 48], // paddingHorizontal: 24 * 2
+    outputRange: [0, width - PADDING_HORIZONTAL * 2],
   });
 
   return (
@@ -39,7 +40,7 @@ export default SurveyProgressBar;
 
 const styles = StyleSheet.create({
   wrapper: {
-    paddingHorizontal: 24,
+    paddingHorizontal: PADDING_HORIZONTAL,
     marginTop: 16,
     marginBottom: 24,
   },
