@@ -1,5 +1,7 @@
 import React from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import AppText from '../../components/AppText';
+import {SafeAreaView} from 'react-native-safe-area-context';
 
 type Props = {
   onFinish: () => void; // "다음에 하기" 누를 때 호출
@@ -17,22 +19,32 @@ const OnboardingSurveyScreen = ({onFinish}: Props) => {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>
-        <Text style={styles.nickname}>익끼님에게{'\n'}</Text>
-        <Text>딱 맞는 학습을 위해,{'\n'}설문에 참여해 주세요!</Text>
-      </Text>
+    <SafeAreaView style={styles.container}>
+      <View style={styles.textBlock}>
+        <AppText style={styles.line}>
+          <AppText style={styles.normal}>익끼님에게</AppText>
+        </AppText>
+        <AppText style={styles.line}>
+          <AppText style={styles.bold}>딱 맞는 학습</AppText>
+          <AppText style={styles.normal}>을 위해,</AppText>
+        </AppText>
+        <AppText style={styles.line}>
+          <AppText style={styles.normal}>설문에 참여해 주세요!</AppText>
+        </AppText>
+      </View>
+
+      <View style={{flex: 1}} />
 
       <TouchableOpacity
         style={styles.primaryButton}
         onPress={handleStartSurvey}>
-        <Text style={styles.primaryText}>네 알려줄게요</Text>
+        <AppText style={styles.primaryText}>네 알려줄게요</AppText>
       </TouchableOpacity>
 
       <TouchableOpacity onPress={handleSkip}>
-        <Text style={styles.skipText}>다음에 알려줄게요</Text>
+        <AppText style={styles.skipText}>다음에 알려줄게요</AppText>
       </TouchableOpacity>
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -45,22 +57,29 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
     backgroundColor: '#fff',
   },
-  title: {
-    fontSize: 22,
-    fontWeight: '400',
-    textAlign: 'left',
-    marginBottom: 48,
+  textBlock: {
+    marginTop: 100,
+  },
+  line: {
+    flexDirection: 'row',
     lineHeight: 32,
   },
-  nickname: {
-    fontWeight: '600',
-    fontSize: 24,
+  normal: {
+    fontSize: 28,
+    fontWeight: 400,
+    lineHeight: 40,
+  },
+  bold: {
+    fontSize: 28,
+    fontWeight: 700,
+    lineHeight: 40,
   },
   primaryButton: {
     backgroundColor: '#0B1F44',
-    paddingVertical: 16,
-    borderRadius: 12,
+    height: 55,
+    borderRadius: 55,
     alignItems: 'center',
+    justifyContent: 'center',
   },
   primaryText: {
     color: '#fff',
