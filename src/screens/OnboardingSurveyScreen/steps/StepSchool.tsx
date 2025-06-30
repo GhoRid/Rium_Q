@@ -4,7 +4,7 @@ import SurveyTitle from '../components/SurveyTitle';
 import SearchInput from '../components/SearchInput';
 import AppText from '../../../components/AppText'; // 결과 없을 때 예시 텍스트
 
-const StepRegion = () => {
+const StepSchool = () => {
   const [keyword, setKeyword] = useState('');
 
   const searchKeyword = (text: string) => {
@@ -14,18 +14,18 @@ const StepRegion = () => {
 
   return (
     <View style={styles.container}>
-      <SurveyTitle>현재 거주하고 있는 지역</SurveyTitle>
+      <SurveyTitle>어느 학교를 다니시나요?</SurveyTitle>
       <SearchInput
         value={keyword}
         onChangeText={setKeyword}
         onSearch={() => searchKeyword(keyword)}
-        placeholder="동명(읍, 면)으로 검색 (ex. 신안동)"
+        placeholder="학교명"
       />
     </View>
   );
 };
 
-export default StepRegion;
+export default StepSchool;
 
 const styles = StyleSheet.create({
   container: {

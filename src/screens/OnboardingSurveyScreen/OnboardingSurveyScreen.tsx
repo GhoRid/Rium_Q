@@ -4,14 +4,17 @@ import CustomHeader from '../../components/Header/CustomHeader';
 import BackButtonHeaderLeft from '../../components/Header/BackButtonHeaderLeft';
 import SurveyProgressBar from './components/SurveyProgressBar';
 import StepRegion from './steps/StepRegion';
-import {useRef, useState} from 'react';
+import StepSchool from './steps/StepSchool';
 import BottomButton from './components/BottomButton';
+import {useRef, useState} from 'react';
 
 const {width} = Dimensions.get('window');
 
 const OnboardingSurveyScreen = () => {
   const scrollRef = useRef<ScrollView>(null);
   const [currentStep, setCurrentStep] = useState(0);
+
+  const steps = [<StepRegion />, <StepSchool />];
 
   const goToStep = (step: number) => {
     setCurrentStep(step);
@@ -21,23 +24,21 @@ const OnboardingSurveyScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
       <CustomHeader leftItem={<BackButtonHeaderLeft />} />
-      <SurveyProgressBar currentStep={currentStep} totalSteps={2} />
+      <SurveyProgressBar currentStep={currentStep} totalSteps={steps.length} />
 
       <ScrollView
         ref={scrollRef}
-        scrollEnabled={false} // 터치 스크롤 비활성화
+        scrollEnabled={false}
         pagingEnabled
         horizontal
         showsHorizontalScrollIndicator={false}>
-        <View style={styles.stepContainer}>
-          <StepRegion />
-        </View>
-        <View style={styles.stepContainer}>
-          <StepRegion />
-        </View>
+        {steps.map((StepComponent, index) => (
+          <View style={styles.stepContainer} key={index}>
+            {StepComponent}
+          </View>
+        ))}
       </ScrollView>
 
-      {/* 하단 버튼 */}
       <BottomButton currentStep={currentStep} goToStep={goToStep} />
     </SafeAreaView>
   );
@@ -49,17 +50,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-  },
-  buttonRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    padding: 24,
-  },
-  button: {
-    paddingVertical: 12,
-    paddingHorizontal: 20,
-    borderRadius: 8,
-    backgroundColor: '#eee',
   },
   stepContainer: {
     width: width,

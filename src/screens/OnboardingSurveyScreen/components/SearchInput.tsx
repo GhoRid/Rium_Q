@@ -6,7 +6,6 @@ import {
   TouchableOpacity,
   TextInputProps,
 } from 'react-native';
-import palette from '../../../styles/palette';
 import SvgIcon from '../../../components/SvgIcon';
 
 type SearchInputProps = {
@@ -20,7 +19,7 @@ const SearchInput = ({
   value,
   onChangeText,
   onSearch,
-  placeholder = '동명(읍, 면)으로 검색 (ex. 신안동)',
+  placeholder,
 }: SearchInputProps) => {
   const isFocused = value.length > 0;
 
