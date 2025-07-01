@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   View,
   TextInput,
@@ -21,7 +21,7 @@ const SearchInput = ({
   onSearch,
   placeholder,
 }: SearchInputProps) => {
-  const isFocused = value.length > 0;
+  const [isFocused, setIsFocused] = useState(false);
 
   return (
     <View
@@ -37,12 +37,14 @@ const SearchInput = ({
         onChangeText={onChangeText}
         returnKeyType="search"
         onSubmitEditing={onSearch}
+        onFocus={() => setIsFocused(true)}
+        onBlur={() => setIsFocused(false)}
       />
       <TouchableOpacity onPress={onSearch}>
         <SvgIcon
           name="검색"
           size={20}
-          color={isFocused ? 'black' : '#bcbcbc'}
+          color={isFocused || value.length > 0 ? 'black' : '#bcbcbc'}
         />
       </TouchableOpacity>
     </View>
