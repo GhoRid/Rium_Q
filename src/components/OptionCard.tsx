@@ -23,7 +23,7 @@ const OptionCard = ({option, isSelected, onSelect}: OptionCardProps) => {
         isSelected ? styles.optionItemSelected : styles.optionItemUnselected,
       ]}
       activeOpacity={0.8}
-      onPress={() => onSelect(option.id)}>
+      onPress={() => onSelect(isSelected ? 0 : option.id)}>
       <View
         style={[
           styles.circleWrapper,

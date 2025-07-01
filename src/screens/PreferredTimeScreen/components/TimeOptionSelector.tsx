@@ -1,9 +1,7 @@
 import React from 'react';
-import {TouchableOpacity, View, StyleSheet} from 'react-native';
-import AppText from '../../../components/AppText';
-import SvgIcon from '../../../components/SvgIcon';
+import {View, StyleSheet} from 'react-native';
 import palette from '../../../styles/palette';
-import OptionCard from '../../OnboardingSurveyScreen/components/OptionCard';
+import OptionCard from '../../../components/OptionCard';
 
 export type TimeOption = {
   id: number;
