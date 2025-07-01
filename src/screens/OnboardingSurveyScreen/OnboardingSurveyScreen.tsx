@@ -8,6 +8,7 @@ import StepSchool from './steps/StepSchool';
 import BottomButton from './components/BottomButton';
 import {useRef, useState} from 'react';
 import StepGrade from './steps/StepGrade';
+import StepAcademy from './steps/StepAcademy';
 
 const {width} = Dimensions.get('window');
 
@@ -15,7 +16,12 @@ const OnboardingSurveyScreen = () => {
   const scrollRef = useRef<ScrollView>(null);
   const [currentStep, setCurrentStep] = useState(0);
 
-  const steps = [<StepRegion />, <StepSchool />, <StepGrade />];
+  const steps = [
+    <StepRegion />,
+    <StepSchool />,
+    <StepGrade />,
+    <StepAcademy />,
+  ];
 
   const goToStep = (step: number) => {
     setCurrentStep(step);
