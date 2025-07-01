@@ -3,6 +3,7 @@ import {TouchableOpacity, View, StyleSheet} from 'react-native';
 import AppText from '../../../components/AppText';
 import SvgIcon from '../../../components/SvgIcon';
 import palette from '../../../styles/palette';
+import OptionCard from '../../OnboardingSurveyScreen/components/OptionCard';
 
 export type TimeOption = {
   id: number;
@@ -22,40 +23,12 @@ const TimeOptionSelector = ({options, selectedIds, onSelect}: Props) => {
         const isSelected = selectedIds.includes(option.id); // ✅ 배열 포함 여부로 판별
 
         return (
-          <TouchableOpacity
+          <OptionCard
             key={option.id}
-            style={[
-              styles.optionItem,
-              isSelected
-                ? styles.optionItemSelected
-                : styles.optionItemUnselected,
-            ]}
-            activeOpacity={0.8}
-            onPress={() => onSelect(option.id)}>
-            <View
-              style={[
-                styles.circleWrapper,
-                isSelected
-                  ? {borderColor: palette.app_main_color}
-                  : {
-                      borderColor: '#888',
-                    },
-              ]}>
-              <View
-                style={[
-                  styles.circle,
-                  isSelected ? {backgroundColor: palette.app_main_color} : {},
-                ]}
-              />
-            </View>
-            <AppText
-              style={[
-                styles.optionLabel,
-                isSelected ? styles.optionLabelSelected : {},
-              ]}>
-              {option.label}
-            </AppText>
-          </TouchableOpacity>
+            option={option}
+            isSelected={isSelected}
+            onSelect={() => onSelect(option.id)}
+          />
         );
       })}
     </View>

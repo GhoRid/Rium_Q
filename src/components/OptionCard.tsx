@@ -1,7 +1,7 @@
 import React from 'react';
 import {TouchableOpacity, View, StyleSheet} from 'react-native';
-import AppText from '../../../components/AppText';
-import palette from '../../../styles/palette';
+import palette from '../styles/palette';
+import AppText from './AppText';
 
 export type TimeOption = {
   id: number;
