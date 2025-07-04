@@ -11,15 +11,16 @@ import OnboardingNavigator from './OnboardingNavigator';
 const RootNavigator = () => {
   const [isSplashFinished, setIsSplashFinished] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState<boolean | null>(null);
-  const [skipSurvey, setSkipSurvey] = useState(false);
+  const [isOnboardingSurveyFinish, setsOnboardingSurveyFinish] =
+    useState(false);
 
   useEffect(() => {
     const init = async () => {
       const loggedIn = await checkAuth();
       setIsLoggedIn(loggedIn);
 
-      const skipped = await AsyncStorage.getItem('surveySkipped');
-      setSkipSurvey(skipped === 'true');
+      const skipped = await AsyncStorage.getItem('surveyFinished');
+      setsOnboardingSurveyFinish(skipped === 'true');
     };
     init();
   }, []);
@@ -27,7 +28,7 @@ const RootNavigator = () => {
   const {data, isLoading} = useQuery({
     queryKey: ['getmataDateIsPresent'],
     queryFn: getmataDateIsPresent,
-    enabled: isLoggedIn === true && skipSurvey === false,
+    enabled: isLoggedIn === true && isOnboardingSurveyFinish === false,
   });
 
   if (!isSplashFinished || isLoggedIn === null) {
@@ -38,13 +39,13 @@ const RootNavigator = () => {
     return <LoginScreen setIsLoggedIn={setIsLoggedIn} />;
   }
 
-  // if (true && !skipSurvey) {
-  if (true) {
+  if (true && !isOnboardingSurveyFinish) {
+    // if (true) {
     return (
       <OnboardingNavigator
         onFinish={async () => {
-          await AsyncStorage.setItem('surveySkipped', 'true');
-          setSkipSurvey(true);
+          await AsyncStorage.setItem('surveyFinished', 'true');
+          setsOnboardingSurveyFinish(true);
         }}
       />
     );
