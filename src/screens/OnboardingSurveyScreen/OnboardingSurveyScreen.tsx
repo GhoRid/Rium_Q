@@ -10,12 +10,21 @@ import {useRef, useState} from 'react';
 import StepGrade from './steps/StepGrade';
 import StepAcademy from './steps/StepAcademy';
 import StepPreferredStudyTime from './steps/StepPreferredStudyTime';
+import SkipSurveyModal from '../../components/SkipSurveyModal';
+import {NavigationProp, useNavigation} from '@react-navigation/native';
+import {OnboardingStackParamList} from '../../navigators/OnboardingNavigator';
 
 const {width} = Dimensions.get('window');
 
-const OnboardingSurveyScreen = () => {
+type OnboardingSurveyScreenProps = {
+  onFinish: () => void; // "다음에 하기" 누를 때 호출
+};
+
+const OnboardingSurveyScreen = ({onFinish}: OnboardingSurveyScreenProps) => {
   const scrollRef = useRef<ScrollView>(null);
-  const [currentStep, setCurrentStep] = useState(0);
+  const navigation = useNavigation<NavigationProp<OnboardingStackParamList>>();
+  const [currentStep, setCurrentStep] = useState<number>(0);
+  const [showModal, setShowModal] = useState<boolean>(false);
 
   const steps = [
     <StepRegion />,
@@ -30,9 +39,23 @@ const OnboardingSurveyScreen = () => {
     scrollRef.current?.scrollTo({x: width * step, animated: true});
   };
 
+  const confirmSkip = () => {
+    onFinish();
+    setShowModal(false);
+    navigation.goBack();
+  };
+
   return (
     <SafeAreaView style={styles.container}>
-      <CustomHeader leftItem={<BackButtonHeaderLeft />} />
+      <CustomHeader
+        leftItem={
+          <BackButtonHeaderLeft
+            onPressBackBtn={() => {
+              setShowModal(true);
+            }}
+          />
+        }
+      />
       <SurveyProgressBar currentStep={currentStep} totalSteps={steps.length} />
 
       <ScrollView
@@ -49,6 +72,17 @@ const OnboardingSurveyScreen = () => {
       </ScrollView>
 
       <BottomButton currentStep={currentStep} goToStep={goToStep} />
+
+      <SkipSurveyModal
+        content={{
+          title: '다음에 하시겠어요?',
+          description:
+            '맞춤 계획을 짜드리기 위해서 설문은 필수입니다!\n계획 페이지에서 설문을 다시 진행할 수 있습니다.',
+        }}
+        visible={showModal}
+        onConfirm={confirmSkip}
+        onRequestClose={() => setShowModal(false)}
+      />
     </SafeAreaView>
   );
 };

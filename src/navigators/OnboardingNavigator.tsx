@@ -24,7 +24,10 @@ const OnboardingNavigator = ({onFinish}: OnboardingNavigatorProps) => {
         name="Intro"
         children={() => <OnboardingSurveyIntroScreen onFinish={onFinish} />}
       />
-      <Stack.Screen name="survey" component={OnboardingSurveyScreen} />
+      <Stack.Screen
+        name="survey"
+        children={() => <OnboardingSurveyScreen onFinish={onFinish} />}
+      />
     </Stack.Navigator>
   );
 };
