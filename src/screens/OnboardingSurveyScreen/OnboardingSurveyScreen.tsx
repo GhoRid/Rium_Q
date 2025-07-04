@@ -9,6 +9,7 @@ import BottomButton from './components/BottomButton';
 import {useRef, useState} from 'react';
 import StepGrade from './steps/StepGrade';
 import StepAcademy from './steps/StepAcademy';
+import StepPreferredStudyTime from './steps/StepPreferredStudyTime';
 
 const {width} = Dimensions.get('window');
 
@@ -21,6 +22,7 @@ const OnboardingSurveyScreen = () => {
     <StepSchool />,
     <StepGrade />,
     <StepAcademy />,
+    <StepPreferredStudyTime />,
   ];
 
   const goToStep = (step: number) => {
