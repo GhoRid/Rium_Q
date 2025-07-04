@@ -27,7 +27,7 @@ const OnboardingSurveyIntroScreen = ({
   };
 
   const handleStartSurvey = () => {
-    navigation.navigate('survey');
+    navigation.navigate('Survey');
   };
 
   return (

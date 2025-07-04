@@ -4,12 +4,15 @@ import palette from '../../../styles/palette';
 
 type BottomButtonProps = {
   currentStep: number;
+  totalSteps: number;
   goToStep: (step: number) => void;
 };
 
-const BottomButton = ({currentStep, goToStep}: BottomButtonProps) => {
-  console.log(currentStep);
-
+const BottomButton = ({
+  currentStep,
+  totalSteps,
+  goToStep,
+}: BottomButtonProps) => {
   return (
     <View style={styles.buttonContainer}>
       <View style={styles.twoButtonContainer}>
@@ -23,7 +26,9 @@ const BottomButton = ({currentStep, goToStep}: BottomButtonProps) => {
         <TouchableOpacity
           style={styles.button}
           onPress={() => goToStep(currentStep + 1)}>
-          <AppText style={styles.buttonText}>다음</AppText>
+          <AppText style={styles.buttonText}>
+            {totalSteps <= currentStep + 1 ? '완료' : '다음'}
+          </AppText>
         </TouchableOpacity>
       </View>
     </View>

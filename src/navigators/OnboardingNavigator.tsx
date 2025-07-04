@@ -2,11 +2,12 @@ import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import OnboardingSurveyIntroScreen from '../screens/OnboardingSurveyIntroScreen/OnboardingSurveyIntroScreen';
 import OnboardingSurveyScreen from '../screens/OnboardingSurveyScreen/OnboardingSurveyScreen';
-// 추가 설문 단계들 필요 시 여기에 계속 추가
+import OnboardingSurveyFinishedScreen from '../screens/OnboardingSurveyFinishedScreen/OnboardingSurveyFinishedScreen';
 
 export type OnboardingStackParamList = {
   Intro: undefined;
-  survey: undefined;
+  Survey: undefined;
+  SurveyFinished: undefined;
 };
 
 const Stack = createNativeStackNavigator<OnboardingStackParamList>();
@@ -25,8 +26,12 @@ const OnboardingNavigator = ({onFinish}: OnboardingNavigatorProps) => {
         children={() => <OnboardingSurveyIntroScreen onFinish={onFinish} />}
       />
       <Stack.Screen
-        name="survey"
+        name="Survey"
         children={() => <OnboardingSurveyScreen onFinish={onFinish} />}
+      />
+      <Stack.Screen
+        name="SurveyFinished"
+        children={() => <OnboardingSurveyFinishedScreen onFinish={onFinish} />}
       />
     </Stack.Navigator>
   );

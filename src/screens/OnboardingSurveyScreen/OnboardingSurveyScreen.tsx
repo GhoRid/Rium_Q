@@ -35,8 +35,12 @@ const OnboardingSurveyScreen = ({onFinish}: OnboardingSurveyScreenProps) => {
   ];
 
   const goToStep = (step: number) => {
-    setCurrentStep(step);
-    scrollRef.current?.scrollTo({x: width * step, animated: true});
+    if (steps.length <= step) {
+      navigation.navigate('SurveyFinished');
+    } else {
+      setCurrentStep(step);
+      scrollRef.current?.scrollTo({x: width * step, animated: true});
+    }
   };
 
   const confirmSkip = () => {
@@ -71,7 +75,11 @@ const OnboardingSurveyScreen = ({onFinish}: OnboardingSurveyScreenProps) => {
         ))}
       </ScrollView>
 
-      <BottomButton currentStep={currentStep} goToStep={goToStep} />
+      <BottomButton
+        currentStep={currentStep}
+        totalSteps={steps.length}
+        goToStep={goToStep}
+      />
 
       <SkipSurveyModal
         content={{
