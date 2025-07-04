@@ -30,7 +30,7 @@ const OptionCard = ({option, isSelected, onSelect}: OptionCardProps) => {
           isSelected
             ? {borderColor: palette.app_main_color}
             : {
-                borderColor: '#888',
+                borderColor: '#bcbcbc',
               },
         ]}>
         <View
@@ -57,7 +57,8 @@ const styles = StyleSheet.create({
   optionItem: {
     flexDirection: 'row',
     alignItems: 'center',
-    padding: 20,
+    height: 55,
+    paddingHorizontal: 15,
     borderRadius: 15,
     borderWidth: 1,
   },
@@ -67,7 +68,7 @@ const styles = StyleSheet.create({
   },
   optionItemUnselected: {
     backgroundColor: '#fff',
-    borderColor: '#888',
+    borderColor: '#bcbcbc',
   },
   circleWrapper: {
     width: 15,
@@ -86,7 +87,7 @@ const styles = StyleSheet.create({
   optionLabel: {
     fontSize: 16,
     fontWeight: 400,
-    color: '#888',
+    color: '#bcbcbc',
   },
   optionLabelSelected: {
     fontWeight: 700,

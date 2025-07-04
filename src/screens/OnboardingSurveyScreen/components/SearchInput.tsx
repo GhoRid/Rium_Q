@@ -57,8 +57,8 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: 14,
-    paddingVertical: 16,
+    paddingHorizontal: 15,
+    height: 55,
     borderRadius: 15,
   },
   defaultBorder: {
