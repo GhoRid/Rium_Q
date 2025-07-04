@@ -7,17 +7,26 @@ import {
   Text,
   TouchableWithoutFeedback,
 } from 'react-native';
-import AppText from '../../../components/AppText';
-import palette from '../../../styles/palette';
-import SvgIcon from '../../../components/SvgIcon';
+import AppText from './AppText';
+import SvgIcon from './SvgIcon';
+import palette from '../styles/palette';
 
 type Props = {
+  content: {
+    title: string;
+    description: string;
+  };
   visible: boolean;
   onConfirm: () => void;
   onRequestClose?: () => void;
 };
 
-const SkipSurveyModal = ({visible, onConfirm, onRequestClose}: Props) => {
+const SkipSurveyModal = ({
+  content,
+  visible,
+  onConfirm,
+  onRequestClose,
+}: Props) => {
   return (
     <Modal
       animationType="fade"
@@ -36,12 +45,9 @@ const SkipSurveyModal = ({visible, onConfirm, onRequestClose}: Props) => {
               </TouchableOpacity>
 
               <View style={styles.contentContainer}>
-                <AppText style={styles.title}>다음에 하시겠어요?</AppText>
+                <AppText style={styles.title}>{content.title}</AppText>
 
-                <AppText style={styles.desc}>
-                  맞춤 계획을 짜드리기 위해서 설문은 필수입니다!
-                  {'\n'}계획 페이지에서 설문을 다시 진행할 수 있습니다.
-                </AppText>
+                <AppText style={styles.desc}>{content.description}</AppText>
               </View>
 
               <TouchableOpacity style={styles.button} onPress={onConfirm}>

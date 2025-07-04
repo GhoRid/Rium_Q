@@ -4,7 +4,7 @@ import AppText from '../../components/AppText';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {OnboardingStackParamList} from '../../navigators/OnboardingNavigator';
-import SkipSurveyModal from './components/SkipSurveyModal';
+import SkipSurveyModal from '../../components/SkipSurveyModal';
 
 type OnboardingSurveyIntroScreenProps = {
   onFinish: () => void; // "다음에 하기" 누를 때 호출
@@ -59,6 +59,11 @@ const OnboardingSurveyIntroScreen = ({
 
       {/* 모달창 부분 */}
       <SkipSurveyModal
+        content={{
+          title: '다음에 하시겠어요?',
+          description:
+            '맞춤 계획을 짜드리기 위해서 설문은 필수입니다!\n계획 페이지에서 설문을 다시 진행할 수 있습니다.',
+        }}
         visible={showModal}
         onConfirm={confirmSkip}
         onRequestClose={() => setShowModal(false)}
