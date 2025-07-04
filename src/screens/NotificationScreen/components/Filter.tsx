@@ -1,10 +1,5 @@
-import {
-  StyleSheet,
-  TouchableOpacity,
-  Text,
-  ScrollView,
-  View,
-} from 'react-native';
+import {StyleSheet, TouchableOpacity, View} from 'react-native';
+import AppText from '../../../components/AppText';
 
 type FilterProps = {
   filter: any;
@@ -32,14 +27,14 @@ const Filter = ({
               : styles.filterButton
           }
           onPress={() => setSelectedTag(element)}>
-          <Text
+          <AppText
             style={
               selectedTag == element
                 ? styles.selectedFilterText
                 : styles.filterText
             }>
             {element}
-          </Text>
+          </AppText>
         </TouchableOpacity>
       ))}
     </View>

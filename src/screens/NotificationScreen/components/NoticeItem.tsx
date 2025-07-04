@@ -1,4 +1,5 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
+import AppText from '../../../components/AppText';
 
 type NoticeItemProps = {
   notice: {
@@ -14,11 +15,11 @@ const NoticeItem = ({notice}: NoticeItemProps) => {
   return (
     <View key={notice.id} style={styles.noticeRow}>
       <View style={styles.leftArea}>
-        <Text style={styles.noticeIcon}>{notice.icon}</Text>
+        <AppText style={styles.noticeIcon}>{notice.icon}</AppText>
       </View>
       <View style={styles.noticeContentArea}>
-        <Text style={styles.noticeTime}>{notice.time}</Text>
-        <Text style={styles.noticeText}>{notice.text}</Text>
+        <AppText style={styles.noticeTime}>{notice.time}</AppText>
+        <AppText style={styles.noticeText}>{notice.text}</AppText>
       </View>
       {notice.dot && <View style={styles.redDot} />}
     </View>

@@ -1,16 +1,17 @@
 import React from 'react';
-import {Platform, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {Platform, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import SvgIcon from '../SvgIcon';
+import AppText from '../AppText';
 
 type BackButtonHeaderLeftProps = {
   onPressBackBtn?: () => void;
-  pageName?: string;
+  screenName?: string;
 };
 
 const BackButtonHeaderLeft = ({
   onPressBackBtn,
-  pageName,
+  screenName,
 }: BackButtonHeaderLeftProps) => {
   const isAndroid = Platform.OS === 'android';
   const navigation = useNavigation();
@@ -20,9 +21,9 @@ const BackButtonHeaderLeft = ({
       <TouchableOpacity
         style={styles.backButtonBox}
         onPress={onPressBackBtn ? onPressBackBtn : () => navigation.goBack()}>
-        <SvgIcon name="좌측방향" size={24} color="black" />
+        <SvgIcon name="좌측방향" size={30} color="#BDBDBD" strokeWidth={3} />
       </TouchableOpacity>
-      {pageName && <Text style={styles.text}>{pageName}</Text>}
+      {screenName && <AppText style={styles.text}>{screenName}</AppText>}
     </View>
   );
 };
@@ -39,6 +40,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 20,
+    fontWeight: 'bold',
     color: 'black',
     marginLeft: 8,
   },

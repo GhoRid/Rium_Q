@@ -1,34 +1,31 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {Text, TouchableOpacity, View} from 'react-native';
+import {TouchableOpacity, View} from 'react-native';
 import HomeScreen from '../../screens/HomeScreen/HomeScreen';
 import PlanScreen from '../../screens/PlanScreen/PlanScreen';
 import CustomTabBar from './CustomTabBar';
 import MyPageScreen from '../../screens/MyPageScreen/MyPageScreen';
-import {SafeAreaView, useSafeAreaInsets} from 'react-native-safe-area-context';
+import {SafeAreaView} from 'react-native-safe-area-context';
 import CustomHeader from '../../components/Header/CustomHeader';
 import SvgIcon from '../../components/SvgIcon';
-import TestScreen from '../../screens/TestScreen/TestScreen';
-import StatisticScreen from '../../screens/\bStatisticScreen/\bStatisticScreen';
 import {useNavigation, NavigationProp} from '@react-navigation/native';
 import {RootStackParamList} from '../../types/screens';
-import palette from '../../utils/palette';
+import palette from '../../styles/palette';
+import StatisticScreen from '../../screens/StatisticScreen/StatisticScreen';
+import EmptyScreen from '../../screens/EmptyScreen';
+import AppText from '../../components/AppText';
 
 const Tab = createBottomTabNavigator();
 
 const TabNavigator = () => {
-  const insets = useSafeAreaInsets();
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
   return (
-    <View
+    <SafeAreaView
       style={{
         flex: 1,
         backgroundColor: 'white',
       }}>
-      <Tab.Navigator
-        tabBar={props => <CustomTabBar {...props} />}
-        // screenOptions={{headerShown: false}}
-      >
+      <Tab.Navigator tabBar={props => <CustomTabBar {...props} />}>
         {/* 홈 스크린 */}
         <Tab.Screen
           name="Home"
@@ -48,7 +45,6 @@ const TabNavigator = () => {
                   <TouchableOpacity
                     onPress={() => {
                       navigation.navigate('Notification');
-                      console.log('알림 아이콘 클릭됨');
                     }}>
                     <SvgIcon name="알림" size={35} />
                   </TouchableOpacity>
@@ -60,15 +56,13 @@ const TabNavigator = () => {
         {/* 계획 스크린 */}
         <Tab.Screen
           name="Plan"
-          // tabBarLabel="Plan"
           component={PlanScreen}
           options={{tabBarLabel: '계획', headerShown: false}}
         />
         {/* 테스트 스크린 */}
         <Tab.Screen
-          name="Test"
-          navigationKey="Test"
-          component={TestScreen}
+          name="Empty"
+          component={EmptyScreen}
           options={{headerShown: false}}
         />
         {/* 통계 스크린 */}
@@ -80,13 +74,13 @@ const TabNavigator = () => {
             header: () => (
               <CustomHeader
                 leftItem={
-                  <Text
+                  <AppText
                     style={{
                       fontSize: 20,
                       fontWeight: 'bold',
                     }}>
                     익끼 님의 학습 리포트
-                  </Text>
+                  </AppText>
                 } // 왼쪽 아이콘
               />
             ),
@@ -102,8 +96,10 @@ const TabNavigator = () => {
               <CustomHeader
                 leftItem={
                   <View style={{flexDirection: 'row'}}>
-                    <Text style={{fontSize: 24, fontWeight: '700'}}>익끼</Text>
-                    <Text style={{fontSize: 24}}>님</Text>
+                    <AppText style={{fontSize: 24, fontWeight: '700'}}>
+                      익끼
+                    </AppText>
+                    <AppText style={{fontSize: 24}}>님</AppText>
                   </View>
                 }
                 rightItem={
@@ -119,7 +115,7 @@ const TabNavigator = () => {
           }}
         />
       </Tab.Navigator>
-    </View>
+    </SafeAreaView>
   );
 };
 

@@ -1,8 +1,10 @@
-import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
+import {StyleSheet, View, TouchableOpacity} from 'react-native';
 import SvgIcon from '../../../components/SvgIcon';
-import palette from '../../../utils/palette';
+import palette from '../../../styles/palette';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {RootStackParamList} from '../../../types/screens';
+import shadow from '../../../styles/shadow';
+import AppText from '../../../components/AppText';
 
 const Grid = () => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
@@ -12,7 +14,7 @@ const Grid = () => {
       {/* 왼쪽 세로 긴 카드 */}
       <View style={styles.leftColumn}>
         <View style={styles.longCard}>
-          <Text style={styles.smallText}>내 랭킹</Text>
+          <AppText style={styles.smallText}>내 랭킹</AppText>
         </View>
       </View>
 
@@ -24,13 +26,13 @@ const Grid = () => {
             navigation.navigate('SeatReservation');
           }}>
           <View style={styles.seatTextContainer}>
-            <Text style={styles.seatText}>좌석{'\n'}예약하기</Text>
+            <AppText style={styles.seatText}>좌석{'\n'}예약하기</AppText>
           </View>
           <SvgIcon name="책상" color="white" width={38} height={38} />
         </TouchableOpacity>
 
         <View style={styles.smallCard}>
-          <Text style={styles.smallText}>석왕이 깨기</Text>
+          <AppText style={styles.smallText}>석왕이 깨기</AppText>
         </View>
       </View>
     </View>
@@ -39,20 +41,12 @@ const Grid = () => {
 
 export default Grid;
 
-const shadow = {
-  shadowColor: '#000',
-  shadowOpacity: 0.1,
-  shadowOffset: {width: 0, height: 2},
-  shadowRadius: 4,
-  elevation: 2,
-};
-
 const styles = StyleSheet.create({
   grid: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     gap: '4%',
-    height: '40%',
+    height: '35%',
   },
   leftColumn: {
     width: '48%',
@@ -80,7 +74,7 @@ const styles = StyleSheet.create({
   smallText: {
     color: '#333',
     fontSize: 16,
-    fontWeight: '500',
+    fontWeight: 500,
   },
   seatCard: {
     height: '48%',

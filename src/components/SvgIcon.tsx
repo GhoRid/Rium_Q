@@ -11,6 +11,7 @@ type IconProps = SvgProps & {
   width?: number;
   height?: number;
   size?: number;
+  strokeWidth?: number; // 굵기 추가
 };
 
 function SvgIcon({
@@ -20,6 +21,7 @@ function SvgIcon({
   width: _width,
   height: _height,
   size,
+  strokeWidth = 2,
   ...props
 }: IconProps) {
   const Comp = Icons[name];
@@ -41,6 +43,7 @@ function SvgIcon({
       color={color}
       // stroke={fill}
       {...sizeProps}
+      strokeWidth={strokeWidth}
     />
   );
 }

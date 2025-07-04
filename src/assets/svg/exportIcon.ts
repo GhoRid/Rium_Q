@@ -1,24 +1,41 @@
+//앱 로고
+export {default as 앱로고1} from './icon/logo1.svg';
+export {default as 앱로고2} from './icon/logo2.svg';
+
 //하단 네비게이터
 export {default as Home} from './icon/home.svg';
 export {default as Plan} from './icon/plan.svg';
+export {default as planIsFocused} from './icon/planIsFocused.svg';
 export {default as Statistic} from './icon/statistics.svg';
 export {default as MyPage} from './icon/person.svg';
 
-export {default as 앱로고1} from './icon/logo1.svg';
-export {default as 앱로고2} from './icon/logo2.svg';
 export {default as 알림} from './icon/bell.svg';
 export {default as 설정} from './icon/setting.svg';
 export {default as 하트} from './icon/heart.svg';
 export {default as 책상} from './icon/desk.svg';
+
+export {default as 기본프로필} from './icon/defaultProfile.svg';
+export {default as 새로고침} from './icon/reload.svg';
+
+export {default as 전화} from './icon/calling.svg';
+
 export {default as 둘러보기} from './icon/file-search.svg';
 export {default as 지도} from './icon/map.svg';
 // export {default as 주문내역} from './icon/check-square.svg';
 export {default as 검색} from './icon/search.svg';
+
+// 방향
 export {default as 우측방향} from './icon/directionRight.svg';
 export {default as 좌측방향} from './icon/directionLeft.svg';
 export {default as 아래방향} from './icon/directionDown.svg';
+export {default as 위방향} from './icon/directionUp.svg';
 export {default as 취소} from './icon/close.svg';
 export {default as 더하기} from './icon/plus.svg';
+
+// 로그인 관련
+export {default as 카카오} from './icon/kakaotalkLogo.svg';
+export {default as 애플로고} from './icon/AppleLogo.svg';
+export {default as 회원가입} from './icon/SignUp.svg';
 
 export {default as 택배배송} from './icon/delivery.svg';
 export {default as 순위상승} from './icon/triangleUp.svg';

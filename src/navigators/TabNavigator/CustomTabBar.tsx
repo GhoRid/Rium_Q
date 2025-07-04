@@ -1,6 +1,7 @@
-import {View, Text, TouchableOpacity, StyleSheet, Platform} from 'react-native';
+import {View, TouchableOpacity, StyleSheet} from 'react-native';
 import SvgIcon from '../../components/SvgIcon';
-import palette from '../../utils/palette';
+import palette from '../../styles/palette';
+import AppText from '../../components/AppText';
 
 const CustomTabBar = ({state, descriptors, navigation}: any) => {
   return (
@@ -21,12 +22,31 @@ const CustomTabBar = ({state, descriptors, navigation}: any) => {
           return (
             <TouchableOpacity
               key={route.key}
-              onPress={onPress}
-              //   style={styles.centerButtonContainer}
+              // onPress={onPress}
+              onPress={() => {
+                navigation.navigate('Timer');
+              }}
               activeOpacity={0.8}>
               <View style={styles.centerButton}>
                 <SvgIcon name="앱로고1" size={32} color="white" />
               </View>
+            </TouchableOpacity>
+          );
+        } else if (index === 1 && isFocused) {
+          return (
+            <TouchableOpacity
+              key={route.key}
+              onPress={onPress}
+              style={styles.tabItem}>
+              <SvgIcon
+                name="planIsFocused"
+                // color={palette.app_main_color}
+                // fill={isFocused ? palette.app_main_color : 'none'}
+              />
+              <AppText
+                style={{fontSize: 12, color: isFocused ? '#1a2b48' : '#888'}}>
+                {label}
+              </AppText>
             </TouchableOpacity>
           );
         }
@@ -36,10 +56,15 @@ const CustomTabBar = ({state, descriptors, navigation}: any) => {
             key={route.key}
             onPress={onPress}
             style={styles.tabItem}>
-            <SvgIcon name={route.name} />
-            <Text style={{fontSize: 12, color: isFocused ? '#1a2b48' : '#888'}}>
+            <SvgIcon
+              name={route.name}
+              color={palette.app_main_color}
+              fill={isFocused ? palette.app_main_color : 'none'}
+            />
+            <AppText
+              style={{fontSize: 12, color: isFocused ? '#1a2b48' : '#888'}}>
               {label}
-            </Text>
+            </AppText>
           </TouchableOpacity>
         );
       })}
@@ -54,20 +79,15 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: 'white',
     paddingHorizontal: 20,
+    paddingTop: 10,
     alignItems: 'center',
     justifyContent: 'space-between',
-    // elevation: 10,
-    // shadowColor: '#000',
-    // shadowOpacity: 0.05,
-    // shadowOffset: {width: 0, height: -1},
-    // shadowRadius: 5,
   },
   tabItem: {
     alignItems: 'center',
     justifyContent: 'center',
     flex: 1,
     gap: 5,
-    // backgroundColor: 'orange',
   },
   centerButton: {
     width: 70,

@@ -5,6 +5,8 @@ import AchievementRate from './components/AchievementRate';
 import Grid from './components/Grid';
 import Carousel from './components/Carousel';
 import StudyObjectModal from './components/StudyObjectModal';
+import {useQuery} from '@tanstack/react-query';
+import {getmataDateIsPresent} from '../../apis/api/user';
 
 const studyData = [
   {subject: '국어', aim: '모의고사 1회차'},
@@ -20,7 +22,6 @@ const HomeScreen = () => {
 
   return (
     <View style={styles.container}>
-      {/* <SvgIcon name="알림" /> */}
       {/* 상단: 과목 선택 + 시험명 */}
       <Carousel data={studyData} setModalVisible={setModalVisible} />
       {/* 모달 */}
@@ -47,7 +48,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    // padding: 20,
     paddingHorizontal: 20,
     paddingTop: 10,
     paddingBottom: 40,

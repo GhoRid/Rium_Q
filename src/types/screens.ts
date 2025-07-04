@@ -1,15 +1,24 @@
-import {ParamListBase} from '@react-navigation/native';
+import {NavigatorScreenParams, ParamListBase} from '@react-navigation/native';
 
-export interface RootStackParamList extends ParamListBase {
-  Tab: undefined;
+interface TabNavigatorParamList extends ParamListBase {
   Home: undefined;
   Plan: undefined;
-  Timer: undefined;
   Statistic: undefined;
   MyPage: undefined;
+  Empty: undefined;
+}
+export interface RootStackParamList extends ParamListBase {
+  Tab: NavigatorScreenParams<TabNavigatorParamList>;
+  Login: undefined;
   Notification: undefined;
   Test: undefined;
   StudyTimeDetail: undefined;
   SeatReservation: undefined;
+
+  PreferredTime: undefined;
+
   Setting: undefined;
+  SettingNotification: undefined;
+  EditMyInfo: undefined;
+  SettingAccount: undefined;
 }

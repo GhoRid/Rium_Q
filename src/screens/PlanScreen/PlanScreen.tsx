@@ -1,11 +1,14 @@
-import {View, Text} from 'react-native';
-
+import React, {useState} from 'react';
+import {View, StyleSheet} from 'react-native';
 const PlanScreen = () => {
-  return (
-    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <Text>계획 화면</Text>
-    </View>
-  );
+  return <View style={styles.container}></View>;
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: 'white',
+  },
+});
 
 export default PlanScreen;

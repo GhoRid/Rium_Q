@@ -1,4 +1,5 @@
 PODS:
+  - Alamofire (5.9.1)
   - boost (1.84.0)
   - BVLinearGradient (2.8.3):
     - React-Core
@@ -10,6 +11,22 @@ PODS:
   - hermes-engine (0.79.2):
     - hermes-engine/Pre-built (= 0.79.2)
   - hermes-engine/Pre-built (0.79.2)
+  - kakao-login (5.4.1):
+    - KakaoSDKAuth (= 2.22.0)
+    - KakaoSDKCommon (= 2.22.0)
+    - KakaoSDKUser (= 2.22.0)
+    - React
+  - KakaoSDKAuth (2.22.0):
+    - KakaoSDKCommon (= 2.22.0)
+  - KakaoSDKCommon (2.22.0):
+    - KakaoSDKCommon/Common (= 2.22.0)
+    - KakaoSDKCommon/Network (= 2.22.0)
+  - KakaoSDKCommon/Common (2.22.0)
+  - KakaoSDKCommon/Network (2.22.0):
+    - Alamofire (~> 5.9.0)
+    - KakaoSDKCommon/Common (= 2.22.0)
+  - KakaoSDKUser (2.22.0):
+    - KakaoSDKAuth (= 2.22.0)
   - lottie-ios (4.5.0)
   - lottie-react-native (7.2.2):
     - DoubleConversion
@@ -1360,6 +1377,30 @@ PODS:
     - React-jsiexecutor
     - React-RCTFBReactNativeSpec
     - ReactCommon/turbomodule/core
+  - react-native-image-picker (8.2.1):
+    - DoubleConversion
+    - glog
+    - hermes-engine
+    - RCT-Folly (= 2024.11.18.00)
+    - RCTRequired
+    - RCTTypeSafety
+    - React-Core
+    - React-debug
+    - React-Fabric
+    - React-featureflags
+    - React-graphics
+    - React-hermes
+    - React-ImageManager
+    - React-jsi
+    - React-NativeModulesApple
+    - React-RCTFabric
+    - React-renderercss
+    - React-rendererdebug
+    - React-utils
+    - ReactCodegen
+    - ReactCommon/turbomodule/bridging
+    - ReactCommon/turbomodule/core
+    - Yoga
   - react-native-pager-view (6.8.1):
     - DoubleConversion
     - glog
@@ -1805,6 +1846,54 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
+  - RNCAsyncStorage (2.2.0):
+    - DoubleConversion
+    - glog
+    - hermes-engine
+    - RCT-Folly (= 2024.11.18.00)
+    - RCTRequired
+    - RCTTypeSafety
+    - React-Core
+    - React-debug
+    - React-Fabric
+    - React-featureflags
+    - React-graphics
+    - React-hermes
+    - React-ImageManager
+    - React-jsi
+    - React-NativeModulesApple
+    - React-RCTFabric
+    - React-renderercss
+    - React-rendererdebug
+    - React-utils
+    - ReactCodegen
+    - ReactCommon/turbomodule/bridging
+    - ReactCommon/turbomodule/core
+    - Yoga
+  - RNPermissions (5.4.1):
+    - DoubleConversion
+    - glog
+    - hermes-engine
+    - RCT-Folly (= 2024.11.18.00)
+    - RCTRequired
+    - RCTTypeSafety
+    - React-Core
+    - React-debug
+    - React-Fabric
+    - React-featureflags
+    - React-graphics
+    - React-hermes
+    - React-ImageManager
+    - React-jsi
+    - React-NativeModulesApple
+    - React-RCTFabric
+    - React-renderercss
+    - React-rendererdebug
+    - React-utils
+    - ReactCodegen
+    - ReactCommon/turbomodule/bridging
+    - ReactCommon/turbomodule/core
+    - Yoga
   - RNScreens (4.11.1):
     - DoubleConversion
     - glog
@@ -1917,6 +2006,7 @@ DEPENDENCIES:
   - fmt (from `../node_modules/react-native/third-party-podspecs/fmt.podspec`)
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
   - hermes-engine (from `../node_modules/react-native/sdks/hermes-engine/hermes-engine.podspec`)
+  - "kakao-login (from `../node_modules/@react-native-seoul/kakao-login`)"
   - lottie-react-native (from `../node_modules/lottie-react-native`)
   - RCT-Folly (from `../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec`)
   - RCT-Folly/Fabric (from `../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec`)
@@ -1951,6 +2041,7 @@ DEPENDENCIES:
   - React-logger (from `../node_modules/react-native/ReactCommon/logger`)
   - React-Mapbuffer (from `../node_modules/react-native/ReactCommon`)
   - React-microtasksnativemodule (from `../node_modules/react-native/ReactCommon/react/nativemodule/microtasks`)
+  - react-native-image-picker (from `../node_modules/react-native-image-picker`)
   - react-native-pager-view (from `../node_modules/react-native-pager-view`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - React-NativeModulesApple (from `../node_modules/react-native/ReactCommon/react/nativemodule/core/platform/ios`)
@@ -1985,12 +2076,18 @@ DEPENDENCIES:
   - ReactCodegen (from `build/generated/ios`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - RNBootSplash (from `../node_modules/react-native-bootsplash`)
+  - "RNCAsyncStorage (from `../node_modules/@react-native-async-storage/async-storage`)"
+  - RNPermissions (from `../node_modules/react-native-permissions`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - RNSVG (from `../node_modules/react-native-svg`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
   trunk:
+    - Alamofire
+    - KakaoSDKAuth
+    - KakaoSDKCommon
+    - KakaoSDKUser
     - lottie-ios
     - SocketRocket
 
@@ -2012,6 +2109,8 @@ EXTERNAL SOURCES:
   hermes-engine:
     :podspec: "../node_modules/react-native/sdks/hermes-engine/hermes-engine.podspec"
     :tag: hermes-2025-03-03-RNv0.79.0-bc17d964d03743424823d7dd1a9f37633459c5c5
+  kakao-login:
+    :path: "../node_modules/@react-native-seoul/kakao-login"
   lottie-react-native:
     :path: "../node_modules/lottie-react-native"
   RCT-Folly:
@@ -2076,6 +2175,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon"
   React-microtasksnativemodule:
     :path: "../node_modules/react-native/ReactCommon/react/nativemodule/microtasks"
+  react-native-image-picker:
+    :path: "../node_modules/react-native-image-picker"
   react-native-pager-view:
     :path: "../node_modules/react-native-pager-view"
   react-native-safe-area-context:
@@ -2144,6 +2245,10 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon"
   RNBootSplash:
     :path: "../node_modules/react-native-bootsplash"
+  RNCAsyncStorage:
+    :path: "../node_modules/@react-native-async-storage/async-storage"
+  RNPermissions:
+    :path: "../node_modules/react-native-permissions"
   RNScreens:
     :path: "../node_modules/react-native-screens"
   RNSVG:
@@ -2152,6 +2257,7 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
 SPEC CHECKSUMS:
+  Alamofire: f36a35757af4587d8e4f4bfa223ad10be2422b8c
   boost: 7e761d76ca2ce687f7cc98e698152abd03a18f90
   BVLinearGradient: 880f91a7854faff2df62518f0281afb1c60d49a3
   DoubleConversion: cb417026b2400c8f53ae97020b2be961b59470cb
@@ -2160,6 +2266,10 @@ SPEC CHECKSUMS:
   fmt: a40bb5bd0294ea969aaaba240a927bd33d878cdd
   glog: 5683914934d5b6e4240e497e0f4a3b42d1854183
   hermes-engine: 314be5250afa5692b57b4dd1705959e1973a8ebe
+  kakao-login: 6f7a39583ae9e1a4e76240e66ae3ec575d461d1e
+  KakaoSDKAuth: 569b377eda622d93d4575240b8031cd658163eef
+  KakaoSDKCommon: d57127c339fc79e73aa8b236a4c77211c29924f1
+  KakaoSDKUser: 043bcd7e91454ebf3bf64f150c430e6f65f0a08d
   lottie-ios: a881093fab623c467d3bce374367755c272bdd59
   lottie-react-native: 2ed3839d12e44b5946a901687e9ab00ee9bc3232
   RCT-Folly: 36fe2295e44b10d831836cc0d1daec5f8abcf809
@@ -2193,6 +2303,7 @@ SPEC CHECKSUMS:
   React-logger: 368570a253f00879a1e4fea24ed4047e72e7bbf3
   React-Mapbuffer: c04fcda1c6281fc0a6824c7dcc1633dd217ac1ec
   React-microtasksnativemodule: ca2804a25fdcefffa0aa942aa23ab53b99614a34
+  react-native-image-picker: c73e6edfdbc2bbc1c12b3fe9c2149441fa08f149
   react-native-pager-view: 32cf333014f4a55c85c5d1018a28e5f83675718b
   react-native-safe-area-context: dc279397abf103b0577f48c548630b7e639646a7
   React-NativeModulesApple: 452b86b29fae99ed0a4015dca3ad9cd222f88abf
@@ -2227,11 +2338,13 @@ SPEC CHECKSUMS:
   ReactCodegen: fda99a79c866370190e162083a35602fdc314e5d
   ReactCommon: 4d0da92a5eb8da86c08e3ec34bd23ab439fb2461
   RNBootSplash: 1d93abb45016adce71a7f0cdbdf4f7b622777276
+  RNCAsyncStorage: 2cf7d05f5b1bc38680b6c83971e535a6ae9c5bc7
+  RNPermissions: a1c99a7eb3fe449b8f27d88725c7d8a9d95847e8
   RNScreens: c2e3cc506212228c607b4785b315205e28acbf0f
   RNSVG: 50819276c95d91ccd8fbe5cfea7e09a416c9beaa
   SocketRocket: d4aabe649be1e368d1318fdf28a022d714d65748
   Yoga: c758bfb934100bb4bf9cbaccb52557cee35e8bdf
 
-PODFILE CHECKSUM: 44d4ab29e73b4fdd9626a0c055429c416ebf0fe4
+PODFILE CHECKSUM: 816bc453bfed81cfe23c23d3736eacabe5411613
 
 COCOAPODS: 1.16.2
