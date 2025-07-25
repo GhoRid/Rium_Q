@@ -1,28 +1,41 @@
+// src/components/YourPath/Filter.tsx
+
+import React from 'react';
 import {StyleSheet, TouchableOpacity, ScrollView, View} from 'react-native';
 import AppText from '../../../components/AppText';
+import palette from '../../../styles/palette';
 
 type FilterProps = {
-  filter: any;
+  filter: string[];
   selectedTag: string;
   setSelectedTag: (tag: string) => void;
 };
 
-const Filter = ({filter, selectedTag, setSelectedTag}: FilterProps) => {
+const Filter: React.FC<FilterProps> = ({
+  filter,
+  selectedTag,
+  setSelectedTag,
+}) => {
   return (
     <View>
       <ScrollView
         horizontal
         showsHorizontalScrollIndicator={false}
+        // bounces={false}
+        // alwaysBounceHorizontal={false}
+        overScrollMode="never"
         style={styles.filterContainer}
-        contentContainerStyle={styles.filterContentContainerStyle}>
-        {filter.map((element: string, idx: number) => {
+        contentContainerStyle={styles.filterContentContainer}>
+        {filter.map((element, idx) => {
           const isSelected = selectedTag === element;
           return (
             <TouchableOpacity
-              key={idx}
+              key={element}
               style={[
                 styles.filterButtonBase,
                 isSelected ? styles.selectedFilterButton : styles.filterButton,
+                // 마지막 버튼엔 marginRight 제거
+                idx !== filter.length - 1 && {marginRight: 10},
               ]}
               onPress={() => setSelectedTag(element)}>
               <AppText
@@ -46,10 +59,13 @@ const styles = StyleSheet.create({
   filterContainer: {
     paddingVertical: 10,
   },
-  filterContentContainerStyle: {
-    gap: 10,
+  filterContentContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    // 초기 위치 띄워두기
+    paddingLeft: 16,
+    paddingRight: 16,
   },
-  // 공통 버튼 스타일
   filterButtonBase: {
     alignItems: 'center',
     justifyContent: 'center',
@@ -58,7 +74,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 15,
   },
-  // 비선택 상태
   filterButton: {
     borderColor: '#BCBCBC',
   },
@@ -68,12 +83,11 @@ const styles = StyleSheet.create({
   filterText: {
     color: '#BCBCBC',
   },
-  // 선택된 상태
   selectedFilterButton: {
-    borderColor: '#0667FF',
+    borderColor: palette.app_blue,
     backgroundColor: '#E6F0FF',
   },
   selectedFilterText: {
-    color: '#0667FF',
+    color: palette.app_blue,
   },
 });

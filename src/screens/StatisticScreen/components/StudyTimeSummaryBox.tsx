@@ -1,4 +1,4 @@
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, TouchableOpacity} from 'react-native';
 import SvgIcon from '../../../components/SvgIcon';
 import shadow from '../../../styles/shadow';
 import AppText from '../../../components/AppText';
@@ -9,19 +9,26 @@ type StudyTimeSummaryBoxProps = {
     totalTime: string; // 총 시간
     averageTime: string; // 하루 평균 시간
   };
+  setIsModalVisible: (visible: boolean) => void; // 모달 표시 상태 변경 함수
 };
 
-const StudyTimeSummaryBox = ({period, data}: StudyTimeSummaryBoxProps) => {
+const StudyTimeSummaryBox = ({
+  period,
+  data,
+  setIsModalVisible,
+}: StudyTimeSummaryBoxProps) => {
   return (
     <View style={styles.container}>
       {/* 날짜 정보 */}
       {period === '기간' ? (
         <View style={[styles.header, {justifyContent: 'space-between'}]}>
           <AppText style={styles.periodLabel}>지난 28일</AppText>
-          <View style={styles.dateRangeContainer}>
+          <TouchableOpacity
+            style={styles.dateRangeContainer}
+            onPress={() => setIsModalVisible(true)}>
             <AppText style={styles.dateRangeText}>5/15 ~ 6/11</AppText>
             <SvgIcon name="아래방향" size={16} />
-          </View>
+          </TouchableOpacity>
         </View>
       ) : (
         <View style={[styles.header, {justifyContent: 'center'}]}>
