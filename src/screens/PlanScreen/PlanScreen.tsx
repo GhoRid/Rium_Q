@@ -1,11 +1,16 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {View, StyleSheet, TouchableOpacity} from 'react-native';
 import CustomHeader from '../../components/Header/CustomHeader';
 import AppText from '../../components/AppText';
-import App from '../../../App';
 import DDayHeader from './components/DDayHeader';
 import palette from '../../styles/palette';
+import ScheduleCard from './components/ScheduleCard';
+
+import data from './data.json';
+
 const PlanScreen = () => {
+  const {date, items} = data[0];
+
   return (
     <View style={styles.container}>
       <CustomHeader
@@ -17,6 +22,8 @@ const PlanScreen = () => {
         }
       />
       <DDayHeader />
+
+      <ScheduleCard date={date} items={items} />
     </View>
   );
 };
