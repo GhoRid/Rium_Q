@@ -4,11 +4,11 @@ import React, {useState} from 'react';
 import {
   Modal,
   View,
-  Text,
   TouchableOpacity,
   Dimensions,
   ScrollView,
   StyleSheet,
+  Pressable,
 } from 'react-native';
 import {
   eachDayOfInterval,
@@ -20,8 +20,10 @@ import {
   addMonths,
   subMonths,
   isSameMonth,
+  isSameDay,
 } from 'date-fns';
 import palette from '../../../styles/palette';
+import AppText from '../../../components/AppText';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const MODAL_WIDTH = SCREEN_WIDTH * 0.8;
@@ -55,6 +57,7 @@ const DayPickerCalendarModal: React.FC<Props> = ({
 }) => {
   const [current, setCurrent] = useState(new Date());
   const [range, setRange] = useState<{from: Date; to: Date} | null>(null);
+  const [selectedPreset, setSelectedPreset] = useState<string | null>(null);
 
   const weeks = generateCalendar(current);
 
@@ -102,49 +105,54 @@ const DayPickerCalendarModal: React.FC<Props> = ({
             horizontal
             showsHorizontalScrollIndicator={false}
             contentContainerStyle={styles.presetsRow}>
-            {PRESETS.map(label => (
-              <TouchableOpacity
-                key={label}
-                style={[
-                  styles.presetBtn,
-                  range &&
-                    label.includes(
-                      String(
-                        Math.round(
-                          (range.to.getTime() - range.from.getTime()) /
-                            (1000 * 60 * 60 * 24) +
-                            1,
-                        ),
-                      ),
-                    ) &&
-                    styles.presetBtnActive,
-                ]}
-                onPress={() => selectPreset(label)}>
-                <Text style={styles.presetText}>{label}</Text>
-              </TouchableOpacity>
-            ))}
+            {PRESETS.map(label => {
+              const isActive = selectedPreset === label;
+
+              return (
+                <TouchableOpacity
+                  key={label}
+                  style={[styles.presetBtn, isActive && styles.presetBtnActive]}
+                  onPress={() => {
+                    if (isActive) {
+                      setSelectedPreset(null);
+                      setRange(null);
+                    } else {
+                      setSelectedPreset(label);
+                      selectPreset(label);
+                    }
+                  }}>
+                  <AppText
+                    style={
+                      isActive ? styles.presetTextActive : styles.presetText
+                    }>
+                    {label}
+                  </AppText>
+                </TouchableOpacity>
+              );
+            })}
           </ScrollView>
 
+          {/* 캘린더 */}
           <View style={styles.calenderBox}>
             {/* 헤더 */}
             <View style={styles.header}>
               <TouchableOpacity onPress={prevMonth}>
-                <Text style={styles.arrow}>‹</Text>
+                <AppText style={styles.arrow}>‹</AppText>
               </TouchableOpacity>
-              <Text style={styles.monthText}>
+              <AppText style={styles.monthText}>
                 {format(current, 'yyyy년 M월')}
-              </Text>
+              </AppText>
               <TouchableOpacity onPress={nextMonth}>
-                <Text style={styles.arrow}>›</Text>
+                <AppText style={styles.arrow}>›</AppText>
               </TouchableOpacity>
             </View>
 
             {/* 요일 */}
             <View style={styles.weekDays}>
               {WEEK_DAYS.map(wd => (
-                <Text key={wd} style={styles.weekDayText}>
+                <AppText key={wd} style={styles.weekDayText}>
                   {wd}
-                </Text>
+                </AppText>
               ))}
             </View>
 
@@ -154,19 +162,39 @@ const DayPickerCalendarModal: React.FC<Props> = ({
                 {week.map((day, di) => {
                   const inCurrent = isSameMonth(day, current);
                   const inRange = isInRange(day);
+                  const isStart = range !== null && isSameDay(day, range.from);
+                  const isEnd = range !== null && isSameDay(day, range.to);
+                  const isBetween = inRange && !isStart && !isEnd;
+
                   return (
-                    <TouchableOpacity
+                    <Pressable
                       key={di}
-                      style={[styles.dayCell, inRange && styles.dayCellActive]}
-                      onPress={() => onDayPress(day)}>
-                      <Text
+                      style={[
+                        styles.dayCell,
+                        // 중간 구간: 연한 파란 배경
+                        isBetween && styles.rangeMiddle,
+                        isStart && styles.rangeMiddleStart,
+                        isEnd && styles.rangeMiddleEnd,
+                      ]}
+                      onPress={() => {
+                        onDayPress(day);
+                        !!selectedPreset && setSelectedPreset(null);
+                      }}>
+                      <View
                         style={[
-                          styles.dayText,
-                          !inCurrent && styles.dayTextDisabled,
+                          // 시작/끝: 진한 파란 원
+                          isStart || isEnd ? styles.rangeEndPoint : {},
                         ]}>
-                        {format(day, 'd')}
-                      </Text>
-                    </TouchableOpacity>
+                        <AppText
+                          style={[
+                            styles.dayText,
+                            !inCurrent ? styles.dayTextDisabled : {},
+                            isStart || isEnd ? styles.dayTextSelected : {},
+                          ]}>
+                          {format(day, 'd')}
+                        </AppText>
+                      </View>
+                    </Pressable>
                   );
                 })}
               </View>
@@ -178,12 +206,12 @@ const DayPickerCalendarModal: React.FC<Props> = ({
             <TouchableOpacity
               style={styles.cancelBtn}
               onPress={() => setIsModalVisible(false)}>
-              <Text style={styles.cancelText}>취소</Text>
+              <AppText style={styles.cancelText}>취소</AppText>
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.confirmBtn}
               onPress={() => onConfirm(range?.from || null, range?.to || null)}>
-              <Text style={styles.confirmText}>확인</Text>
+              <AppText style={styles.confirmText}>확인</AppText>
             </TouchableOpacity>
           </View>
         </View>
@@ -222,13 +250,15 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   presetBtnActive: {
-    backgroundColor: '#fff',
-    borderWidth: 1,
-    borderColor: '#333',
+    backgroundColor: '#E6F0FF',
   },
   presetText: {
     fontSize: 14,
     color: '#333',
+  },
+  presetTextActive: {
+    fontSize: 14,
+    color: palette.app_blue,
   },
   calenderBox: {
     paddingHorizontal: 25,
@@ -249,7 +279,7 @@ const styles = StyleSheet.create({
   },
   monthText: {
     fontSize: 18,
-    fontWeight: 600,
+    fontWeight: '600',
     color: palette.app_main_color,
   },
   weekDays: {
@@ -273,10 +303,29 @@ const styles = StyleSheet.create({
     height: 32,
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 16,
   },
-  dayCellActive: {
-    backgroundColor: '#e0eaff',
+  // 선택 범위 중간 구간 (연한 파란색)
+  rangeMiddle: {
+    backgroundColor: '#E6F0FF',
+  },
+  rangeMiddleStart: {
+    backgroundColor: '#E6F0FF',
+    borderTopLeftRadius: 16,
+    borderBottomLeftRadius: 16,
+  },
+  rangeMiddleEnd: {
+    backgroundColor: '#E6F0FF',
+    borderTopRightRadius: 16,
+    borderBottomRightRadius: 16,
+  },
+  // 선택 시작·끝 원 (진한 파란색)
+  rangeEndPoint: {
+    backgroundColor: palette.app_blue,
+    borderRadius: 16,
+    padding: 3,
+    aspectRatio: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   dayText: {
     fontSize: 16,
@@ -284,6 +333,10 @@ const styles = StyleSheet.create({
   },
   dayTextDisabled: {
     color: '#ccc',
+  },
+  // 시작·끝 텍스트 흰색
+  dayTextSelected: {
+    color: '#fff',
   },
   footer: {
     flexDirection: 'row',
