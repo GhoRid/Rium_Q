@@ -1,4 +1,9 @@
-import {NavigationProp, useNavigation} from '@react-navigation/native';
+import {
+  CommonActions,
+  NavigationProp,
+  StackActions,
+  useNavigation,
+} from '@react-navigation/native';
 import {Animated, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {RootStackParamList} from '../../../types/screens';
 import palette from '../../../styles/palette';
@@ -19,8 +24,8 @@ const mockData = [
     subject: '국어',
     totalTime: 8492, // 초 단위
     records: [
-      {title: '2024학년도 6월 국어 모의고사', time: 4830},
-      {title: '2024학년도 6월 국어 모의고사', time: 3662},
+      {planId: 1, title: '2024학년도 6월 국어 모의고사', time: 4830},
+      {planId: 2, title: '2024학년도 6월 국어 모의고사', time: 3662},
     ],
   },
   {
@@ -105,7 +110,9 @@ const FinishedView = ({
               styles.bottomButton,
               {backgroundColor: palette.app_main_color},
             ]}
-            onPress={() => navigation.navigate('Tab', {screen: 'Home'})}>
+            onPress={() => {
+              navigation.dispatch(StackActions.popTo('Tab', {screen: 'Home'}));
+            }}>
             <AppText style={[styles.bottomButtonText, {color: '#fff'}]}>
               홈으로
             </AppText>
