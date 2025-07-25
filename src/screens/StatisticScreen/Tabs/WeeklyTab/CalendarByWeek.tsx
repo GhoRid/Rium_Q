@@ -1,17 +1,14 @@
 import React, {useState} from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  Dimensions,
-} from 'react-native';
+import {View, StyleSheet, TouchableOpacity, Dimensions} from 'react-native';
 import {
   eachWeekOfInterval,
   addDays,
   format,
-  addWeeks,
-  subWeeks,
+  addMonths,
+  subMonths,
+  startOfQuarter,
+  endOfQuarter,
+  isWithinInterval,
 } from 'date-fns';
 import {scaleLinear} from 'd3-scale';
 import SvgIcon from '../../../../components/SvgIcon';
@@ -67,36 +64,50 @@ const toTimeStr = (total: number) => {
 };
 
 const CalendarByWeek = () => {
-  const [baseDate, setBaseDate] = useState(new Date(2025, 5, 1));
+  const [baseDate, setBaseDate] = useState(startOfQuarter(new Date()));
 
-  const weeks = eachWeekOfInterval(
+  const startOfQ = startOfQuarter(baseDate);
+  const endOfQ = endOfQuarter(baseDate);
+
+  const allWeeks = eachWeekOfInterval(
     {
-      start: new Date(2025, 2, 2),
-      end: new Date(2025, 5, 30),
+      start: new Date(2025, 0, 1),
+      end: new Date(2025, 11, 31),
     },
     {weekStartsOn: 0},
   );
 
-  const handlePrev = () => setBaseDate(prev => subWeeks(prev, 5));
-  const handleNext = () => setBaseDate(prev => addWeeks(prev, 5));
+  const displayedWeeks = eachWeekOfInterval(
+    {start: startOfQ, end: endOfQ},
+    {weekStartsOn: 0},
+  );
+
+  const handlePrev = () => {
+    setBaseDate(prev => subMonths(prev, 3)); // 이전 분기
+  };
+
+  const handleNext = () => {
+    setBaseDate(prev => addMonths(prev, 3)); // 다음 분기
+  };
 
   return (
     <View style={styles.container}>
-      {/* 상단 네비게이션 */}
       <View style={styles.calendar}>
         <View style={styles.navRow}>
           <TouchableOpacity onPress={handlePrev}>
             <SvgIcon name="좌측방향" size={24} color="#000" />
           </TouchableOpacity>
-          <AppText style={styles.title}>2025년 2분기</AppText>
+          <AppText style={styles.title}>
+            {format(startOfQ, 'yyyy')}년{' '}
+            {Math.floor(startOfQ.getMonth() / 3) + 1}분기
+          </AppText>
           <TouchableOpacity onPress={handleNext}>
             <SvgIcon name="우측방향" size={24} color="#000" />
           </TouchableOpacity>
         </View>
 
-        {/* 주간 셀 */}
         <View style={styles.grid}>
-          {weeks.map((weekStart, idx) => {
+          {displayedWeeks.map((weekStart, idx) => {
             const totalMinutes = getWeeklyTotalMinutes(weekStart);
             const timeStr = toTimeStr(totalMinutes);
             const weekLabel = format(weekStart, 'M/d') + '~';
@@ -109,7 +120,6 @@ const CalendarByWeek = () => {
                   {backgroundColor: colorScale(totalMinutes)},
                 ]}>
                 <AppText style={styles.weekLabel}>{weekLabel}</AppText>
-
                 {totalMinutes <= 0 ? (
                   <AppText style={styles.timeText}> </AppText>
                 ) : (
@@ -121,7 +131,6 @@ const CalendarByWeek = () => {
         </View>
       </View>
 
-      {/* 범례 */}
       <View style={styles.legendContainer}>
         <AppText style={styles.legendLabel}>Less</AppText>
         <View style={styles.legendBar}>
@@ -158,16 +167,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     marginBottom: 30,
   },
-  navText: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
   title: {
     fontSize: 16,
-    fontWeight: 600,
+    fontWeight: '600',
   },
   grid: {
-    width: CONTENT_WIDTH, // 정확히 5칸
+    width: CONTENT_WIDTH,
     flexDirection: 'row',
     flexWrap: 'wrap',
   },
