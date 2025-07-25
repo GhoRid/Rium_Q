@@ -72,10 +72,10 @@ const toTimeStr = (minutes: number) => {
  */
 
 const CalendarByMonth = () => {
-  const [baseDate, setBaseDate] = useState(new Date(2025, 5, 1));
+  const [baseDate, setBaseDate] = useState(new Date());
 
   const year = getYear(baseDate);
-  const selectedMonth = getMonth(baseDate); // 0~11
+  const [selectedDate, setSelectedDate] = useState(new Date()); // ✅ Date 형태
 
   const handlePrev = () => setBaseDate(prev => subMonths(prev, 12));
   const handleNext = () => setBaseDate(prev => addMonths(prev, 12));
@@ -99,26 +99,28 @@ const CalendarByMonth = () => {
           {Array.from({length: 12}, (_, idx) => {
             const total = getTotalMinutesOfMonth(year, idx);
             const bgColor = colorScale(total);
-
             const timeStr = toTimeStr(total);
 
-            const isSelected = selectedMonth === idx;
+            const isSelected =
+              selectedDate.getFullYear() === year &&
+              selectedDate.getMonth() === idx;
 
             return (
-              <View
+              <TouchableOpacity
                 key={idx}
                 style={[
                   styles.cell,
                   {backgroundColor: bgColor},
                   isSelected && styles.selectedCell,
-                ]}>
+                ]}
+                onPress={() => setSelectedDate(new Date(year, idx, 1))}>
                 <AppText style={styles.monthLabel}>{idx + 1}월</AppText>
                 {total <= 0 ? (
                   <AppText style={styles.timeText}> </AppText>
                 ) : (
                   <AppText style={styles.timeText}>{timeStr}</AppText>
                 )}
-              </View>
+              </TouchableOpacity>
             );
           })}
         </View>
