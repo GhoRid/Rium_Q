@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     height: 50,
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: 20,
+    paddingHorizontal: 30,
     backgroundColor: 'white',
     zIndex: 1000, // 헤더가 다른 요소 위에 오도록 설정
   },
