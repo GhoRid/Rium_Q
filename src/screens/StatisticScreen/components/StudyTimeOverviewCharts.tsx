@@ -10,12 +10,25 @@ const TAB_NAMES = ['순공시간', '과목별', '목표달성률'] as const;
 type TabName = (typeof TAB_NAMES)[number];
 
 const sampleData = [
-  {label: '24.12', value: 125},
-  {label: '1월', value: 235},
-  {label: '2월', value: 146},
-  {label: '3월', value: 181},
-  {label: '4월', value: 143},
-  {label: '이번 달', value: 192},
+  {label: '6/7', value: 8},
+  {label: '6/9', value: 4},
+  {label: '6/10', value: 7.5},
+  {label: '6/11', value: 1},
+  {label: '6/12', value: 2},
+  {label: '6/13', value: 0},
+  {label: '6/14', value: 4.5},
+  {label: '6/15', value: 3},
+  {label: '6/16', value: 6},
+  {label: '6/7', value: 2},
+  {label: '6/7', value: 8},
+  {label: '6/7', value: 2},
+  {label: '6/7', value: 6},
+  {label: '6/7', value: 5},
+  {label: '6/7', value: 5},
+  {label: '6/7', value: 4},
+  {label: '6/7', value: 3},
+  {label: '6/7', value: 7},
+  {label: '6/7', value: 1},
 ];
 
 const sampleDataExample = [

@@ -48,7 +48,7 @@ const getIntensityColor = (time: string | undefined): string => {
 };
 
 const Calendar = () => {
-  const [currentDate, setCurrentDate] = useState(new Date(2025, 5)); // 6월
+  const [currentDate, setCurrentDate] = useState(new Date()); // 6월
 
   const year = getYear(currentDate);
   const month = getMonth(currentDate) + 1;

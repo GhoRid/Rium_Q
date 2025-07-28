@@ -13,10 +13,6 @@ const Filter = ({
   setSelectedTag,
 }: FilterProps) => {
   return (
-    // <ScrollView
-    //   horizontal={true}
-    //   showsHorizontalScrollIndicator={false}
-    //   contentContainerStyle={styles.filterContainer}>
     <View style={styles.gapBox}>
       {filter.map((element: string, idx: number) => (
         <TouchableOpacity

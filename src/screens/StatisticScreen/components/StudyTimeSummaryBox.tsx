@@ -9,7 +9,7 @@ type StudyTimeSummaryBoxProps = {
     totalTime: string; // 총 시간
     averageTime: string; // 하루 평균 시간
   };
-  setIsModalVisible: (visible: boolean) => void; // 모달 표시 상태 변경 함수
+  setIsModalVisible?: (visible: boolean) => void; // 모달 표시 상태 변경 함수
 };
 
 const StudyTimeSummaryBox = ({
@@ -25,7 +25,7 @@ const StudyTimeSummaryBox = ({
           <AppText style={styles.periodLabel}>지난 28일</AppText>
           <TouchableOpacity
             style={styles.dateRangeContainer}
-            onPress={() => setIsModalVisible(true)}>
+            onPress={() => setIsModalVisible && setIsModalVisible(true)}>
             <AppText style={styles.dateRangeText}>5/15 ~ 6/11</AppText>
             <SvgIcon name="아래방향" size={16} />
           </TouchableOpacity>
