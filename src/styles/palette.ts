@@ -4,4 +4,6 @@ const palette = {
   kakao_yellow: '#FEE500',
 };
 
-export default palette;
+const subjectThemeColors = {};
+
+export {palette};

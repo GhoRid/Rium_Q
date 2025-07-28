@@ -3,7 +3,7 @@
 import React from 'react';
 import {StyleSheet, TouchableOpacity, ScrollView, View} from 'react-native';
 import AppText from '../../../components/AppText';
-import palette from '../../../styles/palette';
+import {palette} from '../../../styles/palette';
 
 type FilterProps = {
   filter: string[];

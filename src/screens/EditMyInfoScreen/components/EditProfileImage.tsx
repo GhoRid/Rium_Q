@@ -1,9 +1,7 @@
-// components/EditProfileImage.tsx
-
 import React from 'react';
 import {StyleSheet, TouchableOpacity, View, Image} from 'react-native';
 import SvgIcon from '../../../components/SvgIcon';
-import palette from '../../../styles/palette';
+import {palette} from '../../../styles/palette';
 import AppText from '../../../components/AppText';
 
 const AVATAR_SIZE = 85;

@@ -1,5 +1,5 @@
 import {StyleSheet, View, Text} from 'react-native';
-import palette from '../../../styles/palette';
+import {palette} from '../../../styles/palette';
 
 const DDayHeader = () => {
   return (

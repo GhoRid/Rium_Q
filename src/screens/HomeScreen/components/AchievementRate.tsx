@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {View, StyleSheet, Pressable, Animated} from 'react-native';
-import palette from '../../../styles/palette';
+import {palette} from '../../../styles/palette';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {RootStackParamList} from '../../../types/screens';
 import AppText from '../../../components/AppText';

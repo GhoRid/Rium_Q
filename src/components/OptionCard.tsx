@@ -1,6 +1,6 @@
 import React from 'react';
 import {TouchableOpacity, View, StyleSheet} from 'react-native';
-import palette from '../styles/palette';
+import {palette} from '../styles/palette';
 import AppText from './AppText';
 
 export type TimeOption = {

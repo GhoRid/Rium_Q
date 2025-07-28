@@ -1,7 +1,7 @@
 import React, {useEffect, useRef} from 'react';
 import {Animated, StyleSheet, View} from 'react-native';
 import Svg, {Circle, G} from 'react-native-svg';
-import palette from '../../../../styles/palette';
+import {palette} from '../../../../styles/palette';
 import AppText from '../../../../components/AppText';
 
 type RoundProgressbarProps = {

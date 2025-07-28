@@ -1,5 +1,5 @@
 import {StyleSheet, View} from 'react-native';
-import palette from '../../../styles/palette';
+import {palette} from '../../../styles/palette';
 import Bar from './charts/Bar';
 import AppText from '../../../components/AppText';
 

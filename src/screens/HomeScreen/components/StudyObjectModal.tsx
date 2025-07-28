@@ -7,7 +7,7 @@ import {
   Dimensions,
 } from 'react-native';
 import SvgIcon from '../../../components/SvgIcon';
-import palette from '../../../styles/palette';
+import {palette} from '../../../styles/palette';
 import AppText from '../../../components/AppText';
 
 type StudyObjectModalProps = {

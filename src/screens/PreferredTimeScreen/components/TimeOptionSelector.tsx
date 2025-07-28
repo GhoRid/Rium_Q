@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
-import palette from '../../../styles/palette';
+import {palette} from '../../../styles/palette';
 import OptionCard from '../../../components/OptionCard';
 
 export type TimeOption = {

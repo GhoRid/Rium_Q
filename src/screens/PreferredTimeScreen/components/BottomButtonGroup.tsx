@@ -1,13 +1,6 @@
 import React from 'react';
-import {
-  View,
-  StyleSheet,
-  TouchableOpacity,
-  Text,
-  ViewStyle,
-  TextStyle,
-} from 'react-native';
-import palette from '../../../styles/palette';
+import {View, StyleSheet, TouchableOpacity, TextStyle} from 'react-native';
+import {palette} from '../../../styles/palette';
 import AppText from '../../../components/AppText';
 
 type Props = {

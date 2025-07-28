@@ -4,7 +4,7 @@ import LoginButton from './components/LoginButton';
 import SvgIcon from '../../components/SvgIcon';
 import SignUpBox from './components/SignUpBox';
 import {signInWithKakaoAndSave} from '../../services/auth/kakaoLogin';
-import palette from '../../styles/palette';
+import {palette} from '../../styles/palette';
 
 type LoginScreenProps = {
   setIsLoggedIn: (isLoggedIn: boolean) => void;

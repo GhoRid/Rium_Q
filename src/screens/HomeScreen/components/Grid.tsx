@@ -1,6 +1,6 @@
 import {StyleSheet, View, TouchableOpacity} from 'react-native';
 import SvgIcon from '../../../components/SvgIcon';
-import palette from '../../../styles/palette';
+import {palette} from '../../../styles/palette';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {RootStackParamList} from '../../../types/screens';
 import shadow from '../../../styles/shadow';

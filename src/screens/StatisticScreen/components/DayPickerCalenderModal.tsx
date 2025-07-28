@@ -22,7 +22,7 @@ import {
   isSameMonth,
   isSameDay,
 } from 'date-fns';
-import palette from '../../../styles/palette';
+import {palette} from '../../../styles/palette';
 import AppText from '../../../components/AppText';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;

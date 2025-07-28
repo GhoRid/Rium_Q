@@ -9,7 +9,7 @@ import CustomHeader from '../../components/Header/CustomHeader';
 import SvgIcon from '../../components/SvgIcon';
 import {useNavigation, NavigationProp} from '@react-navigation/native';
 import {RootStackParamList} from '../../types/screens';
-import palette from '../../styles/palette';
+import {palette} from '../../styles/palette';
 import StatisticScreen from '../../screens/StatisticScreen/StatisticScreen';
 import EmptyScreen from '../../screens/EmptyScreen';
 import AppText from '../../components/AppText';

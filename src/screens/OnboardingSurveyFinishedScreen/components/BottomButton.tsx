@@ -1,6 +1,6 @@
 import {StyleSheet, TouchableOpacity} from 'react-native';
 import AppText from '../../../components/AppText';
-import palette from '../../../styles/palette';
+import {palette} from '../../../styles/palette';
 
 type BottomButtonProps = {
   onPress?: () => void;

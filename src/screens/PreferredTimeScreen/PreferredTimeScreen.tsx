@@ -7,7 +7,7 @@ import TimeOptionSelector from './components/TimeOptionSelector';
 import {useState} from 'react';
 import CustomModal from '../../components/CustomModal';
 import {CustomModalContent} from '../../types/components';
-import palette from '../../styles/palette';
+import {palette} from '../../styles/palette';
 import BottomButtonGroup from './components/BottomButtonGroup';
 
 const TIME_OPTIONS = [

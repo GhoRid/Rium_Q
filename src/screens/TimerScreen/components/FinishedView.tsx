@@ -6,7 +6,7 @@ import {
 } from '@react-navigation/native';
 import {Animated, StyleSheet, TouchableOpacity, View} from 'react-native';
 import {RootStackParamList} from '../../../types/screens';
-import palette from '../../../styles/palette';
+import {palette} from '../../../styles/palette';
 import AppText from '../../../components/AppText';
 import {formatReadableTime} from '../../../utils/formatTime';
 import SubjectTimeAccordion from './SubjectTimeAccordion';

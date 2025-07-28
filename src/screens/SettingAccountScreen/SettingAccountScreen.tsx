@@ -6,8 +6,7 @@ import SvgIcon from '../../components/SvgIcon';
 import {logout} from '../../services/auth/logout';
 import AppText from '../../components/AppText';
 import {useState} from 'react';
-
-import palette from '../../styles/palette';
+import {palette} from '../../styles/palette';
 import CustomModal from '../../components/CustomModal';
 import {CustomModalContent} from '../../types/components';
 import {useMutation} from '@tanstack/react-query';
