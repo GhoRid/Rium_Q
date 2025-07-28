@@ -7,7 +7,7 @@ import {
   Dimensions,
 } from 'react-native';
 import SvgIcon from '../../../components/SvgIcon';
-import {palette} from '../../../styles/palette';
+import {palette, subjectThemeColors} from '../../../styles/palette';
 import AppText from '../../../components/AppText';
 
 type StudyObjectModalProps = {
@@ -46,31 +46,32 @@ const StudyObjectModal = ({
               onPress={() => setModalVisible(false)}
             />
           </View>
-          {data.map((item, index) => (
-            <View key={index} style={styles.itemRow}>
-              <AppText style={[styles.subject, getSubjectStyle(item.subject)]}>
-                {item.subject}
-              </AppText>
-              <AppText style={styles.aim}>{item.aim}</AppText>
-            </View>
-          ))}
+          {data.map((item, index) => {
+            const theme = subjectThemeColors[item.subject] || {
+              backgroundColor: '#ccc',
+              textColor: '#000',
+            };
+
+            return (
+              <View key={index} style={styles.itemRow}>
+                <View
+                  style={[
+                    styles.itemTag,
+                    {backgroundColor: theme.backgroundColor},
+                  ]}>
+                  <AppText
+                    style={[styles.itemTagText, {color: theme.textColor}]}>
+                    {item.subject}
+                  </AppText>
+                </View>
+                <AppText style={styles.aim}>{item.aim}</AppText>
+              </View>
+            );
+          })}
         </View>
       </View>
     </Modal>
   );
-};
-
-const getSubjectStyle = (subject: string) => {
-  const subjectColors: Record<
-    string,
-    {backgroundColor: string; color: string}
-  > = {
-    국어: {backgroundColor: '#D6E4FF', color: '#1D39C4'},
-    수학: {backgroundColor: '#FFE1E1', color: '#D93025'},
-    영어: {backgroundColor: '#D6F4D6', color: '#137333'},
-    탐구: {backgroundColor: '#EAD9FF', color: '#7B1FA2'},
-  };
-  return subjectColors[subject] ?? {backgroundColor: '#EEE', color: '#333'};
 };
 
 export default StudyObjectModal;
@@ -115,13 +116,19 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 12,
+    gap: 10,
   },
-  subject: {
-    paddingVertical: 4,
+  itemTag: {
+    paddingVertical: 3,
     paddingHorizontal: 10,
     borderRadius: 8,
+  },
+  itemTagText: {
+    color: '#fff',
+    fontSize: 16,
     fontWeight: 'bold',
-    marginRight: 8,
+    overflow: 'hidden',
+    flexShrink: 1,
   },
   aim: {
     fontSize: 14,

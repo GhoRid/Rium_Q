@@ -2,6 +2,7 @@ import React from 'react';
 import {StyleSheet, View, TouchableOpacity, Dimensions} from 'react-native';
 import SvgIcon from '../../../components/SvgIcon';
 import AppText from '../../../components/AppText';
+import {subjectThemeColors} from '../../../styles/palette';
 
 type ScheduleCardProps = {
   date: string;
@@ -9,7 +10,6 @@ type ScheduleCardProps = {
     subject: string;
     title: string;
     time: string;
-    color: string;
   }[];
 };
 
@@ -31,20 +31,33 @@ const ScheduleCard = ({date, items}: ScheduleCardProps) => {
       </View>
 
       <View style={styles.plans}>
-        {items.map((item, index) => (
-          <View key={index} style={styles.itemBox}>
-            <View style={[styles.itemTag, {backgroundColor: item.color}]}>
-              <AppText style={styles.itemTagText}>{item.subject}</AppText>
+        {items.map((item, index) => {
+          const theme = subjectThemeColors[item.subject] || {
+            backgroundColor: '#ccc',
+            textColor: '#000',
+          };
+
+          return (
+            <View key={index} style={styles.itemBox}>
+              <View
+                style={[
+                  styles.itemTag,
+                  {backgroundColor: theme.backgroundColor},
+                ]}>
+                <AppText style={[styles.itemTagText, {color: theme.textColor}]}>
+                  {item.subject}
+                </AppText>
+              </View>
+              <AppText
+                style={styles.itemText}
+                numberOfLines={1}
+                ellipsizeMode="tail">
+                {item.title}
+              </AppText>
+              <AppText style={styles.time}>{item.time}</AppText>
             </View>
-            <AppText
-              style={styles.itemText}
-              numberOfLines={1}
-              ellipsizeMode="tail">
-              {item.title}
-            </AppText>
-            <AppText style={styles.time}>{item.time}</AppText>
-          </View>
-        ))}
+          );
+        })}
       </View>
     </View>
   );

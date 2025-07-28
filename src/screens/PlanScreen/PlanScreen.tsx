@@ -3,7 +3,7 @@ import {View, StyleSheet, TouchableOpacity} from 'react-native';
 import CustomHeader from '../../components/Header/CustomHeader';
 import AppText from '../../components/AppText';
 import DDayHeader from './components/DDayHeader';
-import {palette} from '../../styles/palette';
+import {palette, subjectThemeColors} from '../../styles/palette';
 import ScheduleCard from './components/ScheduleCard';
 import data from './data.json';
 
