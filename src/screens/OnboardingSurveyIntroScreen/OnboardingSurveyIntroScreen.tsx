@@ -4,7 +4,7 @@ import AppText from '../../components/AppText';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {OnboardingStackParamList} from '../../navigators/OnboardingNavigator';
-import SkipSurveyModal from '../../components/SkipSurveyModal';
+import SkipSurveyModal from '../../components/Survey/SkipSurveyModal';
 
 type OnboardingSurveyIntroScreenProps = {
   onFinish: () => void; // "다음에 하기" 누를 때 호출

@@ -3,14 +3,17 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import CustomHeader from '../../components/Header/CustomHeader';
 import BackButtonHeaderLeft from '../../components/Header/BackButtonHeaderLeft';
 import {useRef, useState} from 'react';
-import SkipSurveyModal from '../../components/SkipSurveyModal';
+import SkipSurveyModal from '../../components/Survey/SkipSurveyModal';
 import {OnboardingStackParamList} from '../../navigators/OnboardingNavigator';
-import SurveyBottomButton from '../../components/SurveyBottomButton';
-import SurveyProgressBar from '../../components/SurveyProgressBar';
+import SurveyBottomButton from '../../components/Survey/SurveyBottomButton';
+import SurveyProgressBar from '../../components/Survey/SurveyProgressBar';
 import {RootStackParamList} from '../../types/screens';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
-import StepRegion from './steps/StepRegion';
-import StepSchool from './steps/StepSchool';
+import StepSubject from './steps/StepSubject';
+import StepConfidentSubject from './steps/StepConfidentSubject';
+import StepWeakSubject from './steps/StepWeakSubject';
+import StepWeekdayStudyTime from './steps/StepWeekdayStudyTime';
+import StepWeekendStudyTime from './steps/StepWeekendStudyTime';
 
 const {width} = Dimensions.get('window');
 
@@ -21,11 +24,11 @@ const PlanSurveyScreen = () => {
   const [showModal, setShowModal] = useState<boolean>(false);
 
   const steps = [
-    <StepRegion />,
-    <StepSchool />,
-    // <StepGrade />,
-    // <StepAcademy />,
-    // <StepPreferredStudyTime />,
+    <StepSubject />,
+    <StepConfidentSubject />,
+    <StepWeakSubject />,
+    <StepWeekdayStudyTime />,
+    <StepWeekendStudyTime />,
   ];
 
   const goToStep = (step: number) => {

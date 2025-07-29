@@ -7,9 +7,9 @@ import {
   Text,
   TouchableWithoutFeedback,
 } from 'react-native';
-import AppText from './AppText';
-import SvgIcon from './SvgIcon';
-import {palette} from '../styles/palette';
+import AppText from '../AppText';
+import SvgIcon from '../SvgIcon';
+import {palette} from '../../styles/palette';
 
 type Props = {
   content: {

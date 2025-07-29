@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import TimeOptionSelector from '../../PreferredTimeScreen/components/TimeOptionSelector';
-import SurveyTitle from '../../../components/SurveyTitle';
+import SurveyTitle from '../../../components/Survey/SurveyTitle';
 
 const TIME_OPTIONS = [
   {id: 1, label: '아침 06:00 ~ 09:00'},

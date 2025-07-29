@@ -2,7 +2,7 @@ import {StyleSheet, View, TouchableOpacity} from 'react-native';
 import {useState} from 'react';
 import InputWithAddBox from '../components/InputWithAddBox';
 import SvgIcon from '../../../components/SvgIcon';
-import SurveyTitle from '../../../components/SurveyTitle';
+import SurveyTitle from '../../../components/Survey/SurveyTitle';
 
 export type AcademyItem = {
   id: number;

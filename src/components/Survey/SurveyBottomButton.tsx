@@ -1,6 +1,6 @@
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
-import AppText from './AppText';
-import {palette} from '../styles/palette';
+import AppText from '../AppText';
+import {palette} from '../../styles/palette';
 
 type SurveyBottomButtonProps = {
   currentStep: number;

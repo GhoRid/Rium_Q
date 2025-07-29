@@ -8,11 +8,11 @@ import {useRef, useState} from 'react';
 import StepGrade from './steps/StepGrade';
 import StepAcademy from './steps/StepAcademy';
 import StepPreferredStudyTime from './steps/StepPreferredStudyTime';
-import SkipSurveyModal from '../../components/SkipSurveyModal';
+import SkipSurveyModal from '../../components/Survey/SkipSurveyModal';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {OnboardingStackParamList} from '../../navigators/OnboardingNavigator';
-import SurveyBottomButton from '../../components/SurveyBottomButton';
-import SurveyProgressBar from '../../components/SurveyProgressBar';
+import SurveyBottomButton from '../../components/Survey/SurveyBottomButton';
+import SurveyProgressBar from '../../components/Survey/SurveyProgressBar';
 
 const {width} = Dimensions.get('window');
 

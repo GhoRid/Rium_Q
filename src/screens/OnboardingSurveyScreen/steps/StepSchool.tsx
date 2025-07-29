@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import AppText from '../../../components/AppText'; // 결과 없을 때 예시 텍스트
-import SurveyTitle from '../../../components/SurveyTitle';
+import SurveyTitle from '../../../components/Survey/SurveyTitle';
 import SearchInput from '../../../components/SearchInput';
 
 const StepSchool = () => {
