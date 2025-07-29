@@ -2,36 +2,30 @@ import {Dimensions, ScrollView, StyleSheet, View} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import CustomHeader from '../../components/Header/CustomHeader';
 import BackButtonHeaderLeft from '../../components/Header/BackButtonHeaderLeft';
-import StepRegion from './steps/StepRegion';
-import StepSchool from './steps/StepSchool';
 import {useRef, useState} from 'react';
-import StepGrade from './steps/StepGrade';
-import StepAcademy from './steps/StepAcademy';
-import StepPreferredStudyTime from './steps/StepPreferredStudyTime';
 import SkipSurveyModal from '../../components/SkipSurveyModal';
-import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {OnboardingStackParamList} from '../../navigators/OnboardingNavigator';
 import SurveyBottomButton from '../../components/SurveyBottomButton';
 import SurveyProgressBar from '../../components/SurveyProgressBar';
+import {RootStackParamList} from '../../types/screens';
+import {NavigationProp, useNavigation} from '@react-navigation/native';
+import StepRegion from './steps/StepRegion';
+import StepSchool from './steps/StepSchool';
 
 const {width} = Dimensions.get('window');
 
-type OnboardingSurveyScreenProps = {
-  onFinish: () => void; // "다음에 하기" 누를 때 호출
-};
-
-const OnboardingSurveyScreen = ({onFinish}: OnboardingSurveyScreenProps) => {
+const PlanSurveyScreen = () => {
   const scrollRef = useRef<ScrollView>(null);
-  const navigation = useNavigation<NavigationProp<OnboardingStackParamList>>();
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   const [currentStep, setCurrentStep] = useState<number>(0);
   const [showModal, setShowModal] = useState<boolean>(false);
 
   const steps = [
     <StepRegion />,
     <StepSchool />,
-    <StepGrade />,
-    <StepAcademy />,
-    <StepPreferredStudyTime />,
+    // <StepGrade />,
+    // <StepAcademy />,
+    // <StepPreferredStudyTime />,
   ];
 
   const goToStep = (step: number) => {
@@ -44,7 +38,7 @@ const OnboardingSurveyScreen = ({onFinish}: OnboardingSurveyScreenProps) => {
   };
 
   const confirmSkip = () => {
-    onFinish();
+    // onFinish();
     setShowModal(false);
     navigation.goBack();
   };
@@ -95,7 +89,7 @@ const OnboardingSurveyScreen = ({onFinish}: OnboardingSurveyScreenProps) => {
   );
 };
 
-export default OnboardingSurveyScreen;
+export default PlanSurveyScreen;
 
 const styles = StyleSheet.create({
   container: {

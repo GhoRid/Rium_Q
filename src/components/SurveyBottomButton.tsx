@@ -1,18 +1,18 @@
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
-import AppText from '../../../components/AppText';
-import {palette} from '../../../styles/palette';
+import AppText from './AppText';
+import {palette} from '../styles/palette';
 
-type BottomButtonProps = {
+type SurveyBottomButtonProps = {
   currentStep: number;
   totalSteps: number;
   goToStep: (step: number) => void;
 };
 
-const BottomButton = ({
+const SurveyBottomButton = ({
   currentStep,
   totalSteps,
   goToStep,
-}: BottomButtonProps) => {
+}: SurveyBottomButtonProps) => {
   return (
     <View style={styles.buttonContainer}>
       <View style={styles.twoButtonContainer}>
@@ -35,14 +35,13 @@ const BottomButton = ({
   );
 };
 
-export default BottomButton;
+export default SurveyBottomButton;
 
 const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: 'row',
     height: 50,
     marginHorizontal: 24,
-    // width: '100%',
   },
   twoButtonContainer: {
     width: '100%',

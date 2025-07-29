@@ -1,12 +1,6 @@
 import React, {useState} from 'react';
-import {
-  View,
-  TextInput,
-  StyleSheet,
-  TouchableOpacity,
-  TextInputProps,
-} from 'react-native';
-import SvgIcon from '../../../components/SvgIcon';
+import {View, TextInput, StyleSheet, TouchableOpacity} from 'react-native';
+import SvgIcon from './SvgIcon';
 
 type SearchInputProps = {
   value: string;

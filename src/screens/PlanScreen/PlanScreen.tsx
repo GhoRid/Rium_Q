@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, StyleSheet, TouchableOpacity} from 'react-native';
 import CustomHeader from '../../components/Header/CustomHeader';
 import AppText from '../../components/AppText';
@@ -6,9 +6,14 @@ import DDayHeader from './components/DDayHeader';
 import {palette, subjectThemeColors} from '../../styles/palette';
 import ScheduleCard from './components/ScheduleCard';
 import data from './data.json';
+import SurveyPromptModal from './components/SurveyPromptModal';
+import {NavigationProp, useNavigation} from '@react-navigation/native';
+import {RootStackParamList} from '../../types/screens';
 
 const PlanScreen = () => {
   const {date, items} = data[0];
+  const [isModalVisible, setIsModalVisible] = useState<boolean>(true);
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
   return (
     <View style={styles.container}>
@@ -23,6 +28,20 @@ const PlanScreen = () => {
       <DDayHeader />
 
       <ScheduleCard date={date} items={items} />
+
+      <SurveyPromptModal
+        isModalVisible={isModalVisible}
+        setIsModalVisible={setIsModalVisible}
+        data={{
+          title: '아직 목표가 설정되지 않았어요!',
+          content: '리움Q가 계획을 수립할 수 있도록 설문에 참여해주세요!',
+          confirmText: '설문하러 가기',
+          onConfirm: () => {
+            setIsModalVisible(false);
+            navigation.navigate('PlanSurvey');
+          },
+        }}
+      />
     </View>
   );
 };

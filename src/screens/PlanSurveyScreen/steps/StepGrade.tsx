@@ -1,7 +1,7 @@
 import {StyleSheet, View} from 'react-native';
+import SurveyTitle from '../components/SurveyTitle';
 import {useState} from 'react';
 import OptionCard from '../../../components/OptionCard';
-import SurveyTitle from '../../../components/SurveyTitle';
 
 const OPTIONS = [
   {id: 1, label: '1학년'},

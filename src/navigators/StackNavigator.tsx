@@ -13,6 +13,7 @@ import EditMyInfoScreen from '../screens/EditMyInfoScreen/EditMyInfoScreen';
 import SettingAccountScreen from '../screens/SettingAccountScreen/SettingAccountScreen';
 import SettingNotificationScreen from '../screens/SettingNotification/SettingNotification';
 import PreferredTimeScreen from '../screens/PreferredTimeScreen/PreferredTimeScreen';
+import PlanSurveyScreen from '../screens/PlanSurveyScreen/PlanSurveyScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -41,6 +42,8 @@ const StackNavigator = ({setIsLoggedIn}: StackNavigatorProps) => {
       <Stack.Screen name="StudyTimeDetail" component={StudyTimeDetailScreen} />
       {/* 좌석 예약 스크린 */}
       <Stack.Screen name="SeatReservation" component={SeatReservationScreen} />
+      {/* 계획 설문 스크린 */}
+      <Stack.Screen name="PlanSurvey" component={PlanSurveyScreen} />
       {/* 타이머 스크린 */}
       <Stack.Screen name="Timer" component={TimerScreen} />
       {/* 내 정보 수정 스크린 */}

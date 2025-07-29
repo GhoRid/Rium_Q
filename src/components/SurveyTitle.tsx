@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet} from 'react-native';
-import AppText from '../../../components/AppText';
+import AppText from './AppText';
 
 type Props = {
   children: React.ReactNode;

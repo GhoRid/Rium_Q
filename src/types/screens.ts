@@ -10,6 +10,7 @@ interface TabNavigatorParamList extends ParamListBase {
 export interface RootStackParamList extends ParamListBase {
   Tab: NavigatorScreenParams<TabNavigatorParamList>;
   Login: undefined;
+  PlanSurveyScreen: undefined;
   Notification: undefined;
   Test: undefined;
   StudyTimeDetail: undefined;
